@@ -5,11 +5,24 @@
     "title": "Glass Bridge Stepper",
     "accent": "STEPPER",
     "lead": "A fair crash ladder. Ten rungs, cash out any time. Survival to rung k is RTP ÷ payoutₖ, so every stopping rule returns the same 97%: the player chooses variance, never expectation.",
-    "tags": ["one draw, ten reveals", "strategy-proof", "easy 10× · medium 25× · hard 100×"],
+    "tags": [
+      "one draw, ten reveals",
+      "strategy-proof",
+      "easy 10× · medium 25× · hard 100×"
+    ],
     "figures": [
-      ["examples/ladders.png", "Returns, survival and the single-RN crash table for the three difficulties."],
-      ["examples/strategies.png", "Monte Carlo under four stopping rules: every one returns the RTP."],
-      ["examples/crash.png", "Where the crash falls: the eleven slots of the single draw."]
+      [
+        "examples/ladders.png",
+        "Returns, survival and the single-RN crash table for the three difficulties."
+      ],
+      [
+        "examples/strategies.png",
+        "Monte Carlo under four stopping rules: every one returns the RTP."
+      ],
+      [
+        "examples/crash.png",
+        "Where the crash falls: the eleven slots of the single draw."
+      ]
     ],
     "cli": "node bin/build-ladder.js --rtp 0.97 --max 25 --steps 10 --js"
   },
@@ -19,11 +32,40 @@
     "title": "Red Light Green Light",
     "accent": "GREEN LIGHT",
     "lead": "A single-shot payout function. The field is the 0–10000 draw; zone widths are the probabilities; inside a zone the payout ramps from a − r to a + r. Payouts and RTP in, a monotone payout(u) out, exact by summation.",
-    "tags": ["sloped bands", "maxent · geometric · weights", "r = 0.1 × min payout gap"],
+    "tags": [
+      "sloped bands",
+      "maxent · geometric · weights",
+      "r = 0.1 × min payout gap"
+    ],
     "figures": [
-      ["examples/curves.png", "Same payouts, same RTP, same r under three probability assignments. Only the zone widths move."],
-      ["examples/bands.png", "Inside every band the paid multiple is exactly uniform on [a − r, a + r]."]
+      [
+        "examples/curves.png",
+        "Same payouts, same RTP, same r under three probability assignments. Only the zone widths move."
+      ],
+      [
+        "examples/bands.png",
+        "Inside every band the paid multiple is exactly uniform on [a − r, a + r]."
+      ]
     ],
     "cli": "node bin/build-payout.js --payouts 0,0.5,1,2,5,20 --rtp 0.95 --js"
+  },
+  {
+    "slug": "race",
+    "folder": "race-engine",
+    "title": "Rated Racers",
+    "accent": "RACERS",
+    "lead": "A Plackett–Luce race. Racers carry an Elo; strength is 10^(Elo/400); the next finisher is drawn in proportion to strength. Every ordered podium has a closed-form probability and one draw picks it. Odds are set so every racer returns exactly the RTP, winner-only or 1st/2nd/3rd.",
+    "tags": [
+      "Plackett–Luce",
+      "Elo → strength",
+      "RTP-exact odds per racer"
+    ],
+    "figures": [
+      [
+        "examples/places.png",
+        "Place probabilities per racer and the outcome zones on the draw, sorted by probability."
+      ]
+    ],
+    "cli": "node bin/build-race.js --elo 1800,1650,1600,1500,1450,1300 --rtp 0.95 --places 0.6,0.3,0.1 --js"
   }
 ]

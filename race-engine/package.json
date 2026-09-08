@@ -1,0 +1,10 @@
+{
+  "name": "race-engine",
+  "version": "1.0.0",
+  "description": "Plackett–Luce race: Elo-rated racers in, exact win/place probabilities, a single-draw outcome zone table and RTP-exact odds out",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": { "test": "node --test", "build": "node bin/build-race.js", "examples": "sh scripts/make-examples.sh" },
+  "license": "UNLICENSED",
+  "private": true
+}

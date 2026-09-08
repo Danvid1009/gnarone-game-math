@@ -6,6 +6,7 @@ Payout math for the Rollerz RGS. Live demos: **https://danvid1009.github.io/gnar
 |---|---|---|
 | [`payout-engine/`](payout-engine) | Sloped-band payout: payouts + RTP in, monotone `payout(u)` out. Probability rules maxent / geometric / weights; `r = 0.1 × min payout gap`. Demo: Red Light, Green Light. | [ALGORITHM.md](payout-engine/ALGORITHM.md) |
 | [`stepper-engine/`](stepper-engine) | Fair crash ladder: survival to rung k is `RTP / c_k`, so every stopping rule returns the RTP. Demo: Glass Bridge. | [ALGORITHM.md](stepper-engine/ALGORITHM.md) |
+| [`race-engine/`](race-engine) | Plackett–Luce race: Elo-rated racers, exact win/place probabilities, single-draw outcome zones, RTP-exact odds for every racer (winner-only or 1st/2nd/3rd). Demo: Rated Racers. | [ALGORITHM.md](race-engine/ALGORITHM.md) |
 | [`rgs-math/`](rgs-math) | The Rollerz provider contract (`defineGame`), a mock RGS server, table/curve tooling, RTP verification, example providers. | [README](rgs-math/README.md) |
 | [`docs/`](docs) | The static site GitHub Pages serves: one page per engine (demo, typeset algorithm, figures, source). Generated, do not edit by hand. | |
 | [`site/`](site) | The site generator: `engines.json` lists the engines, `build.js` renders `docs/`. | |

@@ -1,0 +1,210 @@
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rated Racers</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#0a0c11;--bg-2:#11141c;--panel:#151923;--line:#252b38;--ink:#f1efe8;--ink-2:#a8adb8;--ink-3:#6b7180;--pink:#e8336d;--pink-2:#ff6b9d;--teal:#6fd3c7;--teal-2:#2a8f86;--gold:#f2c14e;--silver:#c9ccd3;--bronze:#c98a4e;--green:#2f8f6b;--danger:#ff4d6d;--sand:#c9a27a;--sand-2:#a8845d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:14px;line-height:1.45;min-height:100vh}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.display{font-family:"Bebas Neue","IBM Plex Sans",sans-serif;letter-spacing:.04em}
+header{display:flex;align-items:baseline;justify-content:space-between;padding:16px 22px 0;gap:16px;flex-wrap:wrap}
+header h1{margin:0;font-size:34px;font-weight:400;line-height:1}header h1 span{color:var(--pink)}
+.balance{font-size:13px;color:var(--ink-2)}.balance b{display:block;font-size:26px;color:var(--ink);font-weight:500}
+.app{display:grid;grid-template-columns:1fr 330px;gap:18px;padding:14px 22px 28px;max-width:1300px;margin:0 auto;align-items:start}
+@media (max-width:960px){.app{grid-template-columns:1fr}}
+.stage{position:relative;height:600px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:linear-gradient(180deg,#1a1320 0%,#2b1f2e 22%,#4a3446 27%,var(--sand) 28%,var(--sand-2) 100%);user-select:none}
+.stage::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(232,51,109,.035) 38px 40px);pointer-events:none}
+.guards{position:absolute;top:60px;right:40px;display:flex;gap:16px}
+.guard{width:20px;height:32px;border-radius:10px 10px 4px 4px;background:var(--pink);position:relative;opacity:.9}
+.guard::after{content:"";position:absolute;left:5px;top:6px;width:10px;height:10px;border-radius:50%;background:#0a0c11}
+.guard.sq::after{border-radius:2px}.guard.tri::after{border-radius:0;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.lanes{position:absolute;left:24px;right:24px;top:190px;bottom:60px;display:flex;flex-direction:column;gap:6px}
+.lane{flex:1;position:relative;border-top:1px dashed rgba(0,0,0,.28);cursor:pointer}
+.lane:last-child{border-bottom:1px dashed rgba(0,0,0,.28)}
+.lane .tag{position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:12px;color:#2a1e16;display:flex;gap:8px;align-items:baseline;pointer-events:none}
+.lane .tag b{font-family:"Bebas Neue",sans-serif;font-size:18px;letter-spacing:.04em;font-weight:400}
+.lane .odds{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:12px;color:#2a1e16;pointer-events:none}
+.lane.backed{background:rgba(111,211,199,.22);outline:2px solid var(--teal);outline-offset:-2px}
+.lane:hover{background:rgba(255,255,255,.08)}
+.runner{position:absolute;top:50%;left:96px;width:24px;height:38px;transform:translate(-50%,-50%);transition:left var(--dur,3s) cubic-bezier(.35,.8,.45,1);z-index:3;pointer-events:none}
+.runner .head{width:14px;height:14px;border-radius:50%;background:#e8c39e;margin:0 auto 2px}
+.runner .body{width:20px;height:22px;border-radius:6px 6px 3px 3px;background:var(--green);margin:0 auto;position:relative}
+.runner .body::after{content:attr(data-n);position:absolute;inset:auto 0 2px;text-align:center;font:9px "IBM Plex Mono",monospace;color:#dff5ea}
+.runner.run .body{animation:bob .16s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-3px) rotate(5deg)}}
+.runner .medal{position:absolute;left:50%;top:-16px;transform:translateX(-50%) scale(0);width:18px;height:18px;border-radius:50%;font:11px "IBM Plex Mono",monospace;color:#1a1a1a;text-align:center;line-height:18px;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.runner .medal.on{transform:translateX(-50%) scale(1)}
+.medal.g{background:var(--gold)}.medal.s{background:var(--silver)}.medal.b{background:var(--bronze)}
+.finish{position:absolute;right:calc(24px + 70px);top:186px;bottom:56px;width:10px;background:repeating-linear-gradient(0deg,#fff 0 8px,#111 8px 16px);opacity:.85}
+.callout{position:absolute;left:16px;top:16px;background:rgba(10,12,17,.84);border:1px solid var(--line);border-radius:4px;padding:10px 12px;max-width:330px;font-size:12.5px;color:var(--ink-2);backdrop-filter:blur(4px);z-index:6}
+.callout b{color:var(--ink);font-weight:500}.callout .big{font-size:30px;color:var(--teal);line-height:1;margin-bottom:4px}
+.callout.lose .big{color:var(--danger)}.callout.win .big{color:var(--gold)}
+.side{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px}
+.card h2{margin:0 0 10px;font-size:20px;font-weight:400;color:var(--ink-2)}
+.seg{display:flex;gap:6px}
+.seg button,.chips button{flex:1;padding:8px 6px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);border-radius:4px;cursor:pointer;font:inherit;font-weight:500}
+.seg button.on{border-color:var(--pink);color:var(--ink);background:rgba(232,51,109,.16)}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.chips button.on{border-color:var(--teal);color:var(--ink);background:rgba(111,211,199,.14)}
+button:disabled{opacity:.4;cursor:not-allowed}
+.btn{width:100%;margin-top:10px;padding:14px 10px;border:none;border-radius:4px;font:inherit;font-size:22px;font-family:"Bebas Neue",sans-serif;letter-spacing:.06em;cursor:pointer;color:#fff;background:var(--pink)}
+.btn:hover:not(:disabled){background:var(--pink-2)}
+label.small{display:block;margin-top:10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+input.pay{width:100%;margin-top:6px;padding:8px;border:1px solid var(--line);border-radius:4px;background:var(--bg-2);color:var(--ink);font:13px "IBM Plex Mono",monospace}
+.err{color:var(--danger);font-size:12px;margin-top:6px;min-height:1em}
+.racers{list-style:none;margin:0;padding:0;font-size:12.5px}
+.racers li{display:grid;grid-template-columns:22px 1fr 54px 56px 60px;gap:6px;padding:5px 0;border-bottom:1px solid var(--line);color:var(--ink-3);align-items:center;cursor:pointer}
+.racers li.head{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;cursor:default}
+.racers li.backed{color:var(--ink)}.racers li.backed .m{color:var(--teal)}
+.racers li input{width:54px;padding:2px 4px;border:1px solid var(--line);border-radius:3px;background:var(--bg-2);color:var(--ink);font:12px "IBM Plex Mono",monospace;text-align:right}
+.racers .r{text-align:right}
+.stat{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-2)}
+.stat:last-child{border-bottom:0}.stat b{color:var(--ink);font-weight:500}
+.zones{list-style:none;margin:0;padding:0;font-size:12px;max-height:190px;overflow:auto}
+.zones li{display:grid;grid-template-columns:30px 1fr 60px;gap:6px;padding:3px 0;border-bottom:1px solid var(--line);color:var(--ink-3)}
+.zones li.hit{color:var(--ink)}.zones li.hit .p{color:var(--teal)}
+.zones .r{text-align:right}
+.disclose{font-size:12px;color:var(--ink-3);line-height:1.5}.disclose b{color:var(--ink-2);font-weight:500}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header><h1 class="display">RATED <span>RACERS</span></h1><div class="balance">demo balance<b class="mono" id="balance">1,000.00</b></div></header>
+
+<div class="app">
+  <section class="stage" id="stage">
+    <div class="guards"><div class="guard"></div><div class="guard sq"></div><div class="guard tri"></div></div>
+    <div class="finish"></div>
+    <div class="lanes" id="lanes"></div>
+    <div class="callout" id="callout"><div class="big display" id="coBig">BACK A RACER</div><div id="coText">Click a lane to back that racer, pick a stake, press Race. One number decides the podium; the rest of the field is filled in for show.</div></div>
+  </section>
+
+  <aside class="side">
+    <div class="card">
+      <h2 class="display">FIELD</h2>
+      <ul class="racers mono" id="racers"></ul>
+      <label class="small">target rtp</label><input class="pay" id="rtp" value="0.95">
+      <label class="small">payout structure</label>
+      <div class="seg" id="mode"><button data-m="win" class="on">winner only</button><button data-m="place">1st / 2nd / 3rd</button></div>
+      <div id="fracRow" hidden><label class="small">purse split (fractions, sum to 1)</label><input class="pay" id="fracs" value="0.6, 0.3, 0.1"></div>
+      <div class="err" id="err"></div>
+      <h2 class="display" style="margin-top:12px">STAKE</h2>
+      <div class="chips mono" id="chips"></div>
+      <button class="btn" id="btnRace">RACE</button>
+    </div>
+    <div class="card">
+      <h2 class="display">THIS RACE</h2>
+      <div class="stat"><span>Backed</span><b class="mono" id="stBack">—</b></div>
+      <div class="stat"><span>Odds (× stake for 1st)</span><b class="mono" id="stOdds">—</b></div>
+      <div class="stat"><span>Draw u</span><b class="mono" id="stU">—</b></div>
+      <div class="stat"><span>Podium</span><b class="mono" id="stPod">—</b></div>
+      <div class="stat"><span>Paid</span><b class="mono" id="stPaid">—</b></div>
+    </div>
+    <div class="card">
+      <h2 class="display">DRAW ZONES</h2>
+      <ul class="zones mono" id="zones"></ul>
+      <div class="stat" style="margin-top:8px"><span>Zones</span><b class="mono" id="stZ">—</b></div>
+    </div>
+    <div class="card disclose"><b>How this is fair.</b> Strength is 10^(Elo/400), so pairwise odds are Elo's own formula. The next finisher is drawn from those still running in proportion to strength (Plackett–Luce). Every ordered podium has a closed-form probability; sorted and laid end to end they tile 0–1, and one uniform draw picks one. Odds are set so every racer returns exactly the target RTP: the favourite and the outsider are the same bet, at different variance.</div>
+  </aside>
+</div>
+
+<script>
+// ── engine (mirrors race-engine/src/engine.js) ───────────────────────────────────────
+function buildRace(racers, rtp, f) {
+  const n = racers.length, K = f.length; if (K > n) throw new Error(`cannot pay ${K} places with ${n} racers`);
+  const fs = f.reduce((s, x) => s + x, 0); if (Math.abs(fs - 1) > 1e-9) throw new Error(`purse fractions sum to ${fs.toFixed(3)}, not 1`);
+  if (!(rtp > 0 && rtp < 1)) throw new Error('rtp must be between 0 and 1');
+  const R = racers.map((r, i) => ({ ...r, i, w: Math.pow(10, r.elo / 400) })); const W = R.reduce((s, r) => s + r.w, 0);
+  const tuples = [];
+  (function rec(pre, rem, p) { if (pre.length === K) { tuples.push({ top: pre.slice(), p }); return; } for (let i = 0; i < n; i++) if (!pre.includes(i)) rec([...pre, i], rem - R[i].w, p * R[i].w / rem); })([], W, 1);
+  tuples.sort((a, b) => b.p - a.p);
+  let acc = 0; const zones = tuples.map((t, z) => { const from = acc; acc += t.p; return { zone: z, top: t.top, p: t.p, from, to: acc }; }); zones[zones.length - 1].to = 1;
+  const placeP = R.map(() => new Array(K).fill(0)); for (const t of tuples) t.top.forEach((i, k) => placeP[i][k] += t.p);
+  const odds = R.map((_, i) => rtp / f.reduce((s, fk, k) => s + fk * placeP[i][k], 0));
+  const zoneOf = u => { let lo = 0, hi = zones.length - 1; while (lo < hi) { const m = (lo + hi) >> 1; if (zones[m].to <= u) lo = m + 1; else hi = m; } return lo; };
+  return { R, W, K, f, rtp, zones, placeP, odds,
+    finish(u, rnd) { const z = zoneOf(u); const order = [...zones[z].top]; let rem = R.map(r => r.i).filter(i => !order.includes(i)); while (rem.length) { const tot = rem.reduce((s, i) => s + R[i].w, 0); let x = rnd() * tot, pick = rem[rem.length - 1]; for (const i of rem) { x -= R[i].w; if (x < 0) { pick = i; break; } } order.push(pick); rem = rem.filter(i => i !== pick); } return { zone: z, top: zones[z].top, order }; },
+    multiple(i, top) { const k = top.indexOf(i); return k < 0 || k >= K ? 0 : odds[i] * f[k]; } };
+}
+function uniform() { const a = new Uint32Array(2); crypto.getRandomValues(a); return (a[0] * 4294967296 + a[1]) / 18446744073709551616; }
+
+// ── state ───────────────────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const pct = x => (100 * x).toFixed(2) + '%';
+const CHIPS = [1, 5, 10, 25, 50, 100];
+let racers = [['Ace', 1800], ['Bolt', 1650], ['Cinder', 1600], ['Dash', 1500], ['Ember', 1450], ['Flint', 1300]].map(([name, elo]) => ({ name, elo }));
+let balance = 1000, stake = 10, backed = 0, mode = 'win', race = null, busy = false, last = null;
+
+function rebuild() {
+  try {
+    const f = mode === 'win' ? [1] : $('fracs').value.split(',').map(s => Number(s.trim()));
+    race = buildRace(racers, Number($('rtp').value), f); $('err').textContent = '';
+  } catch (e) { $('err').textContent = e.message; return; }
+  // lanes
+  const L = $('lanes'); L.innerHTML = '';
+  race.R.forEach((r, i) => {
+    const lane = document.createElement('div'); lane.className = 'lane' + (i === backed ? ' backed' : ''); lane.dataset.i = i;
+    lane.innerHTML = `<div class="tag"><b>${r.name}</b><span class="mono">Elo ${r.elo}</span></div><div class="runner" id="run${i}"><div class="medal"></div><div class="head"></div><div class="body" data-n="${String(456 - i).padStart(3, '0')}"></div></div><div class="odds mono">${race.odds[i].toFixed(2)}× · win ${pct(race.placeP[i][0])}</div>`;
+    lane.addEventListener('click', () => { if (!busy) { backed = i; rebuild(); } });
+    L.appendChild(lane);
+  });
+  // field table
+  $('racers').innerHTML = `<li class="head"><span></span><span>racer</span><span class="r">elo</span><span class="r">p(win)</span><span class="r">odds</span></li>` +
+    race.R.map((r, i) => `<li data-i="${i}" class="${i === backed ? 'backed' : ''}"><span>${i === backed ? '▶' : ''}</span><span>${r.name}</span><span class="r"><input type="number" step="10" value="${r.elo}" data-i="${i}" aria-label="${r.name} Elo"></span><span class="r">${pct(race.placeP[i][0])}</span><span class="r m">${race.odds[i].toFixed(2)}×</span></li>`).join('');
+  $('racers').querySelectorAll('li[data-i]').forEach(li => li.addEventListener('click', e => { if (e.target.tagName === 'INPUT' || busy) return; backed = +li.dataset.i; rebuild(); }));
+  $('racers').querySelectorAll('input').forEach(inp => inp.addEventListener('change', () => { racers[+inp.dataset.i].elo = Number(inp.value); rebuild(); }));
+  // zones
+  $('zones').innerHTML = race.zones.slice(0, 60).map(z => `<li data-z="${z.zone}"><span>${z.zone}</span><span>${z.top.map(i => race.R[i].name).join(' › ')}</span><span class="r p">${pct(z.p)}</span></li>`).join('') + (race.zones.length > 60 ? `<li><span></span><span>… ${race.zones.length - 60} more</span><span></span></li>` : '');
+  $('stZ').textContent = `${race.zones.length} ordered top-${race.K} finishes`;
+  refresh();
+}
+$('mode').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (busy) return; mode = b.dataset.m; $('mode').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); $('fracRow').hidden = mode !== 'place'; rebuild(); }));
+['rtp', 'fracs'].forEach(id => $(id).addEventListener('change', rebuild));
+function buildChips() { $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === stake ? 'on' : ''}">${c}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (busy) return; stake = +b.dataset.c; buildChips(); })); }
+
+// ── race ────────────────────────────────────────────────────────────────────────────
+function say(big, text, mood) { $('coBig').textContent = big; $('coText').textContent = text; $('callout').className = 'callout' + (mood ? ' ' + mood : ''); }
+function run() {
+  if (busy || !race) return;
+  if (stake > balance) { say('NOT ENOUGH', 'Lower the stake or reload for a fresh demo balance.', 'lose'); return; }
+  busy = true; balance -= stake; refresh();
+  const u = uniform(), fin = race.finish(u, Math.random);
+  const mult = race.multiple(backed, fin.top), win = Math.round(stake * mult * 100) / 100;
+  last = { u, fin, mult, win, stake, backed };
+  document.querySelectorAll('.zones li.hit').forEach(l => l.classList.remove('hit'));
+  const laneW = $('lanes').getBoundingClientRect().width, finishX = laneW - 70 - 24 - 6;
+  const n = race.R.length;
+  race.R.forEach((_, i) => { const el = $('run' + i); el.className = 'runner run'; el.style.setProperty('--dur', '0s'); el.style.left = '96px'; el.querySelector('.medal').className = 'medal'; });
+  say('GO', `Backing ${race.R[backed].name} at ${race.odds[backed].toFixed(2)}×. The podium is already decided; watch it play out.`);
+  setTimeout(() => {
+    fin.order.forEach((i, place) => {
+      const el = $('run' + i), dur = 2.4 + place * 0.28 + (place ? Math.random() * 0.15 : 0);
+      el.style.setProperty('--dur', dur + 's'); el.style.left = (finishX - place * 26) + 'px';
+      setTimeout(() => { el.classList.remove('run'); if (place < 3) { const m = el.querySelector('.medal'); m.textContent = place + 1; m.className = 'medal on ' + ['g', 's', 'b'][place]; } }, dur * 1000);
+    });
+    const total = (2.4 + (n - 1) * 0.28 + 0.2) * 1000;
+    setTimeout(() => {
+      const zli = document.querySelector(`.zones li[data-z="${fin.zone}"]`); if (zli) { zli.classList.add('hit'); zli.scrollIntoView({ block: 'nearest' }); }
+      const place = fin.top.indexOf(backed);
+      if (mult > 0) { balance += win; say(`${mult.toFixed(3)}×`, `${race.R[backed].name} finished ${['1st', '2nd', '3rd'][place]}. Paid ${fmt(win)} (${race.odds[backed].toFixed(3)} × ${race.f[place]}). Podium: ${fin.top.map(i => race.R[i].name).join(' › ')}.`, 'win'); }
+      else say('NO PLACE', `${race.R[backed].name} finished ${ordinal(fin.order.indexOf(backed) + 1)}. Podium: ${fin.top.map(i => race.R[i].name).join(' › ')}. Stake of ${fmt(stake)} lost.`, 'lose');
+      busy = false; refresh();
+    }, total);
+  }, 400);
+}
+const ordinal = k => k + (['th', 'st', 'nd', 'rd'][(k % 100 > 10 && k % 100 < 14) ? 0 : (k % 10 < 4 ? k % 10 : 0)]);
+$('btnRace').addEventListener('click', run);
+document.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); run(); } });
+function refresh() {
+  $('balance').textContent = fmt(balance); $('btnRace').disabled = busy;
+  $('stBack').textContent = race ? `${race.R[backed].name} (Elo ${race.R[backed].elo})` : '—';
+  $('stOdds').textContent = race ? `${race.odds[backed].toFixed(3)}×${race.K > 1 ? `  (${race.f.map((x, k) => (race.odds[backed] * x).toFixed(2)).join(' / ')} by place)` : ''}` : '—';
+  $('stU').textContent = last && !busy ? `${last.u.toFixed(6)} → zone ${last.fin.zone}` : (busy ? '…' : '—');
+  $('stPod').textContent = last && !busy ? last.fin.top.map(i => race.R[i].name).join(' › ') : (busy ? '…' : '—');
+  $('stPaid').textContent = last && !busy ? fmt(last.win) : (busy ? '…' : '—');
+}
+rebuild(); buildChips();
+</script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GnarOne Game Math</title>
+<title>Rated Racers</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <style>
@@ -54,17 +54,47 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
 </style>
 </head>
 <body><div class="wrap">
-<h1>GNARONE <span>GAME MATH</span></h1>
-<p class="lead">Payout engines for the Rollerz RGS. Each one has a page with its playable demo, the algorithm typeset from its ALGORITHM.md, figures, and the source. Every round is one uniform draw, fixed at bet time and shown after the round ends. RTP is exact by summation; simulation only checks the code.</p>
-<h2>Engines</h2>
-<div class="grid">
-  <a class="card" href="stepper/"><div class="k">GLASS BRIDGE <b>STEPPER</b></div><p>A fair crash ladder. Ten rungs, cash out any time. Survival to rung k is RTP ÷ payoutₖ, so every stopping rule returns the same 97%: the player chooses variance, never expectation.</p><span class="tag">one draw, ten reveals</span></a>
-  <a class="card" href="payout/"><div class="k">RED LIGHT <b>GREEN LIGHT</b></div><p>A single-shot payout function. The field is the 0–10000 draw; zone widths are the probabilities; inside a zone the payout ramps from a − r to a + r. Payouts and RTP in, a monotone payout(u) out, exact by summation.</p><span class="tag">sloped bands</span></a>
-  <a class="card" href="race/"><div class="k">RATED <b>RACERS</b></div><p>A Plackett–Luce race. Racers carry an Elo; strength is 10^(Elo/400); the next finisher is drawn in proportion to strength. Every ordered podium has a closed-form probability and one draw picks it. Odds are set so every racer returns exactly the RTP, winner-only or 1st/2nd/3rd.</p><span class="tag">Plackett–Luce</span></a>
-</div>
-<h2>Source</h2>
+<nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>Rated Racers</div><div><a href="play.html">full-screen demo</a> · <a href="https://github.com/Danvid1009/gnarone-game-math/tree/main/race-engine">source</a></div></nav>
+<h1>RATED <span>RACERS</span></h1>
+<p class="lead">A Plackett–Luce race. Racers carry an Elo; strength is 10^(Elo/400); the next finisher is drawn in proportion to strength. Every ordered podium has a closed-form probability and one draw picks it. Odds are set so every racer returns exactly the RTP, winner-only or 1st/2nd/3rd.</p>
+<div class="tags"><span>Plackett–Luce</span><span>Elo → strength</span><span>RTP-exact odds per racer</span></div>
+
+<div class="demo"><iframe src="play.html" title="Rated Racers demo" loading="eager"></iframe><a class="full" href="play.html">open full screen ↗</a></div>
+
+<h2>The math</h2>
+<div class="md" id="md"><p>Loading ALGORITHM.md…</p></div>
+
+<h2>Figures</h2><div class="imgs"><figure><img src="img/places.png" alt="Place probabilities per racer and the outcome zones on the draw, sorted by probability."><figcaption>Place probabilities per racer and the outcome zones on the draw, sorted by probability.</figcaption></figure></div>
+
+<h2>Build it yourself</h2>
+<pre><code>git clone https://github.com/Danvid1009/gnarone-game-math.git
+cd gnarone-game-math/race-engine
+npm test
+node bin/build-race.js --elo 1800,1650,1600,1500,1450,1300 --rtp 0.95 --places 0.6,0.3,0.1 --js</code></pre>
 <ul class="links">
-  <li><a href="https://github.com/Danvid1009/gnarone-game-math">github.com/Danvid1009/gnarone-game-math</a> — all engines, the RGS contract tooling in <code>rgs-math/</code>, and this site's generator in <code>site/</code>.</li>
+  <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/race-engine/ALGORITHM.md">ALGORITHM.md on GitHub</a></li>
+  <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/race-engine/src/engine.js">src/engine.js</a> — the engine</li>
+  <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/race-engine/web/index.html">web/index.html</a> — this demo, one self-contained file</li>
 </ul>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+(async () => {
+  const el = document.getElementById('md');
+  try {
+    let src = await (await fetch('ALGORITHM.md')).text();
+    // protect math from the markdown parser
+    const holes = [];
+    src = src.replace(/\$\$([\s\S]+?)\$\$/g, (m) => { holes.push(m); return '\u0000' + (holes.length - 1) + '\u0000'; })
+             .replace(/\$([^$\n]+?)\$/g, (m) => { holes.push(m); return '\u0000' + (holes.length - 1) + '\u0000'; });
+    let html = marked.parse(src);
+    html = html.replace(/\u0000(\d+)\u0000/g, (_, i) => holes[+i]);
+    el.innerHTML = html;
+    renderMathInElement(el, { delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }], throwOnError: false });
+  } catch (e) { el.innerHTML = '<p>Could not load ALGORITHM.md: ' + e.message + '</p>'; }
+})();
+</script>
 <footer>Demo balances are play credits. Draws use crypto.getRandomValues in the browser; the server-side engines use a seeded PRNG so every round replays from its seed.</footer>
 </div></body></html>
