@@ -1,253 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Glass Bridge Stepper</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <style>
-:root{color-scheme:dark;--bg:#0a0c11;--bg-2:#11141c;--panel:#151923;--line:#252b38;--ink:#f1efe8;--ink-2:#a8adb8;--ink-3:#6b7180;--pink:#e8336d;--pink-2:#ff6b9d;--teal:#6fd3c7;--teal-2:#2a8f86;--glass:rgba(111,211,199,.14);--glass-edge:rgba(160,230,220,.55);--safe:#7ee0d0;--gold:#f2c14e;--green:#2f8f6b;--danger:#ff4d6d}
+:root{color-scheme:dark;--bg:#0a0c11;--panel:#151923;--line:#252b38;--ink:#f1efe8;--ink-2:#a8adb8;--ink-3:#6b7180;--pink:#e8336d;--teal:#6fd3c7;--gold:#f2c14e}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:14px;line-height:1.45;min-height:100vh}
-.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
-.display{font-family:"Bebas Neue","IBM Plex Sans",sans-serif;letter-spacing:.04em}
-header{display:flex;align-items:baseline;justify-content:space-between;padding:16px 22px 0;gap:16px;flex-wrap:wrap}
-header h1{margin:0;font-size:34px;font-weight:400;line-height:1}
-header h1 span{color:var(--pink)}
-.balance{font-size:13px;color:var(--ink-2)}
-.balance b{display:block;font-size:26px;color:var(--ink);font-weight:500}
-.app{display:grid;grid-template-columns:1fr 300px;gap:18px;padding:14px 22px 28px;max-width:1240px;margin:0 auto;align-items:start}
-@media (max-width:900px){.app{grid-template-columns:1fr}}
-/* ── stage ───────────────────────────────────────────────── */
-.stage{position:relative;background:radial-gradient(ellipse at 50% 0%,#1b2130 0%,var(--bg-2) 45%,#07080c 100%);border:1px solid var(--line);border-radius:6px;overflow:hidden;height:660px;perspective:1000px;user-select:none}
-.stage::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(232,51,109,.04) 38px 40px);pointer-events:none}
-.guards{position:absolute;top:14px;left:0;right:0;display:flex;justify-content:center;gap:34px;pointer-events:none}
-.guard{width:22px;height:34px;border-radius:11px 11px 4px 4px;background:var(--pink);position:relative;opacity:.9}
-.guard::after{content:"";position:absolute;left:5px;top:6px;width:12px;height:12px;border-radius:50%;background:#0a0c11}
-.guard.sq::after{border-radius:2px}.guard.tri::after{border-radius:0;clip-path:polygon(50% 0,100% 100%,0 100%)}
-.goal{position:absolute;top:56px;left:50%;transform:translateX(-50%);padding:6px 18px;border:1px solid var(--gold);color:var(--gold);border-radius:3px;font-size:22px;background:rgba(242,193,78,.08);transition:box-shadow .4s,background .4s}
-.goal.lit{background:rgba(242,193,78,.3);box-shadow:0 0 40px rgba(242,193,78,.55)}
-.bridge{position:absolute;left:50%;bottom:34px;width:440px;transform:translateX(-50%) rotateX(50deg);transform-origin:50% 100%;transform-style:preserve-3d}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px;position:relative}
-.row:last-of-type{margin-bottom:0}
-.row .rung{position:absolute;right:calc(100% + 14px);top:50%;transform:translateY(-50%) rotateX(-50deg);color:var(--ink-3);font-size:22px;white-space:nowrap;transition:color .3s}
-.row.active .rung{color:var(--teal)}
-.row.done .rung{color:var(--ink-2)}
-.pane{height:58px;border-radius:3px;background:var(--glass);border:1px solid var(--glass-edge);box-shadow:inset 0 0 22px rgba(160,230,220,.15),0 6px 0 -2px rgba(0,0,0,.6);cursor:not-allowed;transition:background .25s,box-shadow .25s,border-color .25s,transform .25s;position:relative}
-.pane::after{content:"";position:absolute;inset:6px 8px;border-top:1px solid rgba(255,255,255,.25);border-radius:2px}
-.row.active .pane{cursor:pointer;border-color:var(--teal);box-shadow:inset 0 0 26px rgba(111,211,199,.3),0 0 18px rgba(111,211,199,.25),0 6px 0 -2px rgba(0,0,0,.6);animation:pulse 1.4s ease-in-out infinite}
-.row.active .pane:hover{transform:translateY(-2px);background:rgba(111,211,199,.26)}
-@keyframes pulse{0%,100%{box-shadow:inset 0 0 26px rgba(111,211,199,.3),0 0 10px rgba(111,211,199,.15),0 6px 0 -2px rgba(0,0,0,.6)}50%{box-shadow:inset 0 0 26px rgba(111,211,199,.5),0 0 26px rgba(111,211,199,.4),0 6px 0 -2px rgba(0,0,0,.6)}}
-.pane.safe{background:rgba(126,224,208,.55);border-color:var(--safe);box-shadow:inset 0 0 30px rgba(126,224,208,.7),0 0 24px rgba(126,224,208,.4);animation:none}
-.pane.broken{background:transparent;border-color:rgba(255,77,109,.35);box-shadow:none;animation:none}
-.pane.broken::after{display:none}
-.shard{position:absolute;width:14px;height:14px;background:rgba(200,240,235,.7);clip-path:polygon(0 0,100% 20%,60% 100%);animation:shatter .9s ease-out forwards;pointer-events:none}
-@keyframes shatter{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(.3);opacity:0}}
-.player{position:absolute;left:50%;bottom:-70px;width:26px;height:44px;transform:translateX(-50%) rotateX(-50deg);transform-origin:50% 100%;transition:bottom .55s cubic-bezier(.3,1.4,.5,1),left .45s ease,opacity .5s;pointer-events:none;z-index:5}
-.player .head{width:16px;height:16px;border-radius:50%;background:#e8c39e;margin:0 auto 2px}
-.player .body{width:22px;height:26px;border-radius:6px 6px 3px 3px;background:var(--green);margin:0 auto;position:relative}
-.player .body::after{content:"456";position:absolute;inset:auto 0 3px;text-align:center;font:9px "IBM Plex Mono",monospace;color:#dff5ea}
-.player.fall{opacity:0;transition:bottom .7s ease-in,opacity .7s}
-.player.win .body{background:var(--gold)}
-.stage.shake{animation:shake .5s}
-@keyframes shake{0%,100%{transform:translate(0)}20%{transform:translate(-6px,2px)}40%{transform:translate(6px,-3px)}60%{transform:translate(-4px,3px)}80%{transform:translate(4px,-2px)}}
-.callout{position:absolute;right:16px;top:16px;background:rgba(10,12,17,.82);border:1px solid var(--line);border-radius:4px;padding:10px 12px;max-width:250px;font-size:12.5px;color:var(--ink-2);backdrop-filter:blur(4px);z-index:6}
-.callout b{color:var(--ink);font-weight:500}
-.callout .big{font-size:30px;color:var(--teal);line-height:1;margin-bottom:4px}
-.callout.lose .big{color:var(--danger)}.callout.win .big{color:var(--gold)}
-/* ── controls ────────────────────────────────────────────── */
-.side{display:flex;flex-direction:column;gap:12px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px}
-.card h2{margin:0 0 10px;font-size:20px;font-weight:400;color:var(--ink-2)}
-.seg{display:flex;gap:6px}
-.seg button,.chips button{flex:1;padding:8px 6px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);border-radius:4px;cursor:pointer;font:inherit;font-weight:500}
-.seg button.on{border-color:var(--pink);color:var(--ink);background:rgba(232,51,109,.16)}
-.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
-.chips button.on{border-color:var(--teal);color:var(--ink);background:rgba(111,211,199,.14)}
-button:disabled{opacity:.4;cursor:not-allowed}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.btn{padding:14px 10px;border:none;border-radius:4px;font:inherit;font-size:22px;font-family:"Bebas Neue",sans-serif;letter-spacing:.06em;cursor:pointer;color:#fff}
-.btn.play{background:var(--pink)}.btn.play:hover:not(:disabled){background:var(--pink-2)}
-.btn.cash{background:var(--teal-2)}.btn.cash:hover:not(:disabled){background:var(--teal)}
-.stat{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-2)}
-.stat:last-child{border-bottom:0}.stat b{color:var(--ink);font-weight:500}
-.ladder{list-style:none;margin:0;padding:0;font-size:12.5px}
-.ladder li{display:grid;grid-template-columns:28px 1fr 64px 64px;gap:6px;padding:4px 0;border-bottom:1px solid var(--line);color:var(--ink-3)}
-.ladder li.head{color:var(--ink-3);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em}
-.ladder li.cur{color:var(--ink)}.ladder li.cur .m{color:var(--teal)}
-.ladder li.dead{color:var(--danger);text-decoration:line-through}
-.ladder li.egg .m{color:var(--gold)}
-.ladder .r{text-align:right}
-.disclose{font-size:12px;color:var(--ink-3);line-height:1.5}
-.disclose b{color:var(--ink-2);font-weight:500}
-:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 24px 60px}
+nav.top{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:var(--ink-3);margin-bottom:26px}
+nav.top a{color:var(--ink-2);text-decoration:none}nav.top a:hover{color:var(--teal)}
+nav.top .crumbs span{margin:0 6px}
+h1{font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:54px;letter-spacing:.04em;margin:0 0 8px;line-height:1}
+h1 span{color:var(--pink)}
+.lead{color:var(--ink-2);max-width:70ch;margin:0 0 14px;font-size:16.5px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.tags span{font:12px "IBM Plex Mono",monospace;color:var(--teal);border:1px solid var(--line);border-radius:3px;padding:3px 8px}
+h2{font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:28px;letter-spacing:.04em;color:var(--ink-2);margin:40px 0 12px}
+.demo{position:relative;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#000}
+.demo iframe{display:block;width:100%;height:820px;border:0}
+.demo .full{position:absolute;top:10px;right:12px;font:12px "IBM Plex Mono",monospace;color:var(--ink-2);background:rgba(10,12,17,.8);border:1px solid var(--line);border-radius:3px;padding:4px 8px;text-decoration:none}
+.demo .full:hover{color:var(--teal)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+a.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px;color:inherit;text-decoration:none;transition:border-color .15s,transform .15s}
+a.card:hover{border-color:var(--teal);transform:translateY(-2px)}
+a.card .k{font-family:"Bebas Neue",sans-serif;font-size:28px;letter-spacing:.04em;line-height:1;margin-bottom:6px}
+a.card .k b{color:var(--pink);font-weight:400}
+a.card p{margin:0;color:var(--ink-2);font-size:14px}
+a.card .tag{display:inline-block;margin-top:10px;font:12px "IBM Plex Mono",monospace;color:var(--teal)}
+.imgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+figure{margin:0}img{max-width:100%;border:1px solid var(--line);border-radius:6px;display:block}
+figcaption{font-size:12.5px;color:var(--ink-3);margin-top:6px}
+.links a{color:var(--teal)}.links li{margin:4px 0;color:var(--ink-2)}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px;overflow-x:auto;font:13px "IBM Plex Mono",monospace;color:var(--ink)}
+code{font-family:"IBM Plex Mono",monospace;font-size:.92em;background:var(--panel);padding:1px 5px;border-radius:3px}
+pre code{background:none;padding:0}
+/* rendered markdown */
+.md{max-width:76ch}
+.md h1{display:none}
+.md h2{font-size:24px;margin-top:34px}
+.md h3{font-size:16px;color:var(--ink);margin:22px 0 6px}
+.md p,.md li{color:var(--ink-2)}
+.md strong{color:var(--ink);font-weight:500}
+.md table{border-collapse:collapse;font-size:13.5px;margin:12px 0;font-variant-numeric:tabular-nums}
+.md th,.md td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:right}
+.md th:first-child,.md td:first-child{text-align:left}
+.md th{color:var(--ink-3);font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.md .katex-display{margin:16px 0;overflow-x:auto;overflow-y:hidden}
+.md .katex{color:var(--ink)}
+footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
 </style>
+</head>
+<body><div class="wrap">
+<nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>Glass Bridge Stepper</div><div><a href="play.html">full-screen demo</a> · <a href="https://github.com/Danvid1009/gnarone-game-math/tree/main/stepper-engine">source</a></div></nav>
+<h1>GLASS BRIDGE <span>STEPPER</span></h1>
+<p class="lead">A fair crash ladder. Ten rungs, cash out any time. Survival to rung k is RTP ÷ payoutₖ, so every stopping rule returns the same 97%: the player chooses variance, never expectation.</p>
+<div class="tags"><span>one draw, ten reveals</span><span>strategy-proof</span><span>easy 10× · medium 25× · hard 100×</span></div>
 
-<header>
-  <h1 class="display">GLASS BRIDGE <span>STEPPER</span></h1>
-  <div class="balance">demo balance<b class="mono" id="balance">1,000.00</b></div>
-</header>
+<div class="demo"><iframe src="play.html" title="Glass Bridge Stepper demo" loading="eager"></iframe><a class="full" href="play.html">open full screen ↗</a></div>
 
-<div class="app">
-  <section class="stage" id="stage" aria-label="bridge">
-    <div class="guards"><div class="guard"></div><div class="guard sq"></div><div class="guard tri"></div></div>
-    <div class="goal display" id="goal">GOLDEN EGG · <span id="goalMult">10.00×</span></div>
-    <div class="bridge" id="bridge"><div class="player" id="player"><div class="head"></div><div class="body"></div></div></div>
-    <div class="callout" id="callout"><div class="big display" id="coBig">PLACE A BET</div><div id="coText">Pick a difficulty and a stake, then press Play. The crash pane is drawn the moment you bet.</div></div>
-  </section>
+<h2>The math</h2>
+<div class="md" id="md"><p>Loading ALGORITHM.md…</p></div>
 
-  <aside class="side">
-    <div class="card">
-      <h2 class="display">DIFFICULTY</h2>
-      <div class="seg" id="diff">
-        <button data-d="easy" class="on">Easy · 10×</button>
-        <button data-d="medium">Medium · 25×</button>
-        <button data-d="hard">Hard · 100×</button>
-      </div>
-      <h2 class="display" style="margin-top:14px">STAKE</h2>
-      <div class="chips mono" id="chips"></div>
-      <div class="actions">
-        <button class="btn play" id="btnPlay">PLAY</button>
-        <button class="btn cash" id="btnCash" disabled>CASH OUT</button>
-      </div>
-    </div>
+<h2>Figures</h2><div class="imgs"><figure><img src="img/ladders.png" alt="Returns, survival and the single-RN crash table for the three difficulties."><figcaption>Returns, survival and the single-RN crash table for the three difficulties.</figcaption></figure><figure><img src="img/strategies.png" alt="Monte Carlo under four stopping rules: every one returns the RTP."><figcaption>Monte Carlo under four stopping rules: every one returns the RTP.</figcaption></figure><figure><img src="img/crash.png" alt="Where the crash falls: the eleven slots of the single draw."><figcaption>Where the crash falls: the eleven slots of the single draw.</figcaption></figure></div>
 
-    <div class="card">
-      <h2 class="display">THIS ROUND</h2>
-      <div class="stat"><span>Holding</span><b class="mono" id="stHold">—</b></div>
-      <div class="stat"><span>Next pane pays</span><b class="mono" id="stNext">—</b></div>
-      <div class="stat"><span>Next pane holds</span><b class="mono" id="stSurv">—</b></div>
-      <div class="stat"><span>EV of stepping</span><b class="mono" id="stEv">—</b></div>
-    </div>
+<h2>Build it yourself</h2>
+<pre><code>git clone https://github.com/Danvid1009/gnarone-game-math.git
+cd gnarone-game-math/stepper-engine
+npm test
+node bin/build-ladder.js --rtp 0.97 --max 25 --steps 10 --js</code></pre>
+<ul class="links">
+  <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/stepper-engine/ALGORITHM.md">ALGORITHM.md on GitHub</a></li>
+  <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/stepper-engine/src/engine.js">src/engine.js</a> — the engine</li>
+  <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/stepper-engine/web/index.html">web/index.html</a> — this demo, one self-contained file</li>
+</ul>
 
-    <div class="card">
-      <h2 class="display">THE LADDER</h2>
-      <ul class="ladder mono" id="ladder"></ul>
-    </div>
-
-    <div class="card disclose" id="fair">
-      <b>How this is fair.</b> One random number is drawn when you bet and it fixes the pane that breaks. Left or right is your choice, but it doesn't change the outcome — both panes on a row share the same fate. Survival to rung k is exactly RTP ÷ payout<sub>k</sub>, so every stopping rule returns <b>97.0%</b>. Climbing higher changes the variance, never the expectation.
-      <div id="seedLine" class="mono" style="margin-top:8px;color:var(--ink-3)"></div>
-    </div>
-  </aside>
-</div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 <script>
-// ── ladder math (mirrors stepper-engine/src/engine.js) ─────────────────────────────
-const RTP = 0.97, STEPS = 10;
-const DIFF = { easy: 10, medium: 25, hard: 100 };
-function buildLadder(maxWin) {
-  const m = Math.pow(maxWin, 1 / STEPS);
-  const c = Array.from({ length: STEPS }, (_, i) => Math.round(Math.pow(m, i + 1) * 100) / 100);
-  const G = [1, ...c.map(ck => RTP / ck)];                       // survival to at least rung k
-  const p = G.map((g, k) => (k < STEPS ? g - G[k + 1] : g));     // event k: crash after k rungs; event N: golden egg
-  const cum = [0]; for (const x of p) cum.push(cum[cum.length - 1] + x); cum[cum.length - 1] = 1;
-  const hazard = c.map((_, i) => G[i + 1] / G[i]);               // P(survive rung k | reached it)
-  return { maxWin, c, G, p, cum, hazard, crashStep(u) { let k = 0; while (cum[k + 1] <= u) k++; return k; } };
-}
-function uniform() { const a = new Uint32Array(2); crypto.getRandomValues(a); return (a[0] * 4294967296 + a[1]) / 18446744073709551616; }
-
-// ── state ───────────────────────────────────────────────────────────────────────────
-const CHIPS = [1, 5, 10, 25, 50, 100];
-let balance = 1000, diff = 'easy', ladder = buildLadder(DIFF[diff]), stake = 10;
-let round = null;   // { K, u, step, bet, ended }
-const $ = id => document.getElementById(id);
-const fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const pct = x => (100 * x).toFixed(1) + '%';
-
-// ── build DOM ───────────────────────────────────────────────────────────────────────
-function buildBridge() {
-  const b = $('bridge'); b.querySelectorAll('.row').forEach(r => r.remove());
-  const player = $('player');
-  for (let k = STEPS; k >= 1; k--) {            // far rung first (top of screen)
-    const row = document.createElement('div'); row.className = 'row'; row.dataset.k = k;
-    row.innerHTML = `<div class="pane" data-side="L" role="button" tabindex="-1" aria-label="rung ${k} left pane"></div><div class="pane" data-side="R" role="button" tabindex="-1" aria-label="rung ${k} right pane"></div><div class="rung display">${ladder.c[k - 1].toFixed(2)}×</div>`;
-    row.querySelectorAll('.pane').forEach(p => p.addEventListener('click', () => step(k, p)));
-    b.insertBefore(row, player);
-  }
-  $('goalMult').textContent = ladder.c[STEPS - 1].toFixed(2) + '×';
-  $('goal').classList.remove('lit');
-}
-function buildLadderList() {
-  const ul = $('ladder');
-  ul.innerHTML = `<li class="head"><span>k</span><span>pays</span><span class="r">reach</span><span class="r">holds</span></li>` +
-    ladder.c.map((ck, i) => `<li data-k="${i + 1}" class="${i === STEPS - 1 ? 'egg' : ''}"><span>${i + 1}</span><span class="m">${ck.toFixed(2)}×</span><span class="r">${pct(ladder.G[i + 1])}</span><span class="r">${pct(ladder.hazard[i])}</span></li>`).join('');
-}
-function buildChips() {
-  $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === stake ? 'on' : ''}">${c}</button>`).join('');
-  $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (round && !round.ended) return; stake = +b.dataset.c; buildChips(); }));
-}
-$('diff').querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
-  if (round && !round.ended) return;
-  diff = b.dataset.d; ladder = buildLadder(DIFF[diff]);
-  $('diff').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
-  buildBridge(); buildLadderList(); resetPlayer(); refresh();
-}));
-
-// ── round flow ──────────────────────────────────────────────────────────────────────
-function play() {
-  if (round && !round.ended) return;
-  if (stake > balance) { say('NOT ENOUGH', 'Lower the stake or reload the page for a fresh demo balance.', 'lose'); return; }
-  balance -= stake;
-  const u = uniform();
-  round = { u, K: ladder.crashStep(u), step: 0, bet: stake, ended: false };
-  buildBridge(); resetPlayer(); $('goal').classList.remove('lit');
-  say('STEP ONTO THE BRIDGE', `Tap a pane on the first row. It holds with ${pct(ladder.hazard[0])} — that is the only step where the house takes its 3%.`);
-  refresh();
-}
-function step(k, pane) {
-  if (!round || round.ended || k !== round.step + 1) return;
-  const row = pane.parentElement;
-  round.step = k;
-  if (k > round.K) {                       // crash
-    pane.classList.add('broken'); shatter(pane); $('stage').classList.add('shake'); setTimeout(() => $('stage').classList.remove('shake'), 500);
-    movePlayer(k, pane.dataset.side); setTimeout(fall, 300);
-    round.ended = true;
-    say('SHATTERED', `Rung ${k} gave way. Stake of ${fmt(round.bet)} lost. The crash pane was rung ${k} from the moment you bet.`, 'lose');
-    document.querySelectorAll('#ladder li[data-k]').forEach(li => li.classList.toggle('dead', +li.dataset.k >= k));
-  } else {                                  // safe
-    pane.classList.add('safe'); row.classList.add('done'); movePlayer(k, pane.dataset.side);
-    if (k === STEPS) {
-      round.ended = true; const win = round.bet * ladder.c[k - 1]; balance += win; $('goal').classList.add('lit'); $('player').classList.add('win');
-      say('GOLDEN EGG', `You crossed all ${STEPS} rungs. Paid ${fmt(win)} at ${ladder.c[k - 1].toFixed(2)}×.`, 'win');
-    } else {
-      say(`${ladder.c[k - 1].toFixed(2)}×  HELD`, `You hold ${fmt(round.bet * ladder.c[k - 1])}. Next pane pays ${ladder.c[k].toFixed(2)}× and holds ${pct(ladder.hazard[k])} of the time. Stepping keeps your expected value exactly where it is.`);
-    }
-  }
-  refresh();
-}
-function cashOut() {
-  if (!round || round.ended || round.step === 0) return;
-  const win = round.bet * ladder.c[round.step - 1]; balance += win; round.ended = true;
-  $('player').classList.add('win');
-  say('CASHED OUT', `Paid ${fmt(win)} at ${ladder.c[round.step - 1].toFixed(2)}× after ${round.step} rung${round.step > 1 ? 's' : ''}. The bridge would have held to rung ${Math.min(round.K, STEPS)}${round.K >= STEPS ? ' (all the way)' : ''}.`, 'win');
-  refresh();
-}
-$('btnPlay').addEventListener('click', play); $('btnCash').addEventListener('click', cashOut);
-document.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { if (!round || round.ended) play(); else { const row = document.querySelector('.row.active .pane'); if (row) step(round.step + 1, row); } } if (e.key.toLowerCase() === 'c') cashOut(); });
-
-// ── presentation ────────────────────────────────────────────────────────────────────
-function refresh() {
-  $('balance').textContent = fmt(balance);
-  const live = round && !round.ended;
-  $('btnPlay').disabled = !!live; $('btnCash').disabled = !live || round.step === 0;
-  document.querySelectorAll('.row').forEach(r => r.classList.toggle('active', !!live && +r.dataset.k === round.step + 1));
-  document.querySelectorAll('#ladder li[data-k]').forEach(li => li.classList.toggle('cur', !!round && +li.dataset.k === round.step));
-  const k = round ? round.step : 0;
-  $('stHold').textContent = round && k > 0 && !(round.ended && round.step > round.K) ? fmt(round.bet * ladder.c[k - 1]) : (round ? fmt(0) : '—');
-  $('stNext').textContent = live && k < STEPS ? `${ladder.c[k].toFixed(2)}× = ${fmt(round.bet * ladder.c[k])}` : '—';
-  $('stSurv').textContent = live && k < STEPS ? pct(ladder.hazard[k]) : '—';
-  $('stEv').textContent = live && k < STEPS ? `${fmt(round.bet * ladder.c[k] * ladder.hazard[k])}  (= holding${k === 0 ? ' × 0.97' : ''})` : '—';
-  $('seedLine').textContent = round && round.ended ? `last round: u = ${round.u.toFixed(6)} → slot ${round.K} (${round.K === 0 ? 'instant crash' : round.K >= STEPS ? 'golden egg' : 'crash after rung ' + round.K}) · RN band [${ladder.cum[round.K].toFixed(4)}, ${ladder.cum[round.K + 1].toFixed(4)})` : (round ? 'round in progress — the draw is revealed when it ends' : '');
-}
-function say(big, text, mood) { $('coBig').textContent = big; $('coText').textContent = text; $('callout').className = 'callout' + (mood ? ' ' + mood : ''); }
-function movePlayer(k, side) { const p = $('player'); p.style.bottom = ((k - 1) * 70 + 8) + 'px'; p.style.left = side === 'L' ? '25%' : side === 'R' ? '75%' : '50%'; }
-function resetPlayer() { const p = $('player'); p.className = 'player'; p.style.bottom = '-70px'; p.style.left = '50%'; }
-function fall() { const p = $('player'); p.style.bottom = (parseFloat(p.style.bottom) - 120) + 'px'; p.classList.add('fall'); }
-function shatter(pane) {
-  const r = pane.getBoundingClientRect(), s = $('stage').getBoundingClientRect();
-  for (let i = 0; i < 16; i++) {
-    const d = document.createElement('div'); d.className = 'shard';
-    d.style.left = (r.left - s.left + Math.random() * r.width) + 'px'; d.style.top = (r.top - s.top + Math.random() * r.height) + 'px';
-    d.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px'); d.style.setProperty('--dy', (60 + Math.random() * 140) + 'px'); d.style.setProperty('--rot', (Math.random() * 720 - 360) + 'deg');
-    $('stage').appendChild(d); setTimeout(() => d.remove(), 1000);
-  }
-}
-buildBridge(); buildLadderList(); buildChips(); refresh();
+(async () => {
+  const el = document.getElementById('md');
+  try {
+    let src = await (await fetch('ALGORITHM.md')).text();
+    // protect math from the markdown parser
+    const holes = [];
+    src = src.replace(/\$\$([\s\S]+?)\$\$/g, (m) => { holes.push(m); return '\u0000' + (holes.length - 1) + '\u0000'; })
+             .replace(/\$([^$\n]+?)\$/g, (m) => { holes.push(m); return '\u0000' + (holes.length - 1) + '\u0000'; });
+    let html = marked.parse(src);
+    html = html.replace(/\u0000(\d+)\u0000/g, (_, i) => holes[+i]);
+    el.innerHTML = html;
+    renderMathInElement(el, { delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }], throwOnError: false });
+  } catch (e) { el.innerHTML = '<p>Could not load ALGORITHM.md: ' + e.message + '</p>'; }
+})();
 </script>
+<footer>Demo balances are play credits. Draws use crypto.getRandomValues in the browser; the server-side engines use a seeded PRNG so every round replays from its seed.</footer>
+</div></body></html>

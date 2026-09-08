@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "stepper",
+    "folder": "stepper-engine",
+    "title": "Glass Bridge Stepper",
+    "accent": "STEPPER",
+    "lead": "A fair crash ladder. Ten rungs, cash out any time. Survival to rung k is RTP ÷ payoutₖ, so every stopping rule returns the same 97%: the player chooses variance, never expectation.",
+    "tags": ["one draw, ten reveals", "strategy-proof", "easy 10× · medium 25× · hard 100×"],
+    "figures": [
+      ["examples/ladders.png", "Returns, survival and the single-RN crash table for the three difficulties."],
+      ["examples/strategies.png", "Monte Carlo under four stopping rules: every one returns the RTP."],
+      ["examples/crash.png", "Where the crash falls: the eleven slots of the single draw."]
+    ],
+    "cli": "node bin/build-ladder.js --rtp 0.97 --max 25 --steps 10 --js"
+  },
+  {
+    "slug": "payout",
+    "folder": "payout-engine",
+    "title": "Red Light Green Light",
+    "accent": "GREEN LIGHT",
+    "lead": "A single-shot payout function. The field is the 0–10000 draw; zone widths are the probabilities; inside a zone the payout ramps from a − r to a + r. Payouts and RTP in, a monotone payout(u) out, exact by summation.",
+    "tags": ["sloped bands", "maxent · geometric · weights", "r = 0.1 × min payout gap"],
+    "figures": [
+      ["examples/curves.png", "Same payouts, same RTP, same r under three probability assignments. Only the zone widths move."],
+      ["examples/bands.png", "Inside every band the paid multiple is exactly uniform on [a − r, a + r]."]
+    ],
+    "cli": "node bin/build-payout.js --payouts 0,0.5,1,2,5,20 --rtp 0.95 --js"
+  }
+]
