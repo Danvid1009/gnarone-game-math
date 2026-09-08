@@ -1,0 +1,17 @@
+{
+  "name": "stepper-engine",
+  "version": "1.0.0",
+  "description": "Stepper / crash-ladder engine: RTP + max win + steps in, a fair ladder with a single-RN crash draw out (strategy-proof RTP)",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "bin": { "build-ladder": "bin/build-ladder.js" },
+  "scripts": {
+    "test": "node --test",
+    "build": "node bin/build-ladder.js",
+    "simulate": "node bin/simulate.js",
+    "plot": "python3 scripts/plot.py",
+    "examples": "sh scripts/make-examples.sh"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}

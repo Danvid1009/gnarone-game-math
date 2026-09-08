@@ -1,0 +1,14 @@
+{
+  "name": "rgs-math",
+  "version": "0.1.0",
+  "description": "Math modules (payout tables, ladders, RTP verification) that speak the Rollerz RGS provider contract",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test",
+    "verify": "node scripts/verify-all.js",
+    "serve": "node server/mock-rgs.js"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}

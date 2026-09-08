@@ -1,0 +1,17 @@
+{
+  "name": "payout-engine",
+  "version": "1.0.0",
+  "description": "Sloped-band payout engine: payouts + RTP in, a monotone payout(u) function out, with exact RTP and a fixed neighbourhood r",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "bin": { "build-payout": "bin/build-payout.js" },
+  "scripts": {
+    "test": "node --test",
+    "build": "node bin/build-payout.js",
+    "simulate": "node bin/simulate.js",
+    "plot": "python3 scripts/plot.py",
+    "examples": "sh scripts/make-examples.sh"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}

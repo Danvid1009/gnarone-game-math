@@ -1,0 +1,112 @@
+{
+  "method": "weights",
+  "params": {
+    "p0": 0.24,
+    "Enz": 1.25
+  },
+  "payouts": [
+    0,
+    0.5,
+    1,
+    2,
+    5,
+    20
+  ],
+  "probabilities": [
+    0.24,
+    0.38,
+    0.228,
+    0.114,
+    0.0304,
+    0.0076
+  ],
+  "breaks": [
+    0,
+    0.24,
+    0.62,
+    0.848,
+    0.962,
+    0.9924,
+    1
+  ],
+  "r": 0.05,
+  "gap": 0.5,
+  "fraction": 0.1,
+  "rtp": 0.9500000000000001,
+  "hitRate": 0.76,
+  "stdev": 1.9175852871080685,
+  "bands": [
+    {
+      "index": 0,
+      "payout": 0,
+      "p": 0.24,
+      "from": 0,
+      "to": 0.24,
+      "range": [
+        0,
+        0
+      ],
+      "rtpContribution": 0
+    },
+    {
+      "index": 1,
+      "payout": 0.5,
+      "p": 0.38,
+      "from": 0.24,
+      "to": 0.62,
+      "range": [
+        0.45,
+        0.55
+      ],
+      "rtpContribution": 0.19
+    },
+    {
+      "index": 2,
+      "payout": 1,
+      "p": 0.228,
+      "from": 0.62,
+      "to": 0.848,
+      "range": [
+        0.95,
+        1.05
+      ],
+      "rtpContribution": 0.228
+    },
+    {
+      "index": 3,
+      "payout": 2,
+      "p": 0.114,
+      "from": 0.848,
+      "to": 0.962,
+      "range": [
+        1.95,
+        2.05
+      ],
+      "rtpContribution": 0.228
+    },
+    {
+      "index": 4,
+      "payout": 5,
+      "p": 0.0304,
+      "from": 0.962,
+      "to": 0.9924,
+      "range": [
+        4.95,
+        5.05
+      ],
+      "rtpContribution": 0.152
+    },
+    {
+      "index": 5,
+      "payout": 20,
+      "p": 0.0076,
+      "from": 0.9924,
+      "to": 1,
+      "range": [
+        19.95,
+        20.05
+      ],
+      "rtpContribution": 0.152
+    }
+  ]
+}
