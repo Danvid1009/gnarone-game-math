@@ -56,15 +56,15 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
 <body><div class="wrap">
 <nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>Rated Racers</div><div><a href="play.html">full-screen demo</a> · <a href="https://github.com/Danvid1009/gnarone-game-math/tree/main/race-engine">source</a></div></nav>
 <h1>RATED <span>RACERS</span></h1>
-<p class="lead">Elo array + one uniform → fair Plackett–Luce ranking → top-3 payout. Strength is 10^(Elo/400); one draw picks the winner and its leftover is recycled to pick second, third and the rest. Win/place/show probabilities are closed-form; third pays a fixed 1.4, second sits θ of the way to first, first is solved so every racer returns exactly the RTP.</p>
-<div class="tags"><span>one uniform, recycled</span><span>Plackett–Luce, exact</span><span>[M₁, M₂, 1.4] per racer, RTP-exact</span></div>
+<p class="lead">Elo array + one uniform → fair Plackett–Luce ranking → top-3 payout. Strength is 10^(Elo/400); one draw picks the winner and its leftover is recycled to pick second, third and the rest. Win/place/show probabilities are closed-form, and every podium finish returns stake plus profit: second pays a quarter and third a fifth of the win profit, which is solved per racer so every racer returns exactly the RTP.</p>
+<div class="tags"><span>one uniform, recycled</span><span>Plackett–Luce, exact</span><span>place terms 1 / ¼ / ⅕, RTP-exact per racer</span></div>
 
 <div class="demo"><iframe src="play.html" title="Rated Racers demo" loading="eager"></iframe><a class="full" href="play.html">open full screen ↗</a></div>
 
 <h2>The math</h2>
 <div class="md" id="md"><p>Loading ALGORITHM.md…</p></div>
 
-<h2>Figures</h2><div class="imgs"><figure><img src="img/places.png" alt="Closed-form win / place / show probabilities against the feasibility bound, and the per-racer multipliers."><figcaption>Closed-form win / place / show probabilities against the feasibility bound, and the per-racer multipliers.</figcaption></figure><figure><img src="img/sim-fixed-third.png" alt="200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider."><figcaption>200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider.</figcaption></figure></div>
+<h2>Figures</h2><div class="imgs"><figure><img src="img/places.png" alt="Closed-form win / place / show probabilities against the feasibility bound, and the per-racer place-terms multipliers."><figcaption>Closed-form win / place / show probabilities against the feasibility bound, and the per-racer place-terms multipliers.</figcaption></figure><figure><img src="img/sim-place-terms.png" alt="200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider."><figcaption>200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider.</figcaption></figure></div>
 
 <h2>Build it yourself</h2>
 <pre><code>git clone https://github.com/Danvid1009/gnarone-game-math.git

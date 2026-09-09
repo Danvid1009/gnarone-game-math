@@ -1,6 +1,7 @@
 // Race engine (Plackett–Luce, one recycled uniform).  See ALGORITHM.md.
 //
-//   const R = buildRace({ racers: [{ name, elo }, ...], rtp: 0.95 });           // fixed-third payouts (default)
+//   const R = buildRace({ racers: [{ name, elo }, ...], rtp: 0.95 });           // place-terms payouts (default)
+//   const R = buildRace({ racers, rtp, structure: { kind: 'place-terms', place: 1/4, show: 1/5 } });
 //   const R = buildRace({ racers, rtp, structure: { kind: 'fixed-third', m3: 1.4, theta: 0.5 } });
 //   const R = buildRace({ racers, rtp, structure: { kind: 'fractions', f: [0.6, 0.3, 0.1] } });
 //   R.finish(u)          // u ~ U[0,1)  ->  { order: [r1..rn], top: [r1,r2,r3], zone, path }   whole ranking from ONE uniform
@@ -11,14 +12,16 @@
 // U ← (U − a)/p_i after each pick  →  full Plackett–Luce ranking  →  pay 1st/2nd/3rd.
 // q_i1, q_i2, q_i3 are closed-form; multipliers solve q_i1 M_i1 + q_i2 M_i2 + q_i3 M_i3 = RTP per racer.
 //
-// Fixed-third structure: M3 fixed (1.4), M2 = M3 + θ (M1 − M3), M1 solved. Then M1 > M2 > M3 ⇔ M1 > M3 ⇔
-// RTP > M3 · (q_i1 + q_i2 + q_i3). A field where any racer violates that is rejected.
+// Place-terms structure (default, the each-way convention): every place returns the stake plus a profit,
+// and the place profits are fixed fractions of the win profit:  M1 = 1 + P,  M2 = 1 + P·place,  M3 = 1 + P·show,
+// P solved per racer. Then M1 > M2 > M3 > 1 automatically and feasibility is simply q_i1 + q_i2 + q_i3 < RTP.
+// Alternatives kept: fixed-third (M3 fixed, θ) and fractions (one scale per racer, shared shape).
 
 import { Rng } from './rng.js';
 
 export const eloToStrength = (elo, eMax = 0) => Math.pow(10, (elo - eMax) / 400);
 
-export function buildRace({ racers, rtp, structure = { kind: 'fixed-third', m3: 1.4, theta: 0.5 }, places } = {}) {
+export function buildRace({ racers, rtp, structure = { kind: 'place-terms', place: 1 / 4, show: 1 / 5 }, places } = {}) {
   if (!Array.isArray(racers) || racers.length < 3) throw new Error('need at least three racers (three places pay)');
   if (!(rtp > 0 && rtp < 1)) throw new Error(`rtp must be in (0,1), got ${rtp}`);
   if (Array.isArray(places)) structure = { kind: 'fractions', f: places };
@@ -36,12 +39,19 @@ export function buildRace({ racers, rtp, structure = { kind: 'fixed-third', m3: 
   const top3 = q.map(x => x[0] + x[1] + x[2]);
 
   // ── multipliers per racer ───────────────────────────────────────────────────────────
-  let M;
-  if (structure.kind === 'fixed-third') {
+  let M, feasibleBound = null;
+  if (structure.kind === 'place-terms') {
+    const a = structure.place ?? 1 / 4, b = structure.show ?? 1 / 5;
+    if (!(a > 0 && a <= 1) || !(b > 0 && b <= 1) || !(b <= a)) throw new Error('place-terms: need 0 < show ≤ place ≤ 1');
+    feasibleBound = rtp;
+    const bad = R.filter((_, i) => top3[i] >= rtp);
+    if (bad.length) throw new Error(`infeasible field: ${bad.map(r => `${r.name} (top-3 ${(100 * top3[r.index]).toFixed(2)}%)`).join(', ')} at or above RTP ${(100 * rtp).toFixed(2)}%; no positive win profit can return the RTP. Weaken the favourite.`);
+    M = q.map(([q1_, q2_, q3_]) => { const P = (rtp - (q1_ + q2_ + q3_)) / (q1_ + a * q2_ + b * q3_); return [1 + P, 1 + a * P, 1 + b * P]; });
+  } else if (structure.kind === 'fixed-third') {
     const m3 = structure.m3 ?? 1.4, th = structure.theta ?? 0.5;
     if (!(m3 > 0)) throw new Error('fixed-third: m3 must be > 0');
     if (!(th > 0 && th < 1)) throw new Error('fixed-third: theta must be in (0,1)');
-    const bound = rtp / m3;
+    const bound = rtp / m3; feasibleBound = bound;
     const bad = R.filter((_, i) => top3[i] >= bound);
     if (bad.length) throw new Error(`infeasible field: ${bad.map(r => `${r.name} (top-3 ${(100 * top3[r.index]).toFixed(2)}%)`).join(', ')} at or above the bound RTP/M3 = ${(100 * bound).toFixed(2)}%; M1 would not exceed M3=${m3}. Weaken the favourite or lower m3.`);
     M = q.map(([a, b, c]) => { const x = (rtp - m3 * (c + (1 - th) * b)) / (a + th * b); return [x, m3 + th * (x - m3), m3]; });
@@ -81,7 +91,7 @@ export function buildRace({ racers, rtp, structure = { kind: 'fixed-third', m3: 
 
   const race = {
     racers: R, n, W, rtp, structure, q, q1, q2, q3, top3, M, ev,
-    feasibleBound: structure.kind === 'fixed-third' ? rtp / (structure.m3 ?? 1.4) : null,
+    feasibleBound,
     finish,
     zones,                                                     // n(n−1)(n−2) nested zones, in recursion order
     zonesByProbability() { return zones().sort((a, b) => b.p - a.p); },
@@ -138,7 +148,9 @@ export function buildRace({ racers, rtp, structure = { kind: 'fixed-third', m3: 
 export function format(race) {
   const pct = x => `${(100 * x).toFixed(2)}%`;
   const s = race.structure;
-  const L = [`${race.n} racers   RTP ${race.rtp}   ${s.kind === 'fixed-third' ? `fixed-third: M3=${s.m3 ?? 1.4}, θ=${s.theta ?? 0.5}, feasible iff top-3 < ${pct(race.feasibleBound)}` : `fractions ${JSON.stringify(s.f)}`}`, '',
+  const desc = s.kind === 'place-terms' ? `place-terms: M1 = 1+P, M2 = 1+P·${s.place ?? 0.25}, M3 = 1+P·${s.show ?? 0.2}; feasible iff top-3 < ${pct(race.feasibleBound)}`
+    : s.kind === 'fixed-third' ? `fixed-third: M3=${s.m3 ?? 1.4}, θ=${s.theta ?? 0.5}, feasible iff top-3 < ${pct(race.feasibleBound)}` : `fractions ${JSON.stringify(s.f)}`;
+  const L = [`${race.n} racers   RTP ${race.rtp}   ${desc}`, '',
     'racer        elo   q1       q2       q3       top3        M1        M2      M3     EV      stdev'];
   race.racers.forEach((r, i) => L.push(`${r.name.padEnd(10)} ${String(r.elo).padStart(5)}  ${pct(race.q1[i]).padStart(7)}  ${pct(race.q2[i]).padStart(7)}  ${pct(race.q3[i]).padStart(7)}  ${pct(race.top3[i]).padStart(7)}  ${race.M[i].map(m => m.toFixed(3).padStart(8)).join('  ')}   ${race.ev[i].toFixed(4)}  ${race.stdevOf(i).toFixed(3)}`));
   const zs = race.zonesByProbability();

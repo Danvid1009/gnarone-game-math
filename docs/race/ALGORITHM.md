@@ -6,9 +6,9 @@ $$
 
 ## 1. Inputs
 
-$n \ge 3$ racers with ratings $E = [E_1,\dots,E_n]$, a target return $R^\ast\in(0,1)$, a fixed third-place
-multiple $M_3$ (default $1.4$), a shape parameter $\theta\in(0,1)$ (default $0.5$), and exactly one RNG call
-$U\sim\mathrm{Uniform}[0,1)$ per race.
+$n \ge 3$ racers with ratings $E = [E_1,\dots,E_n]$, a target return $R^\ast\in(0,1)$, place terms
+$0 < \beta \le \alpha \le 1$ (defaults $\alpha = \tfrac14$ for second, $\beta = \tfrac15$ for third), and exactly
+one RNG call $U\sim\mathrm{Uniform}[0,1)$ per race.
 
 ## 2. Elo to race weights
 
@@ -67,34 +67,34 @@ $$
 
 Checks: $\sum_i q_{i1} = \sum_i q_{i2} = \sum_i q_{i3} = 1$.
 
-## 7. Payout structure
+## 7. Payout structure (place terms)
 
-Backing racer $i$ with a unit stake pays $M_{i1}$ for first, $M_{i2}$ for second, $M_{i3}$ for third, $0$
-otherwise, with
+Backing racer $i$ with a unit stake returns the stake plus a profit on any podium finish. The win profit is
+$P_i$; second and third pay fixed fractions of it, the each-way convention:
 
 $$
-\boxed{\ M_{i3} = M_3\ (\text{fixed}),\qquad M_{i2} = M_3 + \theta\,(M_{i1} - M_3),\qquad
+\boxed{\ M_{i1} = 1 + P_i,\qquad M_{i2} = 1 + \alpha P_i,\qquad M_{i3} = 1 + \beta P_i,\qquad
 q_{i1}M_{i1} + q_{i2}M_{i2} + q_{i3}M_{i3} = R^\ast\ }
 $$
 
-Solving,
+Solving for the one free number per racer,
 
 $$
-\boxed{\ M_{i1} = \frac{R^\ast - M_3\bigl(q_{i3} + (1-\theta)\,q_{i2}\bigr)}{q_{i1} + \theta\, q_{i2}}\ }
+\boxed{\ P_i = \frac{R^\ast - (q_{i1}+q_{i2}+q_{i3})}{q_{i1} + \alpha\, q_{i2} + \beta\, q_{i3}}\ }
 $$
 
-Second place sits a fixed fraction $\theta$ of the way from third to first, so $M_{i1} > M_{i2} > M_{i3}$
-holds whenever $M_{i1} > M_3$.
+Because $\beta \le \alpha \le 1$ and $P_i > 0$, the ordering $M_{i1} > M_{i2} > M_{i3} > 1$ holds automatically:
+every place pays more than the stake and nothing has to be special-cased.
 
 ## 8. Feasibility
 
 $$
-M_{i1} > M_3 \iff \boxed{\ R^\ast > M_3\,(q_{i1}+q_{i2}+q_{i3})\ }
+P_i > 0 \iff \boxed{\ q_{i1}+q_{i2}+q_{i3} < R^\ast\ }
 $$
 
-independent of $\theta$. A field is admissible when no racer's top-3 probability reaches $R^\ast/M_3$
-($67.86\%$ for $R^\ast = 0.95$, $M_3 = 1.4$). A field that fails is rejected, naming the racer: otherwise
-winning could not pay more than coming third.
+independent of $\alpha, \beta$. A field is admissible when no racer's top-3 probability reaches the RTP
+($95\%$ here). A field that fails is rejected, naming the racer: a bet that lands on the podium more often
+than the RTP cannot be paid a positive profit and still return $R^\ast$.
 
 ## 9. Return
 
@@ -110,16 +110,16 @@ $\operatorname{round}(S\,M_{ik})$, rounded once.
 ## 10. Reference instance
 
 Twelve racers, Elo $1850, 1780, 1720, 1680, 1640, 1600, 1560, 1520, 1480, 1430, 1380, 1300$;
-$R^\ast = 0.95$, $M_3 = 1.4$, $\theta = 0.5$. Bound $67.86\%$; the favourite sits at $66.36\%$.
+$R^\ast = 0.95$, $\alpha = \tfrac14$, $\beta = \tfrac15$. Bound $95\%$; the favourite sits at $66.36\%$.
 
-| racer | Elo | $q_{i1}$ | $q_{i2}$ | $q_{i3}$ | $M_{i1}$ | $M_{i2}$ | $M_{i3}$ | stdev |
-|---|---|---|---|---|---|---|---|---|
-| 1 | 1850 | 26.97% | 22.06% | 17.33% | 1.455 | 1.428 | 1.400 | 0.68 |
-| 2 | 1780 | 18.02% | 17.44% | 16.12% | 2.252 | 1.826 | 1.400 | 0.95 |
-| 3 | 1720 | 12.76% | 13.28% | 13.56% | 3.438 | 2.419 | 1.400 | 1.28 |
-| 6 | 1600 | 6.40% | 7.16% | 8.04% | 7.895 | 4.648 | 1.400 | 2.19 |
-| 9 | 1480 | 3.21% | 3.70% | 4.32% | 17.085 | 9.243 | 1.400 | 3.42 |
-| 12 | 1300 | 1.14% | 1.34% | 1.60% | 50.851 | 26.126 | 1.400 | 6.14 |
+| racer | Elo | $q_{i1}$ | $q_{i2}$ | $q_{i3}$ | $P_i$ | $M_{i1}$ | $M_{i2}$ | $M_{i3}$ | stdev |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | 1850 | 26.97% | 22.06% | 17.33% | 0.797 | 1.797 | 1.199 | 1.159 | 0.72 |
+| 2 | 1780 | 18.02% | 17.44% | 16.12% | 1.695 | 2.695 | 1.424 | 1.339 | 1.02 |
+| 3 | 1720 | 12.76% | 13.28% | 13.56% | 2.947 | 3.947 | 1.737 | 1.589 | 1.35 |
+| 6 | 1600 | 6.40% | 7.16% | 8.04% | 7.498 | 8.498 | 2.874 | 2.500 | 2.19 |
+| 9 | 1480 | 3.21% | 3.70% | 4.32% | 16.777 | 17.777 | 5.194 | 4.355 | 3.32 |
+| 12 | 1300 | 1.14% | 1.34% | 1.60% | 50.778 | 51.778 | 13.695 | 11.156 | 5.84 |
 
-Every row returns $0.9500$. Over $200{,}000$ simulated races with a unit stake on every racer, each
-racer's realised return was within about one standard error of $0.95$ and the pooled return was $0.9497$.
+Every row returns $0.9500$. Two alternative structures remain available: *fixed-third* ($M_3$ fixed,
+$M_2 = M_3 + \theta(M_1 - M_3)$, bound $R^\ast/M_3$) and *fractions* (one scale per racer, shared shape).

@@ -78,18 +78,18 @@ input.pay{width:100%;margin-top:6px;padding:8px;border:1px solid var(--line);bor
     <div class="guards"><div class="guard"></div><div class="guard sq"></div><div class="guard tri"></div></div>
     <div class="finish"></div>
     <div class="lanes" id="lanes"></div>
-    <div class="callout" id="callout"><div class="big display" id="coBig">BACK A RACER</div><div id="coText">Click a lane to back that racer, pick a stake, press Race. One uniform number, recycled, produces the whole finishing order. First, second and third pay.</div></div>
+    <div class="callout" id="callout"><div class="big display" id="coBig">BACK A RACER</div><div id="coText">Click a lane to back that racer, pick a stake, press Race. One uniform number, recycled, produces the whole finishing order. First, second and third all pay stake plus profit.</div></div>
   </section>
 
   <aside class="side">
     <div class="card">
       <h2 class="display">FIELD</h2>
       <ul class="racers mono" id="racers"></ul>
+      <label class="small">target rtp</label><input class="pay" id="rtp" value="0.95">
       <div class="row2">
-        <div><label class="small">target rtp</label><input class="pay" id="rtp" value="0.95"></div>
-        <div><label class="small">third place M₃</label><input class="pay" id="m3" value="1.4"></div>
+        <div><label class="small">2nd: fraction of win profit</label><input class="pay" id="place" value="0.25"></div>
+        <div><label class="small">3rd: fraction of win profit</label><input class="pay" id="show" value="0.2"></div>
       </div>
-      <label class="small">θ: where 2nd sits between 3rd and 1st</label><input class="pay" id="theta" value="0.5">
       <div class="err" id="err"></div>
       <h2 class="display" style="margin-top:12px">STAKE</h2>
       <div class="chips mono" id="chips"></div>
@@ -108,24 +108,24 @@ input.pay{width:100%;margin-top:6px;padding:8px;border:1px solid var(--line);bor
       <ul class="zones mono" id="zones"></ul>
       <div class="stat" style="margin-top:8px"><span>Zones</span><b class="mono" id="stZ">—</b></div>
     </div>
-    <div class="card disclose"><b>How this is fair.</b> Strength is 10^(Elo/400), so pairwise odds are Elo's own formula. One uniform picks the winner from intervals sized by strength; the leftover part of that same number is stretched back to 0–1 and picks second, and so on (Plackett–Luce, exactly). Each racer's win, place and show probabilities are closed-form; third pays a fixed M₃, second sits θ of the way from third to first, and first is solved so every racer returns exactly the target RTP. A field where a favourite's top-3 chance reaches RTP/M₃ is rejected, because then winning could not pay more than third.</div>
+    <div class="card disclose"><b>How this is fair.</b> Strength is 10^(Elo/400), so pairwise odds are Elo's own formula. One uniform picks the winner from intervals sized by strength; the leftover part of that same number is stretched back to 0–1 and picks second, and so on (Plackett–Luce, exactly). Each racer's win, place and show probabilities are closed-form. Every place returns the stake plus a profit: first pays the full win profit P, second a quarter of it, third a fifth (the each-way convention), and P is solved per racer so every racer returns exactly the target RTP. A field where a favourite's top-3 chance reaches the RTP is rejected, because no positive profit could return it.</div>
   </aside>
 </div>
 
 <script>
 // ── engine (mirrors race-engine/src/engine.js) ───────────────────────────────────────
-function buildRace(racers, rtp, m3, th) {
+function buildRace(racers, rtp, pa, pb) {
   const n = racers.length; if (n < 3) throw new Error('need at least three racers');
-  if (!(rtp > 0 && rtp < 1)) throw new Error('rtp must be between 0 and 1'); if (!(m3 > 0)) throw new Error('M₃ must be > 0'); if (!(th > 0 && th < 1)) throw new Error('θ must be between 0 and 1');
+  if (!(rtp > 0 && rtp < 1)) throw new Error('rtp must be between 0 and 1'); if (!(pa > 0 && pa <= 1 && pb > 0 && pb <= pa)) throw new Error('fractions: need 0 < 3rd ≤ 2nd ≤ 1');
   const eMax = Math.max(...racers.map(r => r.elo));
   const R = racers.map((r, i) => ({ ...r, i, w: Math.pow(10, (r.elo - eMax) / 400) })); const w = R.map(r => r.w), W = w.reduce((s, x) => s + x, 0);
   const q1 = w.map(x => x / W);
   const q2 = w.map((wi, i) => { let s = 0; for (let j = 0; j < n; j++) if (j !== i) s += (w[j] / W) * (wi / (W - w[j])); return s; });
   const q3 = w.map((wi, i) => { let s = 0; for (let j = 0; j < n; j++) if (j !== i) for (let k = 0; k < n; k++) if (k !== i && k !== j) s += (w[j] / W) * (w[k] / (W - w[j])) * (wi / (W - w[j] - w[k])); return s; });
-  const top3 = q1.map((_, i) => q1[i] + q2[i] + q3[i]), bound = rtp / m3;
+  const top3 = q1.map((_, i) => q1[i] + q2[i] + q3[i]), bound = rtp;
   const bad = R.filter((_, i) => top3[i] >= bound);
-  if (bad.length) throw new Error(`Infeasible field: ${bad.map(r => `${r.name} (top-3 ${(100 * top3[r.i]).toFixed(1)}%)`).join(', ')} at or above RTP/M₃ = ${(100 * bound).toFixed(1)}%, so first could not pay more than third. Weaken the favourite or lower M₃.`);
-  const M = R.map((_, i) => { const x = (rtp - m3 * (q3[i] + (1 - th) * q2[i])) / (q1[i] + th * q2[i]); return [x, m3 + th * (x - m3), m3]; });
+  if (bad.length) throw new Error(`Infeasible field: ${bad.map(r => `${r.name} (top-3 ${(100 * top3[r.i]).toFixed(1)}%)`).join(', ')} at or above the RTP ${(100 * rtp).toFixed(1)}%: no positive win profit can return it. Weaken the favourite.`);
+  const M = R.map((_, i) => { const P = (rtp - top3[i]) / (q1[i] + pa * q2[i] + pb * q3[i]); return [1 + P, 1 + pa * P, 1 + pb * P]; });
   function finish(u) {
     const rem = R.map(r => r.i), order = [];
     if (u >= 1) u = 1 - 1e-15;
@@ -137,7 +137,7 @@ function buildRace(racers, rtp, m3, th) {
     order.push(rem[0]); return { order, top: order.slice(0, 3) };
   }
   function zones(limit) { const out = []; for (let a = 0; a < n; a++) for (let b = 0; b < n; b++) { if (b === a) continue; for (let c = 0; c < n; c++) { if (c === a || c === b) continue; out.push({ top: [a, b, c], p: (w[a] / W) * (w[b] / (W - w[a])) * (w[c] / (W - w[a] - w[b])) }); } } out.sort((x, y) => y.p - x.p); return { total: out.length, top: out.slice(0, limit) }; }
-  return { R, W, rtp, m3, th, q1, q2, q3, top3, bound, M, finish, zones, multiple(i, top) { const k = top.indexOf(i); return k < 0 ? 0 : M[i][k]; } };
+  return { R, W, rtp, pa, pb, q1, q2, q3, top3, bound, M, finish, zones, multiple(i, top) { const k = top.indexOf(i); return k < 0 ? 0 : M[i][k]; } };
 }
 function uniform() { const a = new Uint32Array(2); crypto.getRandomValues(a); return (a[0] * 4294967296 + a[1]) / 18446744073709551616; }
 
@@ -150,7 +150,7 @@ let racers = [['Ace', 1850], ['Bolt', 1780], ['Cinder', 1720], ['Dash', 1680], [
 let balance = 1000, stake = 10, backed = 0, race = null, busy = false, last = null;
 
 function rebuild() {
-  try { race = buildRace(racers, Number($('rtp').value), Number($('m3').value), Number($('theta').value)); $('err').textContent = ''; }
+  try { race = buildRace(racers, Number($('rtp').value), Number($('place').value), Number($('show').value)); $('err').textContent = ''; }
   catch (e) { $('err').textContent = e.message; if (!race) return; }
   const L = $('lanes'); L.innerHTML = '';
   race.R.forEach((r, i) => {
@@ -165,10 +165,10 @@ function rebuild() {
   $('racers').querySelectorAll('input').forEach(inp => inp.addEventListener('change', () => { racers[+inp.dataset.i].elo = Number(inp.value); rebuild(); }));
   const Z = race.zones(60);
   $('zones').innerHTML = Z.top.map(z => `<li data-top="${z.top.join('-')}"><span>${z.top.map(i => race.R[i].name).join(' › ')}</span><span class="r p">${pct(z.p)}</span></li>`).join('');
-  $('stZ').textContent = `${Z.total} ordered podiums · bound ${pct(race.bound)}`;
+  $('stZ').textContent = `${Z.total} ordered podiums · feasible while top-3 < ${pct(race.bound)}`;
   refresh();
 }
-['rtp', 'm3', 'theta'].forEach(id => $(id).addEventListener('change', rebuild));
+['rtp', 'place', 'show'].forEach(id => $(id).addEventListener('change', rebuild));
 function buildChips() { $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === stake ? 'on' : ''}">${c}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (busy) return; stake = +b.dataset.c; buildChips(); })); }
 
 // ── race ────────────────────────────────────────────────────────────────────────────

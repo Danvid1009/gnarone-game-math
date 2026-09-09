@@ -18,6 +18,18 @@ test('closed-form q1, q2, q3 each sum to 1 across racers', () => {
   assert.ok(close(R.q1[0], R.racers[0].w / R.W));
 });
 
+test('place-terms (default): M1 = 1+P, M2 = 1+P/4, M3 = 1+P/5, all > 1, EV = rtp for every racer, bound = rtp', () => {
+  const R = buildRace({ racers: RACERS, rtp: 0.95 });
+  assert.equal(R.structure.kind, 'place-terms');
+  R.M.forEach(([a, b, c], i) => { const P = a - 1; assert.ok(P > 0 && a > b && b > c && c > 1); assert.ok(close(b, 1 + P / 4) && close(c, 1 + P / 5)); assert.ok(close(R.ev[i], 0.95)); });
+  assert.ok(close(R.feasibleBound, 0.95));
+  assert.ok(close(R.M[0][0], 1.797, 1e-3) && close(R.M[11][0], 51.778, 1e-3));
+  const R2 = buildRace({ racers: RACERS, rtp: 0.95, structure: { kind: 'place-terms', place: 1 / 3, show: 1 / 4 } });
+  R2.ev.forEach(e => assert.ok(close(e, 0.95))); assert.ok(R2.M[0][1] > R.M[0][1]);
+  assert.throws(() => buildRace({ racers: [{ name: 'Goliath', elo: 2300 }, ...RACERS.slice(1)], rtp: 0.95 }), /infeasible field: Goliath/);
+  assert.throws(() => buildRace({ racers: RACERS, rtp: 0.95, structure: { kind: 'place-terms', place: 0.2, show: 0.5 } }), /show ≤ place/);
+});
+
 test('fixed-third: M1 > M2 > M3 = 1.4, EV = rtp for every racer, θ places M2 between', () => {
   const R = buildRace({ racers: RACERS, rtp: 0.95, structure: { kind: 'fixed-third', m3: 1.4, theta: 0.5 } });
   R.M.forEach(([a, b, c], i) => { assert.ok(a > b && b > c && close(c, 1.4)); assert.ok(close(b, 1.4 + 0.5 * (a - 1.4))); assert.ok(close(R.ev[i], 0.95)); });
@@ -26,7 +38,7 @@ test('fixed-third: M1 > M2 > M3 = 1.4, EV = rtp for every racer, θ places M2 be
 
 test('fixed-third: a favourite at or above the bound is rejected with its name', () => {
   const strong = [{ name: 'Goliath', elo: 2100 }, ...RACERS.slice(1)];
-  assert.throws(() => buildRace({ racers: strong, rtp: 0.95 }), /infeasible field: Goliath/);
+  assert.throws(() => buildRace({ racers: strong, rtp: 0.95, structure: { kind: 'fixed-third', m3: 1.4, theta: 0.5 } }), /infeasible field: Goliath/);
 });
 
 test('fractions structure still works and is rtp-exact', () => {

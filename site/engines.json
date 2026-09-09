@@ -54,19 +54,19 @@
     "folder": "race-engine",
     "title": "Rated Racers",
     "accent": "RACERS",
-    "lead": "Elo array + one uniform → fair Plackett–Luce ranking → top-3 payout. Strength is 10^(Elo/400); one draw picks the winner and its leftover is recycled to pick second, third and the rest. Win/place/show probabilities are closed-form; third pays a fixed 1.4, second sits θ of the way to first, first is solved so every racer returns exactly the RTP.",
+    "lead": "Elo array + one uniform → fair Plackett–Luce ranking → top-3 payout. Strength is 10^(Elo/400); one draw picks the winner and its leftover is recycled to pick second, third and the rest. Win/place/show probabilities are closed-form, and every podium finish returns stake plus profit: second pays a quarter and third a fifth of the win profit, which is solved per racer so every racer returns exactly the RTP.",
     "tags": [
       "one uniform, recycled",
       "Plackett–Luce, exact",
-      "[M₁, M₂, 1.4] per racer, RTP-exact"
+      "place terms 1 / ¼ / ⅕, RTP-exact per racer"
     ],
     "figures": [
       [
         "examples/places.png",
-        "Closed-form win / place / show probabilities against the feasibility bound, and the per-racer multipliers."
+        "Closed-form win / place / show probabilities against the feasibility bound, and the per-racer place-terms multipliers."
       ],
       [
-        "examples/sim-fixed-third.png",
+        "examples/sim-place-terms.png",
         "200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider."
       ]
     ],
