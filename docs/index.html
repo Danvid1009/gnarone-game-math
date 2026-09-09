@@ -60,7 +60,7 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
 <div class="grid">
   <a class="card" href="stepper/"><div class="k">GLASS BRIDGE <b>STEPPER</b></div><p>A fair crash ladder. Ten rungs, cash out any time. Survival to rung k is RTP ÷ payoutₖ, so every stopping rule returns the same 97%: the player chooses variance, never expectation.</p><span class="tag">one draw, ten reveals</span></a>
   <a class="card" href="payout/"><div class="k">RED LIGHT <b>GREEN LIGHT</b></div><p>A single-shot payout function. The field is the 0–10000 draw; zone widths are the probabilities; inside a zone the payout ramps from a − r to a + r. Payouts and RTP in, a monotone payout(u) out, exact by summation.</p><span class="tag">sloped bands</span></a>
-  <a class="card" href="race/"><div class="k">RATED <b>RACERS</b></div><p>A Plackett–Luce race. Racers carry an Elo; strength is 10^(Elo/400); the next finisher is drawn in proportion to strength. Every ordered podium has a closed-form probability and one draw picks it. Odds are set so every racer returns exactly the RTP, winner-only or 1st/2nd/3rd.</p><span class="tag">Plackett–Luce</span></a>
+  <a class="card" href="race/"><div class="k">RATED <b>RACERS</b></div><p>Elo array + one uniform → fair Plackett–Luce ranking → top-3 payout. Strength is 10^(Elo/400); one draw picks the winner and its leftover is recycled to pick second, third and the rest. Win/place/show probabilities are closed-form; third pays a fixed 1.4, second sits θ of the way to first, first is solved so every racer returns exactly the RTP.</p><span class="tag">one uniform, recycled</span></a>
 </div>
 <h2>Source</h2>
 <ul class="links">

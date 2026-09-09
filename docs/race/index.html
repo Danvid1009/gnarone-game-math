@@ -56,21 +56,21 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
 <body><div class="wrap">
 <nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>Rated Racers</div><div><a href="play.html">full-screen demo</a> · <a href="https://github.com/Danvid1009/gnarone-game-math/tree/main/race-engine">source</a></div></nav>
 <h1>RATED <span>RACERS</span></h1>
-<p class="lead">A Plackett–Luce race. Racers carry an Elo; strength is 10^(Elo/400); the next finisher is drawn in proportion to strength. Every ordered podium has a closed-form probability and one draw picks it. Odds are set so every racer returns exactly the RTP, winner-only or 1st/2nd/3rd.</p>
-<div class="tags"><span>Plackett–Luce</span><span>Elo → strength</span><span>RTP-exact odds per racer</span></div>
+<p class="lead">Elo array + one uniform → fair Plackett–Luce ranking → top-3 payout. Strength is 10^(Elo/400); one draw picks the winner and its leftover is recycled to pick second, third and the rest. Win/place/show probabilities are closed-form; third pays a fixed 1.4, second sits θ of the way to first, first is solved so every racer returns exactly the RTP.</p>
+<div class="tags"><span>one uniform, recycled</span><span>Plackett–Luce, exact</span><span>[M₁, M₂, 1.4] per racer, RTP-exact</span></div>
 
 <div class="demo"><iframe src="play.html" title="Rated Racers demo" loading="eager"></iframe><a class="full" href="play.html">open full screen ↗</a></div>
 
 <h2>The math</h2>
 <div class="md" id="md"><p>Loading ALGORITHM.md…</p></div>
 
-<h2>Figures</h2><div class="imgs"><figure><img src="img/places.png" alt="Place probabilities per racer and the outcome zones on the draw, sorted by probability."><figcaption>Place probabilities per racer and the outcome zones on the draw, sorted by probability.</figcaption></figure></div>
+<h2>Figures</h2><div class="imgs"><figure><img src="img/places.png" alt="Closed-form win / place / show probabilities against the feasibility bound, and the per-racer multipliers."><figcaption>Closed-form win / place / show probabilities against the feasibility bound, and the per-racer multipliers.</figcaption></figure><figure><img src="img/sim-fixed-third.png" alt="200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider."><figcaption>200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider.</figcaption></figure></div>
 
 <h2>Build it yourself</h2>
 <pre><code>git clone https://github.com/Danvid1009/gnarone-game-math.git
 cd gnarone-game-math/race-engine
 npm test
-node bin/build-race.js --elo 1800,1650,1600,1500,1450,1300 --rtp 0.95 --places 0.6,0.3,0.1 --js</code></pre>
+node bin/build-race.js --elo 1850,1780,1720,1680,1640,1600,1560,1520,1480,1430,1380,1300 --rtp 0.95 --js</code></pre>
 <ul class="links">
   <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/race-engine/ALGORITHM.md">ALGORITHM.md on GitHub</a></li>
   <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/race-engine/src/engine.js">src/engine.js</a> — the engine</li>

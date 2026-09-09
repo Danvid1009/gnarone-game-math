@@ -54,18 +54,22 @@
     "folder": "race-engine",
     "title": "Rated Racers",
     "accent": "RACERS",
-    "lead": "A Plackett–Luce race. Racers carry an Elo; strength is 10^(Elo/400); the next finisher is drawn in proportion to strength. Every ordered podium has a closed-form probability and one draw picks it. Odds are set so every racer returns exactly the RTP, winner-only or 1st/2nd/3rd.",
+    "lead": "Elo array + one uniform → fair Plackett–Luce ranking → top-3 payout. Strength is 10^(Elo/400); one draw picks the winner and its leftover is recycled to pick second, third and the rest. Win/place/show probabilities are closed-form; third pays a fixed 1.4, second sits θ of the way to first, first is solved so every racer returns exactly the RTP.",
     "tags": [
-      "Plackett–Luce",
-      "Elo → strength",
-      "RTP-exact odds per racer"
+      "one uniform, recycled",
+      "Plackett–Luce, exact",
+      "[M₁, M₂, 1.4] per racer, RTP-exact"
     ],
     "figures": [
       [
         "examples/places.png",
-        "Place probabilities per racer and the outcome zones on the draw, sorted by probability."
+        "Closed-form win / place / show probabilities against the feasibility bound, and the per-racer multipliers."
+      ],
+      [
+        "examples/sim-fixed-third.png",
+        "200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider."
       ]
     ],
-    "cli": "node bin/build-race.js --elo 1800,1650,1600,1500,1450,1300 --rtp 0.95 --places 0.6,0.3,0.1 --js"
+    "cli": "node bin/build-race.js --elo 1850,1780,1720,1680,1640,1600,1560,1520,1480,1430,1380,1300 --rtp 0.95 --js"
   }
 ]
