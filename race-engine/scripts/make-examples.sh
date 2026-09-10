@@ -8,6 +8,7 @@ node bin/build-race.js --elo $E --rtp 0.95 --names $N --json > examples/race.jso
 node bin/build-race.js --elo $E --rtp 0.95 --names $N --js | sed -n '/^\/\/ Plackett/,$p' > examples/raceOrder.js
 node bin/build-race.js --elo $E --rtp 0.95 --names $N --fractions 0.6,0.3,0.1 > examples/fractions.txt
 node scripts/sim-place-terms.js 200000 0.95 0.25 0.2 > examples/sim-place-terms.json 2> examples/sim-place-terms.txt
+node scripts/make-fixtures.js > /dev/null
 PY=$(command -v python3); [ -x /opt/anaconda3/bin/python3 ] && PY=/opt/anaconda3/bin/python3
 $PY scripts/plot.py examples/race.json examples/
 $PY scripts/plot-sim.py examples/sim-place-terms.json examples/

@@ -64,6 +64,22 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
 <h2>The math</h2>
 <div class="md" id="md"><p>Loading ALGORITHM.md…</p></div>
 
+<h2>Sample API (static fixtures)</h2>
+<p class="lead">One hundred pre-drawn rounds from fixed seeds, each resolved for every bet type, served as plain JSON. Deterministic, so two people calling the same round get the same answer.</p>
+<pre><code># the field: racers, Elo, win/place/show probabilities, multipliers per racer
+curl -s https://danvid1009.github.io/gnarone-game-math/race/api/field.json
+
+# one round (000–099): seed, u, full finishing order, podium, settlement for every racer at stake 1000
+curl -s https://danvid1009.github.io/gnarone-game-math/race/api/rounds/007.json
+
+# all 100 rounds in one file
+curl -s https://danvid1009.github.io/gnarone-game-math/race/api/rounds.json
+
+# a worked RGS-shaped request/response pair (round 007, backing Flint)
+curl -s https://danvid1009.github.io/gnarone-game-math/race/api/sample-request.json
+curl -s https://danvid1009.github.io/gnarone-game-math/race/api/sample-response.json</code></pre>
+<p class="lead">To settle a bet from a round: look up the backed racer in <code>settlements</code>; <code>win = round(stake × multiplier)</code> if its <code>place</code> is 1, 2 or 3, else 0. The order is also reproducible from the seed with the standalone function in the build block below.</p>
+
 <h2>Figures</h2><div class="imgs"><figure><img src="img/places.png" alt="Closed-form win / place / show probabilities against the feasibility bound, and the per-racer place-terms multipliers."><figcaption>Closed-form win / place / show probabilities against the feasibility bound, and the per-racer place-terms multipliers.</figcaption></figure><figure><img src="img/sim-place-terms.png" alt="200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider."><figcaption>200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider.</figcaption></figure></div>
 
 <h2>Build it yourself</h2>

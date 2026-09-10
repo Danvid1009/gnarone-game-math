@@ -1,0 +1,9 @@
+{
+  "endpoint": "POST /api/race/bet",
+  "body": {
+    "sessionId": "demo-session",
+    "betAmount": 1000,
+    "betType": "Flint"
+  },
+  "note": "deterministic fixture: the server used seed \"fixture-007\" instead of a fresh draw"
+}

@@ -46,3 +46,13 @@ are refused with the offending racer named.
 
 `scripts/sim-place-terms.js` runs 200,000 races with a unit stake on every racer and writes the data
 behind `examples/sim-place-terms.png`.
+
+## Sample API (static fixtures)
+
+`scripts/make-fixtures.js` writes `examples/api/`: `field.json` (racers, Elo, q, multipliers),
+`rounds/000.json` … `rounds/099.json` (seed, u, full order, podium, settlement for every racer at
+stake 1000), `rounds.json` (all of them), and a worked `sample-request.json` / `sample-response.json`
+in the RGS bet shape. The site publishes them at
+`https://danvid1009.github.io/gnarone-game-math/race/api/`, so a partner can `curl` a round and
+settle any bet type from it. Seeds are `fixture-000` … `fixture-099`; the order is reproducible
+from the seed with `raceOrder(u)` in `examples/raceOrder.js`.

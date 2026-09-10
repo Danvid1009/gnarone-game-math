@@ -8,7 +8,7 @@
 // docs/<slug>/index.html (demo + typeset algorithm + figures + source links) plus docs/index.html.
 // To add a model: add an entry to engines.json and run this again.
 
-import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync, rmSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync, rmSync, cpSync } from 'node:fs';
 import { dirname, join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -109,6 +109,25 @@ for (const e of engines) {
   copyFileSync(join(root, e.folder, 'ALGORITHM.md'), join(out, 'ALGORITHM.md'));
   const figs = e.figures.filter(([p]) => existsSync(join(root, e.folder, p)));
   for (const [p] of figs) copyFileSync(join(root, e.folder, p), join(out, 'img', basename(p)));
+  const hasApi = existsSync(join(root, e.folder, 'examples/api'));
+  if (hasApi) cpSync(join(root, e.folder, 'examples/api'), join(out, 'api'), { recursive: true });
+  const BASE = 'https://danvid1009.github.io/gnarone-game-math';
+  const apiSection = hasApi ? `
+<h2>Sample API (static fixtures)</h2>
+<p class="lead">One hundred pre-drawn rounds from fixed seeds, each resolved for every bet type, served as plain JSON. Deterministic, so two people calling the same round get the same answer.</p>
+<pre><code># the field: racers, Elo, win/place/show probabilities, multipliers per racer
+curl -s ${BASE}/${e.slug}/api/field.json
+
+# one round (000–099): seed, u, full finishing order, podium, settlement for every racer at stake 1000
+curl -s ${BASE}/${e.slug}/api/rounds/007.json
+
+# all 100 rounds in one file
+curl -s ${BASE}/${e.slug}/api/rounds.json
+
+# a worked RGS-shaped request/response pair (round 007, backing Flint)
+curl -s ${BASE}/${e.slug}/api/sample-request.json
+curl -s ${BASE}/${e.slug}/api/sample-response.json</code></pre>
+<p class="lead">To settle a bet from a round: look up the backed racer in <code>settlements</code>; <code>win = round(stake × multiplier)</code> if its <code>place</code> is 1, 2 or 3, else 0. The order is also reproducible from the seed with the standalone function in the build block below.</p>` : '';
   const [t1, t2] = e.title.toUpperCase().includes(e.accent) ? [e.title.toUpperCase().replace(e.accent, '').trim(), e.accent] : [e.title.toUpperCase(), ''];
   const page = HEAD(e.title) + `
 <nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>${esc(e.title)}</div><div><a href="play.html">full-screen demo</a> · <a href="${REPO}/tree/main/${e.folder}">source</a></div></nav>
@@ -120,6 +139,7 @@ for (const e of engines) {
 
 <h2>The math</h2>
 <div class="md" id="md"><p>Loading ALGORITHM.md…</p></div>
+${apiSection}
 
 ${figs.length ? `<h2>Figures</h2><div class="imgs">${figs.map(([p, cap]) => `<figure><img src="img/${basename(p)}" alt="${esc(cap)}"><figcaption>${esc(cap)}</figcaption></figure>`).join('')}</div>` : ''}
 
@@ -136,7 +156,7 @@ ${esc(e.cli)}</code></pre>
 ${MD_SCRIPT}
 ${FOOT}`;
   writeFileSync(join(out, 'index.html'), page);
-  console.log(`docs/${e.slug}/  ← ${e.folder}  (${figs.length} figures)`);
+  console.log(`docs/${e.slug}/  ← ${e.folder}  (${figs.length} figures${hasApi ? ', api' : ''})`);
 }
 
 // landing page
