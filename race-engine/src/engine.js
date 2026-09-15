@@ -47,6 +47,9 @@ export function buildRace({ racers, rtp, structure = { kind: 'place-terms', plac
     const bad = R.filter((_, i) => top3[i] >= rtp);
     if (bad.length) throw new Error(`infeasible field: ${bad.map(r => `${r.name} (top-3 ${(100 * top3[r.index]).toFixed(2)}%)`).join(', ')} at or above RTP ${(100 * rtp).toFixed(2)}%; no positive win profit can return the RTP. Weaken the favourite.`);
     M = q.map(([q1_, q2_, q3_]) => { const P = (rtp - (q1_ + q2_ + q3_)) / (q1_ + a * q2_ + b * q3_); return [1 + P, 1 + a * P, 1 + b * P]; });
+  } else if (structure.kind === 'win-only') {
+    feasibleBound = 1;
+    M = q.map(([q1_]) => [rtp / q1_, 0, 0]);
   } else if (structure.kind === 'fixed-third') {
     const m3 = structure.m3 ?? 1.4, th = structure.theta ?? 0.5;
     if (!(m3 > 0)) throw new Error('fixed-third: m3 must be > 0');
@@ -148,7 +151,7 @@ export function buildRace({ racers, rtp, structure = { kind: 'place-terms', plac
 export function format(race) {
   const pct = x => `${(100 * x).toFixed(2)}%`;
   const s = race.structure;
-  const desc = s.kind === 'place-terms' ? `place-terms: M1 = 1+P, M2 = 1+P·${s.place ?? 0.25}, M3 = 1+P·${s.show ?? 0.2}; feasible iff top-3 < ${pct(race.feasibleBound)}`
+  const desc = s.kind === 'win-only' ? `win-only: M1 = RTP / q1, places pay 0` : s.kind === 'place-terms' ? `place-terms: M1 = 1+P, M2 = 1+P·${s.place ?? 0.25}, M3 = 1+P·${s.show ?? 0.2}; feasible iff top-3 < ${pct(race.feasibleBound)}`
     : s.kind === 'fixed-third' ? `fixed-third: M3=${s.m3 ?? 1.4}, θ=${s.theta ?? 0.5}, feasible iff top-3 < ${pct(race.feasibleBound)}` : `fractions ${JSON.stringify(s.f)}`;
   const L = [`${race.n} racers   RTP ${race.rtp}   ${desc}`, '',
     'racer        elo   q1       q2       q3       top3        M1        M2      M3     EV      stdev'];

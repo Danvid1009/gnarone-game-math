@@ -1,0 +1,246 @@
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Red Light Green Light Payout</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#0a0c11;--bg-2:#11141c;--panel:#151923;--line:#252b38;--ink:#f1efe8;--ink-2:#a8adb8;--ink-3:#6b7180;--pink:#e8336d;--pink-2:#ff6b9d;--teal:#6fd3c7;--teal-2:#2a8f86;--gold:#f2c14e;--green:#2f8f6b;--danger:#ff4d6d;--sand:#c9a27a;--sand-2:#a8845d;--sky:#2b1f2e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:14px;line-height:1.45;min-height:100vh}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.display{font-family:"Bebas Neue","IBM Plex Sans",sans-serif;letter-spacing:.04em}
+header{display:flex;align-items:baseline;justify-content:space-between;padding:16px 22px 0;gap:16px;flex-wrap:wrap}
+header h1{margin:0;font-size:34px;font-weight:400;line-height:1}
+header h1 span{color:var(--pink)}
+.balance{font-size:13px;color:var(--ink-2)}.balance b{display:block;font-size:26px;color:var(--ink);font-weight:500}
+.app{display:grid;grid-template-columns:1fr 320px;gap:18px;padding:14px 22px 28px;max-width:1280px;margin:0 auto;align-items:start}
+@media (max-width:940px){.app{grid-template-columns:1fr}}
+/* stage */
+.stage{position:relative;height:580px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:linear-gradient(180deg,#1a1320 0%,var(--sky) 38%,#4a3446 46%,var(--sand) 47%,var(--sand-2) 100%);user-select:none}
+.stage::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(232,51,109,.035) 38px 40px);pointer-events:none}
+.doll{position:absolute;right:26px;top:88px;width:70px;height:170px;pointer-events:none;transition:filter .3s}
+.doll .head{width:56px;height:56px;border-radius:50%;background:#f0c9a3;margin:0 auto;position:relative;transition:transform .5s cubic-bezier(.4,1.6,.5,1)}
+.doll .head::before,.doll .head::after{content:"";position:absolute;top:22px;width:8px;height:8px;border-radius:50%;background:#1b1b1b}
+.doll .head::before{left:14px}.doll .head::after{right:14px}
+.doll .hair{position:absolute;top:-8px;left:-4px;right:-4px;height:30px;border-radius:30px 30px 6px 6px;background:#2a1b14}
+.doll .body{width:60px;height:96px;margin:4px auto 0;background:#f08c2f;border-radius:10px 10px 4px 4px;position:relative}
+.doll .body::after{content:"";position:absolute;left:8px;right:8px;top:12px;height:70px;background:#ffe37a;border-radius:6px}
+.doll.away .head{transform:rotateY(180deg)}
+.doll.red{filter:drop-shadow(0 0 22px rgba(232,51,109,.9))}
+.doll.red .head::before,.doll.red .head::after{background:var(--pink)}
+.light{position:absolute;top:24px;left:24px;display:flex;gap:10px;align-items:center;font-size:24px}
+.light i{width:14px;height:14px;border-radius:50%;background:#333;display:inline-block;box-shadow:0 0 0 2px #222}
+.light i.on.g{background:#5fe0a0;box-shadow:0 0 16px #5fe0a0}.light i.on.r{background:var(--pink);box-shadow:0 0 16px var(--pink)}
+.field{position:absolute;left:36px;right:130px;top:300px;height:170px}
+.zones{position:absolute;inset:0;display:flex;border:1px solid rgba(0,0,0,.25)}
+.zone{position:relative;height:100%;border-right:1px dashed rgba(0,0,0,.35);transition:filter .3s}
+.zone .lbl{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);color:#1e1611;font-size:20px;white-space:nowrap;opacity:.85}
+.zone .pr{position:absolute;left:50%;top:6px;transform:translateX(-50%);color:#2a1e16;font-size:11px;white-space:nowrap;opacity:.8}
+.zone.hit{filter:brightness(1.25)}
+.zone.z0{background:rgba(232,51,109,.28)}.zone.z1{background:rgba(111,211,199,.22)}.zone.z2{background:rgba(111,211,199,.34)}.zone.z3{background:rgba(242,193,78,.30)}.zone.z4{background:rgba(242,193,78,.48)}.zone.z5{background:rgba(255,255,255,.55)}
+.curve{position:absolute;left:36px;right:130px;top:190px;height:110px;overflow:visible}
+.curve svg{width:100%;height:100%;overflow:visible}
+.axis{position:absolute;left:36px;right:130px;top:478px;display:flex;justify-content:space-between;font-size:11px;color:#2a1e16}
+.runner{position:absolute;top:376px;left:36px;width:26px;height:46px;transform:translateX(-50%);transition:left var(--dur,2.2s) cubic-bezier(.25,.9,.35,1);z-index:4}
+.runner .head{width:16px;height:16px;border-radius:50%;background:#e8c39e;margin:0 auto 2px}
+.runner .body{width:22px;height:28px;border-radius:6px 6px 3px 3px;background:var(--green);margin:0 auto;position:relative}
+.runner .body::after{content:"456";position:absolute;inset:auto 0 3px;text-align:center;font:9px "IBM Plex Mono",monospace;color:#dff5ea}
+.runner.run .body{animation:bob .18s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(0) rotate(-4deg)}to{transform:translateY(-3px) rotate(4deg)}}
+.runner.dead{transform:translateX(-50%) rotate(90deg) translateY(14px);transition:left var(--dur,2.2s) cubic-bezier(.25,.9,.35,1),transform .35s ease-in .05s}
+.runner.win .body{background:var(--gold)}
+.marker{position:absolute;top:186px;width:2px;height:300px;background:var(--ink);opacity:0;transform:translateX(-50%);z-index:3;transition:opacity .3s}
+.marker.on{opacity:.9}
+.marker .tag{position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:12px;padding:3px 7px;border-radius:3px;white-space:nowrap}
+.callout{position:absolute;left:16px;top:70px;background:rgba(10,12,17,.84);border:1px solid var(--line);border-radius:4px;padding:10px 12px;max-width:290px;font-size:12.5px;color:var(--ink-2);backdrop-filter:blur(4px);z-index:6}
+.callout b{color:var(--ink);font-weight:500}
+.callout .big{font-size:30px;color:var(--teal);line-height:1;margin-bottom:4px}
+.callout.lose .big{color:var(--danger)}.callout.win .big{color:var(--gold)}
+.flash{position:absolute;inset:0;background:var(--pink);opacity:0;pointer-events:none;z-index:7}
+.flash.on{animation:flash .5s}
+@keyframes flash{0%{opacity:.55}100%{opacity:0}}
+/* controls */
+.side{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px}
+.card h2{margin:0 0 10px;font-size:20px;font-weight:400;color:var(--ink-2)}
+.seg{display:flex;gap:6px}
+.seg button,.chips button{flex:1;padding:8px 6px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);border-radius:4px;cursor:pointer;font:inherit;font-weight:500}
+.seg button.on{border-color:var(--pink);color:var(--ink);background:rgba(232,51,109,.16)}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.chips button.on{border-color:var(--teal);color:var(--ink);background:rgba(111,211,199,.14)}
+button:disabled{opacity:.4;cursor:not-allowed}
+.btn{width:100%;margin-top:10px;padding:14px 10px;border:none;border-radius:4px;font:inherit;font-size:22px;font-family:"Bebas Neue",sans-serif;letter-spacing:.06em;cursor:pointer;color:#fff;background:var(--pink)}
+.btn:hover:not(:disabled){background:var(--pink-2)}
+input.pay{width:100%;margin-top:6px;padding:8px;border:1px solid var(--line);border-radius:4px;background:var(--bg-2);color:var(--ink);font:13px "IBM Plex Mono",monospace}
+label.small{display:block;margin-top:10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.err{color:var(--danger);font-size:12px;margin-top:6px;min-height:1em}
+.bands{list-style:none;margin:0;padding:0;font-size:12.5px}
+.bands li{display:grid;grid-template-columns:36px 1fr 64px 92px;gap:6px;padding:4px 0;border-bottom:1px solid var(--line);color:var(--ink-3)}
+.bands li.head{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em}
+.bands li.hit{color:var(--ink)}.bands li.hit .m{color:var(--teal)}
+.bands .r{text-align:right}
+.stat{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-2)}
+.stat:last-child{border-bottom:0}.stat b{color:var(--ink);font-weight:500}
+.disclose{font-size:12px;color:var(--ink-3);line-height:1.5}.disclose b{color:var(--ink-2);font-weight:500}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header>
+  <h1 class="display">RED LIGHT <span>GREEN LIGHT</span></h1>
+  <div class="balance">demo balance<b class="mono" id="balance">1,000.00</b></div>
+</header>
+
+<div class="app">
+  <section class="stage" id="stage" aria-label="field">
+    <div class="light display" id="light"><i class="g" id="lg"></i><i class="r" id="lr"></i><span id="lightTxt">READY</span></div>
+    <div class="doll away" id="doll"><div class="head"><div class="hair"></div></div><div class="body"></div></div>
+    <div class="curve" id="curve"><svg id="svg" viewBox="0 0 1000 110" preserveAspectRatio="none"></svg></div>
+    <div class="field"><div class="zones" id="zones"></div></div>
+    <div class="axis mono" id="axis"></div>
+    <div class="marker mono" id="marker"><div class="tag" id="markerTag"></div></div>
+    <div class="runner" id="runner"><div class="head"></div><div class="body"></div></div>
+    <div class="callout" id="callout"><div class="big display" id="coBig">PLACE A BET</div><div id="coText">The field is the 0–10000 draw. The runner stops where the number lands; the zone sets the payout and the slope sets the exact amount.</div></div>
+    <div class="flash" id="flash"></div>
+  </section>
+
+  <aside class="side">
+    <div class="card">
+      <h2 class="display">PAYOUT TABLE</h2>
+      <label class="small">payouts (× stake, comma-separated, include 0 for a no-win zone)</label>
+      <input class="pay" id="payouts" value="0, 0.5, 1, 2, 5, 20">
+      <label class="small">target rtp</label>
+      <input class="pay" id="rtp" value="0.95">
+      <label class="small">probability method</label>
+      <div class="seg" id="method"><button data-m="maxent" class="on">maxent</button><button data-m="geometric">geometric</button><button data-m="weights">weights</button></div>
+      <div id="wRow" hidden><label class="small">weights (one per payout; zero's is ignored)</label><input class="pay" id="weights" value="0, 50, 30, 15, 4, 1"></div>
+      <div class="err" id="err"></div>
+      <h2 class="display" style="margin-top:12px">STAKE</h2>
+      <div class="chips mono" id="chips"></div>
+      <button class="btn" id="btnPlay">RUN</button>
+    </div>
+    <div class="card">
+      <h2 class="display">THIS ROUND</h2>
+      <div class="stat"><span>Draw x</span><b class="mono" id="stX">—</b></div>
+      <div class="stat"><span>Zone</span><b class="mono" id="stZone">—</b></div>
+      <div class="stat"><span>Position in zone</span><b class="mono" id="stT">—</b></div>
+      <div class="stat"><span>Multiple paid</span><b class="mono" id="stMult">—</b></div>
+    </div>
+    <div class="card">
+      <h2 class="display">ZONES</h2>
+      <ul class="bands mono" id="bands"></ul>
+      <div class="stat" style="margin-top:8px"><span>Exact RTP</span><b class="mono" id="stRtp">—</b></div>
+      <div class="stat"><span>Hit rate</span><b class="mono" id="stHit">—</b></div>
+      <div class="stat"><span>r (band half-width)</span><b class="mono" id="stR">—</b></div>
+    </div>
+    <div class="card disclose"><b>How this is fair.</b> One uniform number is drawn when you bet and projected to 0–10000. Zone widths are the probabilities, so the chance of each payout is exactly its width. Inside a zone the payout rises in a straight line from a − r to a + r, so each zone's mean is exactly a and the total return is exactly Σ pᵢaᵢ. r is one tenth of the smallest gap between payouts, so zones never overlap and nothing ever pays between 0 and the lowest prize.</div>
+  </aside>
+</div>
+
+<script>
+// ── engine (mirrors payout-engine/src/engine.js) ─────────────────────────────────────
+function bisect(f, target, lo, hi) { const inc = f(hi) > f(lo); for (let i = 0; i < 200; i++) { const m = (lo + hi) / 2; if ((f(m) < target) === inc) lo = m; else hi = m; } return (lo + hi) / 2; }
+function assign(A, rtp, method, weights) {
+  const n = A.length, amin = A[0], amax = A[n - 1];
+  if (!(rtp > amin && rtp < amax)) throw new Error(`rtp must lie strictly between ${amin} and ${amax}`);
+  const norm = x => { const Z = x.reduce((s, v) => s + v, 0); return x.map(v => v / Z); };
+  const meanOf = w => norm(w).reduce((s, v, i) => s + v * A[i], 0);
+  if (method === 'maxent') { const w = l => A.map(a => Math.exp(-l * (a - amin) / amax)); return norm(w(bisect(l => meanOf(w(l)), rtp, -2000, 2000))); }
+  if (method === 'geometric') { const w = q => A.map((_, i) => Math.exp(q * i)); return norm(w(bisect(q => meanOf(w(q)), rtp, -60, 60))); }
+  const iz = A.indexOf(0); if (iz < 0) throw new Error('weights needs a 0 payout');
+  if (!weights || weights.length !== n) throw new Error(`need ${n} weights`);
+  const W = weights.map((w, i) => (i === iz ? 0 : w)); const Wt = W.reduce((s, w) => s + w, 0); if (!(Wt > 0) || W.some(w => w < 0)) throw new Error('weights must be ≥ 0 with a positive total');
+  const Enz = W.reduce((s, w, i) => s + (w / Wt) * A[i], 0); if (!(Enz > rtp)) throw new Error(`E[payout | win] = ${Enz.toFixed(3)} must exceed rtp`);
+  const p0 = 1 - rtp / Enz; return W.map((w, i) => (i === iz ? p0 : (1 - p0) * w / Wt));
+}
+function build({ payouts, rtp, method, weights }) {
+  const order = payouts.map((_, i) => i).sort((i, j) => payouts[i] - payouts[j]);
+  const A = order.map(i => payouts[i]); if (new Set(A).size !== A.length) throw new Error('payouts must be distinct');
+  const W = weights ? order.map(i => weights[i]) : undefined;
+  const p = assign(A, rtp, method, W);
+  const breaks = [0]; let acc = 0; for (const x of p) { acc += x; breaks.push(acc); } breaks[breaks.length - 1] = 1;
+  const pos = A.filter(a => a > 0); if (pos.length < 2) throw new Error('need two positive payouts');
+  const gap = Math.min(...pos.slice(1).map((a, i) => a - pos[i])), r = 0.1 * gap;
+  if (pos[0] - r <= 0) throw new Error('lowest payout too close to zero');
+  const bandOf = u => { let i = 0; while (breaks[i + 1] <= u) i++; return i; };
+  const payout = u => { const i = bandOf(u); if (A[i] <= 0) return 0; const t = (u - breaks[i]) / (breaks[i + 1] - breaks[i]); return A[i] + r * (2 * t - 1); };
+  return { A, p, breaks, r, gap, rtp: p.reduce((s, x, i) => s + x * A[i], 0), hitRate: p.reduce((s, x, i) => s + (A[i] > 0 ? x : 0), 0), bandOf, payout };
+}
+function uniform() { const a = new Uint32Array(2); crypto.getRandomValues(a); return (a[0] * 4294967296 + a[1]) / 18446744073709551616; }
+
+// ── state ───────────────────────────────────────────────────────────────────────────
+const CHIPS = [1, 5, 10, 25, 50, 100];
+const $ = id => document.getElementById(id);
+const fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const pct = x => (100 * x).toFixed(2) + '%';
+let balance = 1000, stake = 10, method = 'maxent', E = null, busy = false, last = null;
+
+function readConfig() {
+  const payouts = $('payouts').value.split(',').map(s => Number(s.trim())).filter(s => !Number.isNaN(s));
+  const rtp = Number($('rtp').value);
+  const weights = method === 'weights' ? $('weights').value.split(',').map(s => Number(s.trim())) : undefined;
+  E = build({ payouts, rtp, method, weights });
+}
+function rebuild() {
+  try { readConfig(); $('err').textContent = ''; } catch (e) { $('err').textContent = e.message; return; }
+  const zones = $('zones'); zones.innerHTML = '';
+  E.A.forEach((a, i) => {
+    const z = document.createElement('div'); z.className = `zone z${Math.min(i, 5)}`; z.style.flex = `${E.p[i]} 0 0`; z.dataset.i = i;
+    if (E.p[i] > 0.04) z.innerHTML = `<div class="pr">${pct(E.p[i])}</div><div class="lbl display">${a > 0 ? a + '×' : 'OUT'}</div>`;
+    zones.appendChild(z);
+  });
+  // sloped curve above the field (log-ish scale so 20× fits)
+  const ymax = Math.max(...E.A) + E.r, sc = v => 105 - 100 * Math.log1p(v * 8 / ymax) / Math.log1p(8);
+  let d = '';
+  E.A.forEach((a, i) => { const x0 = 1000 * E.breaks[i], x1 = 1000 * E.breaks[i + 1]; const y0 = sc(a > 0 ? a - E.r : 0), y1 = sc(a > 0 ? a + E.r : 0); d += `${i ? 'L' : 'M'}${x0},${y0} L${x1},${y1} `; });
+  $('svg').innerHTML = `<path d="${d}" fill="none" stroke="#f1efe8" stroke-width="2.5" vector-effect="non-scaling-stroke"/>` + E.A.map((a, i) => a > 0 && E.p[i] > 0.06 ? `<text x="${1000 * (E.breaks[i] + E.breaks[i + 1]) / 2}" y="${sc(a + E.r) - 8}" fill="#f1efe8" font-size="12" text-anchor="middle" font-family="IBM Plex Mono">${(a - E.r).toFixed(2)}→${(a + E.r).toFixed(2)}</text>` : '').join('');
+  $('axis').innerHTML = [0, 2000, 4000, 6000, 8000, 10000].map(v => `<span>${v}</span>`).join('');
+  $('bands').innerHTML = `<li class="head"><span>zone</span><span>pays</span><span class="r">p</span><span class="r">x range</span></li>` +
+    E.A.map((a, i) => `<li data-i="${i}"><span>${i}</span><span class="m">${a > 0 ? `${(a - E.r).toFixed(2)}–${(a + E.r).toFixed(2)}×` : 'no win'}</span><span class="r">${pct(E.p[i])}</span><span class="r">${Math.round(1e4 * E.breaks[i])}–${Math.round(1e4 * E.breaks[i + 1])}</span></li>`).join('');
+  $('stRtp').textContent = E.rtp.toFixed(4); $('stHit').textContent = pct(E.hitRate); $('stR').textContent = E.r.toFixed(4) + '×';
+  $('marker').classList.remove('on'); document.querySelectorAll('.zone.hit').forEach(z => z.classList.remove('hit'));
+}
+$('method').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { method = b.dataset.m; $('method').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); $('wRow').hidden = method !== 'weights'; rebuild(); }));
+['payouts', 'rtp', 'weights'].forEach(id => $(id).addEventListener('change', rebuild));
+function buildChips() { $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === stake ? 'on' : ''}">${c}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (busy) return; stake = +b.dataset.c; buildChips(); })); }
+
+// ── round ───────────────────────────────────────────────────────────────────────────
+function say(big, text, mood) { $('coBig').textContent = big; $('coText').textContent = text; $('callout').className = 'callout' + (mood ? ' ' + mood : ''); }
+function setLight(which, txt) { $('lg').classList.toggle('on', which === 'g'); $('lr').classList.toggle('on', which === 'r'); $('lightTxt').textContent = txt; }
+function fieldX(u) { const f = document.querySelector('.field').getBoundingClientRect(), s = $('stage').getBoundingClientRect(); return (f.left - s.left) + u * f.width; }
+function play() {
+  if (busy || !E) return;
+  if (stake > balance) { say('NOT ENOUGH', 'Lower the stake or reload for a fresh demo balance.', 'lose'); return; }
+  busy = true; balance -= stake; refresh();
+  const u = uniform(), i = E.bandOf(u), mult = E.payout(u), t = (u - E.breaks[i]) / (E.breaks[i + 1] - E.breaks[i]);
+  last = { u, i, mult, t, bet: stake };
+  const runner = $('runner'), doll = $('doll'), marker = $('marker');
+  runner.className = 'runner'; runner.style.setProperty('--dur', '0s'); runner.style.left = fieldX(0) + 'px'; marker.classList.remove('on'); document.querySelectorAll('.zone.hit').forEach(z => z.classList.remove('hit')); document.querySelectorAll('#bands li.hit').forEach(z => z.classList.remove('hit'));
+  doll.className = 'doll away'; setLight('g', 'GREEN LIGHT'); say('RUN', 'The number is already drawn. The runner is heading for it.');
+  setTimeout(() => {
+    runner.classList.add('run'); const dur = 1.6 + 1.6 * u; runner.style.setProperty('--dur', dur + 's'); runner.style.left = fieldX(u) + 'px';
+    setTimeout(() => {
+      runner.classList.remove('run'); doll.className = 'doll' + (mult > 0 ? '' : ' red'); setLight('r', 'RED LIGHT');
+      marker.style.left = fieldX(u) + 'px'; $('markerTag').textContent = `x = ${Math.round(u * 1e4)}`; marker.classList.add('on');
+      document.querySelector(`.zone[data-i="${i}"]`).classList.add('hit'); document.querySelector(`#bands li[data-i="${i}"]`).classList.add('hit');
+      if (mult > 0) {
+        const win = Math.round(last.bet * mult * 100) / 100; balance += win; runner.classList.add('win');
+        say(`${mult.toFixed(3)}×`, `Stopped at x = ${Math.round(u * 1e4)} in the ${E.A[i]}× zone, ${(100 * t).toFixed(0)}% of the way across it, so the slope pays ${mult.toFixed(4)}×. Paid ${fmt(win)}.`, 'win');
+      } else {
+        $('flash').classList.add('on'); setTimeout(() => $('flash').classList.remove('on'), 600); runner.classList.add('dead');
+        say('ELIMINATED', `Stopped at x = ${Math.round(u * 1e4)}, inside the no-win zone (${pct(E.p[i])} of the field). Stake of ${fmt(last.bet)} lost.`, 'lose');
+      }
+      busy = false; refresh();
+    }, dur * 1000 + 150);
+  }, 500);
+}
+$('btnPlay').addEventListener('click', play);
+document.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { if (document.activeElement.tagName !== 'INPUT') { e.preventDefault(); play(); } } });
+function refresh() {
+  $('balance').textContent = fmt(balance); $('btnPlay').disabled = busy;
+  $('stX').textContent = last ? `${Math.round(last.u * 1e4)}  (u = ${last.u.toFixed(6)})` : '—';
+  $('stZone').textContent = last ? `${last.i} · ${E.A[last.i] > 0 ? E.A[last.i] + '×' : 'no win'}` : '—';
+  $('stT').textContent = last ? `${(100 * last.t).toFixed(1)}%` : '—';
+  $('stMult').textContent = last && !busy ? last.mult.toFixed(4) + '×' : (busy ? '…' : '—');
+}
+rebuild(); buildChips(); refresh(); $('runner').style.left = fieldX(0) + 'px';
+window.addEventListener('resize', () => { if (!busy) { $('runner').style.setProperty('--dur', '0s'); $('runner').style.left = fieldX(last ? last.u : 0) + 'px'; if (last) $('marker').style.left = fieldX(last.u) + 'px'; } });
+</script>

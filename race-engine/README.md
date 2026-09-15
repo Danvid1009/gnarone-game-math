@@ -7,6 +7,7 @@ Node 20+. The math is in [ALGORITHM.md](ALGORITHM.md).
 npm test
 node bin/build-race.js --elo 1850,1780,1720,1680,1640,1600,1560,1520,1480,1430,1380,1300 --rtp 0.95
 node bin/build-race.js --elo ... --rtp 0.95 --place 0.25 --show 0.2 --js     # place terms (default) + standalone raceOrder(u)
+node bin/build-race.js --elo ... --rtp 0.95 --win-only                       # Top 1: winner only, odds = RTP / P(win)
 node bin/build-race.js --elo ... --rtp 0.95 --fixed-third 1.4 --theta 0.5    # alternative: fixed third place
 node bin/build-race.js --elo ... --rtp 0.95 --fractions 0.6,0.3,0.1          # alternative: purse-split pricing
 npm run examples
@@ -53,6 +54,7 @@ behind `examples/sim-place-terms.png`.
 `rounds/000.json` … `rounds/099.json` (seed, u, full order, podium, settlement for every racer at
 stake 1000), `rounds.json` (all of them), and a worked `sample-request.json` / `sample-response.json`
 in the RGS bet shape. The site publishes them at
-`https://danvid1009.github.io/gnarone-game-math/race/api/`, so a partner can `curl` a round and
+`https://danvid1009.github.io/gnarone-game-math/top-3/api/` (mirrored at `race/api/`), and the winner-only
+set from `make-fixtures.js top1` at `top-1/api/`, so a partner can `curl` a round and
 settle any bet type from it. Seeds are `fixture-000` … `fixture-099`; the order is reproducible
 from the seed with `raceOrder(u)` in `examples/raceOrder.js`.

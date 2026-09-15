@@ -1,12 +1,12 @@
 # gnarone-game-math
 
-Payout math for the Rollerz RGS. Live demos: **https://danvid1009.github.io/gnarone-game-math/**
+Payout math for the Rollerz RGS. Live: **https://danvid1009.github.io/gnarone-game-math/** — pages `stepper/`, `single-shot/`, `top-3/`, `top-1/` (old `payout/` and `race/` redirect; the `race/api/` fixtures are mirrored so shared links keep working).
 
 | folder | what | docs |
 |---|---|---|
-| [`payout-engine/`](payout-engine) | Sloped-band payout: payouts + RTP in, monotone `payout(u)` out. Probability rules maxent / geometric / weights; `r = 0.1 × min payout gap`. Demo: Red Light, Green Light. | [ALGORITHM.md](payout-engine/ALGORITHM.md) |
-| [`stepper-engine/`](stepper-engine) | Fair crash ladder: survival to rung k is `RTP / c_k`, so every stopping rule returns the RTP. Demo: Glass Bridge. | [ALGORITHM.md](stepper-engine/ALGORITHM.md) |
-| [`race-engine/`](race-engine) | Plackett–Luce race: Elo-rated racers, exact win/place probabilities, single-draw outcome zones, RTP-exact odds for every racer (winner-only or 1st/2nd/3rd). Demo: Rated Racers. | [ALGORITHM.md](race-engine/ALGORITHM.md) |
+| [`payout-engine/`](payout-engine) | **Single Shot.** Sloped-band payout: payouts + RTP in, monotone `payout(u)` out. Probability rules maxent / geometric / weights; `r = 0.1 × min payout gap`. Demo: Red Light, Green Light. | [ALGORITHM.md](payout-engine/ALGORITHM.md) |
+| [`stepper-engine/`](stepper-engine) | **Stepper.** Fair crash ladder: survival to rung k is `RTP / c_k`, so every stopping rule returns the RTP. Demo: Glass Bridge. | [ALGORITHM.md](stepper-engine/ALGORITHM.md) |
+| [`race-engine/`](race-engine) | Elo race from one recycled uniform (Plackett–Luce, exact). Two site pages: **Top 3** (place-terms payouts 1 / ¼ / ⅕, RTP-exact per racer) and **Top 1** (winner only, odds = RTP / P(win)). Static fixture API for each. | [ALGORITHM.md](race-engine/ALGORITHM.md) · [ALGORITHM-top1.md](race-engine/ALGORITHM-top1.md) |
 | [`rgs-math/`](rgs-math) | The Rollerz provider contract (`defineGame`), a mock RGS server, table/curve tooling, RTP verification, example providers. | [README](rgs-math/README.md) |
 | [`docs/`](docs) | The static site GitHub Pages serves: one page per engine (demo, typeset algorithm, figures, source). Generated, do not edit by hand. | |
 | [`site/`](site) | The site generator: `engines.json` lists the engines, `build.js` renders `docs/`. | |

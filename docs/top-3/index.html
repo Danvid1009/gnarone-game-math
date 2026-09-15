@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Top 3</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<style>
+:root{color-scheme:dark;--bg:#0a0c11;--panel:#151923;--line:#252b38;--ink:#f1efe8;--ink-2:#a8adb8;--ink-3:#6b7180;--pink:#e8336d;--teal:#6fd3c7;--gold:#f2c14e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 24px 60px}
+nav.top{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:var(--ink-3);margin-bottom:26px}
+nav.top a{color:var(--ink-2);text-decoration:none}nav.top a:hover{color:var(--teal)}
+nav.top .crumbs span{margin:0 6px}
+h1{font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:54px;letter-spacing:.04em;margin:0 0 8px;line-height:1}
+h1 span{color:var(--pink)}
+.lead{color:var(--ink-2);max-width:70ch;margin:0 0 14px;font-size:16.5px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.tags span{font:12px "IBM Plex Mono",monospace;color:var(--teal);border:1px solid var(--line);border-radius:3px;padding:3px 8px}
+h2{font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:28px;letter-spacing:.04em;color:var(--ink-2);margin:40px 0 12px}
+.demo{position:relative;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#000}
+.demo iframe{display:block;width:100%;height:820px;border:0}
+.demo .full{position:absolute;top:10px;right:12px;font:12px "IBM Plex Mono",monospace;color:var(--ink-2);background:rgba(10,12,17,.8);border:1px solid var(--line);border-radius:3px;padding:4px 8px;text-decoration:none}
+.demo .full:hover{color:var(--teal)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+a.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px;color:inherit;text-decoration:none;transition:border-color .15s,transform .15s}
+a.card:hover{border-color:var(--teal);transform:translateY(-2px)}
+a.card .k{font-family:"Bebas Neue",sans-serif;font-size:28px;letter-spacing:.04em;line-height:1;margin-bottom:6px}
+a.card .k b{color:var(--pink);font-weight:400}
+a.card p{margin:0;color:var(--ink-2);font-size:14px}
+a.card .tag{display:inline-block;margin-top:10px;font:12px "IBM Plex Mono",monospace;color:var(--teal)}
+.imgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+figure{margin:0}img{max-width:100%;border:1px solid var(--line);border-radius:6px;display:block}
+figcaption{font-size:12.5px;color:var(--ink-3);margin-top:6px}
+.links a{color:var(--teal)}.links li{margin:4px 0;color:var(--ink-2)}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px;overflow-x:auto;font:13px "IBM Plex Mono",monospace;color:var(--ink)}
+code{font-family:"IBM Plex Mono",monospace;font-size:.92em;background:var(--panel);padding:1px 5px;border-radius:3px}
+pre code{background:none;padding:0}
+/* rendered markdown */
+.md{max-width:76ch}
+.md h1{display:none}
+.md h2{font-size:24px;margin-top:34px}
+.md h3{font-size:16px;color:var(--ink);margin:22px 0 6px}
+.md p,.md li{color:var(--ink-2)}
+.md strong{color:var(--ink);font-weight:500}
+.md table{border-collapse:collapse;font-size:13.5px;margin:12px 0;font-variant-numeric:tabular-nums}
+.md th,.md td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:right}
+.md th:first-child,.md td:first-child{text-align:left}
+.md th{color:var(--ink-3);font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.md .katex-display{margin:16px 0;overflow-x:auto;overflow-y:hidden}
+.md .katex{color:var(--ink)}
+footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
+</style>
+</head>
+<body><div class="wrap">
+<nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>Top 3</div><div><a href="play.html">full-screen demo</a> · <a href="https://github.com/Danvid1009/gnarone-game-math/tree/main/race-engine">source</a></div></nav>
+<h1>TOP <span>3</span></h1>
+<p class="lead">Elo array + one uniform → fair Plackett–Luce ranking → top-3 payout. Strength is 10^(Elo/400); one draw picks the winner and its leftover is recycled to pick second, third and the rest. Win/place/show probabilities are closed-form, and every podium finish returns stake plus profit: second pays a quarter and third a fifth of the win profit, which is solved per racer so every racer returns exactly the RTP.</p>
+<div class="tags"><span>one uniform, recycled</span><span>Plackett–Luce, exact</span><span>place terms 1 / ¼ / ⅕, RTP-exact per racer</span></div>
+
+<div class="demo"><iframe src="play.html" title="Top 3 demo" loading="eager"></iframe><a class="full" href="play.html">open full screen ↗</a></div>
+
+<h2>The math</h2>
+<div class="md" id="md"><p>Loading ALGORITHM.md…</p></div>
+
+<h2>Sample API (static fixtures)</h2>
+<p class="lead">One hundred pre-drawn rounds from fixed seeds, each resolved for every bet type, served as plain JSON. Deterministic, so two people calling the same round get the same answer.</p>
+<pre><code># the field: racers, Elo, win/place/show probabilities, multipliers per racer
+curl -s https://danvid1009.github.io/gnarone-game-math/top-3/api/field.json
+
+# one round (000–099): seed, u, full finishing order, podium, settlement for every racer at stake 1000
+curl -s https://danvid1009.github.io/gnarone-game-math/top-3/api/rounds/007.json
+
+# all 100 rounds in one file
+curl -s https://danvid1009.github.io/gnarone-game-math/top-3/api/rounds.json
+
+# a worked RGS-shaped request/response pair (round 007, backing Flint)
+curl -s https://danvid1009.github.io/gnarone-game-math/top-3/api/sample-request.json
+curl -s https://danvid1009.github.io/gnarone-game-math/top-3/api/sample-response.json</code></pre>
+<p class="lead">To settle a bet from a round: look up the backed racer in <code>settlements</code>; <code>win = round(stake × multiplier)</code> if its <code>place</code> is 1, 2 or 3, else 0. The order is also reproducible from the seed with the standalone function in the build block below.</p>
+
+<h2>Figures</h2><div class="imgs"><figure><img src="img/places.png" alt="Closed-form win / place / show probabilities against the feasibility bound, and the per-racer place-terms multipliers."><figcaption>Closed-form win / place / show probabilities against the feasibility bound, and the per-racer place-terms multipliers.</figcaption></figure><figure><img src="img/sim-place-terms.png" alt="200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider."><figcaption>200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider.</figcaption></figure></div>
+
+<h2>Build it yourself</h2>
+<pre><code>git clone https://github.com/Danvid1009/gnarone-game-math.git
+cd gnarone-game-math/race-engine
+npm test
+node bin/build-race.js --elo 1850,1780,1720,1680,1640,1600,1560,1520,1480,1430,1380,1300 --rtp 0.95 --js</code></pre>
+<ul class="links">
+  <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/race-engine/ALGORITHM.md">ALGORITHM.md on GitHub</a></li>
+  <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/race-engine/src/engine.js">src/engine.js</a> — the engine</li>
+  <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/race-engine/web/index.html">web/index.html</a> — this demo, one self-contained file</li>
+</ul>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+(async () => {
+  const el = document.getElementById('md');
+  try {
+    let src = await (await fetch('ALGORITHM.md')).text();
+    // protect math from the markdown parser
+    const holes = [];
+    src = src.replace(/\$\$([\s\S]+?)\$\$/g, (m) => { holes.push(m); return '\u0000' + (holes.length - 1) + '\u0000'; })
+             .replace(/\$([^$\n]+?)\$/g, (m) => { holes.push(m); return '\u0000' + (holes.length - 1) + '\u0000'; });
+    let html = marked.parse(src);
+    html = html.replace(/\u0000(\d+)\u0000/g, (_, i) => holes[+i]);
+    el.innerHTML = html;
+    renderMathInElement(el, { delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }], throwOnError: false });
+  } catch (e) { el.innerHTML = '<p>Could not load ALGORITHM.md: ' + e.message + '</p>'; }
+})();
+</script>
+<footer>Demo balances are play credits. Draws use crypto.getRandomValues in the browser; the server-side engines use a seeded PRNG so every round replays from its seed.</footer>
+</div></body></html>

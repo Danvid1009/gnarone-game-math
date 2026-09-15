@@ -86,3 +86,10 @@ test('validation', () => {
   assert.throws(() => buildRace({ racers: RACERS, rtp: 0.95, structure: { kind: 'fixed-third', theta: 1.2 } }), /theta/);
   assert.throws(() => buildRace({ racers: RACERS, rtp: 0.95, structure: { kind: 'fractions', f: [0.5, 0.3] } }), /summing to 1/);
 });
+
+test('win-only: M1 = rtp/q1, places pay 0, EV = rtp, no feasibility bound', () => {
+  const R = buildRace({ racers: RACERS, rtp: 0.95, structure: { kind: 'win-only' } });
+  R.M.forEach(([a, b, c], i) => { assert.ok(close(a, 0.95 / R.q1[i]) && b === 0 && c === 0); assert.ok(close(R.ev[i], 0.95)); });
+  const strong = buildRace({ racers: [{ name: 'G', elo: 2400 }, ...RACERS.slice(1)], rtp: 0.95, structure: { kind: 'win-only' } });
+  assert.ok(strong.M[0][0] > 0.95 && close(strong.ev[0], 0.95));
+});

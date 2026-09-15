@@ -106,11 +106,12 @@ writeFileSync(join(docs, '.nojekyll'), '');
 for (const e of engines) {
   const out = join(docs, e.slug); mkdirSync(join(out, 'img'), { recursive: true });
   copyFileSync(join(root, e.folder, 'web/index.html'), join(out, 'play.html'));
-  copyFileSync(join(root, e.folder, 'ALGORITHM.md'), join(out, 'ALGORITHM.md'));
+  copyFileSync(join(root, e.folder, e.algorithm ?? 'ALGORITHM.md'), join(out, 'ALGORITHM.md'));
   const figs = e.figures.filter(([p]) => existsSync(join(root, e.folder, p)));
   for (const [p] of figs) copyFileSync(join(root, e.folder, p), join(out, 'img', basename(p)));
-  const hasApi = existsSync(join(root, e.folder, 'examples/api'));
-  if (hasApi) cpSync(join(root, e.folder, 'examples/api'), join(out, 'api'), { recursive: true });
+  const apiDir = e.api ? join(root, e.folder, e.api) : null;
+  const hasApi = !!apiDir && existsSync(apiDir);
+  if (hasApi) cpSync(apiDir, join(out, 'api'), { recursive: true });
   const BASE = 'https://danvid1009.github.io/gnarone-game-math';
   const apiSection = hasApi ? `
 <h2>Sample API (static fixtures)</h2>
@@ -130,12 +131,12 @@ curl -s ${BASE}/${e.slug}/api/sample-response.json</code></pre>
 <p class="lead">To settle a bet from a round: look up the backed racer in <code>settlements</code>; <code>win = round(stake × multiplier)</code> if its <code>place</code> is 1, 2 or 3, else 0. The order is also reproducible from the seed with the standalone function in the build block below.</p>` : '';
   const [t1, t2] = e.title.toUpperCase().includes(e.accent) ? [e.title.toUpperCase().replace(e.accent, '').trim(), e.accent] : [e.title.toUpperCase(), ''];
   const page = HEAD(e.title) + `
-<nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>${esc(e.title)}</div><div><a href="play.html">full-screen demo</a> · <a href="${REPO}/tree/main/${e.folder}">source</a></div></nav>
+<nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>${esc(e.title)}</div><div><a href="play.html${e.query ? '?' + e.query : ''}">full-screen demo</a> · <a href="${REPO}/tree/main/${e.folder}">source</a></div></nav>
 <h1>${esc(t1)} ${t2 ? `<span>${esc(t2)}</span>` : ''}</h1>
 <p class="lead">${esc(e.lead)}</p>
 <div class="tags">${e.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div>
 
-<div class="demo"><iframe src="play.html" title="${esc(e.title)} demo" loading="eager"></iframe><a class="full" href="play.html">open full screen ↗</a></div>
+<div class="demo"><iframe src="play.html${e.query ? '?' + e.query : ''}" title="${esc(e.title)} demo" loading="eager"></iframe><a class="full" href="play.html${e.query ? '?' + e.query : ''}">open full screen ↗</a></div>
 
 <h2>The math</h2>
 <div class="md" id="md"><p>Loading ALGORITHM.md…</p></div>
@@ -149,14 +150,21 @@ cd gnarone-game-math/${e.folder}
 npm test
 ${esc(e.cli)}</code></pre>
 <ul class="links">
-  <li><a href="${REPO}/blob/main/${e.folder}/ALGORITHM.md">ALGORITHM.md on GitHub</a></li>
+  <li><a href="${REPO}/blob/main/${e.folder}/${e.algorithm ?? 'ALGORITHM.md'}">${e.algorithm ?? 'ALGORITHM.md'} on GitHub</a></li>
   <li><a href="${REPO}/blob/main/${e.folder}/src/engine.js">src/engine.js</a> — the engine</li>
   <li><a href="${REPO}/blob/main/${e.folder}/web/index.html">web/index.html</a> — this demo, one self-contained file</li>
 </ul>
 ${MD_SCRIPT}
 ${FOOT}`;
   writeFileSync(join(out, 'index.html'), page);
-  console.log(`docs/${e.slug}/  ← ${e.folder}  (${figs.length} figures${hasApi ? ', api' : ''})`);
+  // old slugs keep working: redirect page, and a mirror of the api so shared links don't break
+  for (const alias of e.aliases ?? []) {
+    const adir = join(docs, alias); mkdirSync(adir, { recursive: true });
+    writeFileSync(join(adir, 'index.html'), `<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=../${e.slug}/"><title>${esc(e.title)}</title><a href="../${e.slug}/">moved to /${e.slug}/</a>`);
+    writeFileSync(join(adir, 'play.html'), `<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=../${e.slug}/play.html"><a href="../${e.slug}/play.html">moved</a>`);
+    if (hasApi) cpSync(apiDir, join(adir, 'api'), { recursive: true });
+  }
+  console.log(`docs/${e.slug}/  ← ${e.folder}  (${figs.length} figures${hasApi ? ', api' : ''}${e.aliases?.length ? ', alias ' + e.aliases.join(',') : ''})`);
 }
 
 // landing page

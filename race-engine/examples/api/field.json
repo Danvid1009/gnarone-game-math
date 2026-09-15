@@ -215,5 +215,6 @@
     }
   ],
   "feasible_bound_top3": 0.95,
+  "mode": "top3",
   "how_to_settle": "win = round(stake × multipliers[place]) if the backed racer is in the first three of `order`, else 0"
 }

@@ -1,0 +1,218 @@
+{
+  "engine": "race-engine",
+  "version": 1,
+  "rtp": 0.95,
+  "structure": {
+    "kind": "win-only"
+  },
+  "stake_units": "minor units (cents)",
+  "racers": [
+    {
+      "index": 0,
+      "name": "Ace",
+      "elo": 1850,
+      "strength": 1,
+      "q": {
+        "first": 0.26968890506888366,
+        "second": 0.220602653938825,
+        "third": 0.17331725704428042
+      },
+      "multipliers": {
+        "first": 3.5225772441671337,
+        "second": 0,
+        "third": 0
+      },
+      "ev": 0.95
+    },
+    {
+      "index": 1,
+      "name": "Bolt",
+      "elo": 1780,
+      "strength": 0.6683439175686147,
+      "q": {
+        "first": 0.18024493933852792,
+        "second": 0.17436755948307917,
+        "third": 0.16124761469163312
+      },
+      "multipliers": {
+        "first": 5.270605674069732,
+        "second": 0,
+        "third": 0
+      },
+      "ev": 0.95
+    },
+    {
+      "index": 2,
+      "name": "Cinder",
+      "elo": 1720,
+      "strength": 0.47315125896148047,
+      "q": {
+        "first": 0.12760364496128548,
+        "second": 0.13283550547409262,
+        "third": 0.1356297039024623
+      },
+      "multipliers": {
+        "first": 7.444928397525218,
+        "second": 0,
+        "third": 0
+      },
+      "ev": 0.95
+    },
+    {
+      "index": 3,
+      "name": "Dash",
+      "elo": 1680,
+      "strength": 0.3758374042884442,
+      "q": {
+        "first": 0.10135917804648187,
+        "second": 0.10890812531650977,
+        "third": 0.11601786898661069
+      },
+      "multipliers": {
+        "first": 9.372609548632523,
+        "second": 0,
+        "third": 0
+      },
+      "ev": 0.95
+    },
+    {
+      "index": 4,
+      "name": "Ember",
+      "elo": 1640,
+      "strength": 0.29853826189179594,
+      "q": {
+        "first": 0.08051245697076607,
+        "second": 0.08854007448762709,
+        "third": 0.0972363631494614
+      },
+      "multipliers": {
+        "first": 11.799416335598146,
+        "second": 0,
+        "third": 0
+      },
+      "ev": 0.9500000000000001
+    },
+    {
+      "index": 5,
+      "name": "Flint",
+      "elo": 1600,
+      "strength": 0.23713737056616552,
+      "q": {
+        "first": 0.06395331781890329,
+        "second": 0.07156031267408655,
+        "third": 0.08035914415860103
+      },
+      "multipliers": {
+        "first": 14.854585069223718,
+        "second": 0,
+        "third": 0
+      },
+      "ev": 0.95
+    },
+    {
+      "index": 6,
+      "name": "Gale",
+      "elo": 1560,
+      "strength": 0.18836490894898006,
+      "q": {
+        "first": 0.05079992604785039,
+        "second": 0.05759442484873321,
+        "third": 0.0657565985990583
+      },
+      "multipliers": {
+        "first": 18.700814625303956,
+        "second": 0,
+        "third": 0
+      },
+      "ev": 0.95
+    },
+    {
+      "index": 7,
+      "name": "Hex",
+      "elo": 1520,
+      "strength": 0.14962356560944334,
+      "q": {
+        "first": 0.04035181558171305,
+        "second": 0.046211717970807156,
+        "third": 0.05342402484623386
+      },
+      "multipliers": {
+        "first": 23.542930753047163,
+        "second": 0,
+        "third": 0
+      },
+      "ev": 0.9499999999999998
+    },
+    {
+      "index": 8,
+      "name": "Iris",
+      "elo": 1480,
+      "strength": 0.11885022274370183,
+      "q": {
+        "first": 0.03205258643894188,
+        "second": 0.036993648627929296,
+        "third": 0.04317647951111831
+      },
+      "multipliers": {
+        "first": 29.638793793121472,
+        "second": 0,
+        "third": 0
+      },
+      "ev": 0.95
+    },
+    {
+      "index": 9,
+      "name": "Jolt",
+      "elo": 1430,
+      "strength": 0.08912509381337455,
+      "q": {
+        "first": 0.02403604896469052,
+        "second": 0.02794529198220429,
+        "third": 0.032906618426357614
+      },
+      "multipliers": {
+        "first": 39.52396674659678,
+        "second": 0,
+        "third": 0
+      },
+      "ev": 0.95
+    },
+    {
+      "index": 10,
+      "name": "Kite",
+      "elo": 1380,
+      "strength": 0.06683439175686146,
+      "q": {
+        "first": 0.01802449393385279,
+        "second": 0.021069074326260297,
+        "third": 0.024970282689781752
+      },
+      "multipliers": {
+        "first": 52.70605674069733,
+        "second": 0,
+        "third": 0
+      },
+      "ev": 0.9499999999999998
+    },
+    {
+      "index": 11,
+      "name": "Lux",
+      "elo": 1300,
+      "strength": 0.042169650342858224,
+      "q": {
+        "first": 0.011372686828103109,
+        "second": 0.013371610869845651,
+        "third": 0.015958043994401594
+      },
+      "multipliers": {
+        "first": 83.53347052980038,
+        "second": 0,
+        "third": 0
+      },
+      "ev": 0.95
+    }
+  ],
+  "feasible_bound_top3": 1,
+  "mode": "top1",
+  "how_to_settle": "win = round(stake × multipliers.first) if the backed racer is order[0], else 0"
+}

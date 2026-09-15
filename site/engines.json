@@ -2,7 +2,7 @@
   {
     "slug": "stepper",
     "folder": "stepper-engine",
-    "title": "Glass Bridge Stepper",
+    "title": "Stepper",
     "accent": "STEPPER",
     "lead": "A fair crash ladder. Ten rungs, cash out any time. Survival to rung k is RTP ÷ payoutₖ, so every stopping rule returns the same 97%: the player chooses variance, never expectation.",
     "tags": [
@@ -27,10 +27,13 @@
     "cli": "node bin/build-ladder.js --rtp 0.97 --max 25 --steps 10 --js"
   },
   {
-    "slug": "payout",
+    "slug": "single-shot",
+    "aliases": [
+      "payout"
+    ],
     "folder": "payout-engine",
-    "title": "Red Light Green Light",
-    "accent": "GREEN LIGHT",
+    "title": "Single Shot",
+    "accent": "SHOT",
     "lead": "A single-shot payout function. The field is the 0–10000 draw; zone widths are the probabilities; inside a zone the payout ramps from a − r to a + r. Payouts and RTP in, a monotone payout(u) out, exact by summation.",
     "tags": [
       "sloped bands",
@@ -50,10 +53,13 @@
     "cli": "node bin/build-payout.js --payouts 0,0.5,1,2,5,20 --rtp 0.95 --js"
   },
   {
-    "slug": "race",
+    "slug": "top-3",
+    "aliases": [
+      "race"
+    ],
     "folder": "race-engine",
-    "title": "Rated Racers",
-    "accent": "RACERS",
+    "title": "Top 3",
+    "accent": "3",
     "lead": "Elo array + one uniform → fair Plackett–Luce ranking → top-3 payout. Strength is 10^(Elo/400); one draw picks the winner and its leftover is recycled to pick second, third and the rest. Win/place/show probabilities are closed-form, and every podium finish returns stake plus profit: second pays a quarter and third a fifth of the win profit, which is solved per racer so every racer returns exactly the RTP.",
     "tags": [
       "one uniform, recycled",
@@ -70,6 +76,29 @@
         "200,000 simulated races with a unit stake on every racer: realised return per racer against the design RTP, and the payout distribution for the favourite and the outsider."
       ]
     ],
+    "api": "examples/api",
     "cli": "node bin/build-race.js --elo 1850,1780,1720,1680,1640,1600,1560,1520,1480,1430,1380,1300 --rtp 0.95 --js"
+  },
+  {
+    "slug": "top-1",
+    "folder": "race-engine",
+    "title": "Top 1",
+    "accent": "1",
+    "query": "mode=top1",
+    "algorithm": "ALGORITHM-top1.md",
+    "lead": "The same Elo race, one uniform recycled into the full ranking, with only the winner paid. Odds are RTP ÷ P(win) = RTP·W / wᵢ, so a 400-Elo gap is a 10:1 odds ratio and every racer returns exactly the RTP with no feasibility condition.",
+    "tags": [
+      "one uniform, recycled",
+      "winner takes all",
+      "odds ∝ 1 / strength"
+    ],
+    "figures": [
+      [
+        "examples/top1.png",
+        "Win probability per racer and the odds that return the RTP."
+      ]
+    ],
+    "api": "examples/api-top1",
+    "cli": "node bin/build-race.js --elo 1850,1780,1720,1680,1640,1600,1560,1520,1480,1430,1380,1300 --rtp 0.95 --win-only --js"
   }
 ]
