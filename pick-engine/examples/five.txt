@@ -1,0 +1,16 @@
+5 options   RTP 0.95
+
+option        P(win)       odds        EV      stdev   RN [from, to)
+OPTION_1      20.0000%     4.7500   0.9500   1.900   [0.000000, 0.200000)
+OPTION_2      20.0000%     4.7500   0.9500   1.900   [0.200000, 0.400000)
+OPTION_3      20.0000%     4.7500   0.9500   1.900   [0.400000, 0.600000)
+OPTION_4      20.0000%     4.7500   0.9500   1.900   [0.600000, 0.800000)
+OPTION_5      20.0000%     4.7500   0.9500   1.900   [0.800000, 1.000000)
+
+// Pick One: 5 options, RTP 0.95. odds = [4.75,4.75,4.75,4.75,4.75]. u: one uniform in [0,1). Returns the winning option index.
+function pickOutcome(u) {
+  const cum = [0,0.2,0.4,0.6000000000000001,0.8,1];
+  if (u >= 1) u = 1 - 1e-15;
+  let i = 0; while (i < cum.length - 2 && cum[i + 1] <= u) i++;
+  return i;
+}

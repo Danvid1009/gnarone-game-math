@@ -1,0 +1,70 @@
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Game of Three</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#0a0c11;--bg-2:#11141c;--panel:#151923;--line:#252b38;--ink:#f1efe8;--ink-2:#a8adb8;--ink-3:#6b7180;--pink:#e8336d;--pink-2:#ff6b9d;--teal:#6fd3c7;--gold:#f2c14e;--danger:#ff4d6d;--rock:#5a5f6e;--rock-2:#3b3f4b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:14px;line-height:1.45}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}.display{font-family:"Bebas Neue",sans-serif;letter-spacing:.04em}
+header{display:flex;align-items:baseline;justify-content:space-between;padding:16px 22px 0;gap:16px;flex-wrap:wrap}header h1{margin:0;font-size:34px;font-weight:400;line-height:1}header h1 span{color:var(--pink)}
+.balance{font-size:13px;color:var(--ink-2)}.balance b{display:block;font-size:26px;color:var(--ink);font-weight:500}
+.app{display:grid;grid-template-columns:1fr 340px;gap:18px;padding:14px 22px 28px;max-width:1300px;margin:0 auto;align-items:start}@media (max-width:960px){.app{grid-template-columns:1fr}}
+.stage{position:relative;height:600px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:radial-gradient(ellipse at 50% 20%,#2a1f2e 0%,var(--bg-2) 45%,#07080c 100%);user-select:none}
+.stage::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(232,51,109,.035) 38px 40px);pointer-events:none}
+.guards{position:absolute;top:18px;right:30px;display:flex;gap:14px}.guard{width:20px;height:32px;border-radius:10px 10px 4px 4px;background:var(--pink);position:relative}.guard::after{content:"";position:absolute;left:5px;top:6px;width:10px;height:10px;border-radius:50%;background:#0a0c11}.guard.sq::after{border-radius:2px}.guard.tri::after{border-radius:0;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.rocks{position:absolute;left:0;right:0;top:200px;display:flex;justify-content:center;gap:60px}
+.rock{width:150px;height:130px;position:relative;transition:transform .2s}
+.rock .body{position:absolute;inset:0;background:radial-gradient(circle at 35% 30%,#7a8090,var(--rock) 45%,var(--rock-2) 100%);clip-path:polygon(20% 10%,60% 0,95% 30%,100% 70%,70% 100%,25% 95%,0 60%);transition:opacity .3s,transform .3s}
+.rock .lbl{position:absolute;bottom:-28px;left:0;right:0;text-align:center;font-size:20px;color:var(--ink-3)}
+.rock.shake{animation:shk .35s}@keyframes shk{0%,100%{transform:translate(0)}25%{transform:translate(-6px,2px) rotate(-2deg)}75%{transform:translate(6px,-2px) rotate(2deg)}}
+.rock.crushed .body{opacity:0;transform:scale(1.3)}.rock.crushed .lbl{color:var(--teal)}
+.rock .gem{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%) scale(0);width:64px;height:64px;clip-path:polygon(50% 0,100% 35%,80% 100%,20% 100%,0 35%);background:linear-gradient(160deg,#fff6c9,var(--gold) 40%,#b8860b);transition:transform .5s cubic-bezier(.3,1.6,.5,1);display:flex;align-items:center;justify-content:center;font:20px "Bebas Neue",sans-serif;color:#2a1e06}
+.rock .gem.on{transform:translate(-50%,-50%) scale(1)}
+.shard{position:absolute;width:12px;height:12px;background:var(--rock);clip-path:polygon(0 0,100% 30%,50% 100%);animation:sh .8s ease-out forwards;pointer-events:none}@keyframes sh{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.callout{position:absolute;left:16px;top:16px;background:rgba(10,12,17,.84);border:1px solid var(--line);border-radius:4px;padding:10px 12px;max-width:380px;font-size:12.5px;color:var(--ink-2);z-index:6}
+.callout .big{font-size:30px;color:var(--teal);line-height:1;margin-bottom:4px}.callout.win .big{color:var(--gold)}.callout.lose .big{color:var(--danger)}
+.side{display:flex;flex-direction:column;gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px}.card h2{margin:0 0 10px;font-size:20px;font-weight:400;color:var(--ink-2)}
+.seg{display:flex;gap:6px}.seg button,.chips button{flex:1;padding:8px 6px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);border-radius:4px;cursor:pointer;font:inherit;font-weight:500}.seg button.on{border-color:var(--pink);color:var(--ink);background:rgba(232,51,109,.16)}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.chips button.on{border-color:var(--teal);color:var(--ink);background:rgba(111,211,199,.14)}button:disabled{opacity:.4;cursor:not-allowed}
+.btn{width:100%;margin-top:10px;padding:14px 10px;border:none;border-radius:4px;font:22px "Bebas Neue",sans-serif;letter-spacing:.06em;cursor:pointer;color:#fff;background:var(--pink)}.btn:hover:not(:disabled){background:var(--pink-2)}
+.stat{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-2)}.stat:last-child{border-bottom:0}.stat b{color:var(--ink);font-weight:500;text-align:right}
+table.t{width:100%;border-collapse:collapse;font-size:11.5px}.t td,.t th{padding:3px 4px;border-bottom:1px solid var(--line);text-align:right;color:var(--ink-3)}.t th{font-size:10px;text-transform:uppercase;letter-spacing:.05em}.t td:first-child,.t th:first-child{text-align:left}.t tr.hit td{color:var(--ink)}.t tr.hit td:last-child{color:var(--teal)}
+.disclose{font-size:12px;color:var(--ink-3);line-height:1.5}.disclose b{color:var(--ink-2);font-weight:500}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<header><h1 class="display">GAME OF <span>THREE</span></h1><div class="balance">demo balance<b class="mono" id="balance">1,000.00</b></div></header>
+<div class="app">
+  <section class="stage" id="stage"><div class="guards"><div class="guard"></div><div class="guard sq"></div><div class="guard tri"></div></div>
+    <div class="callout" id="callout"><div class="big display" id="coBig">SMASH</div><div id="coText">Three rocks. One number decides how many break and whether a gem is inside. Pick a mode and a stake.</div></div>
+    <div class="rocks" id="rocks"></div></section>
+  <aside class="side">
+    <div class="card"><h2 class="display">MODE</h2><div class="seg" id="mode"><button data-m="BASE" class="on">Base</button><button data-m="BOOSTED">Boosted · 2× chips</button></div>
+      <h2 class="display" style="margin-top:12px">STAKE (base chips)</h2><div class="chips mono" id="chips"></div><button class="btn" id="btnSmash">SMASH</button></div>
+    <div class="card"><h2 class="display">THIS ROUND</h2><div class="stat"><span>Draw u</span><b class="mono" id="stU">—</b></div><div class="stat"><span>Rocks crushed</span><b class="mono" id="stC">—</b></div><div class="stat"><span>Gem</span><b class="mono" id="stG">—</b></div><div class="stat"><span>Multiple of stake</span><b class="mono" id="stM">—</b></div><div class="stat"><span>Paid</span><b class="mono" id="stP">—</b></div></div>
+    <div class="card"><h2 class="display">TABLE</h2><table class="t mono" id="tbl"></table><div class="stat" style="margin-top:8px"><span>RTP (exact)</span><b class="mono" id="stRtp">—</b></div><div class="stat"><span>gems</span><b class="mono">10× 8× 5× 4× 3× 2× · w 1 1 2 3 4 7 · mean 3.667</b></div></div>
+    <div class="card disclose"><b>How this is fair.</b> The number of rocks crushed is drawn from a fixed table; on 2 or 3 a gem fires with a fixed chance and its multiplier comes from a weighted table. Return is the exact sum over the 16 outcomes: 97.07% base, 97.15% boosted. Boosted stakes are two chips, so its multiples of stake are the sheet's wins ÷ 2.</div>
+  </aside>
+</div>
+<script>
+const GEMS=[[10,1],[8,1],[5,2],[4,3],[3,4],[2,7]],GW=18;
+const MODES={BASE:{d:1,rows:[[3,.08,.05,5],[2,.28,.05,1],[1,.40,0,.5],[0,.24,0,0]]},BOOSTED:{d:2,rows:[[3,.23,.075,5],[2,.34,.075,1],[1,.31,0,.5],[0,.12,0,0]]}};
+function build(m){const M=MODES[m],z=[];for(const[c,p,g,w]of M.rows){if(g>0)for(const[gm,gw]of GEMS)z.push({c,gem:gm,p:p*g*gw/GW,mult:w*gm/M.d});z.push({c,gem:null,p:p*(1-g),mult:w/M.d})}z.sort((a,b)=>b.mult-a.mult);let a=0;for(const x of z){x.from=a;a+=x.p;x.to=a}z[z.length-1].to=1;return{zones:z,rtp:z.reduce((s,x)=>s+x.p*x.mult,0),rows:M.rows,d:M.d}}
+function uniform(){const a=new Uint32Array(2);crypto.getRandomValues(a);return(a[0]*4294967296+a[1])/18446744073709551616}
+const $=id=>document.getElementById(id),fmt=x=>x.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}),pct=x=>(100*x).toFixed(2)+'%';
+const CHIPS=[1,5,10,25,50,100];let balance=1000,chip=10,mode='BASE',T=build(mode),busy=false;
+function rebuild(){T=build(mode);$('rocks').innerHTML=[0,1,2].map(i=>`<div class="rock" id="rock${i}"><div class="body"></div><div class="gem" id="gem${i}"></div><div class="lbl display" id="lbl${i}">ROCK ${i+1}</div></div>`).join('');
+ $('chips').innerHTML=CHIPS.map(c=>`<button data-c="${c}" class="${c===chip?'on':''}">${c}</button>`).join('');$('chips').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(!busy){chip=+b.dataset.c;rebuild()}}));
+ $('tbl').innerHTML=`<tr><th>rocks</th><th>P</th><th>P(gem)</th><th>win</th><th>return</th></tr>`+T.rows.map(([c,p,g,w])=>`<tr data-c="${c}"><td>${c}</td><td>${pct(p)}</td><td>${pct(g)}</td><td>${(w/T.d).toFixed(2)}×${g?' (×gem)':''}</td><td>${(p*w*(g*3.6666667+(1-g))/T.d).toFixed(4)}</td></tr>`).join('');
+ $('stRtp').textContent=T.rtp.toFixed(6);refresh()}
+function refresh(){$('balance').textContent=fmt(balance);$('btnSmash').disabled=busy}
+$('mode').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(busy)return;mode=b.dataset.m;$('mode').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));rebuild()}));
+function say(b,t,m){$('coBig').textContent=b;$('coText').textContent=t;$('callout').className='callout'+(m?' '+m:'')}
+function shatter(el){const r=el.getBoundingClientRect(),s=$('stage').getBoundingClientRect();for(let i=0;i<14;i++){const d=document.createElement('div');d.className='shard';d.style.left=(r.left-s.left+r.width/2)+'px';d.style.top=(r.top-s.top+r.height/2)+'px';d.style.setProperty('--dx',(Math.random()*160-80)+'px');d.style.setProperty('--dy',(Math.random()*120-20)+'px');d.style.setProperty('--r',(Math.random()*720-360)+'deg');$('stage').appendChild(d);setTimeout(()=>d.remove(),900)}}
+function smash(){if(busy)return;const stake=chip*T.d;if(stake>balance){say('NOT ENOUGH','Lower the stake or reload.','lose');return}busy=true;balance-=stake;refresh();rebuild();busy=true;refresh();
+ const u=uniform();let z=0;while(z<T.zones.length-1&&T.zones[z].to<=u)z++;const o=T.zones[z];const win=Math.round(stake*o.mult*100)/100;
+ $('tbl').querySelectorAll('tr[data-c]').forEach(tr=>tr.classList.toggle('hit',+tr.dataset.c===o.c));
+ const order=[0,1,2].sort(()=>Math.random()-.5);say('SMASHING',`u = ${u.toFixed(6)} landed in zone ${z}. Watch the rocks.`);
+ order.forEach((i,k)=>setTimeout(()=>{const R=$('rock'+i);R.classList.add('shake');setTimeout(()=>{R.classList.remove('shake');if(k<o.c){R.classList.add('crushed');shatter(R);$('lbl'+i).textContent='CRUSHED';if(o.gem&&k===o.c-1){const g=$('gem'+i);g.textContent=o.gem+'×';g.classList.add('on')}}else $('lbl'+i).textContent='SOLID'},350)},300+k*650));
+ setTimeout(()=>{balance+=win;$('stU').textContent=u.toFixed(6);$('stC').textContent=o.c;$('stG').textContent=o.gem?o.gem+'×':'none';$('stM').textContent=o.mult.toFixed(2)+'×';$('stP').textContent=fmt(win);
+  say(win>0?`${o.mult.toFixed(2)}×`:'NOTHING',win>0?`${o.c} rock${o.c>1?'s':''} crushed${o.gem?`, gem ${o.gem}×`:''}. Paid ${fmt(win)} on ${fmt(stake)}.`:`No rocks crushed. Stake of ${fmt(stake)} lost.`,win>0?'win':'lose');busy=false;refresh()},300+3*650+500)}
+$('btnSmash').addEventListener('click',smash);document.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();smash()}});rebuild();
+</script>

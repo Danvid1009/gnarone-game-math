@@ -1,0 +1,69 @@
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pick One</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#0a0c11;--bg-2:#11141c;--panel:#151923;--line:#252b38;--ink:#f1efe8;--ink-2:#a8adb8;--ink-3:#6b7180;--pink:#e8336d;--pink-2:#ff6b9d;--teal:#6fd3c7;--gold:#f2c14e;--danger:#ff4d6d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:14px;line-height:1.45}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}.display{font-family:"Bebas Neue",sans-serif;letter-spacing:.04em}
+header{display:flex;align-items:baseline;justify-content:space-between;padding:16px 22px 0;gap:16px;flex-wrap:wrap}header h1{margin:0;font-size:34px;font-weight:400;line-height:1}header h1 span{color:var(--pink)}
+.balance{font-size:13px;color:var(--ink-2)}.balance b{display:block;font-size:26px;color:var(--ink);font-weight:500}
+.app{display:grid;grid-template-columns:1fr 340px;gap:18px;padding:14px 22px 28px;max-width:1300px;margin:0 auto;align-items:start}@media (max-width:960px){.app{grid-template-columns:1fr}}
+.stage{position:relative;height:560px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,#241a2c 0%,var(--bg-2) 50%,#07080c 100%);user-select:none}
+.stage::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(232,51,109,.035) 38px 40px);pointer-events:none}
+.doors{position:absolute;left:30px;right:30px;top:150px;bottom:110px;display:flex;gap:14px;align-items:stretch}
+.door{flex:var(--w) 0 0;position:relative;border-radius:6px;border:2px solid var(--line);background:linear-gradient(180deg,#1f2433,#151923);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transition:transform .2s,border-color .2s,box-shadow .3s;min-width:60px}
+.door:hover{transform:translateY(-3px)}.door.picked{border-color:var(--teal);box-shadow:0 0 22px rgba(111,211,199,.35)}
+.door .name{font-size:26px}.door .odds{font-size:13px;color:var(--ink-2)}.door .p{font-size:11px;color:var(--ink-3)}
+.door.win{border-color:var(--gold);box-shadow:0 0 34px rgba(242,193,78,.6);background:linear-gradient(180deg,#3a2f14,#1c1a12)}.door.dead{opacity:.35}
+.rn{position:absolute;left:30px;right:30px;bottom:56px;height:26px;border:1px solid var(--line);border-radius:3px;overflow:hidden;display:flex}
+.rn div{height:100%;border-right:1px solid rgba(0,0,0,.4);position:relative;background:rgba(111,211,199,.12)}.rn div.picked{background:rgba(111,211,199,.35)}.rn div.win{background:rgba(242,193,78,.55)}
+.marker{position:absolute;bottom:50px;width:2px;height:38px;background:var(--ink);transform:translateX(-50%);opacity:0;transition:left .8s cubic-bezier(.2,.9,.3,1),opacity .2s}.marker.on{opacity:1}.marker .tag{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:11px;background:var(--ink);color:var(--bg);padding:2px 6px;border-radius:3px;white-space:nowrap}
+.axis{position:absolute;left:30px;right:30px;bottom:34px;display:flex;justify-content:space-between;font-size:10px;color:var(--ink-3)}
+.callout{position:absolute;left:16px;top:16px;background:rgba(10,12,17,.84);border:1px solid var(--line);border-radius:4px;padding:10px 12px;max-width:420px;font-size:12.5px;color:var(--ink-2);z-index:6}
+.callout .big{font-size:30px;color:var(--teal);line-height:1;margin-bottom:4px}.callout.win .big{color:var(--gold)}.callout.lose .big{color:var(--danger)}
+.side{display:flex;flex-direction:column;gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px}.card h2{margin:0 0 10px;font-size:20px;font-weight:400;color:var(--ink-2)}
+.seg{display:flex;gap:6px}.seg button,.chips button{flex:1;padding:8px 6px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);border-radius:4px;cursor:pointer;font:inherit;font-weight:500}.seg button.on{border-color:var(--pink);color:var(--ink);background:rgba(232,51,109,.16)}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.chips button.on{border-color:var(--teal);color:var(--ink);background:rgba(111,211,199,.14)}button:disabled{opacity:.4;cursor:not-allowed}
+.btn{width:100%;margin-top:10px;padding:14px 10px;border:none;border-radius:4px;font:22px "Bebas Neue",sans-serif;letter-spacing:.06em;cursor:pointer;color:#fff;background:var(--pink)}.btn:hover:not(:disabled){background:var(--pink-2)}
+label.small{display:block;margin-top:10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}input.pay{width:100%;margin-top:6px;padding:8px;border:1px solid var(--line);border-radius:4px;background:var(--bg-2);color:var(--ink);font:13px "IBM Plex Mono",monospace}.err{color:var(--danger);font-size:12px;min-height:1em;margin-top:6px}
+.stat{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-2)}.stat:last-child{border-bottom:0}.stat b{color:var(--ink);font-weight:500;text-align:right}
+.disclose{font-size:12px;color:var(--ink-3);line-height:1.5}.disclose b{color:var(--ink-2);font-weight:500}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<header><h1 class="display">PICK <span>ONE</span></h1><div class="balance">demo balance<b class="mono" id="balance">1,000.00</b></div></header>
+<div class="app">
+  <section class="stage" id="stage"><div class="callout" id="callout"><div class="big display" id="coBig">PICK A DOOR</div><div id="coText">n options, one uniform number. Whichever zone it lands in wins. Backing an option pays RTP ÷ P(option), so every door is the same bet at a different variance.</div></div>
+    <div class="doors" id="doors"></div><div class="rn" id="rn"></div><div class="marker mono" id="marker"><div class="tag" id="mtag"></div></div><div class="axis mono"><span>0</span><span>u</span><span>1</span></div></section>
+  <aside class="side">
+    <div class="card"><h2 class="display">OPTIONS</h2><div class="seg" id="nseg"><button data-n="2" class="on">2</button><button data-n="3">3</button><button data-n="5">5</button><button data-n="8">8</button></div>
+      <label class="small">weights (optional, comma list — overrides n)</label><input class="pay" id="weights" placeholder="e.g. 5, 3, 2">
+      <label class="small">target rtp</label><input class="pay" id="rtp" value="0.95"><div class="err" id="err"></div>
+      <h2 class="display" style="margin-top:12px">STAKE</h2><div class="chips mono" id="chips"></div><button class="btn" id="btnGo">REVEAL</button></div>
+    <div class="card"><h2 class="display">THIS ROUND</h2><div class="stat"><span>Backed</span><b class="mono" id="stB">—</b></div><div class="stat"><span>Odds</span><b class="mono" id="stO">—</b></div><div class="stat"><span>Draw u</span><b class="mono" id="stU">—</b></div><div class="stat"><span>Winner</span><b class="mono" id="stW">—</b></div><div class="stat"><span>Paid</span><b class="mono" id="stP">—</b></div></div>
+    <div class="card disclose"><b>How this is fair.</b> Option i owns a zone of width pᵢ on [0,1). A hit on option j pays RTP ÷ pⱼ, so E[win] = pⱼ × RTP ÷ pⱼ = RTP for every j. Two equal options pay 1.9× at RTP 0.95; five pay 4.75×.</div>
+  </aside>
+</div>
+<script>
+function uniform(){const a=new Uint32Array(2);crypto.getRandomValues(a);return(a[0]*4294967296+a[1])/18446744073709551616}
+const $=id=>document.getElementById(id),fmt=x=>x.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}),pct=x=>(100*x).toFixed(2)+'%';
+const CHIPS=[1,5,10,25,50,100];let balance=1000,chip=10,n=2,picked=0,P=null,busy=false;
+function build(){const rtp=Number($('rtp').value);if(!(rtp>0&&rtp<1))throw new Error('rtp must be between 0 and 1');const wtxt=$('weights').value.trim();let p;if(wtxt){const w=wtxt.split(',').map(s=>Number(s.trim()));if(w.length<2||w.some(x=>!(x>0)))throw new Error('weights: need ≥ 2 positive numbers');const W=w.reduce((a,b)=>a+b,0);p=w.map(x=>x/W)}else p=Array(n).fill(1/n);
+ const names=p.length===2&&!wtxt?['HEADS','TAILS']:p.map((_,i)=>String.fromCharCode(65+i));const cum=[0];for(const x of p)cum.push(cum[cum.length-1]+x);cum[p.length]=1;return{p,names,odds:p.map(x=>rtp/x),cum,rtp}}
+function rebuild(){try{P=build();$('err').textContent=''}catch(e){$('err').textContent=e.message;P=null;return}if(picked>=P.p.length)picked=0;
+ $('doors').innerHTML=P.names.map((nm,i)=>`<div class="door ${i===picked?'picked':''}" data-i="${i}" style="--w:${P.p[i]}"><div class="name display">${nm}</div><div class="odds mono">${P.odds[i].toFixed(3)}×</div><div class="p mono">${pct(P.p[i])}</div></div>`).join('');
+ $('doors').querySelectorAll('.door').forEach(d=>d.addEventListener('click',()=>{if(!busy){picked=+d.dataset.i;rebuild()}}));
+ $('rn').innerHTML=P.p.map((x,i)=>`<div style="flex:${x} 0 0" class="${i===picked?'picked':''}" data-i="${i}"></div>`).join('');$('marker').classList.remove('on');
+ $('chips').innerHTML=CHIPS.map(c=>`<button data-c="${c}" class="${c===chip?'on':''}">${c}</button>`).join('');$('chips').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(!busy){chip=+b.dataset.c;rebuild()}}));refresh()}
+function refresh(){$('balance').textContent=fmt(balance);$('btnGo').disabled=busy||!P;$('stB').textContent=P?P.names[picked]:'—';$('stO').textContent=P?P.odds[picked].toFixed(4)+'×':'—'}
+$('nseg').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(busy)return;n=+b.dataset.n;$('weights').value='';$('nseg').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));rebuild()}));
+['weights','rtp'].forEach(id=>$(id).addEventListener('change',rebuild));
+function say(b,t,m){$('coBig').textContent=b;$('coText').textContent=t;$('callout').className='callout'+(m?' '+m:'')}
+function go(){if(busy||!P)return;if(chip>balance){say('NOT ENOUGH','Lower the stake or reload.','lose');return}busy=true;balance-=chip;refresh();
+ const u=uniform();let w=0;while(w<P.p.length-1&&P.cum[w+1]<=u)w++;const hit=w===picked,win=hit?Math.round(chip*P.odds[picked]*100)/100:0;
+ const rn=$('rn').getBoundingClientRect(),st=$('stage').getBoundingClientRect();const m=$('marker');m.style.left=(rn.left-st.left)+'px';m.classList.add('on');$('mtag').textContent='u = '+u.toFixed(6);
+ say('DRAWING',`One uniform number, sliding to where it landed.`);
+ setTimeout(()=>{m.style.left=(rn.left-st.left+u*rn.width)+'px'},50);
+ setTimeout(()=>{$('doors').querySelectorAll('.door').forEach(d=>d.classList.add(+d.dataset.i===w?'win':'dead'));$('rn').querySelector(`[data-i="${w}"]`).classList.add('win');balance+=win;
+  $('stU').textContent=u.toFixed(6);$('stW').textContent=P.names[w];$('stP').textContent=fmt(win);say(hit?`${P.odds[picked].toFixed(3)}×`:'MISS',hit?`${P.names[w]} came up. Paid ${fmt(win)} on ${fmt(chip)}.`:`${P.names[w]} came up, you had ${P.names[picked]}. Stake of ${fmt(chip)} lost.`,hit?'win':'lose');busy=false;refresh()},1100)}
+$('btnGo').addEventListener('click',go);document.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&document.activeElement.tagName!=='INPUT'){e.preventDefault();go()}});rebuild();
+</script>

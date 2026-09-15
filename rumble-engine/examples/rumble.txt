@@ -1,0 +1,10 @@
+LOW bucket  cost 5  deck L2/R5/U8/C15 (30)  avg win 3.9888  sd 6.0445  RTP alone 0.7978  46 compositions
+   per rarity E[win]: LEGENDARY 1.1379  RARE 1.3175  UNCOMMON 1.5334  COMMON 0.0000
+HIGH bucket  cost 10  deck L5/R7/U9/C6 (27)  avg win 9.9943  sd 15.3793  RTP alone 0.9994  56 compositions
+   per rarity E[win]: LEGENDARY 4.6029  RARE 2.8245  UNCOMMON 2.5668  COMMON 0.0000
+
+bet type        cost packs paid  eff cost   P(low)     P(high)    E/pack     RTP      sd(×stake)
+BASE               5     1    1    5.0000    87.324%    12.676%   4.7500   0.9500   1.623
+BOOSTED           10     1    1   10.0000     8.230%    91.770%   9.5000   0.9500   1.493
+BASE_BUNDLE        5    11   10    4.5455    94.515%     5.485%   4.3182   0.9500   0.466
+BOOSTED_BUNDLE    10    11   10    9.0909    22.611%    77.389%   8.6364   0.9500   0.466

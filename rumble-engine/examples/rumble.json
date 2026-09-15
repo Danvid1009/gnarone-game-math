@@ -1,0 +1,303 @@
+{
+  "rtp": 0.95,
+  "pays": {
+    "LEGENDARY": 3,
+    "RARE": 1,
+    "UNCOMMON": 0.5,
+    "COMMON": 0
+  },
+  "multiplier": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 10,
+    "5": 100
+  },
+  "buckets": {
+    "low": {
+      "cost": 5,
+      "deck": {
+        "LEGENDARY": 2,
+        "RARE": 5,
+        "UNCOMMON": 8,
+        "COMMON": 15
+      },
+      "meanCredits": 3.9887724025655062,
+      "sdCredits": 6.044526489104203,
+      "rtpAlone": 0.7977544805131013,
+      "perRarity": {
+        "LEGENDARY": 1.1379310344827587,
+        "RARE": 1.317488386453904,
+        "UNCOMMON": 1.533352981628844,
+        "COMMON": 0
+      },
+      "zones": 46,
+      "top": [
+        {
+          "counts": {
+            "LEGENDARY": 0,
+            "RARE": 1,
+            "UNCOMMON": 1,
+            "COMMON": 3
+          },
+          "p": 0.1277139208173691,
+          "credits": 1.5,
+          "from": 0,
+          "to": 0.1277139208173691
+        },
+        {
+          "counts": {
+            "LEGENDARY": 0,
+            "RARE": 1,
+            "UNCOMMON": 2,
+            "COMMON": 2
+          },
+          "p": 0.1031535514294135,
+          "credits": 3,
+          "from": 0.1277139208173691,
+          "to": 0.2308674722467826
+        },
+        {
+          "counts": {
+            "LEGENDARY": 0,
+            "RARE": 0,
+            "UNCOMMON": 2,
+            "COMMON": 3
+          },
+          "p": 0.08939974457215837,
+          "credits": 2,
+          "from": 0.2308674722467826,
+          "to": 0.320267216818941
+        },
+        {
+          "counts": {
+            "LEGENDARY": 0,
+            "RARE": 0,
+            "UNCOMMON": 1,
+            "COMMON": 4
+          },
+          "p": 0.07662835249042145,
+          "credits": 0.5,
+          "from": 0.320267216818941,
+          "to": 0.39689556930936243
+        },
+        {
+          "counts": {
+            "LEGENDARY": 0,
+            "RARE": 2,
+            "UNCOMMON": 1,
+            "COMMON": 2
+          },
+          "p": 0.05894488653109343,
+          "credits": 4.5,
+          "from": 0.39689556930936243,
+          "to": 0.45584045584045585
+        },
+        {
+          "counts": {
+            "LEGENDARY": 1,
+            "RARE": 1,
+            "UNCOMMON": 1,
+            "COMMON": 2
+          },
+          "p": 0.05894488653109343,
+          "credits": 4.5,
+          "from": 0.45584045584045585,
+          "to": 0.5147853423715493
+        },
+        {
+          "counts": {
+            "LEGENDARY": 1,
+            "RARE": 0,
+            "UNCOMMON": 1,
+            "COMMON": 3
+          },
+          "p": 0.05108556832694764,
+          "credits": 3.5,
+          "from": 0.5147853423715493,
+          "to": 0.5658709106984969
+        },
+        {
+          "counts": {
+            "LEGENDARY": 0,
+            "RARE": 1,
+            "UNCOMMON": 0,
+            "COMMON": 4
+          },
+          "p": 0.04789272030651341,
+          "credits": 1,
+          "from": 0.5658709106984969,
+          "to": 0.6137636310050103
+        }
+      ]
+    },
+    "high": {
+      "cost": 10,
+      "deck": {
+        "LEGENDARY": 5,
+        "RARE": 7,
+        "UNCOMMON": 9,
+        "COMMON": 6
+      },
+      "meanCredits": 9.99425244642636,
+      "sdCredits": 15.379279928614821,
+      "rtpAlone": 0.999425244642636,
+      "perRarity": {
+        "LEGENDARY": 4.602935711631364,
+        "RARE": 2.82453858540815,
+        "UNCOMMON": 2.5667781493868453,
+        "COMMON": 0
+      },
+      "zones": 56,
+      "top": [
+        {
+          "counts": {
+            "LEGENDARY": 1,
+            "RARE": 1,
+            "UNCOMMON": 2,
+            "COMMON": 1
+          },
+          "p": 0.09364548494983277,
+          "credits": 6,
+          "from": 0,
+          "to": 0.09364548494983277
+        },
+        {
+          "counts": {
+            "LEGENDARY": 1,
+            "RARE": 2,
+            "UNCOMMON": 1,
+            "COMMON": 1
+          },
+          "p": 0.07023411371237458,
+          "credits": 7.5,
+          "from": 0.09364548494983277,
+          "to": 0.16387959866220736
+        },
+        {
+          "counts": {
+            "LEGENDARY": 1,
+            "RARE": 1,
+            "UNCOMMON": 1,
+            "COMMON": 2
+          },
+          "p": 0.05852842809364549,
+          "credits": 4.5,
+          "from": 0.16387959866220736,
+          "to": 0.22240802675585286
+        },
+        {
+          "counts": {
+            "LEGENDARY": 0,
+            "RARE": 2,
+            "UNCOMMON": 2,
+            "COMMON": 1
+          },
+          "p": 0.05618729096989967,
+          "credits": 6,
+          "from": 0.22240802675585286,
+          "to": 0.2785953177257525
+        },
+        {
+          "counts": {
+            "LEGENDARY": 0,
+            "RARE": 1,
+            "UNCOMMON": 2,
+            "COMMON": 2
+          },
+          "p": 0.046822742474916385,
+          "credits": 3,
+          "from": 0.2785953177257525,
+          "to": 0.3254180602006689
+        },
+        {
+          "counts": {
+            "LEGENDARY": 1,
+            "RARE": 2,
+            "UNCOMMON": 2,
+            "COMMON": 0
+          },
+          "p": 0.046822742474916385,
+          "credits": 9,
+          "from": 0.3254180602006689,
+          "to": 0.37224080267558524
+        },
+        {
+          "counts": {
+            "LEGENDARY": 2,
+            "RARE": 1,
+            "UNCOMMON": 1,
+            "COMMON": 1
+          },
+          "p": 0.046822742474916385,
+          "credits": 13.5,
+          "from": 0.37224080267558524,
+          "to": 0.4190635451505016
+        },
+        {
+          "counts": {
+            "LEGENDARY": 0,
+            "RARE": 1,
+            "UNCOMMON": 3,
+            "COMMON": 1
+          },
+          "p": 0.04370122630992196,
+          "credits": 5.5,
+          "from": 0.4190635451505016,
+          "to": 0.46276477146042355
+        }
+      ]
+    }
+  },
+  "betTypes": {
+    "BASE": {
+      "cost": 5,
+      "packs": 1,
+      "paidPacks": 1,
+      "effCost": 5,
+      "pLow": 0.8732445047065531,
+      "pHigh": 0.12675549529344687,
+      "evCreditsPerPack": 4.75,
+      "sdCreditsPerPack": 8.11650715476677,
+      "rtp": 0.95,
+      "sdMultiple": 1.623301430953354
+    },
+    "BOOSTED": {
+      "cost": 10,
+      "packs": 1,
+      "paidPacks": 1,
+      "effCost": 10,
+      "pLow": 0.0823002395839469,
+      "pHigh": 0.9176997604160531,
+      "evCreditsPerPack": 9.5,
+      "sdCreditsPerPack": 14.926061007312505,
+      "rtp": 0.95,
+      "sdMultiple": 1.4926061007312506
+    },
+    "BASE_BUNDLE": {
+      "cost": 5,
+      "packs": 11,
+      "paidPacks": 10,
+      "effCost": 4.545454545454546,
+      "pLow": 0.9451485288086082,
+      "pHigh": 0.054851471191391776,
+      "evCreditsPerPack": 4.318181818181818,
+      "sdCreditsPerPack": 7.0267755903136875,
+      "rtp": 0.95,
+      "sdMultiple": 0.4661035623819715
+    },
+    "BOOSTED_BUNDLE": {
+      "cost": 10,
+      "packs": 11,
+      "paidPacks": 10,
+      "effCost": 9.090909090909092,
+      "pLow": 0.22610828778805706,
+      "pHigh": 0.773891712211943,
+      "evCreditsPerPack": 8.636363636363637,
+      "sdCreditsPerPack": 14.057548946055956,
+      "rtp": 0.95,
+      "sdMultiple": 0.4662361532612361
+    }
+  }
+}

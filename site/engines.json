@@ -100,5 +100,62 @@
     ],
     "api": "examples/api-top1",
     "cli": "node bin/build-race.js --elo 1850,1780,1720,1680,1640,1600,1560,1520,1480,1430,1380,1300 --rtp 0.95 --win-only --js"
+  },
+  {
+    "slug": "rip-rumble",
+    "folder": "rumble-engine",
+    "title": "Rip & Rumble",
+    "accent": "RUMBLE",
+    "lead": "Card packs from two decks. A pack is 5 cards without replacement; per rarity it pays count × value × multiplier(count), an exact hypergeometric sum. Each bet type draws the low deck with the one probability that makes E[win] ÷ cost equal the RTP. Reproduces Math-rippin-rumble-ver4.xlsx.",
+    "tags": [
+      "hypergeometric packs",
+      "two buckets, mix solved for RTP",
+      "bundles: 11 packs for 10"
+    ],
+    "figures": [
+      [
+        "examples/rumble.png",
+        "Most likely pack compositions per bucket, and the low-bucket probability per bet type against the simulated return."
+      ]
+    ],
+    "cli": "node bin/build-rumble.js"
+  },
+  {
+    "slug": "game-of-three",
+    "folder": "smash-engine",
+    "title": "Game of Three",
+    "accent": "THREE",
+    "lead": "GO3 / Rock n Smash. Three rocks; a fixed table says how many break (0–3) and pays 5 / 1 / 0.5 / 0; on 2 or 3 a gem fires with a fixed chance and multiplies by 2–10× from a weighted table. RTP is the exact sum over 16 outcomes: 97.07% base, 97.15% boosted. Reproduces Rock n Smash.xlsx.",
+    "tags": [
+      "one draw, 16 zones",
+      "gem bonus 2–10×",
+      "base · boosted"
+    ],
+    "figures": [
+      [
+        "examples/smash.png",
+        "The 16 outcome zones per mode with their probabilities and multiples, against the simulated return."
+      ]
+    ],
+    "cli": "node bin/build-smash.js"
+  },
+  {
+    "slug": "pick-one",
+    "folder": "pick-engine",
+    "title": "Pick One",
+    "accent": "ONE",
+    "lead": "An n-way bet with exact RTP. Options own zones of width pᵢ on the draw; backing option j pays RTP ÷ pⱼ on a hit, so every option returns exactly the RTP. Two equal options pay 1.9× at RTP 0.95; three pay 2.85×; five pay 4.75×. Weighted options work the same way.",
+    "tags": [
+      "2 / 3 / 5 / n options",
+      "odds = RTP ÷ p",
+      "coin flip 1.9×"
+    ],
+    "figures": [
+      [
+        "examples/pick.png",
+        "Odds and simulated return for 2, 3, 5 and 8 equal options."
+      ]
+    ],
+    "cli": "node bin/build-pick.js --n 5 --js"
   }
 ]
