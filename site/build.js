@@ -99,13 +99,39 @@ const MD_SCRIPT = `
 })();
 </script>`;
 
+function apiFooter(e) {
+  const BASE = 'https://danvid1009.github.io/gnarone-game-math';
+  const set = e.apiSets ? `/${e.apiSets[0]}` : '';
+  const settle = e.apiSets
+    ? `Settlement rule: see <code>how_to_settle</code> in each set's <code>field.json</code>. Sets: ${e.apiSets.map(x => `<code>${x}</code>`).join(', ')} — the same seed drives every set, so round 007 has the same u in all of them.`
+    : `Settlement rule: look up the backed racer in <code>settlements</code>; <code>win = round(stake × multiple)</code> if its <code>place</code> is 1, 2 or 3, else 0.`;
+  return `
+<section class="api-foot" style="max-width:1300px;margin:0 auto;padding:10px 22px 32px;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#a8adb8;font-size:13px;line-height:1.5">
+  <div style="border-top:1px solid #252b38;padding-top:16px">
+    <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin-bottom:6px">SAMPLE API · HOW TO CALL</div>
+    <p style="margin:0 0 10px;max-width:80ch">Static fixtures: 100 pre-drawn rounds from seeds <code>fixture-000</code> … <code>fixture-099</code>, served as plain JSON (GET, no auth, deterministic). Stake unit is 1000 minor units; scale linearly.</p>
+<pre style="background:#151923;border:1px solid #252b38;border-radius:4px;padding:12px 14px;overflow-x:auto;font:12.5px 'IBM Plex Mono',ui-monospace,monospace;color:#f1efe8;margin:0 0 10px"><code>${e.apiSets ? `curl -s ${BASE}/${e.slug}/api/index.json                 # sets, odds, files
+` : ''}curl -s ${BASE}/${e.slug}/api${set}/field.json            # configuration + odds
+curl -s ${BASE}/${e.slug}/api${set}/rounds/007.json       # one round (000–099)
+curl -s ${BASE}/${e.slug}/api${set}/rounds.json           # all 100 rounds
+curl -s ${BASE}/${e.slug}/api${set}/sample-request.json   # RGS-shaped request
+curl -s ${BASE}/${e.slug}/api${set}/sample-response.json  # …and its response</code></pre>
+    <p style="margin:0;max-width:80ch">${settle} Full write-up: <a href="./" style="color:#6fd3c7">${e.title} page</a>.</p>
+  </div>
+</section>`;
+}
+
 rmSync(docs, { recursive: true, force: true });
 mkdirSync(docs, { recursive: true });
 writeFileSync(join(docs, '.nojekyll'), '');
 
 for (const e of engines) {
   const out = join(docs, e.slug); mkdirSync(join(out, 'img'), { recursive: true });
-  copyFileSync(join(root, e.folder, 'web/index.html'), join(out, 'play.html'));
+  let play = readFileSync(join(root, e.folder, 'web/index.html'), 'utf8');
+  // engines with fixtures get a "how to call" footer appended to the demo itself
+  const apiDirEarly = e.api ? join(root, e.folder, e.api) : null;
+  if (apiDirEarly && existsSync(apiDirEarly)) play += apiFooter(e);
+  writeFileSync(join(out, 'play.html'), play);
   copyFileSync(join(root, e.folder, e.algorithm ?? 'ALGORITHM.md'), join(out, 'ALGORITHM.md'));
   const figs = e.figures.filter(([p]) => existsSync(join(root, e.folder, p)));
   for (const [p] of figs) copyFileSync(join(root, e.folder, p), join(out, 'img', basename(p)));
