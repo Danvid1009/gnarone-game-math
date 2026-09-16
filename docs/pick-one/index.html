@@ -64,6 +64,24 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
 <h2>The math</h2>
 <div class="md" id="md"><p>Loading ALGORITHM.md…</p></div>
 
+<h2>Sample API (static fixtures)</h2>
+<p class="lead">One hundred pre-drawn rounds from fixed seeds (<code>fixture-000</code> … <code>fixture-099</code>), one set per reference configuration (<code>coin</code>, <code>five</code>, <code>weighted</code>), served as plain JSON. The same seed drives every set, so round 007 uses the same u everywhere.</p>
+<pre><code># what sets exist, their odds and files
+curl -s https://danvid1009.github.io/gnarone-game-math/pick-one/api/index.json
+
+# the configuration of one set: options / bands, probabilities, odds, RN intervals, how to settle
+curl -s https://danvid1009.github.io/gnarone-game-math/pick-one/api/coin/field.json
+
+# one round (000–099): seed, u, outcome, settlement at stake 1000
+curl -s https://danvid1009.github.io/gnarone-game-math/pick-one/api/coin/rounds/007.json
+
+# all 100 rounds of a set
+curl -s https://danvid1009.github.io/gnarone-game-math/pick-one/api/coin/rounds.json
+
+# a worked RGS-shaped request/response pair (round 007)
+curl -s https://danvid1009.github.io/gnarone-game-math/pick-one/api/coin/sample-request.json
+curl -s https://danvid1009.github.io/gnarone-game-math/pick-one/api/coin/sample-response.json</code></pre>
+<p class="lead">Settlement rule is spelled out in each set's <code>field.json</code> under <code>how_to_settle</code>.</p>
 
 <h2>Figures</h2><div class="imgs"><figure><img src="img/pick.png" alt="Odds and simulated return for 2, 3, 5 and 8 equal options."><figcaption>Odds and simulated return for 2, 3, 5 and 8 equal options.</figcaption></figure></div>
 

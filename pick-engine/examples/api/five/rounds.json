@@ -1,0 +1,3907 @@
+{
+ "set": "five",
+ "count": 100,
+ "stake": 1000,
+ "rounds": [
+  {
+   "round": 0,
+   "seed": "fixture-000",
+   "u": 0.9188828743062913,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 1,
+   "seed": "fixture-001",
+   "u": 0.4659930190537125,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 2,
+   "seed": "fixture-002",
+   "u": 0.364564846502617,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 3,
+   "seed": "fixture-003",
+   "u": 0.11550964927300811,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 4,
+   "seed": "fixture-004",
+   "u": 0.3332866549026221,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 5,
+   "seed": "fixture-005",
+   "u": 0.14986608433537185,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 6,
+   "seed": "fixture-006",
+   "u": 0.664523151004687,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 7,
+   "seed": "fixture-007",
+   "u": 0.9729229214135557,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 8,
+   "seed": "fixture-008",
+   "u": 0.9738293311093003,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 9,
+   "seed": "fixture-009",
+   "u": 0.26215640059672296,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 10,
+   "seed": "fixture-010",
+   "u": 0.22953444463200867,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 11,
+   "seed": "fixture-011",
+   "u": 0.8285906130913645,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 12,
+   "seed": "fixture-012",
+   "u": 0.5962774325162172,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 13,
+   "seed": "fixture-013",
+   "u": 0.7766048698686063,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 14,
+   "seed": "fixture-014",
+   "u": 0.11351152905263007,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 15,
+   "seed": "fixture-015",
+   "u": 0.03402110864408314,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 16,
+   "seed": "fixture-016",
+   "u": 0.8192272747401148,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 17,
+   "seed": "fixture-017",
+   "u": 0.7927950932644308,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 18,
+   "seed": "fixture-018",
+   "u": 0.8588338168337941,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 19,
+   "seed": "fixture-019",
+   "u": 0.3113253084011376,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 20,
+   "seed": "fixture-020",
+   "u": 0.8086320760194212,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 21,
+   "seed": "fixture-021",
+   "u": 0.7194579453207552,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 22,
+   "seed": "fixture-022",
+   "u": 0.20368533534929156,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 23,
+   "seed": "fixture-023",
+   "u": 0.6818147811572999,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 24,
+   "seed": "fixture-024",
+   "u": 0.9108621939085424,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 25,
+   "seed": "fixture-025",
+   "u": 0.22070442675612867,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 26,
+   "seed": "fixture-026",
+   "u": 0.5537736455444247,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 27,
+   "seed": "fixture-027",
+   "u": 0.12502007675357163,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 28,
+   "seed": "fixture-028",
+   "u": 0.4126579239964485,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 29,
+   "seed": "fixture-029",
+   "u": 0.44826479791663587,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 30,
+   "seed": "fixture-030",
+   "u": 0.49379214039072394,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 31,
+   "seed": "fixture-031",
+   "u": 0.35356677370145917,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 32,
+   "seed": "fixture-032",
+   "u": 0.34828496165573597,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 33,
+   "seed": "fixture-033",
+   "u": 0.16695917933247983,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 34,
+   "seed": "fixture-034",
+   "u": 0.462283899076283,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 35,
+   "seed": "fixture-035",
+   "u": 0.2993967270012945,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 36,
+   "seed": "fixture-036",
+   "u": 0.4002820437308401,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 37,
+   "seed": "fixture-037",
+   "u": 0.9826120908837765,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 38,
+   "seed": "fixture-038",
+   "u": 0.1470718386117369,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 39,
+   "seed": "fixture-039",
+   "u": 0.4114991140086204,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 40,
+   "seed": "fixture-040",
+   "u": 0.746850244468078,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 41,
+   "seed": "fixture-041",
+   "u": 0.5386010075453669,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 42,
+   "seed": "fixture-042",
+   "u": 0.3456578082405031,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 43,
+   "seed": "fixture-043",
+   "u": 0.6654811182525009,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 44,
+   "seed": "fixture-044",
+   "u": 0.9741294581908733,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 45,
+   "seed": "fixture-045",
+   "u": 0.6944906746502966,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 46,
+   "seed": "fixture-046",
+   "u": 0.17248310870490968,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 47,
+   "seed": "fixture-047",
+   "u": 0.4861457769293338,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 48,
+   "seed": "fixture-048",
+   "u": 0.739230782026425,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 49,
+   "seed": "fixture-049",
+   "u": 0.32322808424942195,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 50,
+   "seed": "fixture-050",
+   "u": 0.22770407097414136,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 51,
+   "seed": "fixture-051",
+   "u": 0.9232457228936255,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 52,
+   "seed": "fixture-052",
+   "u": 0.7553416967857629,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 53,
+   "seed": "fixture-053",
+   "u": 0.07455274695530534,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 54,
+   "seed": "fixture-054",
+   "u": 0.92290194099769,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 55,
+   "seed": "fixture-055",
+   "u": 0.9115958285983652,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 56,
+   "seed": "fixture-056",
+   "u": 0.24423818243667483,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 57,
+   "seed": "fixture-057",
+   "u": 0.8749877200461924,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 58,
+   "seed": "fixture-058",
+   "u": 0.6979408015031368,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 59,
+   "seed": "fixture-059",
+   "u": 0.5655271408613771,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 60,
+   "seed": "fixture-060",
+   "u": 0.617487499024719,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 61,
+   "seed": "fixture-061",
+   "u": 0.8588346908800304,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 62,
+   "seed": "fixture-062",
+   "u": 0.31545034190639853,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 63,
+   "seed": "fixture-063",
+   "u": 0.024024423211812973,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 64,
+   "seed": "fixture-064",
+   "u": 0.1123263796325773,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 65,
+   "seed": "fixture-065",
+   "u": 0.8699406578671187,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 66,
+   "seed": "fixture-066",
+   "u": 0.344207403017208,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 67,
+   "seed": "fixture-067",
+   "u": 0.4777083939407021,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 68,
+   "seed": "fixture-068",
+   "u": 0.962014022981748,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 69,
+   "seed": "fixture-069",
+   "u": 0.8322630007751286,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 70,
+   "seed": "fixture-070",
+   "u": 0.7282623099163175,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 71,
+   "seed": "fixture-071",
+   "u": 0.8809802660252899,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 72,
+   "seed": "fixture-072",
+   "u": 0.18494591652415693,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 73,
+   "seed": "fixture-073",
+   "u": 0.30693460418842733,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 74,
+   "seed": "fixture-074",
+   "u": 0.8521515605971217,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 75,
+   "seed": "fixture-075",
+   "u": 0.09556912817060947,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 76,
+   "seed": "fixture-076",
+   "u": 0.6419947000686079,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 77,
+   "seed": "fixture-077",
+   "u": 0.015307037625461817,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 78,
+   "seed": "fixture-078",
+   "u": 0.9828654592856765,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 79,
+   "seed": "fixture-079",
+   "u": 0.018334724009037018,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 80,
+   "seed": "fixture-080",
+   "u": 0.8947498195338994,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 81,
+   "seed": "fixture-081",
+   "u": 0.947382420534268,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 82,
+   "seed": "fixture-082",
+   "u": 0.32795865763910115,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 83,
+   "seed": "fixture-083",
+   "u": 0.8551602731458843,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 84,
+   "seed": "fixture-084",
+   "u": 0.978206604719162,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 85,
+   "seed": "fixture-085",
+   "u": 0.6549051981419325,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 86,
+   "seed": "fixture-086",
+   "u": 0.6655387713108212,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 87,
+   "seed": "fixture-087",
+   "u": 0.40874466951936483,
+   "winner": 2,
+   "winnerName": "OPTION_3",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 88,
+   "seed": "fixture-088",
+   "u": 0.6745861147064716,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 89,
+   "seed": "fixture-089",
+   "u": 0.6093694374430925,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 90,
+   "seed": "fixture-090",
+   "u": 0.6129446355625987,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 91,
+   "seed": "fixture-091",
+   "u": 0.35041745379567146,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 92,
+   "seed": "fixture-092",
+   "u": 0.6233095948118716,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 93,
+   "seed": "fixture-093",
+   "u": 0.8211358492262661,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 94,
+   "seed": "fixture-094",
+   "u": 0.35158953443169594,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 95,
+   "seed": "fixture-095",
+   "u": 0.9799804366193712,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 96,
+   "seed": "fixture-096",
+   "u": 0.3309054540004581,
+   "winner": 1,
+   "winnerName": "OPTION_2",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 97,
+   "seed": "fixture-097",
+   "u": 0.7896938573103398,
+   "winner": 3,
+   "winnerName": "OPTION_4",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 98,
+   "seed": "fixture-098",
+   "u": 0.9526797868311405,
+   "winner": 4,
+   "winnerName": "OPTION_5",
+   "settlements": {
+    "OPTION_1": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    }
+   }
+  },
+  {
+   "round": 99,
+   "seed": "fixture-099",
+   "u": 0.14364285324700177,
+   "winner": 0,
+   "winnerName": "OPTION_1",
+   "settlements": {
+    "OPTION_1": {
+     "hit": true,
+     "odds": 4.749999999999999,
+     "win": 4750,
+     "stake": 1000
+    },
+    "OPTION_2": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_3": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_4": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    },
+    "OPTION_5": {
+     "hit": false,
+     "odds": 4.749999999999999,
+     "win": 0,
+     "stake": 1000
+    }
+   }
+  }
+ ]
+}

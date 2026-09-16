@@ -1,0 +1,32 @@
+{
+  "set": "weighted",
+  "rtp": 0.95,
+  "stake_units": "minor units (cents)",
+  "options": [
+    {
+      "index": 0,
+      "name": "RED",
+      "p": 0.5,
+      "odds": 1.9,
+      "rn_from": 0,
+      "rn_to": 0.5
+    },
+    {
+      "index": 1,
+      "name": "GREEN",
+      "p": 0.3,
+      "odds": 3.1666666666666665,
+      "rn_from": 0.5,
+      "rn_to": 0.8
+    },
+    {
+      "index": 2,
+      "name": "BLUE",
+      "p": 0.2,
+      "odds": 4.749999999999999,
+      "rn_from": 0.8,
+      "rn_to": 1
+    }
+  ],
+  "how_to_settle": "win = round(stake × odds[backed]) if backed === winner, else 0"
+}

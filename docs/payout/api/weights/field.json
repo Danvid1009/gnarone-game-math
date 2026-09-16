@@ -1,0 +1,65 @@
+{
+  "method": "weights",
+  "rtp": 0.95,
+  "r": 0.05,
+  "gap": 0.5,
+  "fraction": 0.1,
+  "stake_units": "minor units (cents)",
+  "bands": [
+    {
+      "index": 0,
+      "payout": 0,
+      "p": 0.24,
+      "rn_from": 0,
+      "rn_to": 0.24,
+      "pays_from": 0,
+      "pays_to": 0
+    },
+    {
+      "index": 1,
+      "payout": 0.5,
+      "p": 0.38,
+      "rn_from": 0.24,
+      "rn_to": 0.62,
+      "pays_from": 0.45,
+      "pays_to": 0.55
+    },
+    {
+      "index": 2,
+      "payout": 1,
+      "p": 0.228,
+      "rn_from": 0.62,
+      "rn_to": 0.848,
+      "pays_from": 0.95,
+      "pays_to": 1.05
+    },
+    {
+      "index": 3,
+      "payout": 2,
+      "p": 0.114,
+      "rn_from": 0.848,
+      "rn_to": 0.962,
+      "pays_from": 1.95,
+      "pays_to": 2.05
+    },
+    {
+      "index": 4,
+      "payout": 5,
+      "p": 0.0304,
+      "rn_from": 0.962,
+      "rn_to": 0.9924,
+      "pays_from": 4.95,
+      "pays_to": 5.05
+    },
+    {
+      "index": 5,
+      "payout": 20,
+      "p": 0.0076,
+      "rn_from": 0.9924,
+      "rn_to": 1,
+      "pays_from": 19.95,
+      "pays_to": 20.05
+    }
+  ],
+  "how_to_settle": "find the band with rn_from ≤ u < rn_to; if payout is 0 the win is 0; else t = (u − rn_from)/(rn_to − rn_from), multiple = payout + r·(2t − 1), win = round(stake × multiple)"
+}

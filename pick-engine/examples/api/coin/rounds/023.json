@@ -1,0 +1,21 @@
+{
+  "round": 23,
+  "seed": "fixture-023",
+  "u": 0.6818147811572999,
+  "winner": 1,
+  "winnerName": "TAILS",
+  "settlements": {
+    "HEADS": {
+      "hit": false,
+      "odds": 1.9,
+      "win": 0,
+      "stake": 1000
+    },
+    "TAILS": {
+      "hit": true,
+      "odds": 1.9,
+      "win": 1900,
+      "stake": 1000
+    }
+  }
+}

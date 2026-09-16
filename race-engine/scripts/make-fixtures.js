@@ -5,6 +5,9 @@
 import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { buildRace } from '../src/engine.js';
 import { Rng } from '../src/rng.js';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+process.chdir(join(dirname(fileURLToPath(import.meta.url)), '..'));   // paths below are relative to the engine folder
 
 const ELO = [1850, 1780, 1720, 1680, 1640, 1600, 1560, 1520, 1480, 1430, 1380, 1300];
 const NAMES = ['Ace', 'Bolt', 'Cinder', 'Dash', 'Ember', 'Flint', 'Gale', 'Hex', 'Iris', 'Jolt', 'Kite', 'Lux'];

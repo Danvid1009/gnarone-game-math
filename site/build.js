@@ -113,7 +113,25 @@ for (const e of engines) {
   const hasApi = !!apiDir && existsSync(apiDir);
   if (hasApi) cpSync(apiDir, join(out, 'api'), { recursive: true });
   const BASE = 'https://danvid1009.github.io/gnarone-game-math';
-  const apiSection = hasApi ? `
+  const apiSection = hasApi ? (e.apiSets ? `
+<h2>Sample API (static fixtures)</h2>
+<p class="lead">One hundred pre-drawn rounds from fixed seeds (<code>fixture-000</code> … <code>fixture-099</code>), one set per reference configuration (${e.apiSets.map(x => `<code>${x}</code>`).join(', ')}), served as plain JSON. The same seed drives every set, so round 007 uses the same u everywhere.</p>
+<pre><code># what sets exist, their odds and files
+curl -s ${BASE}/${e.slug}/api/index.json
+
+# the configuration of one set: options / bands, probabilities, odds, RN intervals, how to settle
+curl -s ${BASE}/${e.slug}/api/${e.apiSets[0]}/field.json
+
+# one round (000–099): seed, u, outcome, settlement at stake 1000
+curl -s ${BASE}/${e.slug}/api/${e.apiSets[0]}/rounds/007.json
+
+# all 100 rounds of a set
+curl -s ${BASE}/${e.slug}/api/${e.apiSets[0]}/rounds.json
+
+# a worked RGS-shaped request/response pair (round 007)
+curl -s ${BASE}/${e.slug}/api/${e.apiSets[0]}/sample-request.json
+curl -s ${BASE}/${e.slug}/api/${e.apiSets[0]}/sample-response.json</code></pre>
+<p class="lead">Settlement rule is spelled out in each set's <code>field.json</code> under <code>how_to_settle</code>.</p>` : `
 <h2>Sample API (static fixtures)</h2>
 <p class="lead">One hundred pre-drawn rounds from fixed seeds, each resolved for every bet type, served as plain JSON. Deterministic, so two people calling the same round get the same answer.</p>
 <pre><code># the field: racers, Elo, win/place/show probabilities, multipliers per racer
@@ -128,7 +146,7 @@ curl -s ${BASE}/${e.slug}/api/rounds.json
 # a worked RGS-shaped request/response pair (round 007, backing Flint)
 curl -s ${BASE}/${e.slug}/api/sample-request.json
 curl -s ${BASE}/${e.slug}/api/sample-response.json</code></pre>
-<p class="lead">To settle a bet from a round: look up the backed racer in <code>settlements</code>; <code>win = round(stake × multiplier)</code> if its <code>place</code> is 1, 2 or 3, else 0. The order is also reproducible from the seed with the standalone function in the build block below.</p>` : '';
+<p class="lead">To settle a bet from a round: look up the backed racer in <code>settlements</code>; <code>win = round(stake × multiplier)</code> if its <code>place</code> is 1, 2 or 3, else 0. The order is also reproducible from the seed with the standalone function in the build block below.</p>`) : '';
   const [t1, t2] = e.title.toUpperCase().includes(e.accent) ? [e.title.toUpperCase().replace(e.accent, '').trim(), e.accent] : [e.title.toUpperCase(), ''];
   const page = HEAD(e.title) + `
 <nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>${esc(e.title)}</div><div><a href="play.html${e.query ? '?' + e.query : ''}">full-screen demo</a> · <a href="${REPO}/tree/main/${e.folder}">source</a></div></nav>

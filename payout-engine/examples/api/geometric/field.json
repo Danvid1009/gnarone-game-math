@@ -1,0 +1,65 @@
+{
+  "method": "geometric",
+  "rtp": 0.95,
+  "r": 0.05,
+  "gap": 0.5,
+  "fraction": 0.1,
+  "stake_units": "minor units (cents)",
+  "bands": [
+    {
+      "index": 0,
+      "payout": 0,
+      "p": 0.48945417907758887,
+      "rn_from": 0,
+      "rn_to": 0.48945417907758887,
+      "pays_from": 0,
+      "pays_to": 0
+    },
+    {
+      "index": 1,
+      "payout": 0.5,
+      "p": 0.2546388540585609,
+      "rn_from": 0.48945417907758887,
+      "rn_to": 0.7440930331361497,
+      "pays_from": 0.45,
+      "pays_to": 0.55
+    },
+    {
+      "index": 2,
+      "payout": 1,
+      "p": 0.132476028948112,
+      "rn_from": 0.7440930331361497,
+      "rn_to": 0.8765690620842617,
+      "pays_from": 0.95,
+      "pays_to": 1.05
+    },
+    {
+      "index": 3,
+      "payout": 2,
+      "p": 0.06892073996619917,
+      "rn_from": 0.8765690620842617,
+      "rn_to": 0.9454898020504608,
+      "pays_from": 1.95,
+      "pays_to": 2.05
+    },
+    {
+      "index": 4,
+      "payout": 5,
+      "p": 0.035856059660038124,
+      "rn_from": 0.9454898020504608,
+      "rn_to": 0.981345861710499,
+      "pays_from": 4.95,
+      "pays_to": 5.05
+    },
+    {
+      "index": 5,
+      "payout": 20,
+      "p": 0.01865413828950094,
+      "rn_from": 0.981345861710499,
+      "rn_to": 1,
+      "pays_from": 19.95,
+      "pays_to": 20.05
+    }
+  ],
+  "how_to_settle": "find the band with rn_from ≤ u < rn_to; if payout is 0 the win is 0; else t = (u − rn_from)/(rn_to − rn_from), multiple = payout + r·(2t − 1), win = round(stake × multiple)"
+}

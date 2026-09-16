@@ -50,7 +50,13 @@
         "Inside every band the paid multiple is exactly uniform on [a − r, a + r]."
       ]
     ],
-    "cli": "node bin/build-payout.js --payouts 0,0.5,1,2,5,20 --rtp 0.95 --js"
+    "cli": "node bin/build-payout.js --payouts 0,0.5,1,2,5,20 --rtp 0.95 --js",
+    "api": "examples/api",
+    "apiSets": [
+      "maxent",
+      "geometric",
+      "weights"
+    ]
   },
   {
     "slug": "top-3",
@@ -156,6 +162,12 @@
         "Odds and simulated return for 2, 3, 5 and 8 equal options."
       ]
     ],
-    "cli": "node bin/build-pick.js --n 5 --js"
+    "cli": "node bin/build-pick.js --n 5 --js",
+    "api": "examples/api",
+    "apiSets": [
+      "coin",
+      "five",
+      "weighted"
+    ]
   }
 ]

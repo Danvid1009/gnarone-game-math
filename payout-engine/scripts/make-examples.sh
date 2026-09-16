@@ -10,4 +10,5 @@ for m in maxent geometric weights; do
 done
 node bin/simulate.js --payouts $P --rtp $R --methods maxent,geometric,weights --weights $W --rounds 100000 --out examples/sim.json
 PY=$(command -v python3); [ -x /opt/anaconda3/bin/python3 ] && PY=/opt/anaconda3/bin/python3
+node scripts/make-fixtures.js > /dev/null
 $PY scripts/plot.py examples/sim.json examples/

@@ -1,0 +1,87 @@
+{
+  "engine": "pick-engine",
+  "rtp": 0.95,
+  "stake": 1000,
+  "rounds": 100,
+  "seeds": "fixture-000 … fixture-099 (shared across sets: the same u drives every set)",
+  "sets": {
+    "coin": {
+      "options": [
+        "HEADS",
+        "TAILS"
+      ],
+      "odds": [
+        1.9,
+        1.9
+      ],
+      "files": [
+        "coin/field.json",
+        "coin/rounds.json",
+        "coin/rounds/NNN.json",
+        "coin/sample-request.json",
+        "coin/sample-response.json"
+      ],
+      "winCounts": {
+        "HEADS": 47,
+        "TAILS": 53
+      },
+      "rtpIfEveryOptionBackedEveryRound": 0.95
+    },
+    "five": {
+      "options": [
+        "OPTION_1",
+        "OPTION_2",
+        "OPTION_3",
+        "OPTION_4",
+        "OPTION_5"
+      ],
+      "odds": [
+        4.749999999999999,
+        4.749999999999999,
+        4.749999999999999,
+        4.749999999999999,
+        4.749999999999999
+      ],
+      "files": [
+        "five/field.json",
+        "five/rounds.json",
+        "five/rounds/NNN.json",
+        "five/sample-request.json",
+        "five/sample-response.json"
+      ],
+      "winCounts": {
+        "OPTION_1": 16,
+        "OPTION_2": 21,
+        "OPTION_3": 14,
+        "OPTION_4": 21,
+        "OPTION_5": 28
+      },
+      "rtpIfEveryOptionBackedEveryRound": 0.95
+    },
+    "weighted": {
+      "options": [
+        "RED",
+        "GREEN",
+        "BLUE"
+      ],
+      "odds": [
+        1.9,
+        3.1666666666666665,
+        4.749999999999999
+      ],
+      "files": [
+        "weighted/field.json",
+        "weighted/rounds.json",
+        "weighted/rounds/NNN.json",
+        "weighted/sample-request.json",
+        "weighted/sample-response.json"
+      ],
+      "winCounts": {
+        "RED": 47,
+        "GREEN": 25,
+        "BLUE": 28
+      },
+      "rtpIfEveryOptionBackedEveryRound": 1.0049166666666667
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "set": "five",
+  "rtp": 0.95,
+  "stake_units": "minor units (cents)",
+  "options": [
+    {
+      "index": 0,
+      "name": "OPTION_1",
+      "p": 0.2,
+      "odds": 4.749999999999999,
+      "rn_from": 0,
+      "rn_to": 0.2
+    },
+    {
+      "index": 1,
+      "name": "OPTION_2",
+      "p": 0.2,
+      "odds": 4.749999999999999,
+      "rn_from": 0.2,
+      "rn_to": 0.4
+    },
+    {
+      "index": 2,
+      "name": "OPTION_3",
+      "p": 0.2,
+      "odds": 4.749999999999999,
+      "rn_from": 0.4,
+      "rn_to": 0.6000000000000001
+    },
+    {
+      "index": 3,
+      "name": "OPTION_4",
+      "p": 0.2,
+      "odds": 4.749999999999999,
+      "rn_from": 0.6000000000000001,
+      "rn_to": 0.8
+    },
+    {
+      "index": 4,
+      "name": "OPTION_5",
+      "p": 0.2,
+      "odds": 4.749999999999999,
+      "rn_from": 0.8,
+      "rn_to": 1
+    }
+  ],
+  "how_to_settle": "win = round(stake × odds[backed]) if backed === winner, else 0"
+}
