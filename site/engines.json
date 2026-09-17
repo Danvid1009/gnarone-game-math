@@ -105,7 +105,10 @@
       ]
     ],
     "api": "examples/api-top1",
-    "cli": "node bin/build-race.js --elo 1850,1780,1720,1680,1640,1600,1560,1520,1480,1430,1380,1300 --rtp 0.95 --win-only --js"
+    "cli": "node bin/build-race.js --elo 1850,1780,1720,1680,1640,1600,1560,1520,1480,1430,1380,1300 --rtp 0.95 --win-only --js",
+    "rgsOptions": {
+      "mode": "top1"
+    }
   },
   {
     "slug": "rip-rumble",
@@ -168,7 +171,10 @@
       "coin",
       "five",
       "weighted"
-    ]
+    ],
+    "rgsOptions": {
+      "set": "five"
+    }
   },
   {
     "slug": "auction",

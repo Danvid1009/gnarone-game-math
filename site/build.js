@@ -10,7 +10,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync, rmSync, cpSync } from 'node:fs';
 import { dirname, join, basename } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const engines = JSON.parse(readFileSync(join(root, 'site/engines.json'), 'utf8'));
@@ -99,24 +99,50 @@ const MD_SCRIPT = `
 })();
 </script>`;
 
-function apiFooter(e) {
+function rgsSnippet(e, g, base) {
+  const bt = g.betTypes.length > 1 ? g.betTypes[Math.min(1, g.betTypes.length - 1)] : g.defaultBetType;
+  const lv = g.levels(bt); const amt = lv.includes(1000) ? 1000 : lv[Math.min(2, lv.length - 1)];
+  const opts = e.rgsOptions ? JSON.stringify(e.rgsOptions).replace(/"([a-z]+)":/gi, '$1: ').replace(/"/g, "'").replace(/\{/, '{ ').replace(/\}/, ' }') : '';
+  const multi = g.isMultiStep;
+  return `import { createGame } from '${base}/${e.slug}/api/rgs.js';
+
+const g = createGame(${opts});                ${' '.repeat(Math.max(0, 22 - opts.length))}// bet types: ${g.betTypes.join(', ')}
+const s = g.open();                                    // session, balance 100000, chipLevels ${JSON.stringify(lv)}
+${multi ? `let r = g.bet({ sessionId: s.sessionId, betAmount: ${amt}, betType: '${bt}' });   // fresh crypto seed → nextAction ['CONTINUE']
+r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' });          // step: ['CONTINUE','CASH_OUT'] or the round ends
+r = g.nextAction({ roundId: r.roundId, actionCode: 'CASH_OUT' });          // → totalWinAmount, nextAction ['COLLECT']
+g.collect({ roundId: r.roundId });                                          // credits the win → { balance }` : `const r = g.bet({ sessionId: s.sessionId, betAmount: ${amt}, betType: '${bt}' });   // fresh crypto seed; win in r.totalWinAmount
+g.collect({ roundId: r.roundId });                                           // credits the win → { balance }`}
+
+// Replay any fixture: same seed, same code path, same answer as rounds/007.json
+g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: '${bt}', seed: 'fixture-007' });`;
+}
+
+function apiFooter(e, g) {
   const BASE = 'https://danvid1009.github.io/gnarone-game-math';
   const set = e.apiSets ? `/${e.apiSets[0]}` : '';
   const settle = e.apiSets
     ? `Settlement rule: see <code>how_to_settle</code> in each set's <code>field.json</code>. Sets: ${e.apiSets.map(x => `<code>${x}</code>`).join(', ')} — the same seed drives every set, so round 007 has the same u in all of them.`
     : `Settlement rule: look up the backed racer in <code>settlements</code>; <code>win = round(stake × multiple)</code> if its <code>place</code> is 1, 2 or 3, else 0.`;
-  return `
-<section class="api-foot" style="max-width:1300px;margin:0 auto;padding:10px 22px 32px;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#a8adb8;font-size:13px;line-height:1.5">
-  <div style="border-top:1px solid #252b38;padding-top:16px">
-    <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin-bottom:6px">SAMPLE API · HOW TO CALL</div>
-    <p style="margin:0 0 10px;max-width:80ch">Static fixtures: 100 pre-drawn rounds from seeds <code>fixture-000</code> … <code>fixture-099</code>, served as plain JSON (GET, no auth, deterministic). Stake unit is 1000 minor units; scale linearly.</p>
-<pre style="background:#151923;border:1px solid #252b38;border-radius:4px;padding:12px 14px;overflow-x:auto;font:12.5px 'IBM Plex Mono',ui-monospace,monospace;color:#f1efe8;margin:0 0 10px"><code>${e.apiSets ? `curl -s ${BASE}/${e.slug}/api/index.json                 # sets, odds, files
+  const PRE = `<pre style="background:#151923;border:1px solid #252b38;border-radius:4px;padding:12px 14px;overflow-x:auto;font:12.5px 'IBM Plex Mono',ui-monospace,monospace;color:#f1efe8;margin:0 0 10px"><code>`;
+  const hasApi = !!(e.api && existsSync(join(root, e.folder, e.api)));
+  const fixtures = hasApi ? `
+    <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin:18px 0 6px">STATIC FIXTURES · 100 PRE-DRAWN ROUNDS</div>
+    <p style="margin:0 0 10px;max-width:80ch">Seeds <code>fixture-000</code> … <code>fixture-099</code>, served as plain JSON (GET, no auth, deterministic). Stake unit is 1000 minor units; scale linearly. The live module reproduces any of them when given the same seed.</p>
+${PRE}${e.apiSets ? `curl -s ${BASE}/${e.slug}/api/index.json                 # sets, odds, files
 ` : ''}curl -s ${BASE}/${e.slug}/api${set}/field.json            # configuration + odds
 curl -s ${BASE}/${e.slug}/api${set}/rounds/007.json       # one round (000–099)
 curl -s ${BASE}/${e.slug}/api${set}/rounds.json           # all 100 rounds
 curl -s ${BASE}/${e.slug}/api${set}/sample-request.json   # RGS-shaped request
 curl -s ${BASE}/${e.slug}/api${set}/sample-response.json  # …and its response</code></pre>
-    <p style="margin:0;max-width:80ch">${settle} Full write-up: <a href="./" style="color:#6fd3c7">${e.title} page</a>.</p>
+    <p style="margin:0;max-width:80ch">${settle}</p>` : '';
+  return `
+<section class="api-foot" style="max-width:1300px;margin:0 auto;padding:10px 22px 32px;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#a8adb8;font-size:13px;line-height:1.5">
+  <div style="border-top:1px solid #252b38;padding-top:16px">
+    <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin-bottom:6px">LIVE API · HOW TO CALL</div>
+    <p style="margin:0 0 10px;max-width:80ch">The engine ships as a browser module at <code>${BASE}/${e.slug}/api/rgs.js</code>. It speaks the RGS provider contract (open, valid-bets, bet, next-action, collect; money in integer minor units; bet debits, collect credits) and rolls with <code>crypto.getRandomValues</code> in your page, so there is no server and every round is live. Pass <code>seed</code> to replay a round.</p>
+${PRE}${esc(rgsSnippet(e, g, BASE))}</code></pre>${fixtures}
+    <p style="margin:10px 0 0;max-width:80ch">Full write-up: <a href="./" style="color:#6fd3c7">${e.title} page</a>.</p>
   </div>
 </section>`;
 }
@@ -128,18 +154,28 @@ writeFileSync(join(docs, '.nojekyll'), '');
 for (const e of engines) {
   const out = join(docs, e.slug); mkdirSync(join(out, 'img'), { recursive: true });
   let play = readFileSync(join(root, e.folder, 'web/index.html'), 'utf8');
-  // engines with fixtures get a "how to call" footer appended to the demo itself
-  const apiDirEarly = e.api ? join(root, e.folder, e.api) : null;
-  if (apiDirEarly && existsSync(apiDirEarly)) play += apiFooter(e);
+  // the live browser module: <slug>/api/rgs.js → api/src/rgs.js (engine sources) + rgs-math/src (the contract)
+  const rgsMod = await import(pathToFileURL(join(root, e.folder, 'src/rgs.js')).href);
+  const g = rgsMod.createGame(e.rgsOptions ?? {});
+  const apiDir = e.api ? join(root, e.folder, e.api) : null;
+  const hasApi = !!apiDir && existsSync(apiDir);
+  if (hasApi) cpSync(apiDir, join(out, 'api'), { recursive: true });
+  cpSync(join(root, e.folder, 'src'), join(out, 'api/src'), { recursive: true });
+  mkdirSync(join(out, 'rgs-math/src'), { recursive: true });
+  for (const f of ['contract.js', 'rng.js']) copyFileSync(join(root, 'rgs-math/src', f), join(out, 'rgs-math/src', f));
+  writeFileSync(join(out, 'api/rgs.js'), `// ${e.title} — RGS provider module, rolls locally. See ../ for the contract and ALGORITHM.md for the math.\nexport * from './src/rgs.js';\n`);
+  // every demo gets a "how to call" footer
+  play += apiFooter(e, g);
   writeFileSync(join(out, 'play.html'), play);
   copyFileSync(join(root, e.folder, e.algorithm ?? 'ALGORITHM.md'), join(out, 'ALGORITHM.md'));
   const figs = e.figures.filter(([p]) => existsSync(join(root, e.folder, p)));
   for (const [p] of figs) copyFileSync(join(root, e.folder, p), join(out, 'img', basename(p)));
-  const apiDir = e.api ? join(root, e.folder, e.api) : null;
-  const hasApi = !!apiDir && existsSync(apiDir);
-  if (hasApi) cpSync(apiDir, join(out, 'api'), { recursive: true });
   const BASE = 'https://danvid1009.github.io/gnarone-game-math';
-  const apiSection = hasApi ? (e.apiSets ? `
+  const liveSection = `
+<h2>Live API (browser module)</h2>
+<p class="lead">The engine is published as an ES module that implements the RGS provider contract and rolls locally with <code>crypto.getRandomValues</code>: open, valid-bets, bet, ${g.isMultiStep ? 'next-action, ' : ''}collect, with the observed balance semantics (bet debits the stake, collect credits the win, integer minor units). No server, every round live, and any round replays from its seed. Bet types: ${g.betTypes.map(b => `<code>${esc(b)}</code>`).join(', ')}.</p>
+<pre><code>${esc(rgsSnippet(e, g, BASE))}</code></pre>`;
+  const apiSection = liveSection + (hasApi ? (e.apiSets ? `
 <h2>Sample API (static fixtures)</h2>
 <p class="lead">One hundred pre-drawn rounds from fixed seeds (<code>fixture-000</code> … <code>fixture-099</code>), one set per reference configuration (${e.apiSets.map(x => `<code>${x}</code>`).join(', ')}), served as plain JSON. The same seed drives every set, so round 007 uses the same u everywhere.</p>
 <pre><code># what sets exist, their odds and files
@@ -172,7 +208,7 @@ curl -s ${BASE}/${e.slug}/api/rounds.json
 # a worked RGS-shaped request/response pair (round 007, backing Flint)
 curl -s ${BASE}/${e.slug}/api/sample-request.json
 curl -s ${BASE}/${e.slug}/api/sample-response.json</code></pre>
-<p class="lead">To settle a bet from a round: look up the backed racer in <code>settlements</code>; <code>win = round(stake × multiplier)</code> if its <code>place</code> is 1, 2 or 3, else 0. The order is also reproducible from the seed with the standalone function in the build block below.</p>`) : '';
+<p class="lead">To settle a bet from a round: look up the backed racer in <code>settlements</code>; <code>win = round(stake × multiplier)</code> if its <code>place</code> is 1, 2 or 3, else 0. The order is also reproducible from the seed with the standalone function in the build block below.</p>`) : '');
   const [t1, t2] = e.title.toUpperCase().includes(e.accent) ? [e.title.toUpperCase().replace(e.accent, '').trim(), e.accent] : [e.title.toUpperCase(), ''];
   const page = HEAD(e.title) + `
 <nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>${esc(e.title)}</div><div><a href="play.html${e.query ? '?' + e.query : ''}">full-screen demo</a> · <a href="${REPO}/tree/main/${e.folder}">source</a></div></nav>

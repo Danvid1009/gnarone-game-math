@@ -64,6 +64,17 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
 <h2>The math</h2>
 <div class="md" id="md"><p>Loading ALGORITHM.md…</p></div>
 
+<h2>Live API (browser module)</h2>
+<p class="lead">The engine is published as an ES module that implements the RGS provider contract and rolls locally with <code>crypto.getRandomValues</code>: open, valid-bets, bet, collect, with the observed balance semantics (bet debits the stake, collect credits the win, integer minor units). No server, every round live, and any round replays from its seed. Bet types: <code>Ace</code>, <code>Bolt</code>, <code>Cinder</code>, <code>Dash</code>, <code>Ember</code>, <code>Flint</code>, <code>Gale</code>, <code>Hex</code>, <code>Iris</code>, <code>Jolt</code>, <code>Kite</code>, <code>Lux</code>.</p>
+<pre><code>import { createGame } from 'https://danvid1009.github.io/gnarone-game-math/top-1/api/rgs.js';
+
+const g = createGame({ mode: 'top1' });                      // bet types: Ace, Bolt, Cinder, Dash, Ember, Flint, Gale, Hex, Iris, Jolt, Kite, Lux
+const s = g.open();                                    // session, balance 100000, chipLevels [100,200,500,1000,2500,5000,10000]
+const r = g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'Bolt' });   // fresh crypto seed; win in r.totalWinAmount
+g.collect({ roundId: r.roundId });                                           // credits the win → { balance }
+
+// Replay any fixture: same seed, same code path, same answer as rounds/007.json
+g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'Bolt', seed: 'fixture-007' });</code></pre>
 <h2>Sample API (static fixtures)</h2>
 <p class="lead">One hundred pre-drawn rounds from fixed seeds, each resolved for every bet type, served as plain JSON. Deterministic, so two people calling the same round get the same answer.</p>
 <pre><code># the field: racers, Elo, win/place/show probabilities, multipliers per racer

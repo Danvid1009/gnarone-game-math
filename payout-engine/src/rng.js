@@ -5,7 +5,6 @@
 // That is the RNG-isolation rule from the RandomSkill manual (§10) and it is what
 // makes a round auditable: same seed + same inputs => identical result.
 
-import { randomBytes } from 'node:crypto';
 
 function cyrb128(str) {
   let h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
@@ -54,5 +53,5 @@ export class Rng {
   derive(stream) { return new Rng(this.seed, stream); }
 }
 
-/** Fresh 128-bit hex seed from the OS CSPRNG. Use this for live rounds. */
-export function newSeed() { return randomBytes(16).toString('hex'); }
+/** Fresh 128-bit hex seed from the platform CSPRNG (Node ≥ 20 and browsers). Use this for live rounds. */
+export function newSeed() { const b = new Uint8Array(16); globalThis.crypto.getRandomValues(b); return Array.from(b, x => x.toString(16).padStart(2, '0')).join(''); }

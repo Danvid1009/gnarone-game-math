@@ -64,6 +64,19 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
 <h2>The math</h2>
 <div class="md" id="md"><p>Loading ALGORITHM.md…</p></div>
 
+<h2>Live API (browser module)</h2>
+<p class="lead">The engine is published as an ES module that implements the RGS provider contract and rolls locally with <code>crypto.getRandomValues</code>: open, valid-bets, bet, next-action, collect, with the observed balance semantics (bet debits the stake, collect credits the win, integer minor units). No server, every round live, and any round replays from its seed. Bet types: <code>SMALL</code>, <code>MEDIUM</code>, <code>LARGE</code>, <code>XL</code>.</p>
+<pre><code>import { createGame } from 'https://danvid1009.github.io/gnarone-game-math/auction/api/rgs.js';
+
+const g = createGame();                                      // bet types: SMALL, MEDIUM, LARGE, XL
+const s = g.open();                                    // session, balance 100000, chipLevels [100,200,500,1000,2500,5000,10000]
+let r = g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'MEDIUM' });   // fresh crypto seed → nextAction ['CONTINUE']
+r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' });          // step: ['CONTINUE','CASH_OUT'] or the round ends
+r = g.nextAction({ roundId: r.roundId, actionCode: 'CASH_OUT' });          // → totalWinAmount, nextAction ['COLLECT']
+g.collect({ roundId: r.roundId });                                          // credits the win → { balance }
+
+// Replay any fixture: same seed, same code path, same answer as rounds/007.json
+g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'MEDIUM', seed: 'fixture-007' });</code></pre>
 <h2>Sample API (static fixtures)</h2>
 <p class="lead">One hundred pre-drawn rounds from fixed seeds (<code>fixture-000</code> … <code>fixture-099</code>), one set per reference configuration (<code>small</code>, <code>medium</code>, <code>large</code>, <code>xl</code>), served as plain JSON. The same seed drives every set, so round 007 uses the same u everywhere.</p>
 <pre><code># what sets exist, their odds and files

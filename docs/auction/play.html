@@ -146,14 +146,28 @@ renderRungs(); renderStats();
 
 <section class="api-foot" style="max-width:1300px;margin:0 auto;padding:10px 22px 32px;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#a8adb8;font-size:13px;line-height:1.5">
   <div style="border-top:1px solid #252b38;padding-top:16px">
-    <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin-bottom:6px">SAMPLE API · HOW TO CALL</div>
-    <p style="margin:0 0 10px;max-width:80ch">Static fixtures: 100 pre-drawn rounds from seeds <code>fixture-000</code> … <code>fixture-099</code>, served as plain JSON (GET, no auth, deterministic). Stake unit is 1000 minor units; scale linearly.</p>
+    <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin-bottom:6px">LIVE API · HOW TO CALL</div>
+    <p style="margin:0 0 10px;max-width:80ch">The engine ships as a browser module at <code>https://danvid1009.github.io/gnarone-game-math/auction/api/rgs.js</code>. It speaks the RGS provider contract (open, valid-bets, bet, next-action, collect; money in integer minor units; bet debits, collect credits) and rolls with <code>crypto.getRandomValues</code> in your page, so there is no server and every round is live. Pass <code>seed</code> to replay a round.</p>
+<pre style="background:#151923;border:1px solid #252b38;border-radius:4px;padding:12px 14px;overflow-x:auto;font:12.5px 'IBM Plex Mono',ui-monospace,monospace;color:#f1efe8;margin:0 0 10px"><code>import { createGame } from 'https://danvid1009.github.io/gnarone-game-math/auction/api/rgs.js';
+
+const g = createGame();                                      // bet types: SMALL, MEDIUM, LARGE, XL
+const s = g.open();                                    // session, balance 100000, chipLevels [100,200,500,1000,2500,5000,10000]
+let r = g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'MEDIUM' });   // fresh crypto seed → nextAction ['CONTINUE']
+r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' });          // step: ['CONTINUE','CASH_OUT'] or the round ends
+r = g.nextAction({ roundId: r.roundId, actionCode: 'CASH_OUT' });          // → totalWinAmount, nextAction ['COLLECT']
+g.collect({ roundId: r.roundId });                                          // credits the win → { balance }
+
+// Replay any fixture: same seed, same code path, same answer as rounds/007.json
+g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'MEDIUM', seed: 'fixture-007' });</code></pre>
+    <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin:18px 0 6px">STATIC FIXTURES · 100 PRE-DRAWN ROUNDS</div>
+    <p style="margin:0 0 10px;max-width:80ch">Seeds <code>fixture-000</code> … <code>fixture-099</code>, served as plain JSON (GET, no auth, deterministic). Stake unit is 1000 minor units; scale linearly. The live module reproduces any of them when given the same seed.</p>
 <pre style="background:#151923;border:1px solid #252b38;border-radius:4px;padding:12px 14px;overflow-x:auto;font:12.5px 'IBM Plex Mono',ui-monospace,monospace;color:#f1efe8;margin:0 0 10px"><code>curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/index.json                 # sets, odds, files
 curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/small/field.json            # configuration + odds
 curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/small/rounds/007.json       # one round (000–099)
 curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/small/rounds.json           # all 100 rounds
 curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/small/sample-request.json   # RGS-shaped request
 curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/small/sample-response.json  # …and its response</code></pre>
-    <p style="margin:0;max-width:80ch">Settlement rule: see <code>how_to_settle</code> in each set's <code>field.json</code>. Sets: <code>small</code>, <code>medium</code>, <code>large</code>, <code>xl</code> — the same seed drives every set, so round 007 has the same u in all of them. Full write-up: <a href="./" style="color:#6fd3c7">Storage Auction page</a>.</p>
+    <p style="margin:0;max-width:80ch">Settlement rule: see <code>how_to_settle</code> in each set's <code>field.json</code>. Sets: <code>small</code>, <code>medium</code>, <code>large</code>, <code>xl</code> — the same seed drives every set, so round 007 has the same u in all of them.</p>
+    <p style="margin:10px 0 0;max-width:80ch">Full write-up: <a href="./" style="color:#6fd3c7">Storage Auction page</a>.</p>
   </div>
 </section>
