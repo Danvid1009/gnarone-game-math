@@ -1,0 +1,20 @@
+{
+  "endpoint": "POST /api/auction/bet then POST /api/auction/next-action",
+  "body": {
+    "sessionId": "demo-session",
+    "betAmount": 1000,
+    "betType": "MEDIUM"
+  },
+  "nextActions": [
+    {
+      "action": "CONTINUE"
+    },
+    {
+      "action": "CONTINUE"
+    },
+    {
+      "action": "CASH_OUT"
+    }
+  ],
+  "note": "deterministic fixture: seed \"fixture-007\""
+}

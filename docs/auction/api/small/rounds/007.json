@@ -1,0 +1,83 @@
+{
+  "round": 7,
+  "seed": "fixture-007",
+  "u": 0.9729229214135557,
+  "bidsSurvived": 10,
+  "outcome": "TOP",
+  "residual": 0.857489060071346,
+  "lockerBand": 3,
+  "lockerMultiple": 2,
+  "lockerMultiplier": 1.995486826367509,
+  "payoutIfTakenAfter": [
+    {
+      "step": 1,
+      "lockerValue": 1170,
+      "reachable": true,
+      "win": 2335,
+      "stake": 1000
+    },
+    {
+      "step": 2,
+      "lockerValue": 1380,
+      "reachable": true,
+      "win": 2754,
+      "stake": 1000
+    },
+    {
+      "step": 3,
+      "lockerValue": 1620,
+      "reachable": true,
+      "win": 3233,
+      "stake": 1000
+    },
+    {
+      "step": 4,
+      "lockerValue": 1900,
+      "reachable": true,
+      "win": 3791,
+      "stake": 1000
+    },
+    {
+      "step": 5,
+      "lockerValue": 2240,
+      "reachable": true,
+      "win": 4470,
+      "stake": 1000
+    },
+    {
+      "step": 6,
+      "lockerValue": 2630,
+      "reachable": true,
+      "win": 5248,
+      "stake": 1000
+    },
+    {
+      "step": 7,
+      "lockerValue": 3090,
+      "reachable": true,
+      "win": 6166,
+      "stake": 1000
+    },
+    {
+      "step": 8,
+      "lockerValue": 3620,
+      "reachable": true,
+      "win": 7224,
+      "stake": 1000
+    },
+    {
+      "step": 9,
+      "lockerValue": 4260,
+      "reachable": true,
+      "win": 8501,
+      "stake": 1000
+    },
+    {
+      "step": 10,
+      "lockerValue": 5000,
+      "reachable": true,
+      "win": 9977,
+      "stake": 1000
+    }
+  ]
+}

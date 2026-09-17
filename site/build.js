@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const engines = JSON.parse(readFileSync(join(root, 'site/engines.json'), 'utf8'));
 const REPO = 'https://github.com/Danvid1009/gnarone-game-math';
-const docs = join(root, 'docs');
+const docs = process.env.DOCS_OUT ? process.env.DOCS_OUT : join(root, 'docs');   // DOCS_OUT: build elsewhere (e.g. outside an iCloud-synced folder), then rsync into docs/
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 

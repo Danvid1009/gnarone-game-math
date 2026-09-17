@@ -2,95 +2,144 @@
 <title>Storage Auction</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-:root{color-scheme:dark;--bg:#0a0c11;--bg-2:#11141c;--panel:#151923;--line:#252b38;--ink:#f1efe8;--ink-2:#a8adb8;--ink-3:#6b7180;--pink:#e8336d;--pink-2:#ff6b9d;--teal:#6fd3c7;--gold:#f2c14e;--danger:#ff4d6d;--steel:#3a4150;--steel-2:#262b36}
+:root{color-scheme:dark;--bg:#0a0c11;--bg-2:#11141c;--panel:#151923;--line:#252b38;--ink:#f1efe8;--ink-2:#a8adb8;--ink-3:#6b7180;--pink:#e8336d;--pink-2:#ff6b9d;--teal:#6fd3c7;--teal-2:#2a8f86;--gold:#f2c14e;--danger:#ff4d6d;--steel:#2b3140;--steel-2:#1c212c}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:14px;line-height:1.45}
 .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}.display{font-family:"Bebas Neue",sans-serif;letter-spacing:.04em}
 header{display:flex;align-items:baseline;justify-content:space-between;padding:16px 22px 0;gap:16px;flex-wrap:wrap}header h1{margin:0;font-size:34px;font-weight:400;line-height:1}header h1 span{color:var(--pink)}
 .balance{font-size:13px;color:var(--ink-2)}.balance b{display:block;font-size:26px;color:var(--ink);font-weight:500}
-.app{display:grid;grid-template-columns:1fr 360px;gap:18px;padding:14px 22px 28px;max-width:1320px;margin:0 auto;align-items:start}@media (max-width:980px){.app{grid-template-columns:1fr}}
-.stage{position:relative;height:620px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:radial-gradient(ellipse at 50% 15%,#2a2030 0%,var(--bg-2) 45%,#07080c 100%);user-select:none}
+.app{display:grid;grid-template-columns:1fr 340px;gap:18px;padding:14px 22px 28px;max-width:1300px;margin:0 auto;align-items:start}@media (max-width:960px){.app{grid-template-columns:1fr}}
+.stage{position:relative;height:640px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:radial-gradient(ellipse at 50% 20%,#1d1a2a 0%,var(--bg-2) 50%,#07080c 100%);user-select:none}
 .stage::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(232,51,109,.035) 38px 40px);pointer-events:none}
-.guards{position:absolute;top:18px;right:30px;display:flex;gap:14px}.guard{width:20px;height:32px;border-radius:10px 10px 4px 4px;background:var(--pink);position:relative}.guard::after{content:"";position:absolute;left:5px;top:6px;width:10px;height:10px;border-radius:50%;background:#0a0c11}.guard.sq::after{border-radius:2px}.guard.tri::after{border-radius:0;clip-path:polygon(50% 0,100% 100%,0 100%)}
-.unit{position:absolute;left:50%;top:150px;transform:translateX(-50%);width:var(--w,260px);height:var(--h,220px);transition:width .3s,height .3s}
-.unit .frame{position:absolute;inset:0;border:6px solid var(--steel);border-radius:6px;background:repeating-linear-gradient(0deg,var(--steel-2) 0 14px,#1e222c 14px 16px);overflow:hidden}
-.unit .door{position:absolute;inset:0;background:repeating-linear-gradient(0deg,#4a5262 0 16px,#3a4150 16px 18px);border:2px solid #5a6273;transition:transform .8s cubic-bezier(.4,0,.2,1);transform-origin:top}
-.unit.open .door{transform:rotateX(-92deg)}
-.unit .inside{position:absolute;inset:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;background:radial-gradient(circle at 50% 60%,#2d2418,#151210)}
-.unit .inside .val{font-family:"Bebas Neue",sans-serif;font-size:54px;color:var(--gold);line-height:1;text-shadow:0 0 24px rgba(242,193,78,.6);opacity:0;transform:scale(.6);transition:opacity .4s .5s,transform .4s .5s}
-.unit.open .inside .val{opacity:1;transform:scale(1)}
-.unit .lbl{position:absolute;top:-30px;left:0;right:0;text-align:center;font-size:20px;color:var(--ink-3)}
-.bidders{position:absolute;left:0;right:0;top:420px;display:flex;justify-content:center;gap:120px}
-.bidder{width:150px;text-align:center}.bidder .fig{width:26px;height:44px;margin:0 auto 6px;position:relative}
-.bidder .fig .h{width:16px;height:16px;border-radius:50%;background:#e8c39e;margin:0 auto 2px}.bidder .fig .b{width:22px;height:26px;border-radius:6px 6px 3px 3px;margin:0 auto;background:var(--green,#2f8f6b)}
-.bidder.agent .fig .b{background:#7b3fb8}.bidder .who{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
-.bidder .call{font-family:"Bebas Neue",sans-serif;font-size:30px;color:var(--ink);min-height:36px;transition:transform .15s}.bidder .call.pop{transform:scale(1.25)}
-.bidder.out .call{color:var(--danger)}.bidder.win .call{color:var(--gold)}
-.gavel{position:absolute;left:50%;top:400px;transform:translateX(-50%);font-family:"Bebas Neue",sans-serif;font-size:22px;color:var(--ink-2);letter-spacing:.06em;min-height:28px}
-.callout{position:absolute;left:16px;top:16px;background:rgba(10,12,17,.84);border:1px solid var(--line);border-radius:4px;padding:10px 12px;max-width:400px;font-size:12.5px;color:var(--ink-2);z-index:6}
+.stage.shake{animation:shake .5s}@keyframes shake{0%,100%{transform:translate(0)}20%{transform:translate(-6px,2px)}40%{transform:translate(6px,-3px)}60%{transform:translate(-4px,3px)}80%{transform:translate(4px,-2px)}}
+.callout{position:absolute;left:16px;top:16px;background:rgba(10,12,17,.86);border:1px solid var(--line);border-radius:4px;padding:10px 12px;max-width:380px;font-size:12.5px;color:var(--ink-2);z-index:6}
 .callout .big{font-size:30px;color:var(--teal);line-height:1;margin-bottom:4px}.callout.win .big{color:var(--gold)}.callout.lose .big{color:var(--danger)}
+/* ladder on the right of the stage */
+.rungs{position:absolute;right:16px;top:16px;width:210px;list-style:none;margin:0;padding:0;font-size:12px;z-index:5}
+.rungs li{display:grid;grid-template-columns:22px 1fr 58px;gap:6px;padding:3px 6px;border-bottom:1px solid rgba(37,43,56,.7);color:var(--ink-3);background:rgba(10,12,17,.55)}
+.rungs li.head{font-size:10px;text-transform:uppercase;letter-spacing:.06em}.rungs li.cur{color:var(--ink);background:rgba(111,211,199,.14);border-left:2px solid var(--teal)}.rungs li.won{color:var(--ink-2)}
+.rungs li.dead{color:var(--danger);text-decoration:line-through}.rungs li.top .v{color:var(--gold)}.rungs .r{text-align:right}
+/* locker */
+.floor{position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(180deg,#0e1016,#05060a);border-top:1px solid #1c2130}
+.locker{position:absolute;left:50%;bottom:110px;transform:translateX(-50%);width:300px;height:380px;perspective:900px}
+.frame{position:absolute;inset:0;border:6px solid #3a4152;border-radius:4px;background:#050608;overflow:hidden}
+.inside{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:radial-gradient(ellipse at 50% 30%,#2a2416,#0a0906 75%);color:var(--ink);opacity:0;transition:opacity .4s .5s}
+.inside .icon{font-size:64px;line-height:1}.inside .tier{font-size:30px;color:var(--gold)}.inside .desc{font-size:12.5px;color:var(--ink-2);text-align:center;max-width:220px}.inside .amt{font-size:22px;margin-top:6px}
+.door{position:absolute;inset:0;background:repeating-linear-gradient(180deg,var(--steel) 0 22px,var(--steel-2) 22px 26px);border:2px solid #4a5268;border-radius:3px;transform-origin:left;transition:transform 1.1s cubic-bezier(.6,.05,.3,1);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:18px;gap:6px;box-shadow:inset 0 0 40px rgba(0,0,0,.5)}
+.door .lot{font-size:12px;letter-spacing:.2em;color:var(--ink-3)}.door .handle{width:14px;height:52px;border-radius:7px;background:#8a93a8;position:absolute;right:16px;top:50%;transform:translateY(-50%);box-shadow:0 2px 0 #000}
+.door .lock{width:28px;height:36px;border:4px solid var(--gold);border-radius:6px;position:absolute;right:14px;top:calc(50% + 40px);background:#2a2416}
+.locker.open .door{transform:rotateY(-112deg)}.locker.open .inside{opacity:1}
+.locker.lost .door{filter:grayscale(.6) brightness(.6)}
+.tag{position:absolute;left:50%;top:-38px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:6px 14px;border-radius:3px;font-size:24px;white-space:nowrap;transition:background .2s,transform .2s}
+.tag.flash{background:var(--teal);transform:translateX(-50%) scale(1.08)}.tag.gold{background:var(--gold)}.tag.red{background:var(--danger);color:#fff}
+/* rivals */
+.rivals{position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;gap:26px;z-index:4}
+.rival{width:46px;text-align:center;font-size:10px;color:var(--ink-3);position:relative}
+.rival .head{width:18px;height:18px;border-radius:50%;background:#3a3f4c;margin:0 auto 2px}.rival .body{width:34px;height:30px;border-radius:8px 8px 3px 3px;background:#2a2f3a;margin:0 auto}
+.rival .paddle{position:absolute;left:50%;top:-30px;width:22px;height:22px;border-radius:50%;background:var(--pink);transform:translate(-50%,20px);opacity:0;transition:transform .25s,opacity .25s;font:11px "IBM Plex Mono",monospace;color:#fff;line-height:22px}
+.rival .paddle::after{content:"";position:absolute;left:50%;top:100%;width:3px;height:12px;background:#c9c9c9;transform:translateX(-50%)}
+.rival.up .paddle{transform:translate(-50%,0);opacity:1}.rival.win .paddle{background:var(--danger);box-shadow:0 0 18px var(--danger)}.rival.fold{opacity:.35}
+.you{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:46px;text-align:center;font-size:10px;color:var(--teal);z-index:4;display:none}
+.you .head{width:18px;height:18px;border-radius:50%;background:#e8c39e;margin:0 auto 2px}.you .body{width:34px;height:30px;border-radius:8px 8px 3px 3px;background:#2f8f6b;margin:0 auto}
+/* side */
 .side{display:flex;flex-direction:column;gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px}.card h2{margin:0 0 10px;font-size:20px;font-weight:400;color:var(--ink-2)}
-.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.seg button,.ladder button{padding:8px 4px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);border-radius:4px;cursor:pointer;font:inherit;font-weight:500;font-size:12px}
-.seg button.on{border-color:var(--pink);color:var(--ink);background:rgba(232,51,109,.16)}.ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}.ladder button.on{border-color:var(--teal);color:var(--ink);background:rgba(111,211,199,.14)}
-.ladder button small{display:block;font-size:10px;color:var(--ink-3)}button:disabled{opacity:.4;cursor:not-allowed}
-.btn{width:100%;margin-top:10px;padding:14px 10px;border:none;border-radius:4px;font:22px "Bebas Neue",sans-serif;letter-spacing:.06em;cursor:pointer;color:#fff;background:var(--pink)}.btn:hover:not(:disabled){background:var(--pink-2)}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.seg button,.chips button{padding:8px 4px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);border-radius:4px;cursor:pointer;font:inherit;font-weight:500;font-size:12.5px}.seg button.on{border-color:var(--pink);color:var(--ink);background:rgba(232,51,109,.16)}
+.seg button small{display:block;font-weight:400;font-size:10.5px;color:var(--ink-3)}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.chips button.on{border-color:var(--teal);color:var(--ink);background:rgba(111,211,199,.14)}button:disabled{opacity:.4;cursor:not-allowed}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.btn{padding:14px 10px;border:none;border-radius:4px;font:22px "Bebas Neue",sans-serif;letter-spacing:.06em;cursor:pointer;color:#fff}.btn.play{background:var(--pink)}.btn.play:hover:not(:disabled){background:var(--pink-2)}.btn.cash{background:var(--teal-2)}.btn.cash:hover:not(:disabled){background:var(--teal)}.btn.wide{grid-column:1/-1}
 .stat{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-2)}.stat:last-child{border-bottom:0}.stat b{color:var(--ink);font-weight:500;text-align:right}
-table.t{width:100%;border-collapse:collapse;font-size:11.5px}.t td,.t th{padding:3px 4px;border-bottom:1px solid var(--line);text-align:right;color:var(--ink-3)}.t th{font-size:10px;text-transform:uppercase;letter-spacing:.05em}.t td:first-child,.t th:first-child{text-align:left}.t tr.on td{color:var(--ink)}.t tr.on td:nth-child(3){color:var(--teal)}
+table.box{width:100%;border-collapse:collapse;font-size:12.5px}table.box td,table.box th{padding:4px 0;border-bottom:1px solid var(--line);text-align:right;color:var(--ink-2)}table.box th{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);font-weight:500}table.box td:first-child,table.box th:first-child{text-align:left}table.box tr.hit td{color:var(--gold)}
 .disclose{font-size:12px;color:var(--ink-3);line-height:1.5}.disclose b{color:var(--ink-2);font-weight:500}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.log{font-size:12px;max-height:150px;overflow:auto}.log div{padding:3px 0;border-bottom:1px solid var(--line);color:var(--ink-2)}.log .w{color:var(--gold)}.log .l{color:var(--danger)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
-<header><h1 class="display">STORAGE <span>AUCTION</span></h1><div class="balance">demo balance (chips)<b class="mono" id="balance">1,000.00</b></div></header>
+<header><h1 class="display">STORAGE <span>AUCTION</span></h1><div class="balance">demo balance<b class="mono" id="balance">1,000.00</b></div></header>
 <div class="app">
-  <section class="stage" id="stage"><div class="guards"><div class="guard"></div><div class="guard sq"></div><div class="guard tri"></div></div>
-    <div class="callout" id="callout"><div class="big display" id="coBig">PICK A UNIT</div><div id="coText">Choose a box size and your maximum bid. You pay the entry fee to play; your bid is only spent if you win the unit.</div></div>
-    <div class="unit" id="unit"><div class="lbl display" id="unitLbl">SMALL UNIT</div><div class="frame"><div class="inside"><div class="val mono" id="unitVal"></div></div><div class="door"></div></div></div>
-    <div class="gavel" id="gavel"></div>
-    <div class="bidders"><div class="bidder you" id="you"><div class="fig"><div class="h"></div><div class="b"></div></div><div class="who">you</div><div class="call mono" id="youCall">—</div></div><div class="bidder agent" id="agent"><div class="fig"><div class="h"></div><div class="b"></div></div><div class="who">rival</div><div class="call mono" id="agentCall">—</div></div></div>
+  <section class="stage" id="stage">
+    <div class="callout" id="callout"><div class="big display" id="coBig">LOT UP FOR AUCTION</div><div id="coText">Pick a locker size and a stake, then open the bidding. Every bid you win raises what the locker is worth. Take it whenever you like and open it. If a rival outbids you first, the lot is gone.</div></div>
+    <ul class="rungs mono" id="rungs"></ul>
+    <div class="locker" id="locker">
+      <div class="tag display mono" id="tag">LOT · SEALED</div>
+      <div class="frame"><div class="inside" id="inside"><div class="icon" id="inIcon">📦</div><div class="tier display" id="inTier"></div><div class="desc" id="inDesc"></div><div class="amt mono" id="inAmt"></div></div>
+        <div class="door"><div class="handle"></div><div class="lock"></div><div class="lot display">STORAGE UNIT</div><div class="lot mono" id="lotNo">#0000</div></div></div>
+    </div>
+    <div class="floor"></div>
+    <div class="rivals" id="rivals"></div>
+    <div class="you" id="you"><div class="head"></div><div class="body"></div>you</div>
   </section>
   <aside class="side">
-    <div class="card"><h2 class="display">UNIT SIZE</h2><div class="seg" id="sizes"></div>
-      <h2 class="display" style="margin-top:12px">MAX BID (chips)</h2><div class="ladder mono" id="ladder"></div><button class="btn" id="btnBid">BID</button></div>
-    <div class="card"><h2 class="display">THIS AUCTION</h2>
-      <div class="stat"><span>Entry fee (lost either way)</span><b class="mono" id="stFee">—</b></div><div class="stat"><span>Bid (returned if outbid)</span><b class="mono" id="stBid">—</b></div><div class="stat"><span>Outlay</span><b class="mono" id="stOut">—</b></div><div class="stat"><span>P(win the unit)</span><b class="mono" id="stG">—</b></div><div class="stat"><span>Unit worth, on average</span><b class="mono" id="stEV">—</b></div><div class="stat"><span>Expected return / outlay</span><b class="mono" id="stR">—</b></div><div class="stat"><span>Draw u</span><b class="mono" id="stU">—</b></div><div class="stat"><span>Result</span><b class="mono" id="stRes">—</b></div></div>
-    <div class="card"><h2 class="display">THIS UNIT'S CONTENTS</h2><table class="t mono" id="tbl"></table></div>
-    <div class="card disclose"><b>How this is fair.</b> Each unit size has a fixed contents table with mean E[V]. Paying fee F and bidding B, you win when the rival's bid is below yours; the rival's fold chance is derived, G(B) = (0.95·(F+B) − B) / (E[V] − B), so every bid on every size returns exactly 95% of the outlay. Lose and the bid comes back; only the fee is spent. Bids are capped at E[V]/0.95 − F, above which no fold chance could return the RTP.</div>
+    <div class="card"><h2 class="display">LOCKER SIZE</h2>
+      <div class="seg" id="sizes"><button data-m="5" class="on">SMALL<small>top 5×</small></button><button data-m="10">MEDIUM<small>top 10×</small></button><button data-m="25">LARGE<small>top 25×</small></button><button data-m="100">XL<small>top 100×</small></button></div>
+      <h2 class="display" style="margin-top:14px">STAKE</h2><div class="chips mono" id="chips"></div>
+      <div class="actions"><button class="btn play wide" id="btnStart">OPEN THE BIDDING</button><button class="btn play" id="btnBid" disabled>BID</button><button class="btn cash" id="btnTake" disabled>TAKE THE LOCKER</button></div></div>
+    <div class="card"><h2 class="display">THIS ROUND</h2>
+      <div class="stat"><span>Locker worth now</span><b class="mono" id="stHold">—</b></div>
+      <div class="stat"><span>Worth after next bid</span><b class="mono" id="stNext">—</b></div>
+      <div class="stat"><span>P(rivals fold)</span><b class="mono" id="stFold">—</b></div>
+      <div class="stat"><span>EV of bidding</span><b class="mono" id="stEv">—</b></div>
+      <div class="stat"><span>EV of taking (E[X] = 1)</span><b class="mono" id="stTake">—</b></div></div>
+    <div class="card"><h2 class="display">WHAT'S INSIDE</h2><table class="box mono" id="boxTable"></table>
+      <p class="disclose" style="margin:10px 0 0">The locker pays <b>value × X</b>. X is a Single Shot draw with mean exactly 1, so opening never changes the expectation, only the spread.</p></div>
+    <div class="card"><h2 class="display">THE MATH</h2><p class="disclose">Same ladder as the stepper: value after k bids <b>c<sub>k</sub> = round(M<sup>k/10</sup>, 2)</b>, survival <b>G<sub>k</sub> = 0.95 / c<sub>k</sub></b>. The first bid carries the whole 5% edge; every later bid is a fair bet (rivals fold with probability c<sub>k−1</sub>/c<sub>k</sub>). One uniform u places the outbid point; its residual inside that interval is recycled as the locker draw. <b>Every take rule returns exactly 95%.</b></p>
+      <div class="stat"><span>u</span><b class="mono" id="mU">—</b></div><div class="stat"><span>residual v (revealed on open)</span><b class="mono" id="mV">—</b></div></div>
+    <div class="card"><h2 class="display">LOG</h2><div class="log mono" id="log"></div></div>
   </aside>
 </div>
 <script>
-const RTP=0.95;
-const SIZES={
- SMALL: {fee:1, bids:[1,2,3,4],      V:[1,3,5,10,40],      p:[.30,.30,.20,.15,.05], w:220,h:180},
- MEDIUM:{fee:2, bids:[2,4,6,8,10],   V:[2,5,10,25,100],    p:[.32,.30,.20,.14,.04], w:270,h:210},
- LARGE: {fee:5, bids:[5,10,15,20],   V:[3,10,25,60,300],   p:[.35,.30,.20,.12,.03], w:320,h:235},
- XL:    {fee:10,bids:[10,20,30,40],  V:[5,20,50,150,1000], p:[.40,.30,.18,.10,.02], w:380,h:255},
-};
-for(const s of Object.values(SIZES)){s.EV=s.V.reduce((a,v,i)=>a+v*s.p[i],0);s.cap=s.EV/RTP-s.fee;s.G=s.bids.map(B=>(RTP*(s.fee+B)-B)/(s.EV-B));s.pmf=s.G.map((g,i)=>g-(i?s.G[i-1]:0));s.pmf.push(1-s.G[s.G.length-1]);
- s.cum=[0];for(const q of s.p)s.cum.push(s.cum[s.cum.length-1]+q);s.cum[s.p.length]=1}
-function uniform(){const a=new Uint32Array(2);crypto.getRandomValues(a);return(a[0]*4294967296+a[1])/18446744073709551616}
-const $=id=>document.getElementById(id),fmt=x=>x.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}),pct=x=>(100*x).toFixed(1)+'%';
-let balance=1000,size='SMALL',bidIdx=1,busy=false;
-function rebuild(){const s=SIZES[size];$('sizes').innerHTML=Object.keys(SIZES).map(k=>`<button data-s="${k}" class="${k===size?'on':''}">${k}<br><small class="mono" style="color:var(--ink-3)">fee ${SIZES[k].fee}</small></button>`).join('');$('sizes').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(busy)return;size=b.dataset.s;bidIdx=Math.min(bidIdx,SIZES[size].bids.length-1);rebuild()}));
- $('ladder').innerHTML=s.bids.map((B,i)=>`<button data-i="${i}" class="${i===bidIdx?'on':''}">${B}<small>win ${pct(s.G[i])}</small></button>`).join('');$('ladder').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(busy)return;bidIdx=+b.dataset.i;rebuild()}));
- const u=$('unit');u.style.setProperty('--w',s.w+'px');u.style.setProperty('--h',s.h+'px');u.className='unit';$('unitLbl').textContent=size+' UNIT';$('unitVal').textContent='';
- $('tbl').innerHTML=`<tr><th>contents</th><th>P</th></tr>`+s.V.map((v,i)=>`<tr><td>${v} chips</td><td>${pct(s.p[i])}</td></tr>`).join('')+`<tr><td>mean</td><td>${s.EV.toFixed(2)}</td></tr><tr><td>max bid (cap)</td><td>${s.cap.toFixed(2)}</td></tr>`;
- refresh()}
-function refresh(){const s=SIZES[size],B=s.bids[bidIdx],G=s.G[bidIdx];$('balance').textContent=fmt(balance);$('btnBid').disabled=busy;$('stFee').textContent=s.fee;$('stBid').textContent=B;$('stOut').textContent=s.fee+B;$('stG').textContent=pct(G);$('stEV').textContent=s.EV.toFixed(2);$('stR').textContent=((G*s.EV+(1-G)*B)/(s.fee+B)).toFixed(4)}
-function say(b,t,m){$('coBig').textContent=b;$('coText').textContent=t;$('callout').className='callout'+(m?' '+m:'')}
-function call(el,txt){el.textContent=txt;el.classList.add('pop');setTimeout(()=>el.classList.remove('pop'),150)}
-function bid(){if(busy)return;const s=SIZES[size],B=s.bids[bidIdx],G=s.G[bidIdx],out=s.fee+B;if(out>balance){say('NOT ENOUGH','Lower the bid or reload.','lose');return}busy=true;balance-=out;refresh();
- const u=uniform();
- // agent category from the pmf: index k means the rival's max bid sits in [bids[k-1], bids[k]) ; k = bids.length means above the top rung
- let acc=0,k=0;while(k<s.pmf.length-1&&u>=acc+s.pmf[k]){acc+=s.pmf[k];k++}
- const win=u<G; // equivalent to k < bidIdx+1
- const you=$('you'),ag=$('agent');you.className='bidder you';ag.className='bidder agent';$('unit').className='unit';$('unitVal').textContent='';
- say('GOING ONCE…',`u = ${u.toFixed(6)}. The rival's limit was fixed by the draw; the calls just play it out.`);
- // escalation: calls climb the ladder; rival stops at its category, you stop at your max
- const steps=[];const top=Math.min(bidIdx,k);for(let i=0;i<=top;i++){steps.push(['you',s.bids[i]]);if(i<k)steps.push(['agent',s.bids[i]+(i<s.bids.length-1?Math.round((s.bids[i+1]-s.bids[i])/2*10)/10:s.fee)])}
- let t=300;steps.forEach(([who,v])=>{setTimeout(()=>{call(who==='you'?$('youCall'):$('agentCall'),v);$('gavel').textContent=`${v} — do I hear more?`},t);t+=520});
- setTimeout(()=>{
-  if(win){ag.classList.add('out');you.classList.add('win');call($('youCall'),B);$('gavel').textContent=`SOLD to you at ${B}`;call($('agentCall'),'folds');
-   const v=u/G;let z=0;while(z<s.p.length-1&&s.cum[z+1]<=v)z++;const V=s.V[z];
-   setTimeout(()=>{$('unit').classList.add('open');$('unitVal').textContent=V+' chips';balance+=V;$('stU').textContent=u.toFixed(6);$('stRes').textContent=`won · unit ${V}`;say(`${V} CHIPS`,`You won the unit for ${B} plus the ${s.fee} fee and it held ${V} chips. Net ${V-out>=0?'+':''}${V-out}.`,V>=out?'win':'lose');busy=false;refresh()},900)}
-  else{you.classList.add('out');ag.classList.add('win');const over=s.bids[bidIdx]+(bidIdx<s.bids.length-1?Math.round((s.bids[bidIdx+1]-s.bids[bidIdx])/2*10)/10:s.fee);call($('agentCall'),over);$('gavel').textContent=`SOLD to the rival at ${over}`;balance+=B;$('stU').textContent=u.toFixed(6);$('stRes').textContent='outbid · bid returned';say('OUTBID',`The rival went to ${over}. Your bid of ${B} comes back; the ${s.fee} fee is spent.`,'lose');busy=false;refresh()}
- },t+300)}
-$('btnBid').addEventListener('click',bid);document.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();bid()}});rebuild();
+const RTP = 0.95, N = 10, BOX = [0.25, 0.5, 1, 2, 5];
+const TIERS = { 0.25: ['🪑', 'MOSTLY JUNK', 'Broken furniture, old tyres, a box of cables.'], 0.5: ['🔧', 'ODDS AND ENDS', 'Tools, a bicycle, some kitchenware.'], 1: ['📺', 'SOLID HAUL', 'Appliances, boxed electronics, furniture that sells.'], 2: ['🎸', "COLLECTOR'S FIND", 'Vintage guitars, coins, a signed jersey.'], 5: ['🚗', 'JACKPOT', 'A classic car under the tarp.'] };
+function ladder(M) { const m = Math.pow(M, 1 / N), c = Array.from({ length: N }, (_, i) => Math.round(Math.pow(m, i + 1) * 100) / 100); const G = [1, ...c.map(x => RTP / x)]; const p = Array.from({ length: N + 1 }, (_, k) => k < N ? G[k] - G[k + 1] : G[N]); const cum = [0]; for (const x of p) cum.push(cum[cum.length - 1] + x); cum[N + 1] = 1; return { c, G, p, cum, hazard: c.map((_, i) => G[i + 1] / G[i]) }; }
+function box() { const A = BOX, amin = A[0], amax = A[A.length - 1]; const w = l => A.map(a => Math.exp(-l * (a - amin) / amax)); const mean = l => { const x = w(l), Z = x.reduce((s, v) => s + v, 0); return x.reduce((s, v, i) => s + v / Z * A[i], 0); }; let lo = -2000, hi = 2000; for (let i = 0; i < 300; i++) { const mid = (lo + hi) / 2; if (mean(mid) > 1) lo = mid; else hi = mid; } const x = w((lo + hi) / 2), Z = x.reduce((s, v) => s + v, 0), p = x.map(v => v / Z); const br = [0]; for (const q of p) br.push(br[br.length - 1] + q); br[A.length] = 1; const pos = A.filter(a => a > 0), gap = Math.min(...pos.slice(1).map((a, i) => a - pos[i])), r = 0.1 * gap; return { A, p, br, r, mult(v) { if (v >= 1) v = 1 - 1e-12; let i = 0; while (br[i + 1] <= v) i++; if (A[i] <= 0) return { X: 0, band: i }; const t = (v - br[i]) / (br[i + 1] - br[i]); return { X: A[i] + r * (2 * t - 1), band: i }; } }; }
+const B = box();
+function uniform() { const a = new Uint32Array(2); crypto.getRandomValues(a); return (a[0] * 4294967296 + a[1]) / 18446744073709551616; }
+const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(1) + '%';
+let balance = 1000, M = 5, L = ladder(M), stake = 5, round = null;
+const RIVALS = ['Dave', 'Brandi', 'Barry', 'Darrell', 'Ivy'];
+$('rivals').innerHTML = RIVALS.map(n => `<div class="rival"><div class="paddle">!</div><div class="head"></div><div class="body"></div>${n}</div>`).join('');
+$('chips').innerHTML = [1, 2, 5, 10, 25, 50].map(v => `<button data-v="${v}" class="${v === stake ? 'on' : ''}">${v}</button>`).join('');
+$('chips').onclick = e => { const b = e.target.closest('button'); if (!b || round) return; stake = +b.dataset.v; [...$('chips').children].forEach(x => x.classList.toggle('on', x === b)); };
+$('sizes').onclick = e => { const b = e.target.closest('button'); if (!b || round) return; M = +b.dataset.m; L = ladder(M); [...$('sizes').children].forEach(x => x.classList.toggle('on', x === b)); renderRungs(); renderStats(); };
+$('boxTable').innerHTML = `<tr><th>multiple</th><th>p</th><th>pays</th></tr>` + B.A.map((a, i) => `<tr data-b="${i}"><td>${a}×</td><td>${pct(B.p[i])}</td><td>${(a - B.r).toFixed(3)} → ${(a + B.r).toFixed(3)}</td></tr>`).join('');
+function renderRungs() { const k = round ? round.k : 0; $('rungs').innerHTML = `<li class="head"><span>bid</span><span>locker worth</span><span class="r">P(fold)</span></li>` + L.c.map((c, i) => { const s = i + 1; let cls = s === k ? 'cur' : s < k ? 'won' : ''; if (round && round.ended && round.K < s && s === round.K + 1 && !round.took) cls = 'dead'; if (s === N) cls += ' top'; return `<li class="${cls}"><span>${s}</span><span class="v">${c.toFixed(2)}× · ${fmt(c * stake)}</span><span class="r">${pct(L.hazard[i])}</span></li>`; }).join(''); }
+function renderStats() { const k = round ? round.k : 0, hold = k ? L.c[k - 1] * stake : 0; $('stHold').textContent = round && !round.ended ? fmt(hold) : '—'; if (round && !round.ended && k < N) { $('stNext').textContent = fmt(L.c[k] * stake); $('stFold').textContent = pct(L.hazard[k]); $('stEv').textContent = fmt(L.hazard[k] * L.c[k] * stake) + (k ? ' (= held)' : ' (= 0.95 × stake)'); } else { $('stNext').textContent = $('stFold').textContent = $('stEv').textContent = '—'; } $('stTake').textContent = round && !round.ended && k ? fmt(hold) : '—'; }
+function callout(cls, big, text) { $('callout').className = 'callout ' + cls; $('coBig').textContent = big; $('coText').textContent = text; }
+function log(msg, cls = '') { const d = document.createElement('div'); d.className = cls; d.textContent = msg; $('log').prepend(d); }
+function setTag(txt, cls = '') { const t = $('tag'); t.textContent = txt; t.className = 'tag display mono ' + cls; }
+function paddles(k) { const rs = [...$('rivals').children]; rs.forEach(r => r.classList.remove('up', 'win')); const n = Math.max(1, Math.min(5, 5 - Math.floor(k / 2))); rs.slice(0, n).forEach(r => r.classList.add('up')); return rs.slice(0, n); }
+function start() {
+  if (balance < stake) return callout('lose', 'NO CREDIT', 'Demo balance is empty. Reload the page.');
+  balance -= stake; $('balance').textContent = fmt(balance);
+  const u = uniform(); let K = 0; while (L.cum[K + 1] <= u) K++; const v = (u - L.cum[K]) / (L.cum[K + 1] - L.cum[K]); const { X, band } = B.mult(v);
+  round = { u, K, v, X, band, k: 0, ended: false, took: false };
+  $('locker').className = 'locker'; $('lotNo').textContent = '#' + String(Math.floor(u * 9999)).padStart(4, '0'); setTag('LOT · SEALED');
+  $('you').style.display = 'block'; [...$('rivals').children].forEach(r => r.className = 'rival'); [...$('boxTable').rows].forEach(r => r.classList.remove('hit'));
+  $('mU').textContent = u.toFixed(6); $('mV').textContent = 'hidden until the hammer';
+  $('btnStart').disabled = true; $('btnBid').disabled = false; $('btnTake').disabled = true; [...$('chips').children, ...$('sizes').children].forEach(b => b.disabled = true);
+  callout('', 'BIDDING IS OPEN', `Your first bid: the lot is worth ${fmt(L.c[0] * stake)} if the rivals fold (${pct(L.hazard[0])}). This is the only bid that carries the house edge.`);
+  renderRungs(); renderStats();
+}
+function bid() {
+  if (!round || round.ended) return; const k = round.k + 1; const up = paddles(k); $('btnBid').disabled = $('btnTake').disabled = true;
+  setTimeout(() => {
+    if (k > round.K) { round.ended = true; round.k = k; const w = up[Math.floor(round.v * up.length)]; w.classList.add('win'); $('locker').classList.add('lost'); setTag('SOLD · TO ' + w.textContent.toUpperCase(), 'red'); $('stage').classList.add('shake'); setTimeout(() => $('stage').classList.remove('shake'), 500);
+      callout('lose', 'OUTBID', `${w.textContent} took the lot on bid ${k}. Your stake is gone. The locker held ${round.X.toFixed(3)}× — you never found out.`); log(`${M}× lot · outbid on bid ${k} · −${fmt(stake)}`, 'l'); finish(); }
+    else { round.k = k; up.forEach(r => r.classList.remove('up')); setTag(fmt(L.c[k - 1] * stake) + ' · ' + L.c[k - 1].toFixed(2) + '×', 'flash'); setTimeout(() => $('tag').classList.remove('flash'), 300);
+      if (k === N) { callout('win', 'TOP OF THE LADDER', 'No one bids against you at the top. The hammer falls.'); take(true); }
+      else { $('btnBid').disabled = false; $('btnTake').disabled = false; callout('', `YOURS AT ${fmt(L.c[k - 1] * stake)}`, `Bid again: worth ${fmt(L.c[k] * stake)} if rivals fold (${pct(L.hazard[k])}); EV of bidding = ${fmt(L.hazard[k] * L.c[k] * stake)}, exactly what you hold. Or take the locker and open it.`); }
+    }
+    renderRungs(); renderStats();
+  }, 650);
+}
+function take(auto) {
+  if (!round || round.ended || !round.k) return; round.ended = true; round.took = true; $('btnBid').disabled = $('btnTake').disabled = true;
+  const value = Math.round(L.c[round.k - 1] * stake * 100) / 100, win = Math.round(value * round.X * 100) / 100, tier = TIERS[B.A[round.band]];
+  setTag('SOLD · ' + fmt(value), 'gold'); [...$('rivals').children].forEach(r => r.classList.add('fold'));
+  setTimeout(() => { $('inIcon').textContent = tier[0]; $('inTier').textContent = tier[1]; $('inDesc').textContent = tier[2]; $('inAmt').textContent = `${round.X.toFixed(3)}× → ${fmt(win)}`; $('locker').classList.add('open'); $('boxTable').rows[round.band + 1].classList.add('hit'); $('mV').textContent = round.v.toFixed(6) + ` → band ${B.A[round.band]}×`;
+    balance += win; $('balance').textContent = fmt(balance);
+    callout(win >= stake ? 'win' : 'lose', `${tier[1]} · ${fmt(win)}`, `Locker worth ${fmt(value)} after ${round.k} bid${round.k > 1 ? 's' : ''}, contents ${round.X.toFixed(3)}× of that. ${auto ? 'Top of the ladder.' : ''} Net ${win >= stake ? '+' : ''}${fmt(win - stake)}.`);
+    log(`${M}× lot · took after ${round.k} · ${B.A[round.band]}× locker · ${win >= stake ? '+' : ''}${fmt(win - stake)}`, win >= stake ? 'w' : 'l'); finish(); }, 700);
+}
+function finish() { setTimeout(() => { $('btnStart').disabled = false; [...$('chips').children, ...$('sizes').children].forEach(b => b.disabled = false); }, 900); renderRungs(); renderStats(); }
+$('btnStart').onclick = start; $('btnBid').onclick = () => bid(); $('btnTake').onclick = () => take(false);
+renderRungs(); renderStats();
 </script>

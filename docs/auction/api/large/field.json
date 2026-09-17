@@ -1,0 +1,203 @@
+{
+  "set": "large",
+  "rtp": 0.95,
+  "maxWin": 25,
+  "steps": 10,
+  "stake_units": "minor units (cents)",
+  "bids": [
+    {
+      "step": 1,
+      "value": 1.38,
+      "lockerValueAtStake": 1380,
+      "survivalToHere": 0.6884057971014493,
+      "pRivalFoldsGivenHere": 0.6884057971014493
+    },
+    {
+      "step": 2,
+      "value": 1.9,
+      "lockerValueAtStake": 1900,
+      "survivalToHere": 0.5,
+      "pRivalFoldsGivenHere": 0.7263157894736841
+    },
+    {
+      "step": 3,
+      "value": 2.63,
+      "lockerValueAtStake": 2630,
+      "survivalToHere": 0.3612167300380228,
+      "pRivalFoldsGivenHere": 0.7224334600760456
+    },
+    {
+      "step": 4,
+      "value": 3.62,
+      "lockerValueAtStake": 3620,
+      "survivalToHere": 0.26243093922651933,
+      "pRivalFoldsGivenHere": 0.7265193370165746
+    },
+    {
+      "step": 5,
+      "value": 5,
+      "lockerValueAtStake": 5000,
+      "survivalToHere": 0.19,
+      "pRivalFoldsGivenHere": 0.724
+    },
+    {
+      "step": 6,
+      "value": 6.9,
+      "lockerValueAtStake": 6900,
+      "survivalToHere": 0.13768115942028983,
+      "pRivalFoldsGivenHere": 0.7246376811594202
+    },
+    {
+      "step": 7,
+      "value": 9.52,
+      "lockerValueAtStake": 9520,
+      "survivalToHere": 0.09978991596638656,
+      "pRivalFoldsGivenHere": 0.7247899159663868
+    },
+    {
+      "step": 8,
+      "value": 13.13,
+      "lockerValueAtStake": 13130,
+      "survivalToHere": 0.07235338918507235,
+      "pRivalFoldsGivenHere": 0.7250571210967249
+    },
+    {
+      "step": 9,
+      "value": 18.12,
+      "lockerValueAtStake": 18120,
+      "survivalToHere": 0.052428256070640174,
+      "pRivalFoldsGivenHere": 0.7246136865342163
+    },
+    {
+      "step": 10,
+      "value": 25,
+      "lockerValueAtStake": 25000,
+      "survivalToHere": 0.038,
+      "pRivalFoldsGivenHere": 0.7248
+    }
+  ],
+  "events": [
+    {
+      "step": 0,
+      "event": "Outbid on the first bid",
+      "p": 0.31159420289855067,
+      "rn_from": 0,
+      "rn_to": 0.31159420289855067
+    },
+    {
+      "step": 1,
+      "event": "Outbid after 1.38",
+      "p": 0.18840579710144933,
+      "rn_from": 0.31159420289855067,
+      "rn_to": 0.5
+    },
+    {
+      "step": 2,
+      "event": "Outbid after 1.9",
+      "p": 0.1387832699619772,
+      "rn_from": 0.5,
+      "rn_to": 0.6387832699619772
+    },
+    {
+      "step": 3,
+      "event": "Outbid after 2.63",
+      "p": 0.09878579081150346,
+      "rn_from": 0.6387832699619772,
+      "rn_to": 0.7375690607734806
+    },
+    {
+      "step": 4,
+      "event": "Outbid after 3.62",
+      "p": 0.07243093922651933,
+      "rn_from": 0.7375690607734806,
+      "rn_to": 0.8099999999999999
+    },
+    {
+      "step": 5,
+      "event": "Outbid after 5",
+      "p": 0.052318840579710174,
+      "rn_from": 0.8099999999999999,
+      "rn_to": 0.8623188405797101
+    },
+    {
+      "step": 6,
+      "event": "Outbid after 6.9",
+      "p": 0.03789124345390327,
+      "rn_from": 0.8623188405797101,
+      "rn_to": 0.9002100840336134
+    },
+    {
+      "step": 7,
+      "event": "Outbid after 9.52",
+      "p": 0.02743652678131421,
+      "rn_from": 0.9002100840336134,
+      "rn_to": 0.9276466108149276
+    },
+    {
+      "step": 8,
+      "event": "Outbid after 13.13",
+      "p": 0.019925133114432177,
+      "rn_from": 0.9276466108149276,
+      "rn_to": 0.9475717439293598
+    },
+    {
+      "step": 9,
+      "event": "Outbid after 18.12",
+      "p": 0.014428256070640175,
+      "rn_from": 0.9475717439293598,
+      "rn_to": 0.962
+    },
+    {
+      "step": 10,
+      "event": "Hammer at the top 25",
+      "p": 0.038,
+      "rn_from": 0.962,
+      "rn_to": 1
+    }
+  ],
+  "locker": [
+    {
+      "multiple": 0.25,
+      "p": 0.29757173827099437,
+      "residual_from": 0,
+      "residual_to": 0.29757173827099437,
+      "pays_from": 0.225,
+      "pays_to": 0.275
+    },
+    {
+      "multiple": 0.5,
+      "p": 0.27115705607475704,
+      "residual_from": 0.29757173827099437,
+      "residual_to": 0.5687287943457514,
+      "pays_from": 0.475,
+      "pays_to": 0.525
+    },
+    {
+      "multiple": 1,
+      "p": 0.22515384435445532,
+      "residual_from": 0.5687287943457514,
+      "residual_to": 0.7938826387002067,
+      "pays_from": 0.975,
+      "pays_to": 1.025
+    },
+    {
+      "multiple": 2,
+      "p": 0.1552373711528497,
+      "residual_from": 0.7938826387002067,
+      "residual_to": 0.9491200098530563,
+      "pays_from": 1.975,
+      "pays_to": 2.025
+    },
+    {
+      "multiple": 5,
+      "p": 0.05087999014694362,
+      "residual_from": 0.9491200098530563,
+      "residual_to": 1,
+      "pays_from": 4.975,
+      "pays_to": 5.025
+    }
+  ],
+  "locker_r": 0.025,
+  "how_to_play": "BID = CONTINUE. Rung k is SAFE if k <= bidsSurvived, CRASH (outbid, win 0) if k == bidsSurvived + 1. CASH_OUT = the hammer: the player takes the locker at the current rung.",
+  "how_to_settle": "win = payoutIfTakenAfter[s-1].win when the hammer falls after s successful bids (s <= bidsSurvived); 0 if outbid first. That value is round(round(stake × bids[s-1].value) × lockerMultiplier). Reaching step 10 hammers automatically."
+}

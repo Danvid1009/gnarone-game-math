@@ -1,0 +1,196 @@
+{
+  "engine": "auction-engine",
+  "rtp": 0.95,
+  "stake": 1000,
+  "rounds": 100,
+  "steps": 10,
+  "seeds": "fixture-000 … fixture-099 (shared across sizes: the same u drives every size)",
+  "sets": {
+    "small": {
+      "maxWin": 5,
+      "bids": [
+        1.17,
+        1.38,
+        1.62,
+        1.9,
+        2.24,
+        2.63,
+        3.09,
+        3.62,
+        4.26,
+        5
+      ],
+      "files": [
+        "small/field.json",
+        "small/rounds.json",
+        "small/rounds/NNN.json",
+        "small/sample-request.json",
+        "small/sample-response.json"
+      ],
+      "outcomes": {
+        "OUTBID_ON_BID_1": 16,
+        "OUTBID_ON_BID_10": 3,
+        "OUTBID_ON_BID_2": 9,
+        "OUTBID_ON_BID_3": 16,
+        "OUTBID_ON_BID_4": 6,
+        "OUTBID_ON_BID_5": 3,
+        "OUTBID_ON_BID_6": 5,
+        "OUTBID_ON_BID_7": 7,
+        "OUTBID_ON_BID_8": 4,
+        "OUTBID_ON_BID_9": 4,
+        "TOP": 27
+      },
+      "realisedRtpByTakeAfter": [
+        1.13343,
+        1.13001,
+        0.97527,
+        1.01037,
+        1.11239,
+        1.20116,
+        1.25007,
+        1.37458,
+        1.36136,
+        1.29864
+      ]
+    },
+    "medium": {
+      "maxWin": 10,
+      "bids": [
+        1.26,
+        1.58,
+        2,
+        2.51,
+        3.16,
+        3.98,
+        5.01,
+        6.31,
+        7.94,
+        10
+      ],
+      "files": [
+        "medium/field.json",
+        "medium/rounds.json",
+        "medium/rounds/NNN.json",
+        "medium/sample-request.json",
+        "medium/sample-response.json"
+      ],
+      "outcomes": {
+        "OUTBID_ON_BID_1": 21,
+        "OUTBID_ON_BID_10": 2,
+        "OUTBID_ON_BID_2": 16,
+        "OUTBID_ON_BID_3": 10,
+        "OUTBID_ON_BID_4": 7,
+        "OUTBID_ON_BID_5": 10,
+        "OUTBID_ON_BID_6": 5,
+        "OUTBID_ON_BID_7": 4,
+        "OUTBID_ON_BID_8": 4,
+        "OUTBID_ON_BID_9": 6,
+        "TOP": 15
+      },
+      "realisedRtpByTakeAfter": [
+        0.90732,
+        0.95186,
+        1.09523,
+        1.09263,
+        1.00848,
+        1.07088,
+        0.97547,
+        1.12991,
+        1.07008,
+        1.22697
+      ]
+    },
+    "large": {
+      "maxWin": 25,
+      "bids": [
+        1.38,
+        1.9,
+        2.63,
+        3.62,
+        5,
+        6.9,
+        9.52,
+        13.13,
+        18.12,
+        25
+      ],
+      "files": [
+        "large/field.json",
+        "large/rounds.json",
+        "large/rounds/NNN.json",
+        "large/sample-request.json",
+        "large/sample-response.json"
+      ],
+      "outcomes": {
+        "OUTBID_ON_BID_1": 25,
+        "OUTBID_ON_BID_10": 1,
+        "OUTBID_ON_BID_2": 22,
+        "OUTBID_ON_BID_3": 8,
+        "OUTBID_ON_BID_4": 11,
+        "OUTBID_ON_BID_5": 7,
+        "OUTBID_ON_BID_6": 8,
+        "OUTBID_ON_BID_7": 4,
+        "OUTBID_ON_BID_8": 5,
+        "OUTBID_ON_BID_9": 1,
+        "TOP": 8
+      },
+      "realisedRtpByTakeAfter": [
+        0.99547,
+        1.00849,
+        1.15199,
+        1.30405,
+        1.38648,
+        1.25676,
+        1.42488,
+        1.18218,
+        0.72262,
+        0.87563
+      ]
+    },
+    "xl": {
+      "maxWin": 100,
+      "bids": [
+        1.58,
+        2.51,
+        3.98,
+        6.31,
+        10,
+        15.85,
+        25.12,
+        39.81,
+        63.1,
+        100
+      ],
+      "files": [
+        "xl/field.json",
+        "xl/rounds.json",
+        "xl/rounds/NNN.json",
+        "xl/sample-request.json",
+        "xl/sample-response.json"
+      ],
+      "outcomes": {
+        "OUTBID_ON_BID_1": 37,
+        "OUTBID_ON_BID_2": 17,
+        "OUTBID_ON_BID_3": 15,
+        "OUTBID_ON_BID_4": 8,
+        "OUTBID_ON_BID_5": 8,
+        "OUTBID_ON_BID_6": 5,
+        "OUTBID_ON_BID_7": 3,
+        "OUTBID_ON_BID_8": 3,
+        "OUTBID_ON_BID_9": 4
+      },
+      "realisedRtpByTakeAfter": [
+        0.99806,
+        1.07237,
+        1.09521,
+        1.3117,
+        1.63056,
+        2.26217,
+        1.95892,
+        1.11285,
+        0,
+        0
+      ]
+    }
+  }
+}

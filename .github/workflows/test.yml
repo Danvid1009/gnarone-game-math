@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dir: [rgs-math, payout-engine, stepper-engine, race-engine, rumble-engine, smash-engine, pick-engine]
+        dir: [rgs-math, payout-engine, stepper-engine, race-engine, rumble-engine, smash-engine, pick-engine, auction-engine]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

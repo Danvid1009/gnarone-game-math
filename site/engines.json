@@ -169,5 +169,39 @@
       "five",
       "weighted"
     ]
+  },
+  {
+    "slug": "auction",
+    "folder": "auction-engine",
+    "title": "Storage Auction",
+    "accent": "AUCTION",
+    "lead": "The stepper with a locker on top. Bid against rivals; every won bid raises what the locker is worth (c_k = round(M^(k/10), 2)), survival is RTP ÷ c_k so the first bid carries the whole edge and every later bid is fair. Take the locker at any rung and open it: the contents are a Single Shot draw with mean exactly 1 around that value, drawn from the recycled residual of the same uniform. Every take rule returns exactly the RTP.",
+    "tags": [
+      "same math as the stepper",
+      "one uniform, recycled",
+      "small 5× · medium 10× · large 25× · xl 100×"
+    ],
+    "figures": [
+      [
+        "examples/ladders.png",
+        "Locker value per rung and survival for the four sizes: identical to the stepper ladder."
+      ],
+      [
+        "examples/locker.png",
+        "The locker multiplier over the recycled residual (mean 1), and the outcome distribution of 'take after 5' against simulation."
+      ],
+      [
+        "examples/strategies.png",
+        "Monte Carlo under six hammer rules: every one returns the RTP, locker included."
+      ]
+    ],
+    "cli": "node bin/build-auction.js --rtp 0.95 --max 25 --steps 10 --js",
+    "api": "examples/api",
+    "apiSets": [
+      "small",
+      "medium",
+      "large",
+      "xl"
+    ]
   }
 ]
