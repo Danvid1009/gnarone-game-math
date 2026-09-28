@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+// Dump preset facts for the catalogue PDF:  node site/preset-facts.js > /tmp/presets.json
+import { join, dirname } from 'node:path'; import { fileURLToPath, pathToFileURL } from 'node:url';
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const pct = x => +(100 * x).toFixed(1);
+const out = {};
+const load = f => import(pathToFileURL(join(root, f, 'src/rgs.js')).href);
+{ const m = await load('stepper-engine'); out.stepper = Object.entries(m.PRESETS).map(([name, p]) => { const L = m.createGame({ preset: name }).engine; return { name, ...p, returns: L.returns, instantCrash: pct(L.p[0]), reachTop: pct(L.p[L.steps]), firstRungSurvive: pct(L.hazard[0]) }; }); }
+{ const m = await load('payout-engine'); out.singleShot = Object.entries(m.PRESETS).map(([name, p]) => { const E = m.createGame({ preset: name }).engine; return { name, ...p, probs: E.bands.map(b => [b.payout, pct(b.p)]), hitRate: pct(E.hitRate), stdev: +E.stdev.toFixed(2), r: E.r }; }); }
+{ const m = await load('race-engine'); out.race = Object.entries(m.PRESETS).map(([name, p]) => { const g3 = m.createGame({ preset: name, mode: 'top3' }).engine, g1 = m.createGame({ preset: name, mode: 'top1' }).engine; const n = g3.racers.length; return { name, n, elo: [p.racers[0].elo, p.racers[n - 1].elo], favWin: pct(g3.q1[0]), longWin: pct(g3.q1[n - 1]), favM: g3.M[0].map(x => +x.toFixed(2)), longM: g3.M[n - 1].map(x => +x.toFixed(2)), top1FavOdds: +g1.M[0][0].toFixed(2), top1LongOdds: +g1.M[n - 1][0].toFixed(2), favTop3: pct(g3.q1[0] + g3.q2[0] + g3.q3[0]) }; }); }
+{ const m = await load('rumble-engine'); out.rumble = Object.entries(m.PRESETS).map(([name, p]) => { const R = m.createGame({ preset: name }).engine; return { name, ...p, pLow: Object.fromEntries(Object.entries(R.betTypes).map(([t, b]) => [t, pct(b.pLow)])), sd: Object.fromEntries(Object.entries(R.betTypes).map(([t, b]) => [t, +b.sdMultiple.toFixed(2)])) }; }); }
+{ const m = await load('smash-engine'); out.smash = Object.entries(m.PRESETS).map(([name, p]) => { const S = m.createGame({ preset: name }).engine; return { name, ...p, modes: Object.fromEntries(Object.entries(S.modes).map(([k, v]) => [k, { rtp: +(100 * v.rtp).toFixed(2), hit: pct(v.hitRate), stdev: +v.stdev.toFixed(2) }])) }; }); }
+{ const m = await load('pick-engine'); out.pick = Object.entries(m.PRESETS).map(([name, p]) => { const P = m.createGame({ preset: name }).engine; return { name, options: P.options.map(o => [o.name, pct(o.p), +o.odds.toFixed(2)]) }; }); }
+{ const m = await load('auction-engine'); out.auction = Object.entries(m.PRESETS).map(([name, p]) => { const A = m.createGame({ preset: name }).engine; return { name, ...p, bids: A.bids, instantOutbid: pct(A.p[0]), reachTop: pct(A.p[A.steps]), locker: A.box.bands.map(b => [b.multiple, pct(b.p)]), maxWin: +(A.maxWin * A.box.maxMultiplier).toFixed(1) }; }); }
+console.log(JSON.stringify(out, null, 1));

@@ -247,6 +247,9 @@ ${FOOT}`;
   console.log(`docs/${e.slug}/  ← ${e.folder}  (${figs.length} figures${hasApi ? ', api' : ''}${e.aliases?.length ? ', alias ' + e.aliases.join(',') : ''})`);
 }
 
+// the preset catalogue PDF, if built (python3 site/make-presets-pdf.py)
+if (existsSync(join(root, 'PRESETS.pdf'))) copyFileSync(join(root, 'PRESETS.pdf'), join(docs, 'presets.pdf'));
+
 // landing page
 const landing = HEAD('GnarOne Game Math') + `
 <h1>GNARONE <span>GAME MATH</span></h1>
@@ -258,6 +261,11 @@ ${engines.map(e => {
   return `  <a class="card" href="${e.slug}/"><div class="k">${esc(t1)} ${t2 ? `<b>${esc(t2)}</b>` : ''}</div><p>${esc(e.lead)}</p><span class="tag">${esc(e.tags[0])}</span></a>`;
 }).join('\n')}
 </div>
+<h2>For integrators</h2>
+<ul class="links">
+  <li><a href="presets.pdf">Preset catalogue (PDF)</a> — every engine's parameters, shipped presets, who each is for, and what is a preset change versus a ticket.</li>
+  <li>Each game page has a <b>Live API</b> section: import <code>&lt;game&gt;/api/rgs.js</code>, <code>createGame({ preset })</code>, then open → bet → next-action → collect. Fixtures per preset under <code>&lt;game&gt;/api/&lt;preset&gt;/</code>.</li>
+</ul>
 <h2>Source</h2>
 <ul class="links">
   <li><a href="${REPO}">github.com/Danvid1009/gnarone-game-math</a> — all engines, the RGS contract tooling in <code>rgs-math/</code>, and this site's generator in <code>site/</code>.</li>
