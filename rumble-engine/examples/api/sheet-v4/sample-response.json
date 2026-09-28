@@ -1,0 +1,144 @@
+{
+  "open": {
+    "sessionId": "57701431-f034-412d-b868-52765ab9027a",
+    "requestCounter": 0,
+    "balance": 100000,
+    "currency": {
+      "code": "USD",
+      "prefix": "$",
+      "suffix": "",
+      "grouping": ",",
+      "decimal": ".",
+      "precision": 1,
+      "denomination": 1
+    },
+    "chipLevels": [
+      500,
+      1000,
+      2500,
+      5000
+    ],
+    "minBet": 500,
+    "maxBet": 5000,
+    "defaultBet": 1000,
+    "playerAlias": "Player",
+    "seconds": 0,
+    "rounds": 0,
+    "winLoss": 0,
+    "preset": "sheet-v4",
+    "rtp": 0.95,
+    "credit": 100,
+    "betTypes": {
+      "BASE": {
+        "cost": 5,
+        "packs": 1,
+        "paidPacks": 1,
+        "pLow": 0.8732445047065531
+      },
+      "BOOSTED": {
+        "cost": 10,
+        "packs": 1,
+        "paidPacks": 1,
+        "pLow": 0.0823002395839469
+      },
+      "BASE_BUNDLE": {
+        "cost": 5,
+        "packs": 11,
+        "paidPacks": 10,
+        "pLow": 0.9451485288086082
+      },
+      "BOOSTED_BUNDLE": {
+        "cost": 10,
+        "packs": 11,
+        "paidPacks": 10,
+        "pLow": 0.22610828778805706
+      }
+    }
+  },
+  "calls": [
+    {
+      "call": "bet",
+      "response": {
+        "roundId": "1a2126a7-1381-48fb-bbbe-80f53c4a408c",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 900,
+        "cardPacks": [
+          {
+            "cards": [
+              {
+                "rarity": "UNCOMMON",
+                "id": 10,
+                "name": "U10"
+              },
+              {
+                "rarity": "UNCOMMON",
+                "id": 13,
+                "name": "U13"
+              },
+              {
+                "rarity": "UNCOMMON",
+                "id": 20,
+                "name": "U20"
+              },
+              {
+                "rarity": "COMMON",
+                "id": 7,
+                "name": "C07"
+              },
+              {
+                "rarity": "COMMON",
+                "id": 19,
+                "name": "C19"
+              }
+            ],
+            "totalPayout": 900,
+            "legendary": {
+              "count": 0,
+              "valuePerCard": 600,
+              "multiplier": 0,
+              "totalValue": 0
+            },
+            "rare": {
+              "count": 0,
+              "valuePerCard": 200,
+              "multiplier": 0,
+              "totalValue": 0
+            },
+            "uncommon": {
+              "count": 3,
+              "valuePerCard": 100,
+              "multiplier": 3,
+              "totalValue": 900
+            },
+            "common": {
+              "count": 2,
+              "valuePerCard": 0,
+              "multiplier": 2,
+              "totalValue": 0
+            }
+          }
+        ],
+        "math": {
+          "betType": "BASE",
+          "unit": 200,
+          "packs": [
+            {
+              "u": 0.9729229214135557,
+              "bucket": "high"
+            }
+          ]
+        },
+        "nextAction": [
+          "COLLECT"
+        ]
+      }
+    },
+    {
+      "call": "collect",
+      "response": {
+        "balance": 99900
+      }
+    }
+  ]
+}

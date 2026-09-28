@@ -1,0 +1,84 @@
+{
+  "round": 93,
+  "seed": "fixture-093",
+  "results": {
+    "XL": {
+      "stake": 1000,
+      "survived": 3,
+      "outcome": "CRASH_ON_STEP_4",
+      "payoutIfTakenAfter": [
+        {
+          "step": 1,
+          "reachable": true,
+          "win": 1579,
+          "locker": {
+            "multiplier": 0.9994453293642047,
+            "band": 2,
+            "contents": 1579
+          }
+        },
+        {
+          "step": 2,
+          "reachable": true,
+          "win": 2509,
+          "locker": {
+            "multiplier": 0.9994453293642047,
+            "band": 2,
+            "contents": 2509
+          }
+        },
+        {
+          "step": 3,
+          "reachable": true,
+          "win": 3978,
+          "locker": {
+            "multiplier": 0.9994453293642047,
+            "band": 2,
+            "contents": 3978
+          }
+        },
+        {
+          "step": 4,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 5,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 6,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 7,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 8,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 9,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 10,
+          "reachable": false,
+          "win": 0
+        }
+      ],
+      "totalBetAmount": 1000,
+      "totalWinAmount": 0,
+      "size": "XL",
+      "currentStep": 4,
+      "currentPayout": 0,
+      "locker": null
+    }
+  }
+}

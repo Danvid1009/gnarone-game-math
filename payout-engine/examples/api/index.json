@@ -1,98 +1,164 @@
 {
   "engine": "payout-engine",
-  "rtp": 0.95,
-  "payouts": [
-    0,
-    0.5,
-    1,
-    2,
-    5,
-    20
-  ],
   "stake": 1000,
   "rounds": 100,
-  "seeds": "fixture-000 … fixture-099 (shared across methods: the same u drives every method)",
-  "sets": {
-    "maxent": {
-      "r": 0.05,
-      "probabilities": [
-        0.3080260888755427,
-        0.25989727452769873,
-        0.21928854647834078,
-        0.15611491478571823,
-        0.056328701331174555,
-        0.00034447400152501617
+  "seeds": "fixture-000 … fixture-099 (the same seed drives every preset)",
+  "default_preset": "classic",
+  "presets": {
+    "classic": {
+      "parameters": {
+        "payouts": [
+          0,
+          0.5,
+          1,
+          2,
+          5,
+          20
+        ],
+        "method": "geometric",
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE"
       ],
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 1.2082
+      },
       "files": [
-        "maxent/field.json",
-        "maxent/rounds.json",
-        "maxent/rounds/NNN.json",
-        "maxent/sample-request.json",
-        "maxent/sample-response.json"
-      ],
-      "bandHits": [
-        24,
-        26,
-        20,
-        20,
-        10,
-        0
-      ],
-      "rtpOver100Rounds": 1.22615
+        "classic/field.json",
+        "classic/rounds.json",
+        "classic/rounds/NNN.json",
+        "classic/sample-request.json",
+        "classic/sample-response.json"
+      ]
     },
-    "geometric": {
-      "r": 0.05,
-      "probabilities": [
-        0.48945417907758887,
-        0.2546388540585609,
-        0.132476028948112,
-        0.06892073996619917,
-        0.035856059660038124,
-        0.01865413828950094
+    "steady": {
+      "parameters": {
+        "payouts": [
+          0,
+          0.5,
+          1,
+          1.5,
+          2,
+          3
+        ],
+        "method": "geometric",
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE"
       ],
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 1.1204
+      },
       "files": [
-        "geometric/field.json",
-        "geometric/rounds.json",
-        "geometric/rounds/NNN.json",
-        "geometric/sample-request.json",
-        "geometric/sample-response.json"
-      ],
-      "bandHits": [
-        46,
-        21,
-        16,
-        7,
-        8,
-        2
-      ],
-      "rtpOver100Rounds": 1.20815
+        "steady/field.json",
+        "steady/rounds.json",
+        "steady/rounds/NNN.json",
+        "steady/sample-request.json",
+        "steady/sample-response.json"
+      ]
     },
-    "weights": {
-      "r": 0.05,
-      "probabilities": [
-        0.24,
-        0.38,
-        0.228,
-        0.114,
-        0.0304,
-        0.0076
+    "spiky": {
+      "parameters": {
+        "payouts": [
+          0,
+          1,
+          2,
+          5,
+          20,
+          100
+        ],
+        "method": "geometric",
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE"
       ],
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 0.7919
+      },
       "files": [
-        "weights/field.json",
-        "weights/rounds.json",
-        "weights/rounds/NNN.json",
-        "weights/sample-request.json",
-        "weights/sample-response.json"
+        "spiky/field.json",
+        "spiky/rounds.json",
+        "spiky/rounds/NNN.json",
+        "spiky/sample-request.json",
+        "spiky/sample-response.json"
+      ]
+    },
+    "always-pays": {
+      "parameters": {
+        "payouts": [
+          0.2,
+          0.5,
+          1,
+          2,
+          5
+        ],
+        "method": "geometric",
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE"
       ],
-      "bandHits": [
-        20,
-        34,
-        23,
-        15,
-        8,
-        0
-      ],
-      "rtpOver100Rounds": 1.09671
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 1.17
+      },
+      "files": [
+        "always-pays/field.json",
+        "always-pays/rounds.json",
+        "always-pays/rounds/NNN.json",
+        "always-pays/sample-request.json",
+        "always-pays/sample-response.json"
+      ]
     }
   }
 }

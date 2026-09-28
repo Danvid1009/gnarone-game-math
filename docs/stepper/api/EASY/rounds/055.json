@@ -1,0 +1,68 @@
+{
+  "round": 55,
+  "seed": "fixture-055",
+  "results": {
+    "EASY": {
+      "stake": 1000,
+      "survived": 10,
+      "outcome": "TOP",
+      "payoutIfTakenAfter": [
+        {
+          "step": 1,
+          "reachable": true,
+          "win": 1260
+        },
+        {
+          "step": 2,
+          "reachable": true,
+          "win": 1580
+        },
+        {
+          "step": 3,
+          "reachable": true,
+          "win": 2000
+        },
+        {
+          "step": 4,
+          "reachable": true,
+          "win": 2510
+        },
+        {
+          "step": 5,
+          "reachable": true,
+          "win": 3160
+        },
+        {
+          "step": 6,
+          "reachable": true,
+          "win": 3980
+        },
+        {
+          "step": 7,
+          "reachable": true,
+          "win": 5010
+        },
+        {
+          "step": 8,
+          "reachable": true,
+          "win": 6310
+        },
+        {
+          "step": 9,
+          "reachable": true,
+          "win": 7940
+        },
+        {
+          "step": 10,
+          "reachable": true,
+          "win": 10000
+        }
+      ],
+      "totalBetAmount": 1000,
+      "totalWinAmount": 10000,
+      "difficulty": "EASY",
+      "currentStep": 10,
+      "currentPayout": 10000
+    }
+  }
+}

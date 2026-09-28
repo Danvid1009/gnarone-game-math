@@ -9,7 +9,7 @@
     "test": "node --test",
     "build": "node bin/build-auction.js",
     "simulate": "node bin/simulate.js",
-    "fixtures": "node scripts/make-fixtures.js",
+    "fixtures": "node ../site/make-fixtures.js auction-engine",
     "plot": "python3 scripts/plot.py",
     "examples": "sh scripts/make-examples.sh"
   },

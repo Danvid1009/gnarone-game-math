@@ -1,9 +1,22 @@
 {
-  "endpoint": "POST /api/pick/bet",
-  "body": {
-    "sessionId": "demo-session",
-    "betAmount": 1000,
-    "betType": "HEADS"
-  },
-  "note": "deterministic fixture: seed \"fixture-007\""
+  "module": "api/rgs.js",
+  "create": "createGame({\"preset\":\"coin\"})",
+  "calls": [
+    {
+      "call": "bet",
+      "body": {
+        "sessionId": "1bfe7091-f935-4f88-993f-53d4f8ad6187",
+        "betAmount": 1000,
+        "betType": "HEADS",
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "collect",
+      "body": {
+        "roundId": "53a8d22d-d336-4f77-bceb-f1052492d020"
+      }
+    }
+  ],
+  "note": "deterministic: seed fixture-007; drop seed for a live roll"
 }

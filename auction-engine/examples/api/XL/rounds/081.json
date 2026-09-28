@@ -1,0 +1,99 @@
+{
+  "round": 81,
+  "seed": "fixture-081",
+  "results": {
+    "XL": {
+      "stake": 1000,
+      "survived": 6,
+      "outcome": "CRASH_ON_STEP_7",
+      "payoutIfTakenAfter": [
+        {
+          "step": 1,
+          "reachable": true,
+          "win": 760,
+          "locker": {
+            "multiplier": 0.48114838354531264,
+            "band": 1,
+            "contents": 760
+          }
+        },
+        {
+          "step": 2,
+          "reachable": true,
+          "win": 1208,
+          "locker": {
+            "multiplier": 0.48114838354531264,
+            "band": 1,
+            "contents": 1208
+          }
+        },
+        {
+          "step": 3,
+          "reachable": true,
+          "win": 1915,
+          "locker": {
+            "multiplier": 0.48114838354531264,
+            "band": 1,
+            "contents": 1915
+          }
+        },
+        {
+          "step": 4,
+          "reachable": true,
+          "win": 3036,
+          "locker": {
+            "multiplier": 0.48114838354531264,
+            "band": 1,
+            "contents": 3036
+          }
+        },
+        {
+          "step": 5,
+          "reachable": true,
+          "win": 4811,
+          "locker": {
+            "multiplier": 0.48114838354531264,
+            "band": 1,
+            "contents": 4811
+          }
+        },
+        {
+          "step": 6,
+          "reachable": true,
+          "win": 7626,
+          "locker": {
+            "multiplier": 0.48114838354531264,
+            "band": 1,
+            "contents": 7626
+          }
+        },
+        {
+          "step": 7,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 8,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 9,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 10,
+          "reachable": false,
+          "win": 0
+        }
+      ],
+      "totalBetAmount": 1000,
+      "totalWinAmount": 0,
+      "size": "XL",
+      "currentStep": 7,
+      "currentPayout": 0,
+      "locker": null
+    }
+  }
+}

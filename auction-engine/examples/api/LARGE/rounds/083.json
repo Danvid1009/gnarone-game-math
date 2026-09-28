@@ -1,0 +1,94 @@
+{
+  "round": 83,
+  "seed": "fixture-083",
+  "results": {
+    "LARGE": {
+      "stake": 1000,
+      "survived": 5,
+      "outcome": "CRASH_ON_STEP_6",
+      "payoutIfTakenAfter": [
+        {
+          "step": 1,
+          "reachable": true,
+          "win": 2756,
+          "locker": {
+            "multiplier": 1.9973179369272913,
+            "band": 3,
+            "contents": 2756
+          }
+        },
+        {
+          "step": 2,
+          "reachable": true,
+          "win": 3795,
+          "locker": {
+            "multiplier": 1.9973179369272913,
+            "band": 3,
+            "contents": 3795
+          }
+        },
+        {
+          "step": 3,
+          "reachable": true,
+          "win": 5253,
+          "locker": {
+            "multiplier": 1.9973179369272913,
+            "band": 3,
+            "contents": 5253
+          }
+        },
+        {
+          "step": 4,
+          "reachable": true,
+          "win": 7230,
+          "locker": {
+            "multiplier": 1.9973179369272913,
+            "band": 3,
+            "contents": 7230
+          }
+        },
+        {
+          "step": 5,
+          "reachable": true,
+          "win": 9987,
+          "locker": {
+            "multiplier": 1.9973179369272913,
+            "band": 3,
+            "contents": 9987
+          }
+        },
+        {
+          "step": 6,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 7,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 8,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 9,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 10,
+          "reachable": false,
+          "win": 0
+        }
+      ],
+      "totalBetAmount": 1000,
+      "totalWinAmount": 0,
+      "size": "LARGE",
+      "currentStep": 6,
+      "currentPayout": 0,
+      "locker": null
+    }
+  }
+}

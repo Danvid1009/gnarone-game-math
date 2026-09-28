@@ -1,0 +1,85 @@
+{
+  "open": {
+    "sessionId": "bbf049bf-0f8e-4b41-be5f-68c118ce06c4",
+    "requestCounter": 0,
+    "balance": 100000,
+    "currency": {
+      "code": "USD",
+      "prefix": "$",
+      "suffix": "",
+      "grouping": ",",
+      "decimal": ".",
+      "precision": 1,
+      "denomination": 1
+    },
+    "chipLevels": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "minBet": 100,
+    "maxBet": 10000,
+    "defaultBet": 200,
+    "playerAlias": "Player",
+    "seconds": 0,
+    "rounds": 0,
+    "winLoss": 0,
+    "preset": "three",
+    "rtp": 0.95,
+    "options": [
+      {
+        "name": "OPTION_1",
+        "p": 0.3333333333333333,
+        "odds": 2.85,
+        "rn_from": 0,
+        "rn_to": 0.3333333333333333
+      },
+      {
+        "name": "OPTION_2",
+        "p": 0.3333333333333333,
+        "odds": 2.85,
+        "rn_from": 0.3333333333333333,
+        "rn_to": 0.6666666666666666
+      },
+      {
+        "name": "OPTION_3",
+        "p": 0.3333333333333333,
+        "odds": 2.85,
+        "rn_from": 0.6666666666666666,
+        "rn_to": 1
+      }
+    ]
+  },
+  "calls": [
+    {
+      "call": "bet",
+      "response": {
+        "roundId": "558afefd-1112-4902-852c-fa33420268cc",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 0,
+        "math": {
+          "u": 0.9729229214135557,
+          "winner": 2,
+          "winnerName": "OPTION_3",
+          "backed": 0,
+          "hit": false,
+          "odds": 2.85
+        },
+        "nextAction": [
+          "COLLECT"
+        ]
+      }
+    },
+    {
+      "call": "collect",
+      "response": {
+        "balance": 99000
+      }
+    }
+  ]
+}

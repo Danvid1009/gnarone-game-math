@@ -1,21 +1,32 @@
 {
   "round": 64,
   "seed": "fixture-064",
-  "u": 0.1123263796325773,
-  "winner": 0,
-  "winnerName": "HEADS",
-  "settlements": {
+  "results": {
     "HEADS": {
-      "hit": true,
-      "odds": 1.9,
+      "stake": 1000,
       "win": 1900,
-      "stake": 1000
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.1123263796325773,
+        "winner": 0,
+        "winnerName": "HEADS",
+        "backed": 0,
+        "hit": true,
+        "odds": 1.9
+      }
     },
     "TAILS": {
-      "hit": false,
-      "odds": 1.9,
+      "stake": 1000,
       "win": 0,
-      "stake": 1000
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.1123263796325773,
+        "winner": 0,
+        "winnerName": "HEADS",
+        "backed": 1,
+        "hit": false,
+        "odds": 1.9
+      }
     }
   }
 }

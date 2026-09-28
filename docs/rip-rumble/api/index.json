@@ -1,0 +1,165 @@
+{
+  "engine": "rumble-engine",
+  "stake": 1000,
+  "rounds": 100,
+  "seeds": "fixture-000 … fixture-099 (the same seed drives every preset)",
+  "default_preset": "sheet-v4",
+  "presets": {
+    "sheet-v4": {
+      "parameters": {
+        "rtp": 0.95,
+        "credit": 100
+      },
+      "betTypes": [
+        "BASE",
+        "BOOSTED",
+        "BASE_BUNDLE",
+        "BOOSTED_BUNDLE"
+      ],
+      "levels": {
+        "BASE": [
+          500,
+          1000,
+          2500,
+          5000
+        ],
+        "BOOSTED": [
+          1000,
+          2000,
+          5000,
+          10000
+        ],
+        "BASE_BUNDLE": [
+          5000,
+          10000,
+          25000,
+          50000
+        ],
+        "BOOSTED_BUNDLE": [
+          10000,
+          20000,
+          50000,
+          100000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 1.036,
+        "BOOSTED": 1.0365,
+        "BASE_BUNDLE": 0.9622,
+        "BOOSTED_BUNDLE": 0.9956
+      },
+      "files": [
+        "sheet-v4/field.json",
+        "sheet-v4/rounds.json",
+        "sheet-v4/rounds/NNN.json",
+        "sheet-v4/sample-request.json",
+        "sheet-v4/sample-response.json"
+      ]
+    },
+    "sheet-v4-0.93": {
+      "parameters": {
+        "rtp": 0.93,
+        "credit": 100
+      },
+      "betTypes": [
+        "BASE",
+        "BOOSTED",
+        "BASE_BUNDLE",
+        "BOOSTED_BUNDLE"
+      ],
+      "levels": {
+        "BASE": [
+          500,
+          1000,
+          2500,
+          5000
+        ],
+        "BOOSTED": [
+          1000,
+          2000,
+          5000,
+          10000
+        ],
+        "BASE_BUNDLE": [
+          5000,
+          10000,
+          25000,
+          50000
+        ],
+        "BOOSTED_BUNDLE": [
+          10000,
+          20000,
+          50000,
+          100000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 0.951,
+        "BOOSTED": 1.08,
+        "BASE_BUNDLE": 0.9428,
+        "BOOSTED_BUNDLE": 1.0003
+      },
+      "files": [
+        "sheet-v4-0.93/field.json",
+        "sheet-v4-0.93/rounds.json",
+        "sheet-v4-0.93/rounds/NNN.json",
+        "sheet-v4-0.93/sample-request.json",
+        "sheet-v4-0.93/sample-response.json"
+      ]
+    },
+    "sheet-v4-0.97": {
+      "parameters": {
+        "rtp": 0.97,
+        "credit": 100
+      },
+      "betTypes": [
+        "BASE",
+        "BOOSTED",
+        "BASE_BUNDLE",
+        "BOOSTED_BUNDLE"
+      ],
+      "levels": {
+        "BASE": [
+          500,
+          1000,
+          2500,
+          5000
+        ],
+        "BOOSTED": [
+          1000,
+          2000,
+          5000,
+          10000
+        ],
+        "BASE_BUNDLE": [
+          5000,
+          10000,
+          25000,
+          50000
+        ],
+        "BOOSTED_BUNDLE": [
+          10000,
+          20000,
+          50000,
+          100000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 1.051,
+        "BOOSTED": 0.972,
+        "BASE_BUNDLE": 0.9887,
+        "BOOSTED_BUNDLE": 1.0199
+      },
+      "files": [
+        "sheet-v4-0.97/field.json",
+        "sheet-v4-0.97/rounds.json",
+        "sheet-v4-0.97/rounds/NNN.json",
+        "sheet-v4-0.97/sample-request.json",
+        "sheet-v4-0.97/sample-response.json"
+      ]
+    }
+  }
+}

@@ -1,10 +1,8 @@
 import { test } from 'node:test'; import assert from 'node:assert/strict';
-import { createGame } from '../src/rgs.js'; import { assertBrowserSafe, playOnce } from '../../site/rgs-test-helpers.js';
-test('rgs module is browser-safe', () => { assertBrowserSafe(new URL('../src/rgs.js', import.meta.url)); });
-test('BASE and BOOSTED: balance semantics, GO3 result fields, seeded determinism', () => {
-  const g = createGame();
-  for (const t of g.betTypes) {
-    const r1 = playOnce(g, { betType: t, betAmount: 1000, seed: 'det' }), r2 = playOnce(createGame(), { betType: t, betAmount: 1000, seed: 'det' });
-    assert.ok([0, 1, 2, 3].includes(r1.count)); assert.equal(typeof r1.hasBonus, 'boolean'); assert.equal(r1.totalWinAmount, Math.round(1000 * r1.multiplier)); assert.equal(r1.totalWinAmount, r2.totalWinAmount);
-  }
+import * as mod from '../src/rgs.js'; import { assertBrowserSafe, assertPresetFixtures, playOnce } from '../../site/rgs-test-helpers.js';
+test('rgs module is browser-safe (no node: imports anywhere in its import graph)', () => { assertBrowserSafe(new URL('../src/rgs.js', import.meta.url)); });
+test('every preset builds, replays fixture round 007 through the live calls, and follows the RGS balance semantics', () => { assertPresetFixtures(mod, {}, new URL('../examples/api/', import.meta.url)); });
+test('fresh rounds get fresh seeds; bets outside the level list are rejected', () => {
+  const g = mod.createGame(); const a = playOnce(g), b = playOnce(g); assert.notEqual(a.roundId, b.roundId);
+  assert.throws(() => g.bet({ sessionId: g.open().sessionId, betAmount: 123, betType: g.defaultBetType }), /Valid bets/);
 });

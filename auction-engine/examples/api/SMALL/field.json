@@ -1,0 +1,111 @@
+{
+  "preset": "SMALL",
+  "engine": "auction-engine",
+  "parameters": {
+    "maxWin": 5,
+    "steps": 10,
+    "rtp": 0.95
+  },
+  "betTypes": [
+    "SMALL"
+  ],
+  "levels": {
+    "SMALL": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ]
+  },
+  "stake_units": "minor units",
+  "multiStep": true,
+  "how_to_settle": "K = successful bids (from u and cum); v = residual of u in its interval; X = locker multiplier at v. CONTINUE on bid k is SAFE if k ≤ K else CRASH (win 0). CASH_OUT after s ≤ K bids pays round(round(stake × bids[s − 1]) × X)",
+  "rtp": 0.95,
+  "maxWin": 5,
+  "steps": 10,
+  "bids": [
+    1.17,
+    1.38,
+    1.62,
+    1.9,
+    2.24,
+    2.63,
+    3.09,
+    3.62,
+    4.26,
+    5
+  ],
+  "survival": [
+    1,
+    0.811965811965812,
+    0.6884057971014493,
+    0.5864197530864197,
+    0.5,
+    0.4241071428571428,
+    0.3612167300380228,
+    0.3074433656957929,
+    0.26243093922651933,
+    0.22300469483568075,
+    0.19
+  ],
+  "cum": [
+    0,
+    0.18803418803418803,
+    0.31159420289855067,
+    0.4135802469135803,
+    0.5,
+    0.5758928571428572,
+    0.6387832699619772,
+    0.6925566343042071,
+    0.7375690607734806,
+    0.7769953051643192,
+    0.81,
+    1
+  ],
+  "locker": [
+    {
+      "multiple": 0.25,
+      "p": 0.29757173827099437,
+      "residual_from": 0,
+      "residual_to": 0.29757173827099437,
+      "pays_from": 0.225,
+      "pays_to": 0.275
+    },
+    {
+      "multiple": 0.5,
+      "p": 0.27115705607475704,
+      "residual_from": 0.29757173827099437,
+      "residual_to": 0.5687287943457514,
+      "pays_from": 0.475,
+      "pays_to": 0.525
+    },
+    {
+      "multiple": 1,
+      "p": 0.22515384435445532,
+      "residual_from": 0.5687287943457514,
+      "residual_to": 0.7938826387002067,
+      "pays_from": 0.975,
+      "pays_to": 1.025
+    },
+    {
+      "multiple": 2,
+      "p": 0.1552373711528497,
+      "residual_from": 0.7938826387002067,
+      "residual_to": 0.9491200098530563,
+      "pays_from": 1.975,
+      "pays_to": 2.025
+    },
+    {
+      "multiple": 5,
+      "p": 0.05087999014694362,
+      "residual_from": 0.9491200098530563,
+      "residual_to": 1,
+      "pays_from": 4.975,
+      "pays_to": 5.025
+    }
+  ],
+  "locker_r": 0.025
+}

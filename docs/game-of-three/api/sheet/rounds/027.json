@@ -1,0 +1,36 @@
+{
+  "round": 27,
+  "seed": "fixture-027",
+  "results": {
+    "BASE": {
+      "stake": 1000,
+      "win": 1000,
+      "totalBetAmount": 1000,
+      "count": 2,
+      "hasBonus": false,
+      "multiplier": 1,
+      "math": {
+        "u": 0.12502007675357163,
+        "zone": 13,
+        "gem": null,
+        "altAnimation": false,
+        "baseWin": 1
+      }
+    },
+    "BOOSTED": {
+      "stake": 1000,
+      "win": 2500,
+      "totalBetAmount": 1000,
+      "count": 3,
+      "hasBonus": false,
+      "multiplier": 2.5,
+      "math": {
+        "u": 0.12502007675357163,
+        "zone": 8,
+        "gem": null,
+        "altAnimation": false,
+        "baseWin": 5
+      }
+    }
+  }
+}

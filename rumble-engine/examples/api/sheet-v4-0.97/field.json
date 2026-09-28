@@ -1,0 +1,65 @@
+{
+  "preset": "sheet-v4-0.97",
+  "engine": "rumble-engine",
+  "parameters": {
+    "rtp": 0.97,
+    "credit": 100
+  },
+  "betTypes": {
+    "BASE": {
+      "cost": 5,
+      "packs": 1,
+      "paidPacks": 1,
+      "pLow": 0.8565930464934457
+    },
+    "BOOSTED": {
+      "cost": 10,
+      "packs": 1,
+      "paidPacks": 1,
+      "pLow": 0.048997323157732024
+    },
+    "BASE_BUNDLE": {
+      "cost": 5,
+      "packs": 11,
+      "paidPacks": 10,
+      "pLow": 0.930010839523965
+    },
+    "BOOSTED_BUNDLE": {
+      "cost": 10,
+      "packs": 11,
+      "paidPacks": 10,
+      "pLow": 0.19583290921877072
+    }
+  },
+  "levels": {
+    "BASE": [
+      500,
+      1000,
+      2500,
+      5000
+    ],
+    "BOOSTED": [
+      1000,
+      2000,
+      5000,
+      10000
+    ],
+    "BASE_BUNDLE": [
+      5000,
+      10000,
+      25000,
+      50000
+    ],
+    "BOOSTED_BUNDLE": [
+      10000,
+      20000,
+      50000,
+      100000
+    ]
+  },
+  "stake_units": "minor units",
+  "multiStep": false,
+  "how_to_settle": "per pack: for each rarity win += count × valuePerCard × multiplier(count); totalWinAmount = sum over packs. valuePerCard = round(pay[rarity] × bet / (cost × paidPacks))",
+  "rtp": 0.97,
+  "credit": 100
+}

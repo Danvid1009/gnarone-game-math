@@ -1,0 +1,204 @@
+{
+  "round": 28,
+  "seed": "fixture-028",
+  "results": {
+    "Ace": {
+      "stake": 1000,
+      "win": 1061,
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.4126579239964485,
+        "order": [
+          1,
+          0,
+          3,
+          2,
+          4,
+          5
+        ],
+        "names": [
+          "Bolt",
+          "Ace",
+          "Dash",
+          "Cinder",
+          "Ember",
+          "Flint"
+        ],
+        "zone": 21,
+        "backed": 0,
+        "place": 2,
+        "multiple": 1.0608649526178293,
+        "M": [
+          1.2434598104713173,
+          1.0608649526178293,
+          1.0486919620942634
+        ]
+      }
+    },
+    "Bolt": {
+      "stake": 1000,
+      "win": 1680,
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.4126579239964485,
+        "order": [
+          1,
+          0,
+          3,
+          2,
+          4,
+          5
+        ],
+        "names": [
+          "Bolt",
+          "Ace",
+          "Dash",
+          "Cinder",
+          "Ember",
+          "Flint"
+        ],
+        "zone": 21,
+        "backed": 1,
+        "place": 1,
+        "multiple": 1.6798858185957752,
+        "M": [
+          1.6798858185957752,
+          1.1699714546489437,
+          1.1359771637191551
+        ]
+      }
+    },
+    "Cinder": {
+      "stake": 1000,
+      "win": 0,
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.4126579239964485,
+        "order": [
+          1,
+          0,
+          3,
+          2,
+          4,
+          5
+        ],
+        "names": [
+          "Bolt",
+          "Ace",
+          "Dash",
+          "Cinder",
+          "Ember",
+          "Flint"
+        ],
+        "zone": 21,
+        "backed": 2,
+        "place": null,
+        "multiple": 0,
+        "M": [
+          2.545923093712594,
+          1.3864807734281483,
+          1.3091846187425187
+        ]
+      }
+    },
+    "Dash": {
+      "stake": 1000,
+      "win": 1618,
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.4126579239964485,
+        "order": [
+          1,
+          0,
+          3,
+          2,
+          4,
+          5
+        ],
+        "names": [
+          "Bolt",
+          "Ace",
+          "Dash",
+          "Cinder",
+          "Ember",
+          "Flint"
+        ],
+        "zone": 21,
+        "backed": 3,
+        "place": 3,
+        "multiple": 1.6182524412242394,
+        "M": [
+          4.091262206121197,
+          1.7728155515302992,
+          1.6182524412242394
+        ]
+      }
+    },
+    "Ember": {
+      "stake": 1000,
+      "win": 0,
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.4126579239964485,
+        "order": [
+          1,
+          0,
+          3,
+          2,
+          4,
+          5
+        ],
+        "names": [
+          "Bolt",
+          "Ace",
+          "Dash",
+          "Cinder",
+          "Ember",
+          "Flint"
+        ],
+        "zone": 21,
+        "backed": 4,
+        "place": null,
+        "multiple": 0,
+        "M": [
+          6.5318932228785975,
+          2.3829733057196494,
+          2.1063786445757193
+        ]
+      }
+    },
+    "Flint": {
+      "stake": 1000,
+      "win": 0,
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.4126579239964485,
+        "order": [
+          1,
+          0,
+          3,
+          2,
+          4,
+          5
+        ],
+        "names": [
+          "Bolt",
+          "Ace",
+          "Dash",
+          "Cinder",
+          "Ember",
+          "Flint"
+        ],
+        "zone": 21,
+        "backed": 5,
+        "place": null,
+        "multiple": 0,
+        "M": [
+          10.254333478957047,
+          3.313583369739262,
+          2.8508666957914093
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "preset": "MEDIUM",
+  "engine": "stepper-engine",
+  "parameters": {
+    "maxWin": 25,
+    "steps": 10,
+    "rtp": 0.97
+  },
+  "betTypes": [
+    "MEDIUM"
+  ],
+  "levels": {
+    "MEDIUM": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ]
+  },
+  "stake_units": "minor units",
+  "multiStep": true,
+  "how_to_settle": "K = rungs survived (from u and the cum table). CONTINUE on rung k is SAFE if k ≤ K else CRASH (win 0). CASH_OUT after s ≤ K rungs pays round(stake × returns[s − 1]); reaching the top pays returns[N − 1]",
+  "rtp": 0.97,
+  "maxWin": 25,
+  "steps": 10,
+  "returns": [
+    1.38,
+    1.9,
+    2.63,
+    3.62,
+    5,
+    6.9,
+    9.52,
+    13.13,
+    18.12,
+    25
+  ],
+  "survival": [
+    1,
+    0.7028985507246377,
+    0.5105263157894737,
+    0.3688212927756654,
+    0.26795580110497236,
+    0.194,
+    0.14057971014492754,
+    0.10189075630252101,
+    0.07387661843107388,
+    0.05353200883002207,
+    0.0388
+  ],
+  "cum": [
+    0,
+    0.2971014492753623,
+    0.4894736842105263,
+    0.6311787072243347,
+    0.7320441988950277,
+    0.806,
+    0.8594202898550725,
+    0.898109243697479,
+    0.9261233815689262,
+    0.9464679911699779,
+    0.9612,
+    1
+  ]
+}

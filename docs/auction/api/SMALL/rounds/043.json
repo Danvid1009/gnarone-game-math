@@ -1,0 +1,99 @@
+{
+  "round": 43,
+  "seed": "fixture-043",
+  "results": {
+    "SMALL": {
+      "stake": 1000,
+      "survived": 6,
+      "outcome": "CRASH_ON_STEP_7",
+      "payoutIfTakenAfter": [
+        {
+          "step": 1,
+          "reachable": true,
+          "win": 599,
+          "locker": {
+            "multiplier": 0.51167922247732,
+            "band": 1,
+            "contents": 599
+          }
+        },
+        {
+          "step": 2,
+          "reachable": true,
+          "win": 706,
+          "locker": {
+            "multiplier": 0.51167922247732,
+            "band": 1,
+            "contents": 706
+          }
+        },
+        {
+          "step": 3,
+          "reachable": true,
+          "win": 829,
+          "locker": {
+            "multiplier": 0.51167922247732,
+            "band": 1,
+            "contents": 829
+          }
+        },
+        {
+          "step": 4,
+          "reachable": true,
+          "win": 972,
+          "locker": {
+            "multiplier": 0.51167922247732,
+            "band": 1,
+            "contents": 972
+          }
+        },
+        {
+          "step": 5,
+          "reachable": true,
+          "win": 1146,
+          "locker": {
+            "multiplier": 0.51167922247732,
+            "band": 1,
+            "contents": 1146
+          }
+        },
+        {
+          "step": 6,
+          "reachable": true,
+          "win": 1346,
+          "locker": {
+            "multiplier": 0.51167922247732,
+            "band": 1,
+            "contents": 1346
+          }
+        },
+        {
+          "step": 7,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 8,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 9,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 10,
+          "reachable": false,
+          "win": 0
+        }
+      ],
+      "totalBetAmount": 1000,
+      "totalWinAmount": 0,
+      "size": "SMALL",
+      "currentStep": 7,
+      "currentPayout": 0,
+      "locker": null
+    }
+  }
+}

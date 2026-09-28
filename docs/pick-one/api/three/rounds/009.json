@@ -1,0 +1,45 @@
+{
+  "round": 9,
+  "seed": "fixture-009",
+  "results": {
+    "OPTION_1": {
+      "stake": 1000,
+      "win": 2850,
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.26215640059672296,
+        "winner": 0,
+        "winnerName": "OPTION_1",
+        "backed": 0,
+        "hit": true,
+        "odds": 2.85
+      }
+    },
+    "OPTION_2": {
+      "stake": 1000,
+      "win": 0,
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.26215640059672296,
+        "winner": 0,
+        "winnerName": "OPTION_1",
+        "backed": 1,
+        "hit": false,
+        "odds": 2.85
+      }
+    },
+    "OPTION_3": {
+      "stake": 1000,
+      "win": 0,
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.26215640059672296,
+        "winner": 0,
+        "winnerName": "OPTION_1",
+        "backed": 2,
+        "hit": false,
+        "odds": 2.85
+      }
+    }
+  }
+}

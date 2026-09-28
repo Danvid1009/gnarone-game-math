@@ -1,0 +1,68 @@
+{
+  "round": 31,
+  "seed": "fixture-031",
+  "results": {
+    "HARD": {
+      "stake": 1000,
+      "survived": 0,
+      "outcome": "CRASH_ON_STEP_1",
+      "payoutIfTakenAfter": [
+        {
+          "step": 1,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 2,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 3,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 4,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 5,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 6,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 7,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 8,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 9,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 10,
+          "reachable": false,
+          "win": 0
+        }
+      ],
+      "totalBetAmount": 1000,
+      "totalWinAmount": 0,
+      "difficulty": "HARD",
+      "currentStep": 1,
+      "currentPayout": 0
+    }
+  }
+}

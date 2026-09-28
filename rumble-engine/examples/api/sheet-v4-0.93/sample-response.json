@@ -1,0 +1,144 @@
+{
+  "open": {
+    "sessionId": "1fdde2f9-f9f1-46d0-b202-4007dbf0c182",
+    "requestCounter": 0,
+    "balance": 100000,
+    "currency": {
+      "code": "USD",
+      "prefix": "$",
+      "suffix": "",
+      "grouping": ",",
+      "decimal": ".",
+      "precision": 1,
+      "denomination": 1
+    },
+    "chipLevels": [
+      500,
+      1000,
+      2500,
+      5000
+    ],
+    "minBet": 500,
+    "maxBet": 5000,
+    "defaultBet": 1000,
+    "playerAlias": "Player",
+    "seconds": 0,
+    "rounds": 0,
+    "winLoss": 0,
+    "preset": "sheet-v4-0.93",
+    "rtp": 0.93,
+    "credit": 100,
+    "betTypes": {
+      "BASE": {
+        "cost": 5,
+        "packs": 1,
+        "paidPacks": 1,
+        "pLow": 0.8898959629196606
+      },
+      "BOOSTED": {
+        "cost": 10,
+        "packs": 1,
+        "paidPacks": 1,
+        "pLow": 0.11560315601016179
+      },
+      "BASE_BUNDLE": {
+        "cost": 5,
+        "packs": 11,
+        "paidPacks": 10,
+        "pLow": 0.9602862180932513
+      },
+      "BOOSTED_BUNDLE": {
+        "cost": 10,
+        "packs": 11,
+        "paidPacks": 10,
+        "pLow": 0.2563836663573434
+      }
+    }
+  },
+  "calls": [
+    {
+      "call": "bet",
+      "response": {
+        "roundId": "5a8bc7d8-a17b-450f-84aa-930097f2b224",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 2500,
+        "cardPacks": [
+          {
+            "cards": [
+              {
+                "rarity": "LEGENDARY",
+                "id": 10,
+                "name": "L10"
+              },
+              {
+                "rarity": "RARE",
+                "id": 7,
+                "name": "R07"
+              },
+              {
+                "rarity": "RARE",
+                "id": 13,
+                "name": "R13"
+              },
+              {
+                "rarity": "RARE",
+                "id": 20,
+                "name": "R20"
+              },
+              {
+                "rarity": "UNCOMMON",
+                "id": 19,
+                "name": "U19"
+              }
+            ],
+            "totalPayout": 2500,
+            "legendary": {
+              "count": 1,
+              "valuePerCard": 600,
+              "multiplier": 1,
+              "totalValue": 600
+            },
+            "rare": {
+              "count": 3,
+              "valuePerCard": 200,
+              "multiplier": 3,
+              "totalValue": 1800
+            },
+            "uncommon": {
+              "count": 1,
+              "valuePerCard": 100,
+              "multiplier": 1,
+              "totalValue": 100
+            },
+            "common": {
+              "count": 0,
+              "valuePerCard": 0,
+              "multiplier": 0,
+              "totalValue": 0
+            }
+          }
+        ],
+        "math": {
+          "betType": "BASE",
+          "unit": 200,
+          "packs": [
+            {
+              "u": 0.9729229214135557,
+              "bucket": "high"
+            }
+          ]
+        },
+        "nextAction": [
+          "COLLECT"
+        ]
+      }
+    },
+    {
+      "call": "collect",
+      "response": {
+        "balance": 101500
+      }
+    }
+  ]
+}

@@ -33,3 +33,36 @@ export function playOnce(g, { betType = g.defaultBetType, betAmount, seed, actio
   assert.deepEqual(r.nextAction, ['COLLECT']);
   return r;
 }
+
+/**
+ * For every preset of an rgs module: create the game, replay fixture round 007 with the same seed through the
+ * real open/bet/(next-action)/collect calls, and check the wins match the generated fixtures bit for bit.
+ * Multi-step games are checked for "take after 1" and "take after 2".
+ */
+export function assertPresetFixtures(mod, opts, apiDirUrl) {
+  assert.ok(Object.keys(mod.PRESETS).length >= 2, 'a module ships at least two presets');
+  assert.ok(mod.PRESETS[mod.DEFAULT_PRESET], 'default preset exists');
+  for (const preset of Object.keys(mod.PRESETS)) {
+    const g = mod.createGame({ preset, ...opts });
+    const f = JSON.parse(readFileSync(new URL(`${preset}/rounds/007.json`, apiDirUrl)));
+    assert.equal(f.seed, 'fixture-007');
+    for (const t of g.betTypes) {
+      const exp = f.results[t]; assert.ok(exp, `${preset}: fixture has bet type ${t}`);
+      if (!g.isMultiStep) {
+        const r = playOnce(g, { betType: t, betAmount: exp.stake, seed: 'fixture-007' });
+        assert.equal(r.totalWinAmount, exp.win, `${preset}/${t}`);
+      } else {
+        for (const s of [1, 2]) {
+          const sess = g.open(); let r = g.bet({ sessionId: sess.sessionId, betAmount: exp.stake, betType: t, seed: 'fixture-007' });
+          assert.deepEqual(r.nextAction, ['CONTINUE']);
+          for (let k = 0; k < s && !r.roundEnded; k++) r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' });
+          if (!r.roundEnded) r = g.nextAction({ roundId: r.roundId, actionCode: 'CASH_OUT' });
+          assert.equal(r.totalWinAmount, exp.payoutIfTakenAfter[s - 1].win, `${preset}/${t} take after ${s}`);
+          assert.equal(g.collect({ roundId: r.roundId }).balance, sess.balance - exp.stake + r.totalWinAmount);
+        }
+        assert.equal(exp.survived >= 1 ? 'reachable' : 'crash', exp.payoutIfTakenAfter[0].reachable ? 'reachable' : 'crash');
+      }
+    }
+    assert.throws(() => mod.createGame({ preset: 'no-such-preset' }), /unknown preset/);
+  }
+}

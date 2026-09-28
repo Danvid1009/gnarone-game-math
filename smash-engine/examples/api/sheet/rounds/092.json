@@ -1,0 +1,36 @@
+{
+  "round": 92,
+  "seed": "fixture-092",
+  "results": {
+    "BASE": {
+      "stake": 1000,
+      "win": 500,
+      "totalBetAmount": 1000,
+      "count": 1,
+      "hasBonus": false,
+      "multiplier": 0.5,
+      "math": {
+        "u": 0.6233095948118716,
+        "zone": 14,
+        "gem": null,
+        "altAnimation": false,
+        "baseWin": 0.5
+      }
+    },
+    "BOOSTED": {
+      "stake": 1000,
+      "win": 250,
+      "totalBetAmount": 1000,
+      "count": 1,
+      "hasBonus": false,
+      "multiplier": 0.25,
+      "math": {
+        "u": 0.6233095948118716,
+        "zone": 14,
+        "gem": null,
+        "altAnimation": false,
+        "baseWin": 0.5
+      }
+    }
+  }
+}

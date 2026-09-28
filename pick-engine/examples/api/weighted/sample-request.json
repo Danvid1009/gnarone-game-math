@@ -1,9 +1,22 @@
 {
-  "endpoint": "POST /api/pick/bet",
-  "body": {
-    "sessionId": "demo-session",
-    "betAmount": 1000,
-    "betType": "RED"
-  },
-  "note": "deterministic fixture: seed \"fixture-007\""
+  "module": "api/rgs.js",
+  "create": "createGame({\"preset\":\"weighted\"})",
+  "calls": [
+    {
+      "call": "bet",
+      "body": {
+        "sessionId": "89c68f1d-15e6-479a-906e-cc7a11d666d8",
+        "betAmount": 1000,
+        "betType": "RED",
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "collect",
+      "body": {
+        "roundId": "803fe561-d11e-49e4-b26a-9e0a2d1b1c42"
+      }
+    }
+  ],
+  "note": "deterministic: seed fixture-007; drop seed for a live roll"
 }

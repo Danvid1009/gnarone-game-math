@@ -1,87 +1,241 @@
 {
   "engine": "pick-engine",
-  "rtp": 0.95,
   "stake": 1000,
   "rounds": 100,
-  "seeds": "fixture-000 … fixture-099 (shared across sets: the same u drives every set)",
-  "sets": {
+  "seeds": "fixture-000 … fixture-099 (the same seed drives every preset)",
+  "default_preset": "coin",
+  "presets": {
     "coin": {
-      "options": [
+      "parameters": {
+        "n": 2,
+        "rtp": 0.95
+      },
+      "betTypes": [
         "HEADS",
         "TAILS"
       ],
-      "odds": [
-        1.9,
-        1.9
-      ],
+      "levels": {
+        "HEADS": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "TAILS": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "HEADS": 0.893,
+        "TAILS": 1.007
+      },
       "files": [
         "coin/field.json",
         "coin/rounds.json",
         "coin/rounds/NNN.json",
         "coin/sample-request.json",
         "coin/sample-response.json"
-      ],
-      "winCounts": {
-        "HEADS": 47,
-        "TAILS": 53
+      ]
+    },
+    "three": {
+      "parameters": {
+        "n": 3,
+        "rtp": 0.95
       },
-      "rtpIfEveryOptionBackedEveryRound": 0.95
+      "betTypes": [
+        "OPTION_1",
+        "OPTION_2",
+        "OPTION_3"
+      ],
+      "levels": {
+        "OPTION_1": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "OPTION_2": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "OPTION_3": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "OPTION_1": 0.855,
+        "OPTION_2": 0.855,
+        "OPTION_3": 1.14
+      },
+      "files": [
+        "three/field.json",
+        "three/rounds.json",
+        "three/rounds/NNN.json",
+        "three/sample-request.json",
+        "three/sample-response.json"
+      ]
     },
     "five": {
-      "options": [
+      "parameters": {
+        "n": 5,
+        "rtp": 0.95
+      },
+      "betTypes": [
         "OPTION_1",
         "OPTION_2",
         "OPTION_3",
         "OPTION_4",
         "OPTION_5"
       ],
-      "odds": [
-        4.749999999999999,
-        4.749999999999999,
-        4.749999999999999,
-        4.749999999999999,
-        4.749999999999999
-      ],
+      "levels": {
+        "OPTION_1": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "OPTION_2": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "OPTION_3": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "OPTION_4": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "OPTION_5": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "OPTION_1": 0.76,
+        "OPTION_2": 0.9975,
+        "OPTION_3": 0.665,
+        "OPTION_4": 0.9975,
+        "OPTION_5": 1.33
+      },
       "files": [
         "five/field.json",
         "five/rounds.json",
         "five/rounds/NNN.json",
         "five/sample-request.json",
         "five/sample-response.json"
-      ],
-      "winCounts": {
-        "OPTION_1": 16,
-        "OPTION_2": 21,
-        "OPTION_3": 14,
-        "OPTION_4": 21,
-        "OPTION_5": 28
-      },
-      "rtpIfEveryOptionBackedEveryRound": 0.95
+      ]
     },
     "weighted": {
-      "options": [
+      "parameters": {
+        "weights": [
+          5,
+          3,
+          2
+        ],
+        "labels": [
+          "RED",
+          "GREEN",
+          "BLUE"
+        ],
+        "rtp": 0.95
+      },
+      "betTypes": [
         "RED",
         "GREEN",
         "BLUE"
       ],
-      "odds": [
-        1.9,
-        3.1666666666666665,
-        4.749999999999999
-      ],
+      "levels": {
+        "RED": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "GREEN": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "BLUE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "RED": 0.893,
+        "GREEN": 0.7917,
+        "BLUE": 1.33
+      },
       "files": [
         "weighted/field.json",
         "weighted/rounds.json",
         "weighted/rounds/NNN.json",
         "weighted/sample-request.json",
         "weighted/sample-response.json"
-      ],
-      "winCounts": {
-        "RED": 47,
-        "GREEN": 25,
-        "BLUE": 28
-      },
-      "rtpIfEveryOptionBackedEveryRound": 1.0049166666666667
+      ]
     }
   }
 }

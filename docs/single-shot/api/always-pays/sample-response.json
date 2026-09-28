@@ -1,0 +1,103 @@
+{
+  "open": {
+    "sessionId": "b72801d9-f09c-41ea-a764-dbbbdbd22e1c",
+    "requestCounter": 0,
+    "balance": 100000,
+    "currency": {
+      "code": "USD",
+      "prefix": "$",
+      "suffix": "",
+      "grouping": ",",
+      "decimal": ".",
+      "precision": 1,
+      "denomination": 1
+    },
+    "chipLevels": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "minBet": 100,
+    "maxBet": 10000,
+    "defaultBet": 200,
+    "playerAlias": "Player",
+    "seconds": 0,
+    "rounds": 0,
+    "winLoss": 0,
+    "preset": "always-pays",
+    "rtp": 0.95,
+    "r": 0.03,
+    "bands": [
+      {
+        "payout": 0.2,
+        "p": 0.3945829318159956,
+        "rn_from": 0,
+        "rn_to": 0.3945829318159956,
+        "pays_from": 0.17,
+        "pays_to": 0.23
+      },
+      {
+        "payout": 0.5,
+        "p": 0.25721219606328677,
+        "rn_from": 0.3945829318159956,
+        "rn_to": 0.6517951278792824,
+        "pays_from": 0.47,
+        "pays_to": 0.53
+      },
+      {
+        "payout": 1,
+        "p": 0.1676659289321464,
+        "rn_from": 0.6517951278792824,
+        "rn_to": 0.8194610568114288,
+        "pays_from": 0.97,
+        "pays_to": 1.03
+      },
+      {
+        "payout": 2,
+        "p": 0.1092944430899485,
+        "rn_from": 0.8194610568114288,
+        "rn_to": 0.9287554999013773,
+        "pays_from": 1.97,
+        "pays_to": 2.03
+      },
+      {
+        "payout": 5,
+        "p": 0.0712445000986228,
+        "rn_from": 0.9287554999013773,
+        "rn_to": 1,
+        "pays_from": 4.97,
+        "pays_to": 5.03
+      }
+    ]
+  },
+  "calls": [
+    {
+      "call": "bet",
+      "response": {
+        "roundId": "413ebb54-75e7-4635-a168-9885f775e35a",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 5007,
+        "math": {
+          "u": 0.9729229214135557,
+          "band": 4,
+          "multiple": 5.007196489371983,
+          "r": 0.03
+        },
+        "nextAction": [
+          "COLLECT"
+        ]
+      }
+    },
+    {
+      "call": "collect",
+      "response": {
+        "balance": 104007
+      }
+    }
+  ]
+}

@@ -24,7 +24,8 @@
         "Where the crash falls: the eleven slots of the single draw."
       ]
     ],
-    "cli": "node bin/build-ladder.js --rtp 0.97 --max 25 --steps 10 --js"
+    "cli": "node bin/build-ladder.js --rtp 0.97 --max 25 --steps 10 --js",
+    "api": "examples/api"
   },
   {
     "slug": "single-shot",
@@ -51,12 +52,7 @@
       ]
     ],
     "cli": "node bin/build-payout.js --payouts 0,0.5,1,2,5,20 --rtp 0.95 --js",
-    "api": "examples/api",
-    "apiSets": [
-      "maxent",
-      "geometric",
-      "weights"
-    ]
+    "api": "examples/api"
   },
   {
     "slug": "top-3",
@@ -127,7 +123,8 @@
         "Most likely pack compositions per bucket, and the low-bucket probability per bet type against the simulated return."
       ]
     ],
-    "cli": "node bin/build-rumble.js"
+    "cli": "node bin/build-rumble.js",
+    "api": "examples/api"
   },
   {
     "slug": "game-of-three",
@@ -146,7 +143,8 @@
         "The 16 outcome zones per mode with their probabilities and multiples, against the simulated return."
       ]
     ],
-    "cli": "node bin/build-smash.js"
+    "cli": "node bin/build-smash.js",
+    "api": "examples/api"
   },
   {
     "slug": "pick-one",
@@ -166,15 +164,7 @@
       ]
     ],
     "cli": "node bin/build-pick.js --n 5 --js",
-    "api": "examples/api",
-    "apiSets": [
-      "coin",
-      "five",
-      "weighted"
-    ],
-    "rgsOptions": {
-      "set": "five"
-    }
+    "api": "examples/api"
   },
   {
     "slug": "auction",
@@ -202,12 +192,6 @@
       ]
     ],
     "cli": "node bin/build-auction.js --rtp 0.95 --max 25 --steps 10 --js",
-    "api": "examples/api",
-    "apiSets": [
-      "small",
-      "medium",
-      "large",
-      "xl"
-    ]
+    "api": "examples/api"
   }
 ]

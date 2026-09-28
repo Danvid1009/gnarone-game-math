@@ -1,0 +1,123 @@
+{
+  "round": 51,
+  "seed": "fixture-051",
+  "results": {
+    "SMALL": {
+      "stake": 1000,
+      "survived": 10,
+      "outcome": "TOP",
+      "payoutIfTakenAfter": [
+        {
+          "step": 1,
+          "reachable": true,
+          "win": 1148,
+          "locker": {
+            "multiplier": 0.9810628158993444,
+            "band": 2,
+            "contents": 1148
+          }
+        },
+        {
+          "step": 2,
+          "reachable": true,
+          "win": 1354,
+          "locker": {
+            "multiplier": 0.9810628158993444,
+            "band": 2,
+            "contents": 1354
+          }
+        },
+        {
+          "step": 3,
+          "reachable": true,
+          "win": 1589,
+          "locker": {
+            "multiplier": 0.9810628158993444,
+            "band": 2,
+            "contents": 1589
+          }
+        },
+        {
+          "step": 4,
+          "reachable": true,
+          "win": 1864,
+          "locker": {
+            "multiplier": 0.9810628158993444,
+            "band": 2,
+            "contents": 1864
+          }
+        },
+        {
+          "step": 5,
+          "reachable": true,
+          "win": 2198,
+          "locker": {
+            "multiplier": 0.9810628158993444,
+            "band": 2,
+            "contents": 2198
+          }
+        },
+        {
+          "step": 6,
+          "reachable": true,
+          "win": 2580,
+          "locker": {
+            "multiplier": 0.9810628158993444,
+            "band": 2,
+            "contents": 2580
+          }
+        },
+        {
+          "step": 7,
+          "reachable": true,
+          "win": 3031,
+          "locker": {
+            "multiplier": 0.9810628158993444,
+            "band": 2,
+            "contents": 3031
+          }
+        },
+        {
+          "step": 8,
+          "reachable": true,
+          "win": 3551,
+          "locker": {
+            "multiplier": 0.9810628158993444,
+            "band": 2,
+            "contents": 3551
+          }
+        },
+        {
+          "step": 9,
+          "reachable": true,
+          "win": 4179,
+          "locker": {
+            "multiplier": 0.9810628158993444,
+            "band": 2,
+            "contents": 4179
+          }
+        },
+        {
+          "step": 10,
+          "reachable": true,
+          "win": 4905,
+          "locker": {
+            "multiplier": 0.9810628158993444,
+            "band": 2,
+            "contents": 4905
+          }
+        }
+      ],
+      "totalBetAmount": 1000,
+      "totalWinAmount": 4905,
+      "size": "SMALL",
+      "currentStep": 10,
+      "currentPayout": 5000,
+      "locker": {
+        "multiplier": 0.9810628158993444,
+        "band": 2,
+        "contents": 4905
+      }
+    }
+  }
+}

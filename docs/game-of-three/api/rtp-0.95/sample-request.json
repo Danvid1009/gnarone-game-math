@@ -1,0 +1,22 @@
+{
+  "module": "api/rgs.js",
+  "create": "createGame({\"preset\":\"rtp-0.95\"})",
+  "calls": [
+    {
+      "call": "bet",
+      "body": {
+        "sessionId": "6a181623-2398-4783-a15e-0372616aad13",
+        "betAmount": 1000,
+        "betType": "BASE",
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "collect",
+      "body": {
+        "roundId": "8ba7b660-c8e4-48d1-b272-e1a20176dbcd"
+      }
+    }
+  ],
+  "note": "deterministic: seed fixture-007; drop seed for a live roll"
+}

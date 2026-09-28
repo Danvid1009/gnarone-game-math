@@ -1,0 +1,1450 @@
+{
+  "round": 17,
+  "seed": "fixture-017",
+  "results": {
+    "BASE": {
+      "stake": 1000,
+      "win": 1500,
+      "totalBetAmount": 1000,
+      "cardPacks": [
+        {
+          "cards": [
+            {
+              "rarity": "LEGENDARY",
+              "id": 13,
+              "name": "L13"
+            },
+            {
+              "rarity": "RARE",
+              "id": 8,
+              "name": "R08"
+            },
+            {
+              "rarity": "RARE",
+              "id": 10,
+              "name": "R10"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 18,
+              "name": "U18"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 15,
+              "name": "C15"
+            }
+          ],
+          "totalPayout": 1500,
+          "legendary": {
+            "count": 1,
+            "valuePerCard": 600,
+            "multiplier": 1,
+            "totalValue": 600
+          },
+          "rare": {
+            "count": 2,
+            "valuePerCard": 200,
+            "multiplier": 2,
+            "totalValue": 800
+          },
+          "uncommon": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "common": {
+            "count": 1,
+            "valuePerCard": 0,
+            "multiplier": 1,
+            "totalValue": 0
+          }
+        }
+      ],
+      "math": {
+        "betType": "BASE",
+        "unit": 200,
+        "packs": [
+          {
+            "u": 0.7927950932644308,
+            "bucket": "low"
+          }
+        ]
+      }
+    },
+    "BOOSTED": {
+      "stake": 1000,
+      "win": 1250,
+      "totalBetAmount": 1000,
+      "cardPacks": [
+        {
+          "cards": [
+            {
+              "rarity": "LEGENDARY",
+              "id": 10,
+              "name": "L10"
+            },
+            {
+              "rarity": "LEGENDARY",
+              "id": 13,
+              "name": "L13"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 8,
+              "name": "U08"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 15,
+              "name": "C15"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 18,
+              "name": "C18"
+            }
+          ],
+          "totalPayout": 1250,
+          "legendary": {
+            "count": 2,
+            "valuePerCard": 300,
+            "multiplier": 2,
+            "totalValue": 1200
+          },
+          "rare": {
+            "count": 0,
+            "valuePerCard": 100,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "uncommon": {
+            "count": 1,
+            "valuePerCard": 50,
+            "multiplier": 1,
+            "totalValue": 50
+          },
+          "common": {
+            "count": 2,
+            "valuePerCard": 0,
+            "multiplier": 2,
+            "totalValue": 0
+          }
+        }
+      ],
+      "math": {
+        "betType": "BOOSTED",
+        "unit": 100,
+        "packs": [
+          {
+            "u": 0.7927950932644308,
+            "bucket": "high"
+          }
+        ]
+      }
+    },
+    "BASE_BUNDLE": {
+      "stake": 5000,
+      "win": 4150,
+      "totalBetAmount": 5000,
+      "cardPacks": [
+        {
+          "cards": [
+            {
+              "rarity": "LEGENDARY",
+              "id": 13,
+              "name": "L13"
+            },
+            {
+              "rarity": "RARE",
+              "id": 10,
+              "name": "R10"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 8,
+              "name": "U08"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 18,
+              "name": "U18"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 15,
+              "name": "C15"
+            }
+          ],
+          "totalPayout": 600,
+          "legendary": {
+            "count": 1,
+            "valuePerCard": 300,
+            "multiplier": 1,
+            "totalValue": 300
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 2,
+            "valuePerCard": 50,
+            "multiplier": 2,
+            "totalValue": 200
+          },
+          "common": {
+            "count": 1,
+            "valuePerCard": 0,
+            "multiplier": 1,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "LEGENDARY",
+              "id": 4,
+              "name": "L04"
+            },
+            {
+              "rarity": "RARE",
+              "id": 5,
+              "name": "R05"
+            },
+            {
+              "rarity": "RARE",
+              "id": 17,
+              "name": "R17"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 5,
+              "name": "C05"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 17,
+              "name": "C17"
+            }
+          ],
+          "totalPayout": 700,
+          "legendary": {
+            "count": 1,
+            "valuePerCard": 300,
+            "multiplier": 1,
+            "totalValue": 300
+          },
+          "rare": {
+            "count": 2,
+            "valuePerCard": 100,
+            "multiplier": 2,
+            "totalValue": 400
+          },
+          "uncommon": {
+            "count": 0,
+            "valuePerCard": 50,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "common": {
+            "count": 2,
+            "valuePerCard": 0,
+            "multiplier": 2,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "UNCOMMON",
+              "id": 1,
+              "name": "U01"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 17,
+              "name": "U17"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 13,
+              "name": "C13"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 17,
+              "name": "C17"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 18,
+              "name": "C18"
+            }
+          ],
+          "totalPayout": 200,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 0,
+            "valuePerCard": 100,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "uncommon": {
+            "count": 2,
+            "valuePerCard": 50,
+            "multiplier": 2,
+            "totalValue": 200
+          },
+          "common": {
+            "count": 3,
+            "valuePerCard": 0,
+            "multiplier": 3,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "RARE",
+              "id": 18,
+              "name": "R18"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 2,
+              "name": "U02"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 1,
+              "name": "C01"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 3,
+              "name": "C03"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 12,
+              "name": "C12"
+            }
+          ],
+          "totalPayout": 150,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 1,
+            "valuePerCard": 50,
+            "multiplier": 1,
+            "totalValue": 50
+          },
+          "common": {
+            "count": 3,
+            "valuePerCard": 0,
+            "multiplier": 3,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "UNCOMMON",
+              "id": 4,
+              "name": "U04"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 14,
+              "name": "U14"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 15,
+              "name": "U15"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 7,
+              "name": "C07"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 18,
+              "name": "C18"
+            }
+          ],
+          "totalPayout": 450,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 0,
+            "valuePerCard": 100,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "uncommon": {
+            "count": 3,
+            "valuePerCard": 50,
+            "multiplier": 3,
+            "totalValue": 450
+          },
+          "common": {
+            "count": 2,
+            "valuePerCard": 0,
+            "multiplier": 2,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "RARE",
+              "id": 19,
+              "name": "R19"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 3,
+              "name": "U03"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 2,
+              "name": "C02"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 5,
+              "name": "C05"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 20,
+              "name": "C20"
+            }
+          ],
+          "totalPayout": 150,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 1,
+            "valuePerCard": 50,
+            "multiplier": 1,
+            "totalValue": 50
+          },
+          "common": {
+            "count": 3,
+            "valuePerCard": 0,
+            "multiplier": 3,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "RARE",
+              "id": 6,
+              "name": "R06"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 3,
+              "name": "U03"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 4,
+              "name": "U04"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 7,
+              "name": "U07"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 12,
+              "name": "C12"
+            }
+          ],
+          "totalPayout": 550,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 3,
+            "valuePerCard": 50,
+            "multiplier": 3,
+            "totalValue": 450
+          },
+          "common": {
+            "count": 1,
+            "valuePerCard": 0,
+            "multiplier": 1,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "RARE",
+              "id": 2,
+              "name": "R02"
+            },
+            {
+              "rarity": "RARE",
+              "id": 18,
+              "name": "R18"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 8,
+              "name": "U08"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 3,
+              "name": "C03"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 19,
+              "name": "C19"
+            }
+          ],
+          "totalPayout": 450,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 2,
+            "valuePerCard": 100,
+            "multiplier": 2,
+            "totalValue": 400
+          },
+          "uncommon": {
+            "count": 1,
+            "valuePerCard": 50,
+            "multiplier": 1,
+            "totalValue": 50
+          },
+          "common": {
+            "count": 2,
+            "valuePerCard": 0,
+            "multiplier": 2,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "RARE",
+              "id": 4,
+              "name": "R04"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 17,
+              "name": "U17"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 2,
+              "name": "C02"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 16,
+              "name": "C16"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 18,
+              "name": "C18"
+            }
+          ],
+          "totalPayout": 150,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 1,
+            "valuePerCard": 50,
+            "multiplier": 1,
+            "totalValue": 50
+          },
+          "common": {
+            "count": 3,
+            "valuePerCard": 0,
+            "multiplier": 3,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "RARE",
+              "id": 10,
+              "name": "R10"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 11,
+              "name": "U11"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 20,
+              "name": "U20"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 1,
+              "name": "C01"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 12,
+              "name": "C12"
+            }
+          ],
+          "totalPayout": 300,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 2,
+            "valuePerCard": 50,
+            "multiplier": 2,
+            "totalValue": 200
+          },
+          "common": {
+            "count": 2,
+            "valuePerCard": 0,
+            "multiplier": 2,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "RARE",
+              "id": 17,
+              "name": "R17"
+            },
+            {
+              "rarity": "RARE",
+              "id": 18,
+              "name": "R18"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 10,
+              "name": "U10"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 1,
+              "name": "C01"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 9,
+              "name": "C09"
+            }
+          ],
+          "totalPayout": 450,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 2,
+            "valuePerCard": 100,
+            "multiplier": 2,
+            "totalValue": 400
+          },
+          "uncommon": {
+            "count": 1,
+            "valuePerCard": 50,
+            "multiplier": 1,
+            "totalValue": 50
+          },
+          "common": {
+            "count": 2,
+            "valuePerCard": 0,
+            "multiplier": 2,
+            "totalValue": 0
+          }
+        }
+      ],
+      "math": {
+        "betType": "BASE_BUNDLE",
+        "unit": 100,
+        "packs": [
+          {
+            "u": 0.7927950932644308,
+            "bucket": "low"
+          },
+          {
+            "u": 0.8762421775609255,
+            "bucket": "low"
+          },
+          {
+            "u": 0.22284155758097768,
+            "bucket": "low"
+          },
+          {
+            "u": 0.0369692521635443,
+            "bucket": "low"
+          },
+          {
+            "u": 0.6162485592067242,
+            "bucket": "low"
+          },
+          {
+            "u": 0.044157575350254774,
+            "bucket": "low"
+          },
+          {
+            "u": 0.7539806917775422,
+            "bucket": "low"
+          },
+          {
+            "u": 0.3903383295983076,
+            "bucket": "low"
+          },
+          {
+            "u": 0.039676124695688486,
+            "bucket": "low"
+          },
+          {
+            "u": 0.21180046116933227,
+            "bucket": "low"
+          },
+          {
+            "u": 0.39233270729891956,
+            "bucket": "low"
+          }
+        ]
+      }
+    },
+    "BOOSTED_BUNDLE": {
+      "stake": 10000,
+      "win": 6650,
+      "totalBetAmount": 10000,
+      "cardPacks": [
+        {
+          "cards": [
+            {
+              "rarity": "RARE",
+              "id": 10,
+              "name": "R10"
+            },
+            {
+              "rarity": "RARE",
+              "id": 13,
+              "name": "R13"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 8,
+              "name": "U08"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 15,
+              "name": "U15"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 18,
+              "name": "U18"
+            }
+          ],
+          "totalPayout": 850,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 2,
+            "valuePerCard": 100,
+            "multiplier": 2,
+            "totalValue": 400
+          },
+          "uncommon": {
+            "count": 3,
+            "valuePerCard": 50,
+            "multiplier": 3,
+            "totalValue": 450
+          },
+          "common": {
+            "count": 0,
+            "valuePerCard": 0,
+            "multiplier": 0,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "LEGENDARY",
+              "id": 4,
+              "name": "L04"
+            },
+            {
+              "rarity": "LEGENDARY",
+              "id": 17,
+              "name": "L17"
+            },
+            {
+              "rarity": "RARE",
+              "id": 5,
+              "name": "R05"
+            },
+            {
+              "rarity": "RARE",
+              "id": 17,
+              "name": "R17"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 5,
+              "name": "C05"
+            }
+          ],
+          "totalPayout": 1600,
+          "legendary": {
+            "count": 2,
+            "valuePerCard": 300,
+            "multiplier": 2,
+            "totalValue": 1200
+          },
+          "rare": {
+            "count": 2,
+            "valuePerCard": 100,
+            "multiplier": 2,
+            "totalValue": 400
+          },
+          "uncommon": {
+            "count": 0,
+            "valuePerCard": 50,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "common": {
+            "count": 1,
+            "valuePerCard": 0,
+            "multiplier": 1,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "COMMON",
+              "id": 1,
+              "name": "C01"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 2,
+              "name": "C02"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 13,
+              "name": "C13"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 17,
+              "name": "C17"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 18,
+              "name": "C18"
+            }
+          ],
+          "totalPayout": 0,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 0,
+            "valuePerCard": 100,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "uncommon": {
+            "count": 0,
+            "valuePerCard": 50,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "common": {
+            "count": 5,
+            "valuePerCard": 0,
+            "multiplier": 100,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "RARE",
+              "id": 3,
+              "name": "R03"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 1,
+              "name": "U01"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 12,
+              "name": "U12"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 4,
+              "name": "C04"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 15,
+              "name": "C15"
+            }
+          ],
+          "totalPayout": 300,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 2,
+            "valuePerCard": 50,
+            "multiplier": 2,
+            "totalValue": 200
+          },
+          "common": {
+            "count": 2,
+            "valuePerCard": 0,
+            "multiplier": 2,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "LEGENDARY",
+              "id": 14,
+              "name": "L14"
+            },
+            {
+              "rarity": "RARE",
+              "id": 18,
+              "name": "R18"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 3,
+              "name": "U03"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 7,
+              "name": "U07"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 19,
+              "name": "U19"
+            }
+          ],
+          "totalPayout": 850,
+          "legendary": {
+            "count": 1,
+            "valuePerCard": 300,
+            "multiplier": 1,
+            "totalValue": 300
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 3,
+            "valuePerCard": 50,
+            "multiplier": 3,
+            "totalValue": 450
+          },
+          "common": {
+            "count": 0,
+            "valuePerCard": 0,
+            "multiplier": 0,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "RARE",
+              "id": 5,
+              "name": "R05"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 2,
+              "name": "U02"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 20,
+              "name": "U20"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 3,
+              "name": "C03"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 6,
+              "name": "C06"
+            }
+          ],
+          "totalPayout": 300,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 2,
+            "valuePerCard": 50,
+            "multiplier": 2,
+            "totalValue": 200
+          },
+          "common": {
+            "count": 2,
+            "valuePerCard": 0,
+            "multiplier": 2,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "RARE",
+              "id": 4,
+              "name": "R04"
+            },
+            {
+              "rarity": "RARE",
+              "id": 7,
+              "name": "R07"
+            },
+            {
+              "rarity": "RARE",
+              "id": 12,
+              "name": "R12"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 18,
+              "name": "U18"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 2,
+              "name": "C02"
+            }
+          ],
+          "totalPayout": 950,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 3,
+            "valuePerCard": 100,
+            "multiplier": 3,
+            "totalValue": 900
+          },
+          "uncommon": {
+            "count": 1,
+            "valuePerCard": 50,
+            "multiplier": 1,
+            "totalValue": 50
+          },
+          "common": {
+            "count": 1,
+            "valuePerCard": 0,
+            "multiplier": 1,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "LEGENDARY",
+              "id": 8,
+              "name": "L08"
+            },
+            {
+              "rarity": "RARE",
+              "id": 19,
+              "name": "R19"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 3,
+              "name": "U03"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 4,
+              "name": "C04"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 17,
+              "name": "C17"
+            }
+          ],
+          "totalPayout": 450,
+          "legendary": {
+            "count": 1,
+            "valuePerCard": 300,
+            "multiplier": 1,
+            "totalValue": 300
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 1,
+            "valuePerCard": 50,
+            "multiplier": 1,
+            "totalValue": 50
+          },
+          "common": {
+            "count": 2,
+            "valuePerCard": 0,
+            "multiplier": 2,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "RARE",
+              "id": 2,
+              "name": "R02"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 16,
+              "name": "U16"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 18,
+              "name": "U18"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 10,
+              "name": "C10"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 20,
+              "name": "C20"
+            }
+          ],
+          "totalPayout": 300,
+          "legendary": {
+            "count": 0,
+            "valuePerCard": 300,
+            "multiplier": 0,
+            "totalValue": 0
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 2,
+            "valuePerCard": 50,
+            "multiplier": 2,
+            "totalValue": 200
+          },
+          "common": {
+            "count": 2,
+            "valuePerCard": 0,
+            "multiplier": 2,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "LEGENDARY",
+              "id": 11,
+              "name": "L11"
+            },
+            {
+              "rarity": "RARE",
+              "id": 1,
+              "name": "R01"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 12,
+              "name": "U12"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 17,
+              "name": "U17"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 18,
+              "name": "C18"
+            }
+          ],
+          "totalPayout": 600,
+          "legendary": {
+            "count": 1,
+            "valuePerCard": 300,
+            "multiplier": 1,
+            "totalValue": 300
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 2,
+            "valuePerCard": 50,
+            "multiplier": 2,
+            "totalValue": 200
+          },
+          "common": {
+            "count": 1,
+            "valuePerCard": 0,
+            "multiplier": 1,
+            "totalValue": 0
+          }
+        },
+        {
+          "cards": [
+            {
+              "rarity": "LEGENDARY",
+              "id": 10,
+              "name": "L10"
+            },
+            {
+              "rarity": "RARE",
+              "id": 1,
+              "name": "R01"
+            },
+            {
+              "rarity": "UNCOMMON",
+              "id": 9,
+              "name": "U09"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 1,
+              "name": "C01"
+            },
+            {
+              "rarity": "COMMON",
+              "id": 17,
+              "name": "C17"
+            }
+          ],
+          "totalPayout": 450,
+          "legendary": {
+            "count": 1,
+            "valuePerCard": 300,
+            "multiplier": 1,
+            "totalValue": 300
+          },
+          "rare": {
+            "count": 1,
+            "valuePerCard": 100,
+            "multiplier": 1,
+            "totalValue": 100
+          },
+          "uncommon": {
+            "count": 1,
+            "valuePerCard": 50,
+            "multiplier": 1,
+            "totalValue": 50
+          },
+          "common": {
+            "count": 2,
+            "valuePerCard": 0,
+            "multiplier": 2,
+            "totalValue": 0
+          }
+        }
+      ],
+      "math": {
+        "betType": "BOOSTED_BUNDLE",
+        "unit": 100,
+        "packs": [
+          {
+            "u": 0.7927950932644308,
+            "bucket": "high"
+          },
+          {
+            "u": 0.8762421775609255,
+            "bucket": "high"
+          },
+          {
+            "u": 0.22284155758097768,
+            "bucket": "low"
+          },
+          {
+            "u": 0.0369692521635443,
+            "bucket": "low"
+          },
+          {
+            "u": 0.6162485592067242,
+            "bucket": "high"
+          },
+          {
+            "u": 0.044157575350254774,
+            "bucket": "low"
+          },
+          {
+            "u": 0.7539806917775422,
+            "bucket": "high"
+          },
+          {
+            "u": 0.3903383295983076,
+            "bucket": "high"
+          },
+          {
+            "u": 0.039676124695688486,
+            "bucket": "low"
+          },
+          {
+            "u": 0.21180046116933227,
+            "bucket": "low"
+          },
+          {
+            "u": 0.39233270729891956,
+            "bucket": "high"
+          }
+        ]
+      }
+    }
+  }
+}

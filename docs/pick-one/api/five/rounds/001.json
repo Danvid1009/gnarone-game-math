@@ -1,39 +1,71 @@
 {
   "round": 1,
   "seed": "fixture-001",
-  "u": 0.4659930190537125,
-  "winner": 2,
-  "winnerName": "OPTION_3",
-  "settlements": {
+  "results": {
     "OPTION_1": {
-      "hit": false,
-      "odds": 4.749999999999999,
+      "stake": 1000,
       "win": 0,
-      "stake": 1000
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.4659930190537125,
+        "winner": 2,
+        "winnerName": "OPTION_3",
+        "backed": 0,
+        "hit": false,
+        "odds": 4.749999999999999
+      }
     },
     "OPTION_2": {
-      "hit": false,
-      "odds": 4.749999999999999,
+      "stake": 1000,
       "win": 0,
-      "stake": 1000
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.4659930190537125,
+        "winner": 2,
+        "winnerName": "OPTION_3",
+        "backed": 1,
+        "hit": false,
+        "odds": 4.749999999999999
+      }
     },
     "OPTION_3": {
-      "hit": true,
-      "odds": 4.749999999999999,
+      "stake": 1000,
       "win": 4750,
-      "stake": 1000
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.4659930190537125,
+        "winner": 2,
+        "winnerName": "OPTION_3",
+        "backed": 2,
+        "hit": true,
+        "odds": 4.749999999999999
+      }
     },
     "OPTION_4": {
-      "hit": false,
-      "odds": 4.749999999999999,
+      "stake": 1000,
       "win": 0,
-      "stake": 1000
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.4659930190537125,
+        "winner": 2,
+        "winnerName": "OPTION_3",
+        "backed": 3,
+        "hit": false,
+        "odds": 4.749999999999999
+      }
     },
     "OPTION_5": {
-      "hit": false,
-      "odds": 4.749999999999999,
+      "stake": 1000,
       "win": 0,
-      "stake": 1000
+      "totalBetAmount": 1000,
+      "math": {
+        "u": 0.4659930190537125,
+        "winner": 2,
+        "winnerName": "OPTION_3",
+        "backed": 4,
+        "hit": false,
+        "odds": 4.749999999999999
+      }
     }
   }
 }

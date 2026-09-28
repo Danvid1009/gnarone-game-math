@@ -1,0 +1,94 @@
+{
+  "round": 18,
+  "seed": "fixture-018",
+  "results": {
+    "LARGE": {
+      "stake": 1000,
+      "survived": 5,
+      "outcome": "CRASH_ON_STEP_6",
+      "payoutIfTakenAfter": [
+        {
+          "step": 1,
+          "reachable": true,
+          "win": 2788,
+          "locker": {
+            "multiplier": 2.0199331572257253,
+            "band": 3,
+            "contents": 2788
+          }
+        },
+        {
+          "step": 2,
+          "reachable": true,
+          "win": 3838,
+          "locker": {
+            "multiplier": 2.0199331572257253,
+            "band": 3,
+            "contents": 3838
+          }
+        },
+        {
+          "step": 3,
+          "reachable": true,
+          "win": 5312,
+          "locker": {
+            "multiplier": 2.0199331572257253,
+            "band": 3,
+            "contents": 5312
+          }
+        },
+        {
+          "step": 4,
+          "reachable": true,
+          "win": 7312,
+          "locker": {
+            "multiplier": 2.0199331572257253,
+            "band": 3,
+            "contents": 7312
+          }
+        },
+        {
+          "step": 5,
+          "reachable": true,
+          "win": 10100,
+          "locker": {
+            "multiplier": 2.0199331572257253,
+            "band": 3,
+            "contents": 10100
+          }
+        },
+        {
+          "step": 6,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 7,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 8,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 9,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 10,
+          "reachable": false,
+          "win": 0
+        }
+      ],
+      "totalBetAmount": 1000,
+      "totalWinAmount": 0,
+      "size": "LARGE",
+      "currentStep": 6,
+      "currentPayout": 0,
+      "locker": null
+    }
+  }
+}

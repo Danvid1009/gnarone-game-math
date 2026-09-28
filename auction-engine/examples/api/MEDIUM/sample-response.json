@@ -1,0 +1,408 @@
+{
+  "open": {
+    "sessionId": "a9698dbc-3c4d-45a9-b956-b97dfbf2e651",
+    "requestCounter": 0,
+    "balance": 100000,
+    "currency": {
+      "code": "USD",
+      "prefix": "$",
+      "suffix": "",
+      "grouping": ",",
+      "decimal": ".",
+      "precision": 1,
+      "denomination": 1
+    },
+    "chipLevels": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "minBet": 100,
+    "maxBet": 10000,
+    "defaultBet": 200,
+    "playerAlias": "Player",
+    "seconds": 0,
+    "rounds": 0,
+    "winLoss": 0,
+    "preset": "MEDIUM",
+    "rtp": 0.95,
+    "maxWin": 10,
+    "steps": 10,
+    "bids": [
+      1.26,
+      1.58,
+      2,
+      2.51,
+      3.16,
+      3.98,
+      5.01,
+      6.31,
+      7.94,
+      10
+    ],
+    "survival": [
+      1,
+      0.753968253968254,
+      0.6012658227848101,
+      0.475,
+      0.3784860557768924,
+      0.30063291139240506,
+      0.2386934673366834,
+      0.18962075848303392,
+      0.15055467511885895,
+      0.11964735516372794,
+      0.095
+    ],
+    "cum": [
+      0,
+      0.24603174603174605,
+      0.3987341772151899,
+      0.525,
+      0.6215139442231076,
+      0.6993670886075949,
+      0.7613065326633166,
+      0.810379241516966,
+      0.849445324881141,
+      0.880352644836272,
+      0.9049999999999999,
+      1
+    ],
+    "locker": [
+      {
+        "multiple": 0.25,
+        "p": 0.29757173827099437,
+        "residual_from": 0,
+        "residual_to": 0.29757173827099437,
+        "pays_from": 0.225,
+        "pays_to": 0.275
+      },
+      {
+        "multiple": 0.5,
+        "p": 0.27115705607475704,
+        "residual_from": 0.29757173827099437,
+        "residual_to": 0.5687287943457514,
+        "pays_from": 0.475,
+        "pays_to": 0.525
+      },
+      {
+        "multiple": 1,
+        "p": 0.22515384435445532,
+        "residual_from": 0.5687287943457514,
+        "residual_to": 0.7938826387002067,
+        "pays_from": 0.975,
+        "pays_to": 1.025
+      },
+      {
+        "multiple": 2,
+        "p": 0.1552373711528497,
+        "residual_from": 0.7938826387002067,
+        "residual_to": 0.9491200098530563,
+        "pays_from": 1.975,
+        "pays_to": 2.025
+      },
+      {
+        "multiple": 5,
+        "p": 0.05087999014694362,
+        "residual_from": 0.9491200098530563,
+        "residual_to": 1,
+        "pays_from": 4.975,
+        "pays_to": 5.025
+      }
+    ],
+    "locker_r": 0.025
+  },
+  "calls": [
+    {
+      "call": "bet",
+      "response": {
+        "roundId": "50058415-0cb8-4f1c-aa08-923d3ca35f59",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 0,
+        "size": "MEDIUM",
+        "currentStep": 0,
+        "currentPayout": 0,
+        "steps": [
+          {
+            "step": 1,
+            "payout": 1260,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 2,
+            "payout": 1580,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 3,
+            "payout": 2000,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 4,
+            "payout": 2510,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 5,
+            "payout": 3160,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 6,
+            "payout": 3980,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 7,
+            "payout": 5010,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 8,
+            "payout": 6310,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 9,
+            "payout": 7940,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 10,
+            "payout": 10000,
+            "outcome": "UNDECIDED"
+          }
+        ],
+        "locker": null,
+        "roundEnded": false,
+        "nextAction": [
+          "CONTINUE"
+        ]
+      }
+    },
+    {
+      "call": "next-action",
+      "response": {
+        "roundId": "50058415-0cb8-4f1c-aa08-923d3ca35f59",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 0,
+        "size": "MEDIUM",
+        "currentStep": 1,
+        "currentPayout": 1260,
+        "steps": [
+          {
+            "step": 1,
+            "payout": 1260,
+            "outcome": "SAFE"
+          },
+          {
+            "step": 2,
+            "payout": 1580,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 3,
+            "payout": 2000,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 4,
+            "payout": 2510,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 5,
+            "payout": 3160,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 6,
+            "payout": 3980,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 7,
+            "payout": 5010,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 8,
+            "payout": 6310,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 9,
+            "payout": 7940,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 10,
+            "payout": 10000,
+            "outcome": "UNDECIDED"
+          }
+        ],
+        "locker": null,
+        "roundEnded": false,
+        "nextAction": [
+          "CONTINUE",
+          "CASH_OUT"
+        ]
+      }
+    },
+    {
+      "call": "next-action",
+      "response": {
+        "roundId": "50058415-0cb8-4f1c-aa08-923d3ca35f59",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 0,
+        "size": "MEDIUM",
+        "currentStep": 2,
+        "currentPayout": 1580,
+        "steps": [
+          {
+            "step": 1,
+            "payout": 1260,
+            "outcome": "SAFE"
+          },
+          {
+            "step": 2,
+            "payout": 1580,
+            "outcome": "SAFE"
+          },
+          {
+            "step": 3,
+            "payout": 2000,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 4,
+            "payout": 2510,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 5,
+            "payout": 3160,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 6,
+            "payout": 3980,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 7,
+            "payout": 5010,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 8,
+            "payout": 6310,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 9,
+            "payout": 7940,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 10,
+            "payout": 10000,
+            "outcome": "UNDECIDED"
+          }
+        ],
+        "locker": null,
+        "roundEnded": false,
+        "nextAction": [
+          "CONTINUE",
+          "CASH_OUT"
+        ]
+      }
+    },
+    {
+      "call": "next-action",
+      "response": {
+        "roundId": "50058415-0cb8-4f1c-aa08-923d3ca35f59",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 1592,
+        "size": "MEDIUM",
+        "currentStep": 2,
+        "currentPayout": 1580,
+        "steps": [
+          {
+            "step": 1,
+            "payout": 1260,
+            "outcome": "SAFE"
+          },
+          {
+            "step": 2,
+            "payout": 1580,
+            "outcome": "SAFE"
+          },
+          {
+            "step": 3,
+            "payout": 2000,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 4,
+            "payout": 2510,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 5,
+            "payout": 3160,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 6,
+            "payout": 3980,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 7,
+            "payout": 5010,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 8,
+            "payout": 6310,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 9,
+            "payout": 7940,
+            "outcome": "UNDECIDED"
+          },
+          {
+            "step": 10,
+            "payout": 10000,
+            "outcome": "UNDECIDED"
+          }
+        ],
+        "locker": {
+          "multiplier": 1.007477643501104,
+          "band": 2,
+          "contents": 1592
+        },
+        "roundEnded": true,
+        "nextAction": [
+          "COLLECT"
+        ]
+      }
+    },
+    {
+      "call": "collect",
+      "response": {
+        "balance": 100592
+      }
+    }
+  ]
+}

@@ -1,0 +1,668 @@
+{
+  "engine": "race-engine",
+  "mode": "top3",
+  "stake": 1000,
+  "rounds": 100,
+  "seeds": "fixture-000 … fixture-099 (the same seed drives every preset)",
+  "default_preset": "field-12",
+  "presets": {
+    "field-12": {
+      "parameters": {
+        "racers": [
+          {
+            "name": "Ace",
+            "elo": 1850
+          },
+          {
+            "name": "Bolt",
+            "elo": 1780
+          },
+          {
+            "name": "Cinder",
+            "elo": 1720
+          },
+          {
+            "name": "Dash",
+            "elo": 1680
+          },
+          {
+            "name": "Ember",
+            "elo": 1640
+          },
+          {
+            "name": "Flint",
+            "elo": 1600
+          },
+          {
+            "name": "Gale",
+            "elo": 1560
+          },
+          {
+            "name": "Hex",
+            "elo": 1520
+          },
+          {
+            "name": "Iris",
+            "elo": 1480
+          },
+          {
+            "name": "Jolt",
+            "elo": 1430
+          },
+          {
+            "name": "Kite",
+            "elo": 1380
+          },
+          {
+            "name": "Lux",
+            "elo": 1300
+          }
+        ],
+        "rtp": 0.95,
+        "mode": "top3"
+      },
+      "betTypes": [
+        "Ace",
+        "Bolt",
+        "Cinder",
+        "Dash",
+        "Ember",
+        "Flint",
+        "Gale",
+        "Hex",
+        "Iris",
+        "Jolt",
+        "Kite",
+        "Lux"
+      ],
+      "levels": {
+        "Ace": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Bolt": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Cinder": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Dash": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Ember": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Flint": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Gale": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Hex": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Iris": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Jolt": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Kite": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Lux": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "Ace": 0.9625,
+        "Bolt": 0.8295,
+        "Cinder": 0.7888,
+        "Dash": 0.9874,
+        "Ember": 0.836,
+        "Flint": 0.9573,
+        "Gale": 1.1853,
+        "Hex": 1.0818,
+        "Iris": 0.9237,
+        "Jolt": 1.2028,
+        "Kite": 2.8592,
+        "Lux": 0.3601
+      },
+      "files": [
+        "field-12/field.json",
+        "field-12/rounds.json",
+        "field-12/rounds/NNN.json",
+        "field-12/sample-request.json",
+        "field-12/sample-response.json"
+      ]
+    },
+    "field-8": {
+      "parameters": {
+        "racers": [
+          {
+            "name": "Ace",
+            "elo": 1800
+          },
+          {
+            "name": "Bolt",
+            "elo": 1740
+          },
+          {
+            "name": "Cinder",
+            "elo": 1680
+          },
+          {
+            "name": "Dash",
+            "elo": 1620
+          },
+          {
+            "name": "Ember",
+            "elo": 1560
+          },
+          {
+            "name": "Flint",
+            "elo": 1500
+          },
+          {
+            "name": "Gale",
+            "elo": 1440
+          },
+          {
+            "name": "Hex",
+            "elo": 1380
+          }
+        ],
+        "rtp": 0.95,
+        "mode": "top3"
+      },
+      "betTypes": [
+        "Ace",
+        "Bolt",
+        "Cinder",
+        "Dash",
+        "Ember",
+        "Flint",
+        "Gale",
+        "Hex"
+      ],
+      "levels": {
+        "Ace": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Bolt": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Cinder": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Dash": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Ember": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Flint": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Gale": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Hex": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "Ace": 0.9469,
+        "Bolt": 0.9721,
+        "Cinder": 0.8844,
+        "Dash": 1.008,
+        "Ember": 1.0913,
+        "Flint": 0.9719,
+        "Gale": 0.6421,
+        "Hex": 1.7424
+      },
+      "files": [
+        "field-8/field.json",
+        "field-8/rounds.json",
+        "field-8/rounds/NNN.json",
+        "field-8/sample-request.json",
+        "field-8/sample-response.json"
+      ]
+    },
+    "field-6": {
+      "parameters": {
+        "racers": [
+          {
+            "name": "Ace",
+            "elo": 1750
+          },
+          {
+            "name": "Bolt",
+            "elo": 1680
+          },
+          {
+            "name": "Cinder",
+            "elo": 1610
+          },
+          {
+            "name": "Dash",
+            "elo": 1540
+          },
+          {
+            "name": "Ember",
+            "elo": 1470
+          },
+          {
+            "name": "Flint",
+            "elo": 1400
+          }
+        ],
+        "rtp": 0.95,
+        "mode": "top3"
+      },
+      "betTypes": [
+        "Ace",
+        "Bolt",
+        "Cinder",
+        "Dash",
+        "Ember",
+        "Flint"
+      ],
+      "levels": {
+        "Ace": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Bolt": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Cinder": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Dash": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Ember": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Flint": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "Ace": 0.9542,
+        "Bolt": 0.8863,
+        "Cinder": 0.9957,
+        "Dash": 0.8764,
+        "Ember": 1.0585,
+        "Flint": 1.3876
+      },
+      "files": [
+        "field-6/field.json",
+        "field-6/rounds.json",
+        "field-6/rounds/NNN.json",
+        "field-6/sample-request.json",
+        "field-6/sample-response.json"
+      ]
+    },
+    "field-12-tight": {
+      "parameters": {
+        "racers": [
+          {
+            "name": "Ace",
+            "elo": 1650
+          },
+          {
+            "name": "Bolt",
+            "elo": 1632
+          },
+          {
+            "name": "Cinder",
+            "elo": 1614
+          },
+          {
+            "name": "Dash",
+            "elo": 1596
+          },
+          {
+            "name": "Ember",
+            "elo": 1578
+          },
+          {
+            "name": "Flint",
+            "elo": 1560
+          },
+          {
+            "name": "Gale",
+            "elo": 1542
+          },
+          {
+            "name": "Hex",
+            "elo": 1524
+          },
+          {
+            "name": "Iris",
+            "elo": 1506
+          },
+          {
+            "name": "Jolt",
+            "elo": 1488
+          },
+          {
+            "name": "Kite",
+            "elo": 1470
+          },
+          {
+            "name": "Lux",
+            "elo": 1452
+          }
+        ],
+        "rtp": 0.95,
+        "mode": "top3"
+      },
+      "betTypes": [
+        "Ace",
+        "Bolt",
+        "Cinder",
+        "Dash",
+        "Ember",
+        "Flint",
+        "Gale",
+        "Hex",
+        "Iris",
+        "Jolt",
+        "Kite",
+        "Lux"
+      ],
+      "levels": {
+        "Ace": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Bolt": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Cinder": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Dash": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Ember": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Flint": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Gale": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Hex": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Iris": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Jolt": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Kite": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "Lux": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "Ace": 0.736,
+        "Bolt": 1.0017,
+        "Cinder": 1.1609,
+        "Dash": 0.9138,
+        "Ember": 0.6678,
+        "Flint": 0.8271,
+        "Gale": 0.9353,
+        "Hex": 0.9716,
+        "Iris": 1.0678,
+        "Jolt": 1.0139,
+        "Kite": 1.1987,
+        "Lux": 1.3974
+      },
+      "files": [
+        "field-12-tight/field.json",
+        "field-12-tight/rounds.json",
+        "field-12-tight/rounds/NNN.json",
+        "field-12-tight/sample-request.json",
+        "field-12-tight/sample-response.json"
+      ]
+    }
+  }
+}

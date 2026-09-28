@@ -1,17 +1,99 @@
 {
-  "roundId": "fixture-round-007",
-  "balance": 99000,
-  "totalBetAmount": 1000,
-  "totalWinAmount": 0,
-  "nextAction": [
-    "COLLECT"
-  ],
-  "math": {
-    "u": 0.9729229214135557,
-    "winner": 4,
-    "winnerName": "OPTION_5",
-    "backed": 0,
-    "hit": false,
-    "odds": 4.749999999999999
-  }
+  "open": {
+    "sessionId": "81bc1e98-1026-4b24-a00c-3087d0d89785",
+    "requestCounter": 0,
+    "balance": 100000,
+    "currency": {
+      "code": "USD",
+      "prefix": "$",
+      "suffix": "",
+      "grouping": ",",
+      "decimal": ".",
+      "precision": 1,
+      "denomination": 1
+    },
+    "chipLevels": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "minBet": 100,
+    "maxBet": 10000,
+    "defaultBet": 200,
+    "playerAlias": "Player",
+    "seconds": 0,
+    "rounds": 0,
+    "winLoss": 0,
+    "preset": "five",
+    "rtp": 0.95,
+    "options": [
+      {
+        "name": "OPTION_1",
+        "p": 0.2,
+        "odds": 4.749999999999999,
+        "rn_from": 0,
+        "rn_to": 0.2
+      },
+      {
+        "name": "OPTION_2",
+        "p": 0.2,
+        "odds": 4.749999999999999,
+        "rn_from": 0.2,
+        "rn_to": 0.4
+      },
+      {
+        "name": "OPTION_3",
+        "p": 0.2,
+        "odds": 4.749999999999999,
+        "rn_from": 0.4,
+        "rn_to": 0.6000000000000001
+      },
+      {
+        "name": "OPTION_4",
+        "p": 0.2,
+        "odds": 4.749999999999999,
+        "rn_from": 0.6000000000000001,
+        "rn_to": 0.8
+      },
+      {
+        "name": "OPTION_5",
+        "p": 0.2,
+        "odds": 4.749999999999999,
+        "rn_from": 0.8,
+        "rn_to": 1
+      }
+    ]
+  },
+  "calls": [
+    {
+      "call": "bet",
+      "response": {
+        "roundId": "28946206-d981-4b66-aa6c-44a081e99a2f",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 0,
+        "math": {
+          "u": 0.9729229214135557,
+          "winner": 4,
+          "winnerName": "OPTION_5",
+          "backed": 0,
+          "hit": false,
+          "odds": 4.749999999999999
+        },
+        "nextAction": [
+          "COLLECT"
+        ]
+      }
+    },
+    {
+      "call": "collect",
+      "response": {
+        "balance": 99000
+      }
+    }
+  ]
 }

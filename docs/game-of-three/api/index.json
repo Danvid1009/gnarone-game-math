@@ -1,0 +1,89 @@
+{
+  "engine": "smash-engine",
+  "stake": 1000,
+  "rounds": 100,
+  "seeds": "fixture-000 … fixture-099 (the same seed drives every preset)",
+  "default_preset": "sheet",
+  "presets": {
+    "sheet": {
+      "parameters": {},
+      "betTypes": [
+        "BASE",
+        "BOOSTED"
+      ],
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "BOOSTED": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 0.725,
+        "BOOSTED": 0.7925
+      },
+      "files": [
+        "sheet/field.json",
+        "sheet/rounds.json",
+        "sheet/rounds/NNN.json",
+        "sheet/sample-request.json",
+        "sheet/sample-response.json"
+      ]
+    },
+    "rtp-0.95": {
+      "parameters": {
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE",
+        "BOOSTED"
+      ],
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "BOOSTED": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 0.7096,
+        "BOOSTED": 0.7749
+      },
+      "files": [
+        "rtp-0.95/field.json",
+        "rtp-0.95/rounds.json",
+        "rtp-0.95/rounds/NNN.json",
+        "rtp-0.95/sample-request.json",
+        "rtp-0.95/sample-response.json"
+      ]
+    }
+  }
+}

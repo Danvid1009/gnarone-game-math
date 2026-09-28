@@ -1,0 +1,43 @@
+{
+  "module": "api/rgs.js",
+  "create": "createGame({\"preset\":\"LARGE\"})",
+  "calls": [
+    {
+      "call": "bet",
+      "body": {
+        "sessionId": "6af65485-470e-44d1-9683-52596cbf0f46",
+        "betAmount": 1000,
+        "betType": "LARGE",
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "next-action",
+      "body": {
+        "roundId": "4443c70b-99e1-4601-98c9-d0c06c1d279f",
+        "actionCode": "CONTINUE"
+      }
+    },
+    {
+      "call": "next-action",
+      "body": {
+        "roundId": "4443c70b-99e1-4601-98c9-d0c06c1d279f",
+        "actionCode": "CONTINUE"
+      }
+    },
+    {
+      "call": "next-action",
+      "body": {
+        "roundId": "4443c70b-99e1-4601-98c9-d0c06c1d279f",
+        "actionCode": "CASH_OUT"
+      }
+    },
+    {
+      "call": "collect",
+      "body": {
+        "roundId": "4443c70b-99e1-4601-98c9-d0c06c1d279f"
+      }
+    }
+  ],
+  "note": "deterministic: seed fixture-007; drop seed for a live roll"
+}

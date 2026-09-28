@@ -259,15 +259,25 @@ buildBridge(); buildLadderList(); buildChips(); refresh();
     <p style="margin:0 0 10px;max-width:80ch">The engine ships as a browser module at <code>https://danvid1009.github.io/gnarone-game-math/stepper/api/rgs.js</code>. It speaks the RGS provider contract (open, valid-bets, bet, next-action, collect; money in integer minor units; bet debits, collect credits) and rolls with <code>crypto.getRandomValues</code> in your page, so there is no server and every round is live. Pass <code>seed</code> to replay a round.</p>
 <pre style="background:#151923;border:1px solid #252b38;border-radius:4px;padding:12px 14px;overflow-x:auto;font:12.5px 'IBM Plex Mono',ui-monospace,monospace;color:#f1efe8;margin:0 0 10px"><code>import { createGame } from 'https://danvid1009.github.io/gnarone-game-math/stepper/api/rgs.js';
 
-const g = createGame();                                      // bet types: EASY, MEDIUM, HARD
+const g = createGame({ preset: 'EASY' });                    // presets: EASY, MEDIUM, HARD
+                                                       // bet types: EASY
 const s = g.open();                                    // session, balance 100000, chipLevels [100,200,500,1000,2500,5000,10000]
-let r = g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'MEDIUM' });   // fresh crypto seed → nextAction ['CONTINUE']
+let r = g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'EASY' });   // fresh crypto seed → nextAction ['CONTINUE']
 r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' });          // step: ['CONTINUE','CASH_OUT'] or the round ends
 r = g.nextAction({ roundId: r.roundId, actionCode: 'CASH_OUT' });          // → totalWinAmount, nextAction ['COLLECT']
 g.collect({ roundId: r.roundId });                                          // credits the win → { balance }
 
 // Replay any fixture: same seed, same code path, same answer as rounds/007.json
-g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'MEDIUM', seed: 'fixture-007' });</code></pre>
+g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'EASY', seed: 'fixture-007' });</code></pre>
+    <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin:18px 0 6px">STATIC FIXTURES · 100 PRE-DRAWN ROUNDS</div>
+    <p style="margin:0 0 10px;max-width:80ch">Seeds <code>fixture-000</code> … <code>fixture-099</code>, served as plain JSON (GET, no auth, deterministic). Stake unit is 1000 minor units; scale linearly. The live module reproduces any of them when given the same seed.</p>
+<pre style="background:#151923;border:1px solid #252b38;border-radius:4px;padding:12px 14px;overflow-x:auto;font:12.5px 'IBM Plex Mono',ui-monospace,monospace;color:#f1efe8;margin:0 0 10px"><code>curl -s https://danvid1009.github.io/gnarone-game-math/stepper/api/index.json                 # presets, parameters, bet types, realised RTP
+curl -s https://danvid1009.github.io/gnarone-game-math/stepper/api/EASY/field.json            # one preset: frozen config + tables + how to settle
+curl -s https://danvid1009.github.io/gnarone-game-math/stepper/api/EASY/rounds/007.json       # one round (000–099), settled for every bet type
+curl -s https://danvid1009.github.io/gnarone-game-math/stepper/api/EASY/rounds.json           # all 100 rounds (stake + win per bet type)
+curl -s https://danvid1009.github.io/gnarone-game-math/stepper/api/EASY/sample-request.json   # RGS-shaped request
+curl -s https://danvid1009.github.io/gnarone-game-math/stepper/api/EASY/sample-response.json  # …and its response</code></pre>
+    <p style="margin:0;max-width:80ch">One folder per preset: <code>EASY</code>, <code>MEDIUM</code>, <code>HARD</code>. Settlement rule is spelled out in each preset's <code>field.json</code> under <code>how_to_settle</code>; the same seed drives every preset, so round 007 has the same u in all of them.</p>
     <p style="margin:10px 0 0;max-width:80ch">Full write-up: <a href="./" style="color:#6fd3c7">Stepper page</a>.</p>
   </div>
 </section>

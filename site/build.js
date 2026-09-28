@@ -102,11 +102,12 @@ const MD_SCRIPT = `
 function rgsSnippet(e, g, base) {
   const bt = g.betTypes.length > 1 ? g.betTypes[Math.min(1, g.betTypes.length - 1)] : g.defaultBetType;
   const lv = g.levels(bt); const amt = lv.includes(1000) ? 1000 : lv[Math.min(2, lv.length - 1)];
-  const opts = e.rgsOptions ? JSON.stringify(e.rgsOptions).replace(/"([a-z]+)":/gi, '$1: ').replace(/"/g, "'").replace(/\{/, '{ ').replace(/\}/, ' }') : '';
+  const opts = `{ preset: '${g.preset}'${e.rgsOptions?.mode ? `, mode: '${e.rgsOptions.mode}'` : ''} }`;
   const multi = g.isMultiStep;
   return `import { createGame } from '${base}/${e.slug}/api/rgs.js';
 
-const g = createGame(${opts});                ${' '.repeat(Math.max(0, 22 - opts.length))}// bet types: ${g.betTypes.join(', ')}
+const g = createGame(${opts});${' '.repeat(Math.max(1, 38 - opts.length))}// presets: ${e.apiSets.join(', ')}
+                                                       // bet types: ${g.betTypes.join(', ')}
 const s = g.open();                                    // session, balance 100000, chipLevels ${JSON.stringify(lv)}
 ${multi ? `let r = g.bet({ sessionId: s.sessionId, betAmount: ${amt}, betType: '${bt}' });   // fresh crypto seed → nextAction ['CONTINUE']
 r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' });          // step: ['CONTINUE','CASH_OUT'] or the round ends
@@ -121,18 +122,16 @@ g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: '${bt}', seed: 'fixtur
 function apiFooter(e, g) {
   const BASE = 'https://danvid1009.github.io/gnarone-game-math';
   const set = e.apiSets ? `/${e.apiSets[0]}` : '';
-  const settle = e.apiSets
-    ? `Settlement rule: see <code>how_to_settle</code> in each set's <code>field.json</code>. Sets: ${e.apiSets.map(x => `<code>${x}</code>`).join(', ')} — the same seed drives every set, so round 007 has the same u in all of them.`
-    : `Settlement rule: look up the backed racer in <code>settlements</code>; <code>win = round(stake × multiple)</code> if its <code>place</code> is 1, 2 or 3, else 0.`;
+  const settle = `One folder per preset: ${e.apiSets.map(x => `<code>${x}</code>`).join(', ')}. Settlement rule is spelled out in each preset's <code>field.json</code> under <code>how_to_settle</code>; the same seed drives every preset, so round 007 has the same u in all of them.`;
   const PRE = `<pre style="background:#151923;border:1px solid #252b38;border-radius:4px;padding:12px 14px;overflow-x:auto;font:12.5px 'IBM Plex Mono',ui-monospace,monospace;color:#f1efe8;margin:0 0 10px"><code>`;
   const hasApi = !!(e.api && existsSync(join(root, e.folder, e.api)));
   const fixtures = hasApi ? `
     <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin:18px 0 6px">STATIC FIXTURES · 100 PRE-DRAWN ROUNDS</div>
     <p style="margin:0 0 10px;max-width:80ch">Seeds <code>fixture-000</code> … <code>fixture-099</code>, served as plain JSON (GET, no auth, deterministic). Stake unit is 1000 minor units; scale linearly. The live module reproduces any of them when given the same seed.</p>
-${PRE}${e.apiSets ? `curl -s ${BASE}/${e.slug}/api/index.json                 # sets, odds, files
-` : ''}curl -s ${BASE}/${e.slug}/api${set}/field.json            # configuration + odds
-curl -s ${BASE}/${e.slug}/api${set}/rounds/007.json       # one round (000–099)
-curl -s ${BASE}/${e.slug}/api${set}/rounds.json           # all 100 rounds
+${PRE}curl -s ${BASE}/${e.slug}/api/index.json                 # presets, parameters, bet types, realised RTP
+curl -s ${BASE}/${e.slug}/api${set}/field.json            # one preset: frozen config + tables + how to settle
+curl -s ${BASE}/${e.slug}/api${set}/rounds/007.json       # one round (000–099), settled for every bet type
+curl -s ${BASE}/${e.slug}/api${set}/rounds.json           # all 100 rounds (stake + win per bet type)
 curl -s ${BASE}/${e.slug}/api${set}/sample-request.json   # RGS-shaped request
 curl -s ${BASE}/${e.slug}/api${set}/sample-response.json  # …and its response</code></pre>
     <p style="margin:0;max-width:80ch">${settle}</p>` : '';
@@ -157,6 +156,7 @@ for (const e of engines) {
   // the live browser module: <slug>/api/rgs.js → api/src/rgs.js (engine sources) + rgs-math/src (the contract)
   const rgsMod = await import(pathToFileURL(join(root, e.folder, 'src/rgs.js')).href);
   const g = rgsMod.createGame(e.rgsOptions ?? {});
+  e.apiSets = Object.keys(rgsMod.PRESETS);
   const apiDir = e.api ? join(root, e.folder, e.api) : null;
   const hasApi = !!apiDir && existsSync(apiDir);
   if (hasApi) cpSync(apiDir, join(out, 'api'), { recursive: true });
@@ -176,24 +176,24 @@ for (const e of engines) {
 <p class="lead">The engine is published as an ES module that implements the RGS provider contract and rolls locally with <code>crypto.getRandomValues</code>: open, valid-bets, bet, ${g.isMultiStep ? 'next-action, ' : ''}collect, with the observed balance semantics (bet debits the stake, collect credits the win, integer minor units). No server, every round live, and any round replays from its seed. Bet types: ${g.betTypes.map(b => `<code>${esc(b)}</code>`).join(', ')}.</p>
 <pre><code>${esc(rgsSnippet(e, g, BASE))}</code></pre>`;
   const apiSection = liveSection + (hasApi ? (e.apiSets ? `
-<h2>Sample API (static fixtures)</h2>
-<p class="lead">One hundred pre-drawn rounds from fixed seeds (<code>fixture-000</code> … <code>fixture-099</code>), one set per reference configuration (${e.apiSets.map(x => `<code>${x}</code>`).join(', ')}), served as plain JSON. The same seed drives every set, so round 007 uses the same u everywhere.</p>
-<pre><code># what sets exist, their odds and files
+<h2>Presets and static fixtures</h2>
+<p class="lead">Presets: ${e.apiSets.map(x => `<code>${x}</code>`).join(', ')} (default <code>${g.preset}</code>). Each preset is a frozen configuration and its own folder: the config, derived tables and settlement rule in <code>field.json</code>, plus one hundred pre-drawn rounds from seeds <code>fixture-000</code> … <code>fixture-099</code> settled for every bet type. The same seed drives every preset, so round 007 uses the same u everywhere, and the live module reproduces any of them when given the seed.</p>
+<pre><code># presets, their parameters, bet types and realised RTP over the 100 rounds
 curl -s ${BASE}/${e.slug}/api/index.json
 
-# the configuration of one set: options / bands, probabilities, odds, RN intervals, how to settle
+# one preset: parameters, tables (bands / odds / ladder / decks), RN intervals, how to settle
 curl -s ${BASE}/${e.slug}/api/${e.apiSets[0]}/field.json
 
-# one round (000–099): seed, u, outcome, settlement at stake 1000
+# one round (000–099): seed, full outcome, settlement for every bet type
 curl -s ${BASE}/${e.slug}/api/${e.apiSets[0]}/rounds/007.json
 
-# all 100 rounds of a set
+# all 100 rounds of a preset (stake and win per bet type)
 curl -s ${BASE}/${e.slug}/api/${e.apiSets[0]}/rounds.json
 
-# a worked RGS-shaped request/response pair (round 007)
+# round 007 played through the real calls: request bodies and every response
 curl -s ${BASE}/${e.slug}/api/${e.apiSets[0]}/sample-request.json
 curl -s ${BASE}/${e.slug}/api/${e.apiSets[0]}/sample-response.json</code></pre>
-<p class="lead">Settlement rule is spelled out in each set's <code>field.json</code> under <code>how_to_settle</code>.</p>` : `
+<p class="lead">Settlement rule is spelled out in each preset's <code>field.json</code> under <code>how_to_settle</code>.</p>` : `
 <h2>Sample API (static fixtures)</h2>
 <p class="lead">One hundred pre-drawn rounds from fixed seeds, each resolved for every bet type, served as plain JSON. Deterministic, so two people calling the same round get the same answer.</p>
 <pre><code># the field: racers, Elo, win/place/show probabilities, multipliers per racer

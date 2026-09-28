@@ -1,0 +1,79 @@
+{
+  "round": 67,
+  "seed": "fixture-067",
+  "results": {
+    "MEDIUM": {
+      "stake": 1000,
+      "survived": 2,
+      "outcome": "CRASH_ON_STEP_3",
+      "payoutIfTakenAfter": [
+        {
+          "step": 1,
+          "reachable": true,
+          "win": 1244,
+          "locker": {
+            "multiplier": 0.9875983120238391,
+            "band": 2,
+            "contents": 1244
+          }
+        },
+        {
+          "step": 2,
+          "reachable": true,
+          "win": 1560,
+          "locker": {
+            "multiplier": 0.9875983120238391,
+            "band": 2,
+            "contents": 1560
+          }
+        },
+        {
+          "step": 3,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 4,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 5,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 6,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 7,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 8,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 9,
+          "reachable": false,
+          "win": 0
+        },
+        {
+          "step": 10,
+          "reachable": false,
+          "win": 0
+        }
+      ],
+      "totalBetAmount": 1000,
+      "totalWinAmount": 0,
+      "size": "MEDIUM",
+      "currentStep": 3,
+      "currentPayout": 0,
+      "locker": null
+    }
+  }
+}

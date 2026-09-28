@@ -1,0 +1,111 @@
+{
+  "open": {
+    "sessionId": "af9bd3b2-9049-44fa-b34d-d8831275acb4",
+    "requestCounter": 0,
+    "balance": 100000,
+    "currency": {
+      "code": "USD",
+      "prefix": "$",
+      "suffix": "",
+      "grouping": ",",
+      "decimal": ".",
+      "precision": 1,
+      "denomination": 1
+    },
+    "chipLevels": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "minBet": 100,
+    "maxBet": 10000,
+    "defaultBet": 200,
+    "playerAlias": "Player",
+    "seconds": 0,
+    "rounds": 0,
+    "winLoss": 0,
+    "preset": "steady",
+    "rtp": 0.9499999999999997,
+    "r": 0.05,
+    "bands": [
+      {
+        "payout": 0,
+        "p": 0.2810184860326199,
+        "rn_from": 0,
+        "rn_to": 0.2810184860326199,
+        "pays_from": 0,
+        "pays_to": 0
+      },
+      {
+        "payout": 0.5,
+        "p": 0.22045294740898477,
+        "rn_from": 0.2810184860326199,
+        "rn_to": 0.5014714334416047,
+        "pays_from": 0.45,
+        "pays_to": 0.55
+      },
+      {
+        "payout": 1,
+        "p": 0.17294058731661982,
+        "rn_from": 0.5014714334416047,
+        "rn_to": 0.6744120207582245,
+        "pays_from": 0.95,
+        "pays_to": 1.05
+      },
+      {
+        "payout": 1.5,
+        "p": 0.135668164535497,
+        "rn_from": 0.6744120207582245,
+        "rn_to": 0.8100801852937215,
+        "pays_from": 1.45,
+        "pays_to": 1.55
+      },
+      {
+        "payout": 2,
+        "p": 0.1064287519431932,
+        "rn_from": 0.8100801852937215,
+        "rn_to": 0.9165089372369147,
+        "pays_from": 1.95,
+        "pays_to": 2.05
+      },
+      {
+        "payout": 3,
+        "p": 0.08349106276308524,
+        "rn_from": 0.9165089372369147,
+        "rn_to": 1,
+        "pays_from": 2.95,
+        "pays_to": 3.05
+      }
+    ]
+  },
+  "calls": [
+    {
+      "call": "bet",
+      "response": {
+        "roundId": "971a371d-0bb3-4720-97b7-5ff71f8a7290",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 3018,
+        "math": {
+          "u": 0.9729229214135557,
+          "band": 5,
+          "multiple": 3.017568889782517,
+          "r": 0.05
+        },
+        "nextAction": [
+          "COLLECT"
+        ]
+      }
+    },
+    {
+      "call": "collect",
+      "response": {
+        "balance": 102018
+      }
+    }
+  ]
+}

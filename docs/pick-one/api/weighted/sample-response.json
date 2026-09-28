@@ -1,17 +1,85 @@
 {
-  "roundId": "fixture-round-007",
-  "balance": 99000,
-  "totalBetAmount": 1000,
-  "totalWinAmount": 0,
-  "nextAction": [
-    "COLLECT"
-  ],
-  "math": {
-    "u": 0.9729229214135557,
-    "winner": 2,
-    "winnerName": "BLUE",
-    "backed": 0,
-    "hit": false,
-    "odds": 1.9
-  }
+  "open": {
+    "sessionId": "89c68f1d-15e6-479a-906e-cc7a11d666d8",
+    "requestCounter": 0,
+    "balance": 100000,
+    "currency": {
+      "code": "USD",
+      "prefix": "$",
+      "suffix": "",
+      "grouping": ",",
+      "decimal": ".",
+      "precision": 1,
+      "denomination": 1
+    },
+    "chipLevels": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "minBet": 100,
+    "maxBet": 10000,
+    "defaultBet": 200,
+    "playerAlias": "Player",
+    "seconds": 0,
+    "rounds": 0,
+    "winLoss": 0,
+    "preset": "weighted",
+    "rtp": 0.95,
+    "options": [
+      {
+        "name": "RED",
+        "p": 0.5,
+        "odds": 1.9,
+        "rn_from": 0,
+        "rn_to": 0.5
+      },
+      {
+        "name": "GREEN",
+        "p": 0.3,
+        "odds": 3.1666666666666665,
+        "rn_from": 0.5,
+        "rn_to": 0.8
+      },
+      {
+        "name": "BLUE",
+        "p": 0.2,
+        "odds": 4.749999999999999,
+        "rn_from": 0.8,
+        "rn_to": 1
+      }
+    ]
+  },
+  "calls": [
+    {
+      "call": "bet",
+      "response": {
+        "roundId": "803fe561-d11e-49e4-b26a-9e0a2d1b1c42",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 0,
+        "math": {
+          "u": 0.9729229214135557,
+          "winner": 2,
+          "winnerName": "BLUE",
+          "backed": 0,
+          "hit": false,
+          "odds": 1.9
+        },
+        "nextAction": [
+          "COLLECT"
+        ]
+      }
+    },
+    {
+      "call": "collect",
+      "response": {
+        "balance": 99000
+      }
+    }
+  ]
 }
