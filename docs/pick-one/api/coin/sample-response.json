@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "1bfe7091-f935-4f88-993f-53d4f8ad6187",
+    "sessionId": "e8a64f4d-72af-4afb-8d8e-792066e56cb2",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -32,14 +32,14 @@
     "rtp": 0.95,
     "options": [
       {
-        "name": "HEADS",
+        "name": "OPTION_1",
         "p": 0.5,
         "odds": 1.9,
         "rn_from": 0,
         "rn_to": 0.5
       },
       {
-        "name": "TAILS",
+        "name": "OPTION_2",
         "p": 0.5,
         "odds": 1.9,
         "rn_from": 0.5,
@@ -51,14 +51,14 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "53a8d22d-d336-4f77-bceb-f1052492d020",
+        "roundId": "8612b944-bf6f-461a-a1fb-eb5ba58aab0a",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
         "math": {
           "u": 0.9729229214135557,
           "winner": 1,
-          "winnerName": "TAILS",
+          "winnerName": "OPTION_2",
           "backed": 0,
           "hit": false,
           "odds": 1.9

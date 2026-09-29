@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "89c68f1d-15e6-479a-906e-cc7a11d666d8",
+    "sessionId": "bb5085e9-8845-4f62-a2c6-61fc61061c6f",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -32,21 +32,21 @@
     "rtp": 0.95,
     "options": [
       {
-        "name": "RED",
+        "name": "OPTION_1",
         "p": 0.5,
         "odds": 1.9,
         "rn_from": 0,
         "rn_to": 0.5
       },
       {
-        "name": "GREEN",
+        "name": "OPTION_2",
         "p": 0.3,
         "odds": 3.1666666666666665,
         "rn_from": 0.5,
         "rn_to": 0.8
       },
       {
-        "name": "BLUE",
+        "name": "OPTION_3",
         "p": 0.2,
         "odds": 4.749999999999999,
         "rn_from": 0.8,
@@ -58,14 +58,14 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "803fe561-d11e-49e4-b26a-9e0a2d1b1c42",
+        "roundId": "28b71cc5-0f65-4f07-a25d-b54b0ee864ee",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
         "math": {
           "u": 0.9729229214135557,
           "winner": 2,
-          "winnerName": "BLUE",
+          "winnerName": "OPTION_3",
           "backed": 0,
           "hit": false,
           "odds": 1.9

@@ -1,5 +1,8 @@
-// Pick One as an RGS provider that rolls locally (browser or Node).
-//   const g = createGame({ preset: 'five' });   g.bet({ sessionId, betAmount: 1000, betType: 'OPTION_3' })
+// Pick One as an RGS provider that rolls locally (browser or Node). The general RTP / p engine:
+// option i owns probability p_i and pays RTP / p_i. Options are placeholders OPTION_1..n; the client reskins them.
+//   const g = createGame({ preset: 'five' });                            // coin | three | five | weighted
+//   const g = createGame({ preset: 'coin', probabilities: [0.7, 0.3] });  // or weights: [...] — any vector, exact RTP
+//   g.bet({ sessionId, betAmount: 1000, betType: 'OPTION_3' })
 import { defineGame } from '../../rgs-math/src/contract.js';
 import { buildPick } from './engine.js';
 
@@ -8,7 +11,7 @@ export const PRESETS = {
   coin:     { n: 2, rtp: RTP },
   three:    { n: 3, rtp: RTP },
   five:     { n: 5, rtp: RTP },
-  weighted: { weights: [5, 3, 2], labels: ['RED', 'GREEN', 'BLUE'], rtp: RTP },
+  weighted: { weights: [5, 3, 2], rtp: RTP },
 };
 export const DEFAULT_PRESET = 'coin';
 export const HOW_TO_SETTLE = 'the winner is the option whose [rn_from, rn_to) contains u; win = round(stake × odds[backed]) if backed === winner, else 0';

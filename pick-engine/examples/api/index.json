@@ -11,11 +11,11 @@
         "rtp": 0.95
       },
       "betTypes": [
-        "HEADS",
-        "TAILS"
+        "OPTION_1",
+        "OPTION_2"
       ],
       "levels": {
-        "HEADS": [
+        "OPTION_1": [
           100,
           200,
           500,
@@ -24,7 +24,7 @@
           5000,
           10000
         ],
-        "TAILS": [
+        "OPTION_2": [
           100,
           200,
           500,
@@ -36,8 +36,8 @@
       },
       "multiStep": false,
       "realisedRtp": {
-        "HEADS": 0.893,
-        "TAILS": 1.007
+        "OPTION_1": 0.893,
+        "OPTION_2": 1.007
       },
       "files": [
         "coin/field.json",
@@ -182,20 +182,15 @@
           3,
           2
         ],
-        "labels": [
-          "RED",
-          "GREEN",
-          "BLUE"
-        ],
         "rtp": 0.95
       },
       "betTypes": [
-        "RED",
-        "GREEN",
-        "BLUE"
+        "OPTION_1",
+        "OPTION_2",
+        "OPTION_3"
       ],
       "levels": {
-        "RED": [
+        "OPTION_1": [
           100,
           200,
           500,
@@ -204,7 +199,7 @@
           5000,
           10000
         ],
-        "GREEN": [
+        "OPTION_2": [
           100,
           200,
           500,
@@ -213,7 +208,7 @@
           5000,
           10000
         ],
-        "BLUE": [
+        "OPTION_3": [
           100,
           200,
           500,
@@ -225,9 +220,9 @@
       },
       "multiStep": false,
       "realisedRtp": {
-        "RED": 0.893,
-        "GREEN": 0.7917,
-        "BLUE": 1.33
+        "OPTION_1": 0.893,
+        "OPTION_2": 0.7917,
+        "OPTION_3": 1.33
       },
       "files": [
         "weighted/field.json",

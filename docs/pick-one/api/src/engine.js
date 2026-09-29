@@ -12,7 +12,7 @@ export function buildPick({ n, probabilities, weights, labels, rtp = 0.95 } = {}
   else if (Array.isArray(weights)) { const W = weights.reduce((a, b) => a + Number(b), 0); p = weights.map(w => Number(w) / W); }
   else { if (!Number.isInteger(n) || n < 2) throw new Error('n must be an integer ≥ 2'); p = Array(n).fill(1 / n); }
   n = p.length; if (n < 2 || p.some(x => !(x > 0))) throw new Error('need ≥ 2 options with positive probability');
-  const names = labels ?? Array.from({ length: n }, (_, i) => n === 2 ? ['HEADS', 'TAILS'][i] : `OPTION_${i + 1}`);
+  const names = labels ?? Array.from({ length: n }, (_, i) => `OPTION_${i + 1}`);   // placeholders: the client reskins
   const odds = p.map(x => rtp / x);
   const cum = [0]; for (const x of p) cum.push(cum[cum.length - 1] + x); cum[n] = 1;
   const options = names.map((name, i) => ({ index: i, name, p: p[i], odds: odds[i], from: cum[i], to: cum[i + 1], stdev: Math.sqrt(p[i] * odds[i] ** 2 - rtp * rtp) }));

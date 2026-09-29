@@ -10,51 +10,51 @@
       "parameters": {
         "racers": [
           {
-            "name": "Ace",
+            "name": "RACER_1",
             "elo": 1850
           },
           {
-            "name": "Bolt",
+            "name": "RACER_2",
             "elo": 1780
           },
           {
-            "name": "Cinder",
+            "name": "RACER_3",
             "elo": 1720
           },
           {
-            "name": "Dash",
+            "name": "RACER_4",
             "elo": 1680
           },
           {
-            "name": "Ember",
+            "name": "RACER_5",
             "elo": 1640
           },
           {
-            "name": "Flint",
+            "name": "RACER_6",
             "elo": 1600
           },
           {
-            "name": "Gale",
+            "name": "RACER_7",
             "elo": 1560
           },
           {
-            "name": "Hex",
+            "name": "RACER_8",
             "elo": 1520
           },
           {
-            "name": "Iris",
+            "name": "RACER_9",
             "elo": 1480
           },
           {
-            "name": "Jolt",
+            "name": "RACER_10",
             "elo": 1430
           },
           {
-            "name": "Kite",
+            "name": "RACER_11",
             "elo": 1380
           },
           {
-            "name": "Lux",
+            "name": "RACER_12",
             "elo": 1300
           }
         ],
@@ -62,21 +62,21 @@
         "mode": "top1"
       },
       "betTypes": [
-        "Ace",
-        "Bolt",
-        "Cinder",
-        "Dash",
-        "Ember",
-        "Flint",
-        "Gale",
-        "Hex",
-        "Iris",
-        "Jolt",
-        "Kite",
-        "Lux"
+        "RACER_1",
+        "RACER_2",
+        "RACER_3",
+        "RACER_4",
+        "RACER_5",
+        "RACER_6",
+        "RACER_7",
+        "RACER_8",
+        "RACER_9",
+        "RACER_10",
+        "RACER_11",
+        "RACER_12"
       ],
       "levels": {
-        "Ace": [
+        "RACER_1": [
           100,
           200,
           500,
@@ -85,7 +85,7 @@
           5000,
           10000
         ],
-        "Bolt": [
+        "RACER_2": [
           100,
           200,
           500,
@@ -94,7 +94,7 @@
           5000,
           10000
         ],
-        "Cinder": [
+        "RACER_3": [
           100,
           200,
           500,
@@ -103,7 +103,7 @@
           5000,
           10000
         ],
-        "Dash": [
+        "RACER_4": [
           100,
           200,
           500,
@@ -112,7 +112,7 @@
           5000,
           10000
         ],
-        "Ember": [
+        "RACER_5": [
           100,
           200,
           500,
@@ -121,7 +121,7 @@
           5000,
           10000
         ],
-        "Flint": [
+        "RACER_6": [
           100,
           200,
           500,
@@ -130,7 +130,7 @@
           5000,
           10000
         ],
-        "Gale": [
+        "RACER_7": [
           100,
           200,
           500,
@@ -139,7 +139,7 @@
           5000,
           10000
         ],
-        "Hex": [
+        "RACER_8": [
           100,
           200,
           500,
@@ -148,7 +148,7 @@
           5000,
           10000
         ],
-        "Iris": [
+        "RACER_9": [
           100,
           200,
           500,
@@ -157,7 +157,7 @@
           5000,
           10000
         ],
-        "Jolt": [
+        "RACER_10": [
           100,
           200,
           500,
@@ -166,7 +166,7 @@
           5000,
           10000
         ],
-        "Kite": [
+        "RACER_11": [
           100,
           200,
           500,
@@ -175,7 +175,7 @@
           5000,
           10000
         ],
-        "Lux": [
+        "RACER_12": [
           100,
           200,
           500,
@@ -187,18 +187,18 @@
       },
       "multiStep": false,
       "realisedRtp": {
-        "Ace": 0.7751,
-        "Bolt": 1.0542,
-        "Cinder": 0.5956,
-        "Dash": 1.031,
-        "Ember": 0.9439,
-        "Flint": 0.8913,
-        "Gale": 1.3091,
-        "Hex": 1.1771,
-        "Iris": 0.8892,
-        "Jolt": 1.1857,
-        "Kite": 3.6894,
-        "Lux": 0
+        "RACER_1": 0.7751,
+        "RACER_2": 1.0542,
+        "RACER_3": 0.5956,
+        "RACER_4": 1.031,
+        "RACER_5": 0.9439,
+        "RACER_6": 0.8913,
+        "RACER_7": 1.3091,
+        "RACER_8": 1.1771,
+        "RACER_9": 0.8892,
+        "RACER_10": 1.1857,
+        "RACER_11": 3.6894,
+        "RACER_12": 0
       },
       "files": [
         "field-12/field.json",
@@ -212,35 +212,35 @@
       "parameters": {
         "racers": [
           {
-            "name": "Ace",
+            "name": "RACER_1",
             "elo": 1800
           },
           {
-            "name": "Bolt",
+            "name": "RACER_2",
             "elo": 1740
           },
           {
-            "name": "Cinder",
+            "name": "RACER_3",
             "elo": 1680
           },
           {
-            "name": "Dash",
+            "name": "RACER_4",
             "elo": 1620
           },
           {
-            "name": "Ember",
+            "name": "RACER_5",
             "elo": 1560
           },
           {
-            "name": "Flint",
+            "name": "RACER_6",
             "elo": 1500
           },
           {
-            "name": "Gale",
+            "name": "RACER_7",
             "elo": 1440
           },
           {
-            "name": "Hex",
+            "name": "RACER_8",
             "elo": 1380
           }
         ],
@@ -248,17 +248,17 @@
         "mode": "top1"
       },
       "betTypes": [
-        "Ace",
-        "Bolt",
-        "Cinder",
-        "Dash",
-        "Ember",
-        "Flint",
-        "Gale",
-        "Hex"
+        "RACER_1",
+        "RACER_2",
+        "RACER_3",
+        "RACER_4",
+        "RACER_5",
+        "RACER_6",
+        "RACER_7",
+        "RACER_8"
       ],
       "levels": {
-        "Ace": [
+        "RACER_1": [
           100,
           200,
           500,
@@ -267,7 +267,7 @@
           5000,
           10000
         ],
-        "Bolt": [
+        "RACER_2": [
           100,
           200,
           500,
@@ -276,7 +276,7 @@
           5000,
           10000
         ],
-        "Cinder": [
+        "RACER_3": [
           100,
           200,
           500,
@@ -285,7 +285,7 @@
           5000,
           10000
         ],
-        "Dash": [
+        "RACER_4": [
           100,
           200,
           500,
@@ -294,7 +294,7 @@
           5000,
           10000
         ],
-        "Ember": [
+        "RACER_5": [
           100,
           200,
           500,
@@ -303,7 +303,7 @@
           5000,
           10000
         ],
-        "Flint": [
+        "RACER_6": [
           100,
           200,
           500,
@@ -312,7 +312,7 @@
           5000,
           10000
         ],
-        "Gale": [
+        "RACER_7": [
           100,
           200,
           500,
@@ -321,7 +321,7 @@
           5000,
           10000
         ],
-        "Hex": [
+        "RACER_8": [
           100,
           200,
           500,
@@ -333,14 +333,14 @@
       },
       "multiStep": false,
       "realisedRtp": {
-        "Ace": 0.762,
-        "Bolt": 0.9471,
-        "Cinder": 0.9122,
-        "Dash": 0.8589,
-        "Ember": 1.3346,
-        "Flint": 1.1997,
-        "Gale": 0.7262,
-        "Hex": 2.3936
+        "RACER_1": 0.762,
+        "RACER_2": 0.9471,
+        "RACER_3": 0.9122,
+        "RACER_4": 0.8589,
+        "RACER_5": 1.3346,
+        "RACER_6": 1.1997,
+        "RACER_7": 0.7262,
+        "RACER_8": 2.3936
       },
       "files": [
         "field-8/field.json",
@@ -354,27 +354,27 @@
       "parameters": {
         "racers": [
           {
-            "name": "Ace",
+            "name": "RACER_1",
             "elo": 1750
           },
           {
-            "name": "Bolt",
+            "name": "RACER_2",
             "elo": 1680
           },
           {
-            "name": "Cinder",
+            "name": "RACER_3",
             "elo": 1610
           },
           {
-            "name": "Dash",
+            "name": "RACER_4",
             "elo": 1540
           },
           {
-            "name": "Ember",
+            "name": "RACER_5",
             "elo": 1470
           },
           {
-            "name": "Flint",
+            "name": "RACER_6",
             "elo": 1400
           }
         ],
@@ -382,15 +382,15 @@
         "mode": "top1"
       },
       "betTypes": [
-        "Ace",
-        "Bolt",
-        "Cinder",
-        "Dash",
-        "Ember",
-        "Flint"
+        "RACER_1",
+        "RACER_2",
+        "RACER_3",
+        "RACER_4",
+        "RACER_5",
+        "RACER_6"
       ],
       "levels": {
-        "Ace": [
+        "RACER_1": [
           100,
           200,
           500,
@@ -399,7 +399,7 @@
           5000,
           10000
         ],
-        "Bolt": [
+        "RACER_2": [
           100,
           200,
           500,
@@ -408,7 +408,7 @@
           5000,
           10000
         ],
-        "Cinder": [
+        "RACER_3": [
           100,
           200,
           500,
@@ -417,7 +417,7 @@
           5000,
           10000
         ],
-        "Dash": [
+        "RACER_4": [
           100,
           200,
           500,
@@ -426,7 +426,7 @@
           5000,
           10000
         ],
-        "Ember": [
+        "RACER_5": [
           100,
           200,
           500,
@@ -435,7 +435,7 @@
           5000,
           10000
         ],
-        "Flint": [
+        "RACER_6": [
           100,
           200,
           500,
@@ -447,12 +447,12 @@
       },
       "multiStep": false,
       "realisedRtp": {
-        "Ace": 0.9392,
-        "Bolt": 0.5856,
-        "Cinder": 1.0514,
-        "Dash": 1.2236,
-        "Ember": 1.0462,
-        "Flint": 1.7609
+        "RACER_1": 0.9392,
+        "RACER_2": 0.5856,
+        "RACER_3": 1.0514,
+        "RACER_4": 1.2236,
+        "RACER_5": 1.0462,
+        "RACER_6": 1.7609
       },
       "files": [
         "field-6/field.json",
@@ -466,51 +466,51 @@
       "parameters": {
         "racers": [
           {
-            "name": "Ace",
+            "name": "RACER_1",
             "elo": 1650
           },
           {
-            "name": "Bolt",
+            "name": "RACER_2",
             "elo": 1632
           },
           {
-            "name": "Cinder",
+            "name": "RACER_3",
             "elo": 1614
           },
           {
-            "name": "Dash",
+            "name": "RACER_4",
             "elo": 1596
           },
           {
-            "name": "Ember",
+            "name": "RACER_5",
             "elo": 1578
           },
           {
-            "name": "Flint",
+            "name": "RACER_6",
             "elo": 1560
           },
           {
-            "name": "Gale",
+            "name": "RACER_7",
             "elo": 1542
           },
           {
-            "name": "Hex",
+            "name": "RACER_8",
             "elo": 1524
           },
           {
-            "name": "Iris",
+            "name": "RACER_9",
             "elo": 1506
           },
           {
-            "name": "Jolt",
+            "name": "RACER_10",
             "elo": 1488
           },
           {
-            "name": "Kite",
+            "name": "RACER_11",
             "elo": 1470
           },
           {
-            "name": "Lux",
+            "name": "RACER_12",
             "elo": 1452
           }
         ],
@@ -518,21 +518,21 @@
         "mode": "top1"
       },
       "betTypes": [
-        "Ace",
-        "Bolt",
-        "Cinder",
-        "Dash",
-        "Ember",
-        "Flint",
-        "Gale",
-        "Hex",
-        "Iris",
-        "Jolt",
-        "Kite",
-        "Lux"
+        "RACER_1",
+        "RACER_2",
+        "RACER_3",
+        "RACER_4",
+        "RACER_5",
+        "RACER_6",
+        "RACER_7",
+        "RACER_8",
+        "RACER_9",
+        "RACER_10",
+        "RACER_11",
+        "RACER_12"
       ],
       "levels": {
-        "Ace": [
+        "RACER_1": [
           100,
           200,
           500,
@@ -541,7 +541,7 @@
           5000,
           10000
         ],
-        "Bolt": [
+        "RACER_2": [
           100,
           200,
           500,
@@ -550,7 +550,7 @@
           5000,
           10000
         ],
-        "Cinder": [
+        "RACER_3": [
           100,
           200,
           500,
@@ -559,7 +559,7 @@
           5000,
           10000
         ],
-        "Dash": [
+        "RACER_4": [
           100,
           200,
           500,
@@ -568,7 +568,7 @@
           5000,
           10000
         ],
-        "Ember": [
+        "RACER_5": [
           100,
           200,
           500,
@@ -577,7 +577,7 @@
           5000,
           10000
         ],
-        "Flint": [
+        "RACER_6": [
           100,
           200,
           500,
@@ -586,7 +586,7 @@
           5000,
           10000
         ],
-        "Gale": [
+        "RACER_7": [
           100,
           200,
           500,
@@ -595,7 +595,7 @@
           5000,
           10000
         ],
-        "Hex": [
+        "RACER_8": [
           100,
           200,
           500,
@@ -604,7 +604,7 @@
           5000,
           10000
         ],
-        "Iris": [
+        "RACER_9": [
           100,
           200,
           500,
@@ -613,7 +613,7 @@
           5000,
           10000
         ],
-        "Jolt": [
+        "RACER_10": [
           100,
           200,
           500,
@@ -622,7 +622,7 @@
           5000,
           10000
         ],
-        "Kite": [
+        "RACER_11": [
           100,
           200,
           500,
@@ -631,7 +631,7 @@
           5000,
           10000
         ],
-        "Lux": [
+        "RACER_12": [
           100,
           200,
           500,
@@ -643,18 +643,18 @@
       },
       "multiStep": false,
       "realisedRtp": {
-        "Ace": 0.6868,
-        "Bolt": 0.9142,
-        "Cinder": 1.2675,
-        "Dash": 0.656,
-        "Ember": 0.6237,
-        "Flint": 0.6918,
-        "Gale": 1.151,
-        "Hex": 0.8511,
-        "Iris": 1.1014,
-        "Jolt": 1.2216,
-        "Kite": 1.355,
-        "Lux": 1.7176
+        "RACER_1": 0.6868,
+        "RACER_2": 0.9142,
+        "RACER_3": 1.2675,
+        "RACER_4": 0.656,
+        "RACER_5": 0.6237,
+        "RACER_6": 0.6918,
+        "RACER_7": 1.151,
+        "RACER_8": 0.8511,
+        "RACER_9": 1.1014,
+        "RACER_10": 1.2216,
+        "RACER_11": 1.355,
+        "RACER_12": 1.7176
       },
       "files": [
         "field-12-tight/field.json",

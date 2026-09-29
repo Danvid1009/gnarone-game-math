@@ -5,27 +5,27 @@
   "parameters": {
     "racers": [
       {
-        "name": "Ace",
+        "name": "RACER_1",
         "elo": 1750
       },
       {
-        "name": "Bolt",
+        "name": "RACER_2",
         "elo": 1680
       },
       {
-        "name": "Cinder",
+        "name": "RACER_3",
         "elo": 1610
       },
       {
-        "name": "Dash",
+        "name": "RACER_4",
         "elo": 1540
       },
       {
-        "name": "Ember",
+        "name": "RACER_5",
         "elo": 1470
       },
       {
-        "name": "Flint",
+        "name": "RACER_6",
         "elo": 1400
       }
     ],
@@ -33,15 +33,15 @@
     "mode": "top1"
   },
   "betTypes": [
-    "Ace",
-    "Bolt",
-    "Cinder",
-    "Dash",
-    "Ember",
-    "Flint"
+    "RACER_1",
+    "RACER_2",
+    "RACER_3",
+    "RACER_4",
+    "RACER_5",
+    "RACER_6"
   ],
   "levels": {
-    "Ace": [
+    "RACER_1": [
       100,
       200,
       500,
@@ -50,7 +50,7 @@
       5000,
       10000
     ],
-    "Bolt": [
+    "RACER_2": [
       100,
       200,
       500,
@@ -59,7 +59,7 @@
       5000,
       10000
     ],
-    "Cinder": [
+    "RACER_3": [
       100,
       200,
       500,
@@ -68,7 +68,7 @@
       5000,
       10000
     ],
-    "Dash": [
+    "RACER_4": [
       100,
       200,
       500,
@@ -77,7 +77,7 @@
       5000,
       10000
     ],
-    "Ember": [
+    "RACER_5": [
       100,
       200,
       500,
@@ -86,7 +86,7 @@
       5000,
       10000
     ],
-    "Flint": [
+    "RACER_6": [
       100,
       200,
       500,
@@ -102,7 +102,7 @@
   "rtp": 0.95,
   "racers": [
     {
-      "name": "Ace",
+      "name": "RACER_1",
       "elo": 1750,
       "q": [
         0.3641071679313929,
@@ -116,7 +116,7 @@
       ]
     },
     {
-      "name": "Bolt",
+      "name": "RACER_2",
       "elo": 1680,
       "q": [
         0.2433488110300806,
@@ -130,7 +130,7 @@
       ]
     },
     {
-      "name": "Cinder",
+      "name": "RACER_3",
       "elo": 1610,
       "q": [
         0.16264069769950856,
@@ -144,7 +144,7 @@
       ]
     },
     {
-      "name": "Dash",
+      "name": "RACER_4",
       "elo": 1540,
       "q": [
         0.1086999210565823,
@@ -158,7 +158,7 @@
       ]
     },
     {
-      "name": "Ember",
+      "name": "RACER_5",
       "elo": 1470,
       "q": [
         0.07264893107835536,
@@ -172,7 +172,7 @@
       ]
     },
     {
-      "name": "Flint",
+      "name": "RACER_6",
       "elo": 1400,
       "q": [
         0.048554471204080296,

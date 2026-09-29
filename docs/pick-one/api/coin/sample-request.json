@@ -5,16 +5,16 @@
     {
       "call": "bet",
       "body": {
-        "sessionId": "1bfe7091-f935-4f88-993f-53d4f8ad6187",
+        "sessionId": "e8a64f4d-72af-4afb-8d8e-792066e56cb2",
         "betAmount": 1000,
-        "betType": "HEADS",
+        "betType": "OPTION_1",
         "seed": "fixture-007"
       }
     },
     {
       "call": "collect",
       "body": {
-        "roundId": "53a8d22d-d336-4f77-bceb-f1052492d020"
+        "roundId": "8612b944-bf6f-461a-a1fb-eb5ba58aab0a"
       }
     }
   ],

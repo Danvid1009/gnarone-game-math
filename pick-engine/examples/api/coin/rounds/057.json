@@ -2,27 +2,27 @@
   "round": 57,
   "seed": "fixture-057",
   "results": {
-    "HEADS": {
+    "OPTION_1": {
       "stake": 1000,
       "win": 0,
       "totalBetAmount": 1000,
       "math": {
         "u": 0.8749877200461924,
         "winner": 1,
-        "winnerName": "TAILS",
+        "winnerName": "OPTION_2",
         "backed": 0,
         "hit": false,
         "odds": 1.9
       }
     },
-    "TAILS": {
+    "OPTION_2": {
       "stake": 1000,
       "win": 1900,
       "totalBetAmount": 1000,
       "math": {
         "u": 0.8749877200461924,
         "winner": 1,
-        "winnerName": "TAILS",
+        "winnerName": "OPTION_2",
         "backed": 1,
         "hit": true,
         "odds": 1.9

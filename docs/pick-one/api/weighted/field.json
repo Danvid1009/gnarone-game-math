@@ -7,20 +7,15 @@
       3,
       2
     ],
-    "labels": [
-      "RED",
-      "GREEN",
-      "BLUE"
-    ],
     "rtp": 0.95
   },
   "betTypes": [
-    "RED",
-    "GREEN",
-    "BLUE"
+    "OPTION_1",
+    "OPTION_2",
+    "OPTION_3"
   ],
   "levels": {
-    "RED": [
+    "OPTION_1": [
       100,
       200,
       500,
@@ -29,7 +24,7 @@
       5000,
       10000
     ],
-    "GREEN": [
+    "OPTION_2": [
       100,
       200,
       500,
@@ -38,7 +33,7 @@
       5000,
       10000
     ],
-    "BLUE": [
+    "OPTION_3": [
       100,
       200,
       500,
@@ -54,21 +49,21 @@
   "rtp": 0.95,
   "options": [
     {
-      "name": "RED",
+      "name": "OPTION_1",
       "p": 0.5,
       "odds": 1.9,
       "rn_from": 0,
       "rn_to": 0.5
     },
     {
-      "name": "GREEN",
+      "name": "OPTION_2",
       "p": 0.3,
       "odds": 3.1666666666666665,
       "rn_from": 0.5,
       "rn_to": 0.8
     },
     {
-      "name": "BLUE",
+      "name": "OPTION_3",
       "p": 0.2,
       "odds": 4.749999999999999,
       "rn_from": 0.8,

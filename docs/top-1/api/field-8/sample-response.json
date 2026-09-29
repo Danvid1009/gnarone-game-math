@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "0d8b4e22-4153-4f20-965c-9cfdab3af76e",
+    "sessionId": "f5327614-a189-4336-be57-b6747fb2d5b9",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -33,7 +33,7 @@
     "rtp": 0.95,
     "racers": [
       {
-        "name": "Ace",
+        "name": "RACER_1",
         "elo": 1800,
         "q": [
           0.311722580795165,
@@ -47,7 +47,7 @@
         ]
       },
       {
-        "name": "Bolt",
+        "name": "RACER_2",
         "elo": 1740,
         "q": [
           0.2206826869712809,
@@ -61,7 +61,7 @@
         ]
       },
       {
-        "name": "Cinder",
+        "name": "RACER_3",
         "elo": 1680,
         "q": [
           0.15623137792788264,
@@ -75,7 +75,7 @@
         ]
       },
       {
-        "name": "Dash",
+        "name": "RACER_4",
         "elo": 1620,
         "q": [
           0.11060334539256957,
@@ -89,7 +89,7 @@
         ]
       },
       {
-        "name": "Ember",
+        "name": "RACER_5",
         "elo": 1560,
         "q": [
           0.0783011721094524,
@@ -103,7 +103,7 @@
         ]
       },
       {
-        "name": "Flint",
+        "name": "RACER_6",
         "elo": 1500,
         "q": [
           0.055432984707223645,
@@ -117,7 +117,7 @@
         ]
       },
       {
-        "name": "Gale",
+        "name": "RACER_7",
         "elo": 1440,
         "q": [
           0.039243547839309376,
@@ -131,7 +131,7 @@
         ]
       },
       {
-        "name": "Hex",
+        "name": "RACER_8",
         "elo": 1380,
         "q": [
           0.02778230425711631,
@@ -150,7 +150,7 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "bc3e4715-69d5-400b-92ba-2262632cf2d5",
+        "roundId": "15d11b3a-28fc-4083-b17b-a7cc6c5fac2c",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -167,14 +167,14 @@
             6
           ],
           "names": [
-            "Hex",
-            "Ace",
-            "Bolt",
-            "Cinder",
-            "Flint",
-            "Dash",
-            "Ember",
-            "Gale"
+            "RACER_8",
+            "RACER_1",
+            "RACER_2",
+            "RACER_3",
+            "RACER_6",
+            "RACER_4",
+            "RACER_5",
+            "RACER_7"
           ],
           "zone": 294,
           "backed": 0,

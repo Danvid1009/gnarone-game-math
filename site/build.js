@@ -205,7 +205,7 @@ curl -s ${BASE}/${e.slug}/api/rounds/007.json
 # all 100 rounds in one file
 curl -s ${BASE}/${e.slug}/api/rounds.json
 
-# a worked RGS-shaped request/response pair (round 007, backing Flint)
+# a worked RGS-shaped request/response pair (round 007)
 curl -s ${BASE}/${e.slug}/api/sample-request.json
 curl -s ${BASE}/${e.slug}/api/sample-response.json</code></pre>
 <p class="lead">To settle a bet from a round: look up the backed racer in <code>settlements</code>; <code>win = round(stake × multiplier)</code> if its <code>place</code> is 1, 2 or 3, else 0. The order is also reproducible from the seed with the standalone function in the build block below.</p>`) : '');

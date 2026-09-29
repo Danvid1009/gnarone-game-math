@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "46793ce8-f2d0-4624-9718-6db5c9d8b443",
+    "sessionId": "de756fdb-d60c-4efa-ac81-2daa7665a275",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -33,7 +33,7 @@
     "rtp": 0.95,
     "racers": [
       {
-        "name": "Ace",
+        "name": "RACER_1",
         "elo": 1850,
         "q": [
           0.26968890506888366,
@@ -47,7 +47,7 @@
         ]
       },
       {
-        "name": "Bolt",
+        "name": "RACER_2",
         "elo": 1780,
         "q": [
           0.18024493933852792,
@@ -61,7 +61,7 @@
         ]
       },
       {
-        "name": "Cinder",
+        "name": "RACER_3",
         "elo": 1720,
         "q": [
           0.12760364496128548,
@@ -75,7 +75,7 @@
         ]
       },
       {
-        "name": "Dash",
+        "name": "RACER_4",
         "elo": 1680,
         "q": [
           0.10135917804648187,
@@ -89,7 +89,7 @@
         ]
       },
       {
-        "name": "Ember",
+        "name": "RACER_5",
         "elo": 1640,
         "q": [
           0.08051245697076607,
@@ -103,7 +103,7 @@
         ]
       },
       {
-        "name": "Flint",
+        "name": "RACER_6",
         "elo": 1600,
         "q": [
           0.06395331781890329,
@@ -117,7 +117,7 @@
         ]
       },
       {
-        "name": "Gale",
+        "name": "RACER_7",
         "elo": 1560,
         "q": [
           0.05079992604785039,
@@ -131,7 +131,7 @@
         ]
       },
       {
-        "name": "Hex",
+        "name": "RACER_8",
         "elo": 1520,
         "q": [
           0.04035181558171305,
@@ -145,7 +145,7 @@
         ]
       },
       {
-        "name": "Iris",
+        "name": "RACER_9",
         "elo": 1480,
         "q": [
           0.03205258643894188,
@@ -159,7 +159,7 @@
         ]
       },
       {
-        "name": "Jolt",
+        "name": "RACER_10",
         "elo": 1430,
         "q": [
           0.02403604896469052,
@@ -173,7 +173,7 @@
         ]
       },
       {
-        "name": "Kite",
+        "name": "RACER_11",
         "elo": 1380,
         "q": [
           0.01802449393385279,
@@ -187,7 +187,7 @@
         ]
       },
       {
-        "name": "Lux",
+        "name": "RACER_12",
         "elo": 1300,
         "q": [
           0.011372686828103109,
@@ -206,7 +206,7 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "a07bb721-1922-486e-abe6-940d06dbf3bd",
+        "roundId": "0847ad3e-8f87-48c9-9165-e2ac0d416a24",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -227,18 +227,18 @@
             7
           ],
           "names": [
-            "Kite",
-            "Ace",
-            "Dash",
-            "Bolt",
-            "Iris",
-            "Ember",
-            "Cinder",
-            "Flint",
-            "Lux",
-            "Gale",
-            "Jolt",
-            "Hex"
+            "RACER_11",
+            "RACER_1",
+            "RACER_4",
+            "RACER_2",
+            "RACER_9",
+            "RACER_5",
+            "RACER_3",
+            "RACER_6",
+            "RACER_12",
+            "RACER_7",
+            "RACER_10",
+            "RACER_8"
           ],
           "zone": 1102,
           "backed": 0,

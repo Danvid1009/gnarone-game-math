@@ -6,7 +6,7 @@ const close = (a, b, tol = 1e-9) => Math.abs(a - b) < tol;
 
 test('coin flip: 2 options pay 2·RTP; every option returns RTP; zones tile [0,1)', () => {
   const P = buildPick({ n: 2, rtp: 0.95 });
-  assert.deepEqual(P.names, ['HEADS', 'TAILS']); P.odds.forEach(o => assert.ok(close(o, 1.9)));
+  assert.deepEqual(P.names, ['OPTION_1', 'OPTION_2']); P.odds.forEach(o => assert.ok(close(o, 1.9)));
   for (const n of [3, 5, 8]) { const Q = buildPick({ n, rtp: 0.96 }); Q.options.forEach(o => { assert.ok(close(o.p * o.odds, 0.96)); assert.ok(close(o.odds, 0.96 * n)); }); assert.ok(close(Q.cum[n], 1)); }
 });
 

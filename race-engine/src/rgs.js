@@ -1,11 +1,11 @@
 // Top 3 / Top 1 as an RGS provider that rolls locally (browser or Node).
-//   const g = createGame({ preset: 'field-12', mode: 'top3' });   g.bet({ sessionId, betAmount: 1000, betType: 'Flint' })
+//   const g = createGame({ preset: 'field-12', mode: 'top3' });   g.bet({ sessionId, betAmount: 1000, betType: 'RACER_6' })
 import { defineGame } from '../../rgs-math/src/contract.js';
 import { buildRace } from './engine.js';
 
 export const RTP = 0.95, LEVELS = [100, 200, 500, 1000, 2500, 5000, 10000];
-const NAMES = ['Ace', 'Bolt', 'Cinder', 'Dash', 'Ember', 'Flint', 'Gale', 'Hex', 'Iris', 'Jolt', 'Kite', 'Lux'];
-const field = elos => elos.map((elo, i) => ({ name: NAMES[i], elo }));
+// racers are placeholders RACER_1..n in Elo order; the client reskins them (names, colours, silks)
+const field = elos => elos.map((elo, i) => ({ name: `RACER_${i + 1}`, elo }));
 const even = (n, top, bottom) => Array.from({ length: n }, (_, i) => Math.round(top - (top - bottom) * i / (n - 1)));
 export const PRESETS = {
   'field-12':       { racers: field([1850, 1780, 1720, 1680, 1640, 1600, 1560, 1520, 1480, 1430, 1380, 1300]), rtp: RTP },

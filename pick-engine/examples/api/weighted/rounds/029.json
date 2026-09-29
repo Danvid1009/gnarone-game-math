@@ -2,40 +2,40 @@
   "round": 29,
   "seed": "fixture-029",
   "results": {
-    "RED": {
+    "OPTION_1": {
       "stake": 1000,
       "win": 1900,
       "totalBetAmount": 1000,
       "math": {
         "u": 0.44826479791663587,
         "winner": 0,
-        "winnerName": "RED",
+        "winnerName": "OPTION_1",
         "backed": 0,
         "hit": true,
         "odds": 1.9
       }
     },
-    "GREEN": {
+    "OPTION_2": {
       "stake": 1000,
       "win": 0,
       "totalBetAmount": 1000,
       "math": {
         "u": 0.44826479791663587,
         "winner": 0,
-        "winnerName": "RED",
+        "winnerName": "OPTION_1",
         "backed": 1,
         "hit": false,
         "odds": 3.1666666666666665
       }
     },
-    "BLUE": {
+    "OPTION_3": {
       "stake": 1000,
       "win": 0,
       "totalBetAmount": 1000,
       "math": {
         "u": 0.44826479791663587,
         "winner": 0,
-        "winnerName": "RED",
+        "winnerName": "OPTION_1",
         "backed": 2,
         "hit": false,
         "odds": 4.749999999999999

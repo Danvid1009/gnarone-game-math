@@ -6,11 +6,11 @@
     "rtp": 0.95
   },
   "betTypes": [
-    "HEADS",
-    "TAILS"
+    "OPTION_1",
+    "OPTION_2"
   ],
   "levels": {
-    "HEADS": [
+    "OPTION_1": [
       100,
       200,
       500,
@@ -19,7 +19,7 @@
       5000,
       10000
     ],
-    "TAILS": [
+    "OPTION_2": [
       100,
       200,
       500,
@@ -35,14 +35,14 @@
   "rtp": 0.95,
   "options": [
     {
-      "name": "HEADS",
+      "name": "OPTION_1",
       "p": 0.5,
       "odds": 1.9,
       "rn_from": 0,
       "rn_to": 0.5
     },
     {
-      "name": "TAILS",
+      "name": "OPTION_2",
       "p": 0.5,
       "odds": 1.9,
       "rn_from": 0.5,

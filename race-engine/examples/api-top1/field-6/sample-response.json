@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "c62371fc-1ae1-4f66-bb63-56ae59ced4e0",
+    "sessionId": "9f8f3f1a-b530-41a0-87d5-3c9668a2c6b2",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -33,7 +33,7 @@
     "rtp": 0.95,
     "racers": [
       {
-        "name": "Ace",
+        "name": "RACER_1",
         "elo": 1750,
         "q": [
           0.3641071679313929,
@@ -47,7 +47,7 @@
         ]
       },
       {
-        "name": "Bolt",
+        "name": "RACER_2",
         "elo": 1680,
         "q": [
           0.2433488110300806,
@@ -61,7 +61,7 @@
         ]
       },
       {
-        "name": "Cinder",
+        "name": "RACER_3",
         "elo": 1610,
         "q": [
           0.16264069769950856,
@@ -75,7 +75,7 @@
         ]
       },
       {
-        "name": "Dash",
+        "name": "RACER_4",
         "elo": 1540,
         "q": [
           0.1086999210565823,
@@ -89,7 +89,7 @@
         ]
       },
       {
-        "name": "Ember",
+        "name": "RACER_5",
         "elo": 1470,
         "q": [
           0.07264893107835536,
@@ -103,7 +103,7 @@
         ]
       },
       {
-        "name": "Flint",
+        "name": "RACER_6",
         "elo": 1400,
         "q": [
           0.048554471204080296,
@@ -122,7 +122,7 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "e46d72c7-b2fc-408e-919d-1c167205da34",
+        "roundId": "369ce904-6dd0-41c9-8e60-ec81ffb9d5b1",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -137,12 +137,12 @@
             3
           ],
           "names": [
-            "Flint",
-            "Bolt",
-            "Ace",
-            "Cinder",
-            "Ember",
-            "Dash"
+            "RACER_6",
+            "RACER_2",
+            "RACER_1",
+            "RACER_3",
+            "RACER_5",
+            "RACER_4"
           ],
           "zone": 104,
           "backed": 0,
