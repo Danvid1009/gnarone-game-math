@@ -1,0 +1,37 @@
+{
+  "module": "api/rgs.js",
+  "create": "createGame({\"preset\":\"even\"})",
+  "calls": [
+    {
+      "call": "bet",
+      "body": {
+        "sessionId": "55ca3c17-1919-4fd7-9afc-4303d02bf575",
+        "betAmount": 1000,
+        "betType": "A",
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "side-bet",
+      "body": {
+        "sessionId": "55ca3c17-1919-4fd7-9afc-4303d02bf575",
+        "betAmount": 1000,
+        "params": "coin",
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "collect (side bet)",
+      "body": {
+        "roundId": "c19dbd4b-c050-4531-bae6-b8c0667cf759"
+      }
+    },
+    {
+      "call": "collect",
+      "body": {
+        "roundId": "e1bba251-bbdb-4f47-821b-c6c041f064f0"
+      }
+    }
+  ],
+  "note": "deterministic: seed fixture-007; drop seed for a live roll"
+}

@@ -193,5 +193,57 @@
     ],
     "cli": "node bin/build-auction.js --rtp 0.95 --max 25 --steps 10 --js",
     "api": "examples/api"
+  },
+  {
+    "slug": "fight",
+    "folder": "fight-engine",
+    "title": "Live Fight",
+    "accent": "FIGHT",
+    "lead": "Two fighters, a biased damage walk, a health bar each. Each tick one of them lands a hit (probability from the power gap) for a continuous amount of damage; first to zero loses, and if both stand at the bell a biased coin decides on the health share. The win probability at every state is exact by backward induction on the health grid, so the opening bet is priced at RTP ÷ P and every live bet during the fight is a fair bet at 1 ÷ P.",
+    "tags": [
+      "exact win-probability grid",
+      "opening bet at RTP, live bets fair",
+      "linked bets on a running round"
+    ],
+    "figures": [
+      [
+        "examples/rating.png",
+        "P(A wins) at the bell against the power gap and the HP gap: the single rating that folds both together."
+      ],
+      [
+        "examples/paths.png",
+        "Three fights from three seeds: healths tick by tick and the live price of A along the way."
+      ],
+      [
+        "examples/check.png",
+        "Exact grid against 100,000 simulated fights per preset, and the return of live bets placed at a fixed tick."
+      ]
+    ],
+    "cli": "node bin/build-fight.js --a 1700,100 --b 1550,100",
+    "api": "examples/api"
+  },
+  {
+    "slug": "cutscene",
+    "folder": "cutscene-engine",
+    "title": "Cutscene Fight",
+    "accent": "CUTSCENE",
+    "extraSrc": [
+      "fight-engine/src",
+      "payout-engine/src"
+    ],
+    "lead": "One bet on the winner, decided by a single biased coin whose probability is the Live Fight rating of the pairing (power and HP in one number), then a predetermined cutscene that plays it out. During the cutscene the developer can call any number of side bets from a library: biased coins, n-way picks at RTP ÷ p, Single Shot tables. Each side bet is its own independent draw at its own RTP.",
+    "tags": [
+      "one coin, exact RTP",
+      "cosmetic cutscene",
+      "side-bet library: coin · pick · single shot"
+    ],
+    "figures": [
+      [
+        "examples/cutscene.png",
+        "Main-bet probability per preset and the side-bet library's odds, against simulation."
+      ]
+    ],
+    "cli": "node bin/build-cutscene.js --a 1700,100 --b 1550,100",
+    "api": "examples/api"
   }
 ]

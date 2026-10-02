@@ -1,0 +1,11 @@
+{
+  "name": "fight-engine",
+  "version": "1.0.0",
+  "description": "Live Fight: a biased damage walk between two fighters with an exact win-probability grid; opening bet at RTP, live (linked) bets at fair odds",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "bin": { "build-fight": "bin/build-fight.js" },
+  "scripts": { "test": "node --test", "build": "node bin/build-fight.js", "fixtures": "node ../site/make-fixtures.js fight-engine", "examples": "sh scripts/make-examples.sh" },
+  "license": "UNLICENSED",
+  "private": true
+}

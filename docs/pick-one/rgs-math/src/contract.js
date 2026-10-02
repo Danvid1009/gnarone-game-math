@@ -47,12 +47,19 @@ function assertMinor(n, what) {
  *                      ...anything else is returned to the client as-is (e.g. `math`)
  *                    }
  *   step?:           ({round, actionCode, rng}) => same shape as play(); only for multi-step games
+ *   linked?:         { price: ({round}) => ({ odds: { [betType]: multiple, ... }, ...public }),
+ *                      settle: ({round, child}) => integer win }
+ *                    enables linkedBet(): extra money placed on a running multi-step round (live bets),
+ *                    priced from the round's current state and settled when the round ends
+ *   side?:           ({bet, params, rng, seed, session}) => { totalWinAmount, ...public }
+ *                    enables sideBet(): an independent single-call bet with free-form params (a side-bet
+ *                    library), its own round and collect, unrelated to any running round
  *   currency?, startingBalance?, minBet?, maxBet?, defaultBet?, sessionExtras?
  * }
  */
 export function defineGame(spec) {
   const {
-    id, betTypes, levels, play, step = null,
+    id, betTypes, levels, play, step = null, linked = null, side = null,
     defaultBetType = betTypes?.[0], boostedBetType = null,
     currency = DEFAULT_CURRENCY, startingBalance = 100000,
     minBet, maxBet, defaultBet, sessionExtras = {},
@@ -100,6 +107,7 @@ export function defineGame(spec) {
     };
   }
   function publicRound(round, pub) {
+    if (round.linked) return { roundId: round.roundId, parentRoundId: round.parentRoundId, balance: sessions.get(round.sessionId).balance, totalBetAmount: round.totalBetAmount, totalWinAmount: round.totalWinAmount, betType: round.betType, odds: round.odds, placedAtStep: round.placedAtStep, roundEnded: round.ended, nextAction: round.nextAction };
     return {
       roundId: round.roundId,
       balance: sessions.get(round.sessionId).balance,
@@ -114,6 +122,8 @@ export function defineGame(spec) {
   const game = {
     id, betTypes, defaultBetType, boostedBetType, currency, spec,
     isMultiStep: typeof step === 'function',
+    hasLinkedBets: !!linked,
+    hasSideBets: !!side,
 
     levels(betType = defaultBetType) { return levels(requireBetType(betType)); },
 
@@ -183,7 +193,66 @@ export function defineGame(spec) {
       round.ended = r.roundEnded;
       round.nextAction = r.nextAction;
       round.state = r.state;
+      if (round.ended && round.children) for (const cid of round.children) {
+        const child = rounds.get(cid);
+        child.totalWinAmount = linked.settle({ round, child }); assertMinor(child.totalWinAmount, 'linked.settle()');
+        child.ended = true; child.nextAction = COLLECT;
+      }
       return publicRound(round, r.pub);
+    },
+
+    /** An independent side bet from the provider's library: params are free-form and validated by spec.side. */
+    sideBet({ sessionId, betAmount, params = {}, seed = newSeed() }) {
+      if (!side) throw new Error(`${id}: side bets not supported`);
+      const s = requireSession(sessionId);
+      assertMinor(betAmount, 'betAmount');
+      const lv = levels(defaultBetType);
+      if (!lv.includes(betAmount)) throw new Error(`Invalid bet amount ${betAmount}. Valid bets: ${lv.join(', ')}`);
+      if (s.balance < betAmount) throw new Error('insufficient balance');
+      const rng = new Rng(seed, 'side');
+      const out = side({ bet: betAmount, params, rng, seed, session: s });
+      if (!out || typeof out !== 'object') throw new Error('side() must return an object');
+      assertMinor(out.totalWinAmount, 'side().totalWinAmount');
+      const { totalWinAmount, ...pub } = out;
+      s.balance -= betAmount; s.requestCounter += 1; s.rounds += 1;
+      const round = { roundId: randomUUID(), sessionId, seed, betType: `SIDE:${params.kind ?? 'side'}`, totalBetAmount: betAmount, totalWinAmount, ended: true, nextAction: COLLECT, settled: false, side: true, params };
+      rounds.set(round.roundId, round);
+      return { roundId: round.roundId, balance: s.balance, totalBetAmount: betAmount, totalWinAmount, side: params, ...pub, nextAction: COLLECT };
+    },
+
+    /** Current prices for extra money on a running round (live bets). Public, no side effects. */
+    quote({ roundId }) {
+      if (!linked) throw new Error(`${id}: linked bets not supported`);
+      const round = requireRound(roundId);
+      if (round.linked) throw new Error('quote the parent round, not a linked bet');
+      if (round.ended) throw new Error(`round ${roundId} has ended`);
+      const q = linked.price({ round });
+      return { roundId, step: round.steps, ...q };
+    },
+
+    /**
+     * Place a linked bet: new money on a running multi-step round, priced from its current state.
+     * The bet is its own round (own roundId, own collect) and settles when the parent ends.
+     */
+    linkedBet({ sessionId, roundId, betAmount, betType }) {
+      if (!linked) throw new Error(`${id}: linked bets not supported`);
+      const s = requireSession(sessionId);
+      const parent = requireRound(roundId);
+      if (parent.linked) throw new Error('link to the parent round, not to another linked bet');
+      if (parent.sessionId !== sessionId) throw new Error('round belongs to another session');
+      if (parent.ended) throw new Error(`round ${roundId} has ended`);
+      assertMinor(betAmount, 'betAmount');
+      const lv = levels(parent.betType);
+      if (!lv.includes(betAmount)) throw new Error(`Invalid bet amount ${betAmount}. Valid bets: ${lv.join(', ')}`);
+      if (s.balance < betAmount) throw new Error('insufficient balance');
+      const q = linked.price({ round: parent });
+      if (!q.odds || !(betType in q.odds)) throw new Error(`invalid linked betType "${betType}". Allowed: [${Object.keys(q.odds ?? {}).join(', ')}]`);
+      s.balance -= betAmount; s.requestCounter += 1; s.rounds += 1;
+      const child = { roundId: randomUUID(), parentRoundId: roundId, sessionId, betType, odds: q.odds[betType], placedAtStep: parent.steps,
+        totalBetAmount: betAmount, totalWinAmount: 0, ended: false, nextAction: [], settled: false, linked: true };
+      rounds.set(child.roundId, child);
+      (parent.children ??= []).push(child.roundId);
+      return { roundId: child.roundId, parentRoundId: roundId, balance: s.balance, totalBetAmount: betAmount, totalWinAmount: 0, betType, odds: child.odds, placedAtStep: child.placedAtStep, roundEnded: false, nextAction: [] };
     },
 
     collect({ roundId }) {

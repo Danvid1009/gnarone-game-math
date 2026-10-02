@@ -1,0 +1,145 @@
+{
+  "preset": "favourite",
+  "engine": "cutscene-engine",
+  "parameters": {
+    "A": {
+      "power": 1700,
+      "hp": 100
+    },
+    "B": {
+      "power": 1550,
+      "hp": 100
+    },
+    "rtp": 0.95
+  },
+  "betTypes": [
+    "A",
+    "B"
+  ],
+  "levels": {
+    "A": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "B": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ]
+  },
+  "stake_units": "minor units",
+  "multiStep": false,
+  "how_to_settle": "main bet: u < pA → A wins; win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side). The cutscene is cosmetic. Side bets: coin / pick pay round(stake × RTP / p[pick]) on a hit; single-shot pays round(stake × multiple) from the sloped-band table.",
+  "rtp": 0.95,
+  "fighters": {
+    "A": {
+      "power": 1700,
+      "hp": 100
+    },
+    "B": {
+      "power": 1550,
+      "hp": 100
+    }
+  },
+  "pA": 0.7289486576995687,
+  "odds": {
+    "A": 1.3032467924394424,
+    "B": 3.5048710400667455
+  },
+  "sideLibrary": {
+    "coin": {
+      "kind": "coin",
+      "p": 0.5,
+      "rtp": 0.95,
+      "options": [
+        "OPTION_1",
+        "OPTION_2"
+      ],
+      "odds": [
+        1.9,
+        1.9
+      ],
+      "payouts": null
+    },
+    "biased-coin": {
+      "kind": "coin",
+      "p": 0.7,
+      "rtp": 0.95,
+      "options": [
+        "OPTION_1",
+        "OPTION_2"
+      ],
+      "odds": [
+        1.3571428571428572,
+        3.166666666666666
+      ],
+      "payouts": null
+    },
+    "pick-3": {
+      "kind": "pick",
+      "n": 3,
+      "rtp": 0.95,
+      "options": [
+        "OPTION_1",
+        "OPTION_2",
+        "OPTION_3"
+      ],
+      "odds": [
+        2.85,
+        2.85,
+        2.85
+      ],
+      "payouts": null
+    },
+    "pick-weighted": {
+      "kind": "pick",
+      "weights": [
+        5,
+        3,
+        2
+      ],
+      "rtp": 0.95,
+      "options": [
+        "OPTION_1",
+        "OPTION_2",
+        "OPTION_3"
+      ],
+      "odds": [
+        1.9,
+        3.1666666666666665,
+        4.749999999999999
+      ],
+      "payouts": null
+    },
+    "shot-classic": {
+      "kind": "single-shot",
+      "payouts": [
+        0,
+        0.5,
+        1,
+        2,
+        5,
+        20
+      ],
+      "rtp": 0.95,
+      "options": [
+        "BASE"
+      ],
+      "odds": null
+    }
+  },
+  "sideKinds": [
+    "coin",
+    "pick",
+    "single-shot"
+  ]
+}

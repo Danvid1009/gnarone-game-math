@@ -51,6 +51,13 @@ export function assertPresetFixtures(mod, opts, apiDirUrl) {
       if (!g.isMultiStep) {
         const r = playOnce(g, { betType: t, betAmount: exp.stake, seed: 'fixture-007' });
         assert.equal(r.totalWinAmount, exp.win, `${preset}/${t}`);
+      } else if (g.hasCashOut === false) {
+        // reveal-only round: walk CONTINUE to the end and compare the final win
+        const sess = g.open(); let r = g.bet({ sessionId: sess.sessionId, betAmount: exp.stake, betType: t, seed: 'fixture-007' });
+        assert.deepEqual(r.nextAction, ['CONTINUE']);
+        while (!r.roundEnded) r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' });
+        assert.equal(r.totalWinAmount, exp.win, `${preset}/${t}`); if (exp.winner !== undefined) assert.equal(r.winner, exp.winner);
+        assert.equal(g.collect({ roundId: r.roundId }).balance, sess.balance - exp.stake + r.totalWinAmount);
       } else {
         for (const s of [1, 2]) {
           const sess = g.open(); let r = g.bet({ sessionId: sess.sessionId, betAmount: exp.stake, betType: t, seed: 'fixture-007' });

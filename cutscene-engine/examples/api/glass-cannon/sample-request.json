@@ -1,0 +1,37 @@
+{
+  "module": "api/rgs.js",
+  "create": "createGame({\"preset\":\"glass-cannon\"})",
+  "calls": [
+    {
+      "call": "bet",
+      "body": {
+        "sessionId": "6b8623ef-6a06-49e4-9d26-261f86cb8207",
+        "betAmount": 1000,
+        "betType": "A",
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "side-bet",
+      "body": {
+        "sessionId": "6b8623ef-6a06-49e4-9d26-261f86cb8207",
+        "betAmount": 1000,
+        "params": "coin",
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "collect (side bet)",
+      "body": {
+        "roundId": "cb8c9497-d9c4-4f5a-aad6-523a27fdbd92"
+      }
+    },
+    {
+      "call": "collect",
+      "body": {
+        "roundId": "74c8be7e-4488-43dd-b206-c5b51cfd288d"
+      }
+    }
+  ],
+  "note": "deterministic: seed fixture-007; drop seed for a live roll"
+}

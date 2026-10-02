@@ -20,6 +20,8 @@ const ENGINES = {
   'smash-engine':   [{ dir: 'examples/api' }],
   'stepper-engine': [{ dir: 'examples/api' }],
   'auction-engine': [{ dir: 'examples/api' }],
+  'fight-engine':   [{ dir: 'examples/api' }],
+  'cutscene-engine': [{ dir: 'examples/api' }],
 };
 const only = process.argv.slice(2);
 const seedOf = k => `fixture-${String(k).padStart(3, '0')}`;
@@ -48,6 +50,11 @@ for (const [folder, variants] of Object.entries(ENGINES)) {
             const r = g.simulate({ bet: stake, betType: t, seed });
             results[t] = { stake, win: r.totalWinAmount, ...strip(r, ['seed', 'bet', 'betType', 'steps', 'totalWinAmount', 'nextAction']) };
             summary[t] = { stake, win: r.totalWinAmount }; (totals[t] ??= { staked: 0, won: 0 }).staked += stake; totals[t].won += r.totalWinAmount;
+          } else if (g.hasCashOut === false) {
+            // reveal-only multi-step (the fight): one outcome per bet type
+            const full = g.simulate({ bet: stake, betType: t, seed, policy: () => 'CONTINUE' });
+            results[t] = { stake, win: full.totalWinAmount, ...strip(full, ['seed', 'bet', 'betType', 'steps', 'nextAction', 'roundEnded', 'totalWinAmount']) };
+            summary[t] = { stake, win: full.totalWinAmount, winner: full.winner ?? null }; (totals[t] ??= { staked: 0, won: 0 }).staked += stake; totals[t].won += full.totalWinAmount;
           } else {
             const full = g.simulate({ bet: stake, betType: t, seed, policy: () => 'CONTINUE' });
             const survived = full.totalWinAmount > 0 ? N : full.currentStep - 1;
@@ -69,8 +76,13 @@ for (const [folder, variants] of Object.entries(ENGINES)) {
       const t = g.betTypes[0], stake = stakeFor(g, t), s = g.open(); const seq = [];
       let r = g.bet({ sessionId: s.sessionId, betAmount: stake, betType: t, seed: seedOf(7) }); seq.push({ call: 'bet', body: { sessionId: s.sessionId, betAmount: stake, betType: t, seed: seedOf(7) }, response: r });
       for (let i = 0; i < 2 && g.isMultiStep && !r.roundEnded; i++) { r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' }); seq.push({ call: 'next-action', body: { roundId: r.roundId, actionCode: 'CONTINUE' }, response: r }); }
-      if (g.isMultiStep && !r.roundEnded) { r = g.nextAction({ roundId: r.roundId, actionCode: 'CASH_OUT' }); seq.push({ call: 'next-action', body: { roundId: r.roundId, actionCode: 'CASH_OUT' }, response: r }); }
+      if (g.isMultiStep && g.hasCashOut !== false && !r.roundEnded) { r = g.nextAction({ roundId: r.roundId, actionCode: 'CASH_OUT' }); seq.push({ call: 'next-action', body: { roundId: r.roundId, actionCode: 'CASH_OUT' }, response: r }); }
+      let liveId = null;
+      if (g.hasLinkedBets && !r.roundEnded) { const q = g.quote({ roundId: r.roundId }); seq.push({ call: 'quote', body: { roundId: r.roundId }, response: q }); const lb = g.linkedBet({ sessionId: s.sessionId, roundId: r.roundId, betAmount: stake, betType: g.betTypes[1] }); liveId = lb.roundId; seq.push({ call: 'linked-bet', body: { sessionId: s.sessionId, roundId: r.roundId, betAmount: stake, betType: g.betTypes[1] }, response: lb }); }
+      while (g.isMultiStep && !r.roundEnded) { r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' }); if (r.roundEnded) seq.push({ call: 'next-action (last)', body: { roundId: r.roundId, actionCode: 'CONTINUE' }, response: r }); }
+      if (g.hasSideBets) { const sb = g.sideBet({ sessionId: s.sessionId, betAmount: stake, params: 'coin', seed: seedOf(7) }); seq.push({ call: 'side-bet', body: { sessionId: s.sessionId, betAmount: stake, params: 'coin', seed: seedOf(7) }, response: sb }); seq.push({ call: 'collect (side bet)', body: { roundId: sb.roundId }, response: g.collect({ roundId: sb.roundId }) }); }
       const c = g.collect({ roundId: r.roundId }); seq.push({ call: 'collect', body: { roundId: r.roundId }, response: c });
+      if (liveId) seq.push({ call: 'collect (live bet)', body: { roundId: liveId }, response: g.collect({ roundId: liveId }) });
       writeFileSync(join(pdir, 'sample-request.json'), JSON.stringify({ module: `api/rgs.js`, create: `createGame(${JSON.stringify({ preset, ...opts })})`, calls: seq.map(x => ({ call: x.call, body: x.body })), note: `deterministic: seed ${seedOf(7)}; drop seed for a live roll` }, null, 2));
       writeFileSync(join(pdir, 'sample-response.json'), JSON.stringify({ open: s, calls: seq.map(x => ({ call: x.call, response: x.response })) }, null, 2));
       index.presets[preset] = { parameters: g.params, betTypes: g.betTypes, levels, multiStep: g.isMultiStep, realisedRtp: Object.fromEntries(Object.entries(totals).map(([k, v]) => [k, +(v.won / v.staked).toFixed(4)])), files: ['field.json', 'rounds.json', 'rounds/NNN.json', 'sample-request.json', 'sample-response.json'].map(f => `${preset}/${f}`) };

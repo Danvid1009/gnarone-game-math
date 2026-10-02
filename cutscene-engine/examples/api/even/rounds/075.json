@@ -1,0 +1,190 @@
+{
+  "round": 75,
+  "seed": "fixture-075",
+  "results": {
+    "A": {
+      "stake": 1000,
+      "win": 1900,
+      "totalBetAmount": 1000,
+      "winner": "A",
+      "odds": 1.9000000000000004,
+      "cutscene": {
+        "how": "KO",
+        "ticks": 10,
+        "hits": [
+          {
+            "tick": 1,
+            "hitter": "B",
+            "damage": 12.5,
+            "hpA": 87.5,
+            "hpB": 100
+          },
+          {
+            "tick": 2,
+            "hitter": "B",
+            "damage": 7.5,
+            "hpA": 80,
+            "hpB": 100
+          },
+          {
+            "tick": 3,
+            "hitter": "A",
+            "damage": 22,
+            "hpA": 80,
+            "hpB": 78
+          },
+          {
+            "tick": 4,
+            "hitter": "A",
+            "damage": 16,
+            "hpA": 80,
+            "hpB": 62
+          },
+          {
+            "tick": 5,
+            "hitter": "B",
+            "damage": 22.5,
+            "hpA": 57.5,
+            "hpB": 62
+          },
+          {
+            "tick": 6,
+            "hitter": "B",
+            "damage": 0.5,
+            "hpA": 57,
+            "hpB": 62
+          },
+          {
+            "tick": 7,
+            "hitter": "A",
+            "damage": 37.5,
+            "hpA": 57,
+            "hpB": 24.5
+          },
+          {
+            "tick": 8,
+            "hitter": "B",
+            "damage": 29.5,
+            "hpA": 27.5,
+            "hpB": 24.5
+          },
+          {
+            "tick": 9,
+            "hitter": "B",
+            "damage": 2,
+            "hpA": 25.5,
+            "hpB": 24.5
+          },
+          {
+            "tick": 10,
+            "hitter": "A",
+            "damage": 28.5,
+            "hpA": 25.5,
+            "hpB": 0
+          }
+        ],
+        "final": {
+          "hpA": 25.5,
+          "hpB": 0
+        },
+        "redraws": 2
+      },
+      "math": {
+        "u": 0.09556912817060947,
+        "pA": 0.4999999999999999
+      }
+    },
+    "B": {
+      "stake": 1000,
+      "win": 0,
+      "totalBetAmount": 1000,
+      "winner": "A",
+      "odds": 1.8999999999999995,
+      "cutscene": {
+        "how": "KO",
+        "ticks": 10,
+        "hits": [
+          {
+            "tick": 1,
+            "hitter": "B",
+            "damage": 12.5,
+            "hpA": 87.5,
+            "hpB": 100
+          },
+          {
+            "tick": 2,
+            "hitter": "B",
+            "damage": 7.5,
+            "hpA": 80,
+            "hpB": 100
+          },
+          {
+            "tick": 3,
+            "hitter": "A",
+            "damage": 22,
+            "hpA": 80,
+            "hpB": 78
+          },
+          {
+            "tick": 4,
+            "hitter": "A",
+            "damage": 16,
+            "hpA": 80,
+            "hpB": 62
+          },
+          {
+            "tick": 5,
+            "hitter": "B",
+            "damage": 22.5,
+            "hpA": 57.5,
+            "hpB": 62
+          },
+          {
+            "tick": 6,
+            "hitter": "B",
+            "damage": 0.5,
+            "hpA": 57,
+            "hpB": 62
+          },
+          {
+            "tick": 7,
+            "hitter": "A",
+            "damage": 37.5,
+            "hpA": 57,
+            "hpB": 24.5
+          },
+          {
+            "tick": 8,
+            "hitter": "B",
+            "damage": 29.5,
+            "hpA": 27.5,
+            "hpB": 24.5
+          },
+          {
+            "tick": 9,
+            "hitter": "B",
+            "damage": 2,
+            "hpA": 25.5,
+            "hpB": 24.5
+          },
+          {
+            "tick": 10,
+            "hitter": "A",
+            "damage": 28.5,
+            "hpA": 25.5,
+            "hpB": 0
+          }
+        ],
+        "final": {
+          "hpA": 25.5,
+          "hpB": 0
+        },
+        "redraws": 2
+      },
+      "math": {
+        "u": 0.09556912817060947,
+        "pA": 0.4999999999999999
+      }
+    }
+  }
+}

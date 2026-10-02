@@ -1,0 +1,106 @@
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cutscene Fight</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#0a0c11;--bg-2:#11141c;--panel:#151923;--line:#252b38;--ink:#f1efe8;--ink-2:#a8adb8;--ink-3:#6b7180;--pink:#e8336d;--pink-2:#ff6b9d;--teal:#6fd3c7;--teal-2:#2a8f86;--gold:#f2c14e;--danger:#ff4d6d;--blue:#4f8fe8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:14px;line-height:1.45}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}.display{font-family:"Bebas Neue",sans-serif;letter-spacing:.04em}
+header{display:flex;align-items:baseline;justify-content:space-between;padding:16px 22px 0;gap:16px;flex-wrap:wrap}header h1{margin:0;font-size:34px;font-weight:400;line-height:1}header h1 span{color:var(--pink)}
+.balance{font-size:13px;color:var(--ink-2)}.balance b{display:block;font-size:26px;color:var(--ink);font-weight:500}
+.app{display:grid;grid-template-columns:1fr 340px;gap:18px;padding:14px 22px 28px;max-width:1300px;margin:0 auto;align-items:start}@media (max-width:960px){.app{grid-template-columns:1fr}}
+.stage{position:relative;height:640px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#1a1a2c 0%,var(--bg-2) 55%,#07080c 100%);user-select:none}
+.stage::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(232,51,109,.035) 38px 40px);pointer-events:none}
+.letterbox{position:absolute;left:0;right:0;height:46px;background:#000;z-index:4}.letterbox.top{top:0}.letterbox.bot{bottom:0}
+.bars{position:absolute;left:20px;right:20px;top:60px;display:grid;grid-template-columns:1fr 90px 1fr;gap:12px;align-items:center;z-index:3}
+.bar{height:22px;border:1px solid var(--line);border-radius:4px;background:#0b0d12;overflow:hidden;position:relative}.bar i{position:absolute;top:0;bottom:0;transition:width .3s ease}.bar.a i{left:0;background:linear-gradient(90deg,#2d6bd6,#6fa8ff)}.bar.b i{right:0;background:linear-gradient(270deg,#d6342d,#ff8a6f)}
+.bar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;text-shadow:0 1px 2px #000}
+.vs{text-align:center;font-size:26px;color:var(--pink);line-height:1}
+.ring{position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);width:520px;max-width:92%;height:280px;border:3px solid #2a2a3a;border-radius:10px;background:radial-gradient(ellipse at 50% 50%,#15152a,#0a0a12);box-shadow:inset 0 0 60px rgba(0,0,0,.7)}
+.fighter{position:absolute;bottom:50px;width:70px;height:120px;transition:transform .15s}.fighter .head{width:34px;height:34px;border-radius:50%;margin:0 auto 4px;background:#e8c39e}.fighter .body{width:56px;height:70px;border-radius:14px 14px 6px 6px;margin:0 auto}
+.fighter.a{left:70px}.fighter.a .body{background:var(--blue)}.fighter.b{right:70px}.fighter.b .body{background:#d6342d}
+.fighter.hit{animation:hit .35s}@keyframes hit{30%{transform:translateX(var(--kb)) rotate(var(--rot));filter:brightness(1.6)}}.fighter.ko{transform:rotate(90deg) translateY(40px);opacity:.6}
+.fighter.swing{animation:swing .3s}@keyframes swing{40%{transform:translateX(var(--fw))}}
+.dmg{position:absolute;font-size:24px;color:var(--gold);animation:float 1s ease-out forwards;pointer-events:none;z-index:5;text-shadow:0 2px 4px #000}@keyframes float{to{transform:translateY(-50px);opacity:0}}
+.callout{position:absolute;left:16px;bottom:60px;background:rgba(10,12,17,.86);border:1px solid var(--line);border-radius:4px;padding:10px 12px;max-width:430px;font-size:12.5px;color:var(--ink-2);z-index:6}
+.callout .big{font-size:28px;color:var(--teal);line-height:1;margin-bottom:4px}.callout.win .big{color:var(--gold)}.callout.lose .big{color:var(--danger)}
+.sidebets{position:absolute;right:16px;bottom:60px;background:rgba(10,12,17,.86);border:1px solid var(--line);border-radius:4px;padding:10px 12px;width:270px;font-size:12px;color:var(--ink-2);z-index:6}
+.sidebets h3{margin:0 0 6px;font:16px "Bebas Neue",sans-serif;letter-spacing:.04em;color:var(--ink-2)}.sidebets .row{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;padding:4px 0;border-bottom:1px solid var(--line)}.sidebets .row:last-child{border-bottom:0}
+.sidebets select,.sidebets button{padding:6px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink);border-radius:4px;font:inherit;font-size:12px;cursor:pointer}.sidebets button:hover{border-color:var(--teal)}
+.sidebets .res{font-size:11px;color:var(--gold);min-height:1em;margin-top:4px}
+.side{display:flex;flex-direction:column;gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px}.card h2{margin:0 0 10px;font-size:20px;font-weight:400;color:var(--ink-2)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.seg button,.chips button{padding:8px 6px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);border-radius:4px;cursor:pointer;font:inherit;font-weight:500;font-size:12.5px}.seg button.on{border-color:var(--pink);color:var(--ink);background:rgba(232,51,109,.16)}.seg button small{display:block;font-weight:400;font-size:10.5px;color:var(--ink-3)}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.chips button.on{border-color:var(--teal);color:var(--ink);background:rgba(111,211,199,.14)}button:disabled{opacity:.4;cursor:not-allowed}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.btn{padding:14px 10px;border:none;border-radius:4px;font:22px "Bebas Neue",sans-serif;letter-spacing:.06em;cursor:pointer;color:#fff}.btn.a{background:#2d6bd6}.btn.b{background:#d6342d}
+.stat{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-2)}.stat:last-child{border-bottom:0}.stat b{color:var(--ink);font-weight:500;text-align:right}
+.disclose{font-size:12px;color:var(--ink-3);line-height:1.5}.disclose b{color:var(--ink-2);font-weight:500}
+.log{font-size:12px;max-height:160px;overflow:auto}.log div{padding:3px 0;border-bottom:1px solid var(--line);color:var(--ink-2)}.log .w{color:var(--gold)}.log .l{color:var(--danger)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<header><h1 class="display">CUTSCENE <span>FIGHT</span></h1><div class="balance">demo balance<b class="mono" id="balance">1,000.00</b></div></header>
+<div class="app">
+  <section class="stage" id="stage"><div class="letterbox top"></div><div class="letterbox bot"></div>
+    <div class="bars"><div class="bar a"><i id="barA" style="width:100%"></i><span class="mono" id="hpA">100</span></div><div class="vs display">VS</div><div class="bar b"><i id="barB" style="width:100%"></i><span class="mono" id="hpB">100</span></div></div>
+    <div class="ring"><div class="fighter a" id="fA"><div class="head"></div><div class="body"></div></div><div class="fighter b" id="fB"><div class="head"></div><div class="body"></div></div></div>
+    <div class="callout" id="callout"><div class="big display" id="coBig">PLACE YOUR BET</div><div id="coText">One bet on the winner at odds RTP ÷ P. The result is decided the instant you bet, by one biased coin at the fight's rating; the cutscene just plays it out. Side bets below are independent draws you can take any time.</div></div>
+    <div class="sidebets" id="sb"><h3>SIDE BETS · ANY TIME</h3><div class="row"><select id="sbKind"></select><button id="sbGo">BET</button></div><div class="row"><span>pick</span><select id="sbPick"></select></div><div class="res mono" id="sbRes"></div></div>
+  </section>
+  <aside class="side">
+    <div class="card"><h2 class="display">MATCHUP</h2><div class="seg" id="presets"></div>
+      <h2 class="display" style="margin-top:14px">STAKE</h2><div class="chips mono" id="chips"></div>
+      <div class="actions"><button class="btn a" id="btnA">BACK A</button><button class="btn b" id="btnB">BACK B</button></div></div>
+    <div class="card"><h2 class="display">THIS ROUND</h2><div class="stat"><span>P(A wins) · odds A / B</span><b class="mono" id="stOdds">—</b></div><div class="stat"><span>Your bet</span><b class="mono" id="stBet">—</b></div><div class="stat"><span>Result</span><b class="mono" id="stRes">—</b></div><div class="stat"><span>Cutscene</span><b class="mono" id="stCut">—</b></div></div>
+    <div class="card"><h2 class="display">THE MATH</h2><p class="disclose">P(A) is the Live Fight rating of the pairing: an exact backward induction over power and HP. The bet is settled by <b>one uniform</b> against that P; odds = 0.95 ÷ P, so both sides return exactly 95%. The cutscene is drawn from a derived stream and redrawn until its winner matches, so it never changes the payout. Side bets are their own draws: coin and pick pay RTP ÷ p, single shot uses sloped bands.</p></div>
+    <div class="card"><h2 class="display">LOG</h2><div class="log mono" id="log"></div></div>
+  </aside>
+</div>
+<script type="module">
+import { createGame, PRESETS, SIDE_LIBRARY } from './api/rgs.js';
+const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(1) + '%';
+let preset = 'even', stake = 5, g = null, s = null, balance = 1000, playing = null;
+$('presets').innerHTML = Object.keys(PRESETS).map(n => `<button data-p="${n}" class="${n === preset ? 'on' : ''}">${n}<small>${PRESETS[n].A.power}/${PRESETS[n].A.hp} vs ${PRESETS[n].B.power}/${PRESETS[n].B.hp}</small></button>`).join('');
+$('chips').innerHTML = [1, 2, 5, 10, 25, 50].map(v => `<button data-v="${v}" class="${v === stake ? 'on' : ''}">${v}</button>`).join('');
+$('sbKind').innerHTML = Object.keys(SIDE_LIBRARY).map(k => `<option value="${k}">${k}</option>`).join('');
+$('chips').onclick = e => { const b = e.target.closest('button'); if (!b) return; stake = +b.dataset.v; [...$('chips').children].forEach(x => x.classList.toggle('on', x === b)); };
+$('presets').onclick = e => { const b = e.target.closest('button'); if (!b || playing) return; preset = b.dataset.p; [...$('presets').children].forEach(x => x.classList.toggle('on', x === b)); setup(); };
+function setup() { g = createGame({ preset }); s = g.open({ balance: Math.round(balance * 100) }); const C = g.engine; $('stOdds').textContent = `${pct(C.pA)} · ${C.odds.A.toFixed(2)}× / ${C.odds.B.toFixed(2)}×`; $('btnA').textContent = `BACK A @ ${C.odds.A.toFixed(2)}`; $('btnB').textContent = `BACK B @ ${C.odds.B.toFixed(2)}`; bars(C.fighters.A.hp, C.fighters.B.hp); $('fA').className = 'fighter a'; $('fB').className = 'fighter b'; pickOptions(); }
+function pickOptions() { const lib = s.sideLibrary[$('sbKind').value]; $('sbPick').innerHTML = lib.options.map((o, i) => `<option value="${o}">${o}${lib.odds ? ' @ ' + lib.odds[i].toFixed(2) : ''}</option>`).join(''); $('sbPick').disabled = lib.options.length < 2; }
+$('sbKind').onchange = pickOptions;
+function bars(a, b) { const C = g.engine; $('barA').style.width = (100 * a / C.fighters.A.hp) + '%'; $('barB').style.width = (100 * b / C.fighters.B.hp) + '%'; $('hpA').textContent = a.toFixed(1); $('hpB').textContent = b.toFixed(1); }
+const syncBalance = () => { balance = g.getSession(s.sessionId).balance / 100; $('balance').textContent = fmt(balance); };
+function callout(cls, big, text) { $('callout').className = 'callout ' + cls; $('coBig').textContent = big; $('coText').textContent = text; }
+function log(msg, cls = '') { const d = document.createElement('div'); d.className = cls; d.textContent = msg; $('log').prepend(d); }
+function bet(side) { if (playing) return; if (balance < stake) return callout('lose', 'NO CREDIT', 'Demo balance is empty. Reload.'); const r = g.bet({ sessionId: s.sessionId, betAmount: stake * 100, betType: side }); syncBalance(); $('stBet').textContent = `${side} · ${fmt(stake)} @ ${g.engine.odds[side].toFixed(2)}×`; $('stRes').textContent = 'rolling…'; $('stCut').textContent = `${r.cutscene.hits.length} hits · ${r.cutscene.how}`; $('fA').className = 'fighter a'; $('fB').className = 'fighter b'; bars(g.engine.fighters.A.hp, g.engine.fighters.B.hp);
+  $('btnA').disabled = $('btnB').disabled = true; [...$('presets').children].forEach(b => b.disabled = true); callout('', 'FIGHT', `Decided already: u = ${r.math.u.toFixed(4)} against P(A) = ${pct(r.math.pA)}. Watch it play out. Side bets are open the whole time.`);
+  let i = 0; playing = setInterval(() => { const h = r.cutscene.hits[i++]; if (!h) { clearInterval(playing); playing = null; finish(r, side); return; } const victim = h.hitter === 'A' ? 'B' : 'A'; const fh = $('f' + h.hitter), fv = $('f' + victim); fh.style.setProperty('--fw', h.hitter === 'A' ? '40px' : '-40px'); fh.classList.remove('swing'); void fh.offsetWidth; fh.classList.add('swing'); fv.style.setProperty('--kb', victim === 'A' ? '-18px' : '18px'); fv.style.setProperty('--rot', victim === 'A' ? '-8deg' : '8deg'); fv.classList.remove('hit'); void fv.offsetWidth; fv.classList.add('hit'); const d = document.createElement('div'); d.className = 'dmg display'; d.textContent = '−' + h.damage.toFixed(1); d.style.left = victim === 'A' ? '28%' : '66%'; d.style.top = '42%'; $('stage').appendChild(d); setTimeout(() => d.remove(), 1000); bars(h.hpA, h.hpB); }, 550); }
+function finish(r, side) { const loser = r.winner === 'A' ? 'B' : 'A'; if (r.cutscene.how === 'KO') $('f' + loser).classList.add('ko'); g.collect({ roundId: r.roundId }); syncBalance(); const win = r.totalWinAmount / 100; $('stRes').textContent = `${r.winner} by ${r.cutscene.how}`; callout(win > 0 ? 'win' : 'lose', `${r.winner} WINS BY ${r.cutscene.how}`, win > 0 ? `Your bet on ${side} pays ${fmt(win)}.` : `Your bet on ${side} loses.`); log(`${preset} · backed ${side} · ${r.winner} by ${r.cutscene.how} · ${win - stake >= 0 ? '+' : ''}${fmt(win - stake)}`, win > 0 ? 'w' : 'l'); $('btnA').disabled = $('btnB').disabled = false; [...$('presets').children].forEach(b => b.disabled = false); }
+$('sbGo').onclick = () => { if (balance < stake) return; const name = $('sbKind').value, lib = SIDE_LIBRARY[name]; const params = lib.kind === 'single-shot' ? name : { ...lib, pick: $('sbPick').value }; const r = g.sideBet({ sessionId: s.sessionId, betAmount: stake * 100, params }); g.collect({ roundId: r.roundId }); syncBalance(); const win = r.totalWinAmount / 100; const txt = lib.kind === 'single-shot' ? `single shot ${r.multiple.toFixed(3)}× → ${fmt(win)}` : `${r.outcome}${r.hit ? ' ✓ ' + fmt(win) : ' ✗'}`; $('sbRes').textContent = txt; log(`side · ${name} · ${txt} · ${win - stake >= 0 ? '+' : ''}${fmt(win - stake)}`, win > 0 ? 'w' : 'l'); };
+$('btnA').onclick = () => bet('A'); $('btnB').onclick = () => bet('B');
+setup(); $('balance').textContent = fmt(balance);
+</script>
+
+<section class="api-foot" style="max-width:1300px;margin:0 auto;padding:10px 22px 32px;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#a8adb8;font-size:13px;line-height:1.5">
+  <div style="border-top:1px solid #252b38;padding-top:16px">
+    <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin-bottom:6px">LIVE API · HOW TO CALL</div>
+    <p style="margin:0 0 10px;max-width:80ch">The engine ships as a browser module at <code>https://danvid1009.github.io/gnarone-game-math/cutscene/api/rgs.js</code>. It speaks the RGS provider contract (open, valid-bets, bet, next-action, collect; money in integer minor units; bet debits, collect credits) and rolls with <code>crypto.getRandomValues</code> in your page, so there is no server and every round is live. Pass <code>seed</code> to replay a round.</p>
+<pre style="background:#151923;border:1px solid #252b38;border-radius:4px;padding:12px 14px;overflow-x:auto;font:12.5px 'IBM Plex Mono',ui-monospace,monospace;color:#f1efe8;margin:0 0 10px"><code>import { createGame } from 'https://danvid1009.github.io/gnarone-game-math/cutscene/api/rgs.js';
+
+const g = createGame({ preset: 'even' });                    // presets: even, favourite, glass-cannon
+                                                       // bet types: A, B
+const s = g.open();                                    // session, balance 100000, chipLevels [100,200,500,1000,2500,5000,10000]
+const r = g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'B' });   // fresh crypto seed; win in r.totalWinAmount
+g.collect({ roundId: r.roundId });                                           // credits the win → { balance }
+
+// Replay any fixture: same seed, same code path, same answer as rounds/007.json
+g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'B', seed: 'fixture-007' });</code></pre>
+    <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin:18px 0 6px">STATIC FIXTURES · 100 PRE-DRAWN ROUNDS</div>
+    <p style="margin:0 0 10px;max-width:80ch">Seeds <code>fixture-000</code> … <code>fixture-099</code>, served as plain JSON (GET, no auth, deterministic). Stake unit is 1000 minor units; scale linearly. The live module reproduces any of them when given the same seed.</p>
+<pre style="background:#151923;border:1px solid #252b38;border-radius:4px;padding:12px 14px;overflow-x:auto;font:12.5px 'IBM Plex Mono',ui-monospace,monospace;color:#f1efe8;margin:0 0 10px"><code>curl -s https://danvid1009.github.io/gnarone-game-math/cutscene/api/index.json                 # presets, parameters, bet types, realised RTP
+curl -s https://danvid1009.github.io/gnarone-game-math/cutscene/api/even/field.json            # one preset: frozen config + tables + how to settle
+curl -s https://danvid1009.github.io/gnarone-game-math/cutscene/api/even/rounds/007.json       # one round (000–099), settled for every bet type
+curl -s https://danvid1009.github.io/gnarone-game-math/cutscene/api/even/rounds.json           # all 100 rounds (stake + win per bet type)
+curl -s https://danvid1009.github.io/gnarone-game-math/cutscene/api/even/sample-request.json   # RGS-shaped request
+curl -s https://danvid1009.github.io/gnarone-game-math/cutscene/api/even/sample-response.json  # …and its response</code></pre>
+    <p style="margin:0;max-width:80ch">One folder per preset: <code>even</code>, <code>favourite</code>, <code>glass-cannon</code>. Settlement rule is spelled out in each preset's <code>field.json</code> under <code>how_to_settle</code>; the same seed drives every preset, so round 007 has the same u in all of them.</p>
+    <p style="margin:10px 0 0;max-width:80ch">Full write-up: <a href="./" style="color:#6fd3c7">Cutscene Fight page</a>.</p>
+  </div>
+</section>

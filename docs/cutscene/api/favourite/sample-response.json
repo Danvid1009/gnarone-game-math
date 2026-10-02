@@ -1,0 +1,246 @@
+{
+  "open": {
+    "sessionId": "457e3ef0-9479-4438-8877-5097d8fa0673",
+    "requestCounter": 0,
+    "balance": 100000,
+    "currency": {
+      "code": "USD",
+      "prefix": "$",
+      "suffix": "",
+      "grouping": ",",
+      "decimal": ".",
+      "precision": 1,
+      "denomination": 1
+    },
+    "chipLevels": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "minBet": 100,
+    "maxBet": 10000,
+    "defaultBet": 200,
+    "playerAlias": "Player",
+    "seconds": 0,
+    "rounds": 0,
+    "winLoss": 0,
+    "preset": "favourite",
+    "rtp": 0.95,
+    "fighters": {
+      "A": {
+        "power": 1700,
+        "hp": 100
+      },
+      "B": {
+        "power": 1550,
+        "hp": 100
+      }
+    },
+    "pA": 0.7289486576995687,
+    "odds": {
+      "A": 1.3032467924394424,
+      "B": 3.5048710400667455
+    },
+    "sideLibrary": {
+      "coin": {
+        "kind": "coin",
+        "p": 0.5,
+        "rtp": 0.95,
+        "options": [
+          "OPTION_1",
+          "OPTION_2"
+        ],
+        "odds": [
+          1.9,
+          1.9
+        ],
+        "payouts": null
+      },
+      "biased-coin": {
+        "kind": "coin",
+        "p": 0.7,
+        "rtp": 0.95,
+        "options": [
+          "OPTION_1",
+          "OPTION_2"
+        ],
+        "odds": [
+          1.3571428571428572,
+          3.166666666666666
+        ],
+        "payouts": null
+      },
+      "pick-3": {
+        "kind": "pick",
+        "n": 3,
+        "rtp": 0.95,
+        "options": [
+          "OPTION_1",
+          "OPTION_2",
+          "OPTION_3"
+        ],
+        "odds": [
+          2.85,
+          2.85,
+          2.85
+        ],
+        "payouts": null
+      },
+      "pick-weighted": {
+        "kind": "pick",
+        "weights": [
+          5,
+          3,
+          2
+        ],
+        "rtp": 0.95,
+        "options": [
+          "OPTION_1",
+          "OPTION_2",
+          "OPTION_3"
+        ],
+        "odds": [
+          1.9,
+          3.1666666666666665,
+          4.749999999999999
+        ],
+        "payouts": null
+      },
+      "shot-classic": {
+        "kind": "single-shot",
+        "payouts": [
+          0,
+          0.5,
+          1,
+          2,
+          5,
+          20
+        ],
+        "rtp": 0.95,
+        "options": [
+          "BASE"
+        ],
+        "odds": null
+      }
+    },
+    "sideKinds": [
+      "coin",
+      "pick",
+      "single-shot"
+    ]
+  },
+  "calls": [
+    {
+      "call": "bet",
+      "response": {
+        "roundId": "c79c830b-7184-44bf-a884-ab0b4d7685e6",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 0,
+        "winner": "B",
+        "odds": 1.3032467924394424,
+        "cutscene": {
+          "how": "KO",
+          "ticks": 6,
+          "hits": [
+            {
+              "tick": 1,
+              "hitter": "B",
+              "damage": 14,
+              "hpA": 86,
+              "hpB": 100
+            },
+            {
+              "tick": 2,
+              "hitter": "B",
+              "damage": 11,
+              "hpA": 75,
+              "hpB": 100
+            },
+            {
+              "tick": 3,
+              "hitter": "B",
+              "damage": 22.5,
+              "hpA": 52.5,
+              "hpB": 100
+            },
+            {
+              "tick": 4,
+              "hitter": "B",
+              "damage": 33,
+              "hpA": 19.5,
+              "hpB": 100
+            },
+            {
+              "tick": 5,
+              "hitter": "A",
+              "damage": 21,
+              "hpA": 19.5,
+              "hpB": 79
+            },
+            {
+              "tick": 6,
+              "hitter": "B",
+              "damage": 24,
+              "hpA": 0,
+              "hpB": 79
+            }
+          ],
+          "final": {
+            "hpA": 0,
+            "hpB": 79
+          },
+          "redraws": 0
+        },
+        "math": {
+          "u": 0.9729229214135557,
+          "pA": 0.7289486576995687
+        },
+        "nextAction": [
+          "COLLECT"
+        ]
+      }
+    },
+    {
+      "call": "side-bet",
+      "response": {
+        "roundId": "81921c6f-b0a8-4100-9443-08b262639c30",
+        "balance": 98000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 1900,
+        "side": "coin",
+        "kind": "coin",
+        "outcome": "OPTION_1",
+        "pick": "OPTION_1",
+        "hit": true,
+        "odds": 1.9,
+        "math": {
+          "u": 0.07044307538308203,
+          "probs": [
+            0.5,
+            0.5
+          ]
+        },
+        "nextAction": [
+          "COLLECT"
+        ]
+      }
+    },
+    {
+      "call": "collect (side bet)",
+      "response": {
+        "balance": 99900
+      }
+    },
+    {
+      "call": "collect",
+      "response": {
+        "balance": 99900
+      }
+    }
+  ]
+}

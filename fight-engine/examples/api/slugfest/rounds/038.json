@@ -1,0 +1,58 @@
+{
+  "round": 38,
+  "seed": "fixture-038",
+  "results": {
+    "A": {
+      "stake": 1000,
+      "win": 1900,
+      "totalBetAmount": 1000,
+      "tick": 10,
+      "ticksMax": 10,
+      "hp": {
+        "A": 26,
+        "B": 0
+      },
+      "pA": 1,
+      "odds": {
+        "opening": {
+          "A": 1.899999999999999,
+          "B": 1.9000000000000008
+        },
+        "live": null
+      },
+      "last": {
+        "hitter": "A",
+        "damage": 81.5
+      },
+      "winner": "A",
+      "how": "KO",
+      "decision": null
+    },
+    "B": {
+      "stake": 1000,
+      "win": 0,
+      "totalBetAmount": 1000,
+      "tick": 10,
+      "ticksMax": 10,
+      "hp": {
+        "A": 26,
+        "B": 0
+      },
+      "pA": 1,
+      "odds": {
+        "opening": {
+          "A": 1.899999999999999,
+          "B": 1.9000000000000008
+        },
+        "live": null
+      },
+      "last": {
+        "hitter": "A",
+        "damage": 81.5
+      },
+      "winner": "A",
+      "how": "KO",
+      "decision": null
+    }
+  }
+}

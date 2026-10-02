@@ -1,0 +1,207 @@
+{
+  "engine": "fight-engine",
+  "stake": 1000,
+  "rounds": 100,
+  "seeds": "fixture-000 … fixture-099 (the same seed drives every preset)",
+  "default_preset": "even",
+  "presets": {
+    "even": {
+      "parameters": {
+        "A": {
+          "power": 1600,
+          "hp": 100
+        },
+        "B": {
+          "power": 1600,
+          "hp": 100
+        },
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "A",
+        "B"
+      ],
+      "levels": {
+        "A": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "B": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": true,
+      "realisedRtp": {
+        "A": 0.874,
+        "B": 1.026
+      },
+      "files": [
+        "even/field.json",
+        "even/rounds.json",
+        "even/rounds/NNN.json",
+        "even/sample-request.json",
+        "even/sample-response.json"
+      ]
+    },
+    "favourite": {
+      "parameters": {
+        "A": {
+          "power": 1700,
+          "hp": 100
+        },
+        "B": {
+          "power": 1550,
+          "hp": 100
+        },
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "A",
+        "B"
+      ],
+      "levels": {
+        "A": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "B": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": true,
+      "realisedRtp": {
+        "A": 0.86,
+        "B": 1.1917
+      },
+      "files": [
+        "favourite/field.json",
+        "favourite/rounds.json",
+        "favourite/rounds/NNN.json",
+        "favourite/sample-request.json",
+        "favourite/sample-response.json"
+      ]
+    },
+    "glass-cannon": {
+      "parameters": {
+        "A": {
+          "power": 1700,
+          "hp": 70
+        },
+        "B": {
+          "power": 1550,
+          "hp": 120
+        },
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "A",
+        "B"
+      ],
+      "levels": {
+        "A": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "B": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": true,
+      "realisedRtp": {
+        "A": 0.9275,
+        "B": 0.9688
+      },
+      "files": [
+        "glass-cannon/field.json",
+        "glass-cannon/rounds.json",
+        "glass-cannon/rounds/NNN.json",
+        "glass-cannon/sample-request.json",
+        "glass-cannon/sample-response.json"
+      ]
+    },
+    "slugfest": {
+      "parameters": {
+        "A": {
+          "power": 1600,
+          "hp": 100
+        },
+        "B": {
+          "power": 1600,
+          "hp": 100
+        },
+        "ticks": 10,
+        "baseDamage": 24,
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "A",
+        "B"
+      ],
+      "levels": {
+        "A": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ],
+        "B": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": true,
+      "realisedRtp": {
+        "A": 0.874,
+        "B": 1.026
+      },
+      "files": [
+        "slugfest/field.json",
+        "slugfest/rounds.json",
+        "slugfest/rounds/NNN.json",
+        "slugfest/sample-request.json",
+        "slugfest/sample-response.json"
+      ]
+    }
+  }
+}

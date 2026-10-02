@@ -163,6 +163,7 @@ for (const e of engines) {
   cpSync(join(root, e.folder, 'src'), join(out, 'api/src'), { recursive: true });
   mkdirSync(join(out, 'rgs-math/src'), { recursive: true });
   for (const f of ['contract.js', 'rng.js']) copyFileSync(join(root, 'rgs-math/src', f), join(out, 'rgs-math/src', f));
+  for (const extra of e.extraSrc ?? []) cpSync(join(root, extra), join(out, extra), { recursive: true });   // other engines this module imports (../../<engine>/src)
   writeFileSync(join(out, 'api/rgs.js'), `// ${e.title} — RGS provider module, rolls locally. See ../ for the contract and ALGORITHM.md for the math.\nexport * from './src/rgs.js';\n`);
   // every demo gets a "how to call" footer
   play += apiFooter(e, g);

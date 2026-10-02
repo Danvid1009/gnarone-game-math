@@ -73,3 +73,34 @@ test('defineGame validates its spec', () => {
   g.open({ sessionId: 's' });
   assert.throws(() => g.bet({ sessionId: 's', betAmount: 10 }), /totalWinAmount/);
 });
+
+test('linked bets: priced from the running round, settled when it ends, own collect', () => {
+  // toy race-to-3: CONTINUE flips a coin; A wins at +3, B at -3. Live price = fair P(A) from the current position.
+  const P = (x) => (x + 3) / 6;
+  const g = defineGame({
+    id: 'toy-fight', betTypes: ['A', 'B'], levels: () => [100, 1000],
+    play: ({ rng }) => ({ totalWinAmount: 0, roundEnded: false, nextAction: ['CONTINUE'], state: { x: 0, u: Array.from({ length: 50 }, () => rng.next()) }, x: 0 }),
+    step: ({ round }) => { const st = round.state; st.x += st.u[round.steps - 1] < 0.5 ? 1 : -1; const done = Math.abs(st.x) >= 3; return { totalWinAmount: done && st.x > 0 && round.betType === 'A' ? Math.round(round.totalBetAmount * 2) : done && st.x < 0 && round.betType === 'B' ? Math.round(round.totalBetAmount * 2) : 0, roundEnded: done, nextAction: done ? ['COLLECT'] : ['CONTINUE'], state: st, x: st.x }; },
+    linked: { price: ({ round }) => ({ odds: { A: 1 / P(round.state.x), B: 1 / (1 - P(round.state.x)) }, pA: P(round.state.x) }),
+              settle: ({ round, child }) => ((round.state.x > 0 ? 'A' : 'B') === child.betType ? Math.round(child.totalBetAmount * child.odds) : 0) },
+  });
+  assert.ok(g.hasLinkedBets);
+  const s = g.open();
+  let r = g.bet({ sessionId: s.sessionId, betAmount: 100, betType: 'A', seed: 'linked' });
+  assert.throws(() => g.linkedBet({ sessionId: s.sessionId, roundId: r.roundId, betAmount: 55, betType: 'A' }), /Valid bets/);
+  assert.throws(() => g.linkedBet({ sessionId: s.sessionId, roundId: r.roundId, betAmount: 100, betType: 'C' }), /invalid linked betType/);
+  r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' });
+  const q = g.quote({ roundId: r.roundId }); assert.equal(q.step, 1); assert.ok(Math.abs(q.odds.A * q.pA - 1) < 1e-12, 'fair price');
+  const live = g.linkedBet({ sessionId: s.sessionId, roundId: r.roundId, betAmount: 1000, betType: 'B' });
+  assert.equal(live.parentRoundId, r.roundId); assert.equal(live.balance, 100000 - 100 - 1000); assert.equal(live.odds, q.odds.B); assert.equal(live.placedAtStep, 1); assert.deepEqual(live.nextAction, []);
+  assert.throws(() => g.collect({ roundId: live.roundId }), /has not ended/);
+  assert.throws(() => g.quote({ roundId: live.roundId }), /parent/);
+  while (!r.roundEnded) r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' });
+  const child = g.getRound(live.roundId); assert.equal(child.ended, true); assert.deepEqual(child.nextAction, ['COLLECT']);
+  const winner = r.x > 0 ? 'A' : 'B';
+  assert.equal(child.totalWinAmount, winner === 'B' ? Math.round(1000 * live.odds) : 0);
+  const b1 = g.collect({ roundId: r.roundId }).balance, b2 = g.collect({ roundId: live.roundId }).balance;
+  assert.equal(b2, 100000 - 100 - 1000 + r.totalWinAmount + child.totalWinAmount); assert.ok(b2 >= b1);
+  assert.throws(() => g.linkedBet({ sessionId: s.sessionId, roundId: r.roundId, betAmount: 100, betType: 'A' }), /has ended/);
+  assert.throws(() => g.quote({ roundId: r.roundId }), /has ended/);
+});

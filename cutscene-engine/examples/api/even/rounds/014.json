@@ -1,0 +1,120 @@
+{
+  "round": 14,
+  "seed": "fixture-014",
+  "results": {
+    "A": {
+      "stake": 1000,
+      "win": 1900,
+      "totalBetAmount": 1000,
+      "winner": "A",
+      "odds": 1.9000000000000004,
+      "cutscene": {
+        "how": "KO",
+        "ticks": 5,
+        "hits": [
+          {
+            "tick": 1,
+            "hitter": "A",
+            "damage": 12,
+            "hpA": 100,
+            "hpB": 88
+          },
+          {
+            "tick": 2,
+            "hitter": "B",
+            "damage": 9,
+            "hpA": 91,
+            "hpB": 88
+          },
+          {
+            "tick": 3,
+            "hitter": "A",
+            "damage": 35,
+            "hpA": 91,
+            "hpB": 53
+          },
+          {
+            "tick": 4,
+            "hitter": "A",
+            "damage": 7.5,
+            "hpA": 91,
+            "hpB": 45.5
+          },
+          {
+            "tick": 5,
+            "hitter": "A",
+            "damage": 47,
+            "hpA": 91,
+            "hpB": 0
+          }
+        ],
+        "final": {
+          "hpA": 91,
+          "hpB": 0
+        },
+        "redraws": 1
+      },
+      "math": {
+        "u": 0.11351152905263007,
+        "pA": 0.4999999999999999
+      }
+    },
+    "B": {
+      "stake": 1000,
+      "win": 0,
+      "totalBetAmount": 1000,
+      "winner": "A",
+      "odds": 1.8999999999999995,
+      "cutscene": {
+        "how": "KO",
+        "ticks": 5,
+        "hits": [
+          {
+            "tick": 1,
+            "hitter": "A",
+            "damage": 12,
+            "hpA": 100,
+            "hpB": 88
+          },
+          {
+            "tick": 2,
+            "hitter": "B",
+            "damage": 9,
+            "hpA": 91,
+            "hpB": 88
+          },
+          {
+            "tick": 3,
+            "hitter": "A",
+            "damage": 35,
+            "hpA": 91,
+            "hpB": 53
+          },
+          {
+            "tick": 4,
+            "hitter": "A",
+            "damage": 7.5,
+            "hpA": 91,
+            "hpB": 45.5
+          },
+          {
+            "tick": 5,
+            "hitter": "A",
+            "damage": 47,
+            "hpA": 91,
+            "hpB": 0
+          }
+        ],
+        "final": {
+          "hpA": 91,
+          "hpB": 0
+        },
+        "redraws": 1
+      },
+      "math": {
+        "u": 0.11351152905263007,
+        "pA": 0.4999999999999999
+      }
+    }
+  }
+}

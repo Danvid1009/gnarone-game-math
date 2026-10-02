@@ -1,0 +1,10 @@
+{
+  "name": "cutscene-engine",
+  "version": "1.0.0",
+  "description": "Cutscene Fight: one bet on the winner (biased coin from the Live Fight rating), a predetermined cutscene, and a side-bet library the developer can call any number of times",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": { "test": "node --test", "fixtures": "node ../site/make-fixtures.js cutscene-engine", "examples": "sh scripts/make-examples.sh" },
+  "license": "UNLICENSED",
+  "private": true
+}

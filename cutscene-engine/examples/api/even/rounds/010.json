@@ -1,0 +1,190 @@
+{
+  "round": 10,
+  "seed": "fixture-010",
+  "results": {
+    "A": {
+      "stake": 1000,
+      "win": 1900,
+      "totalBetAmount": 1000,
+      "winner": "A",
+      "odds": 1.9000000000000004,
+      "cutscene": {
+        "how": "KO",
+        "ticks": 10,
+        "hits": [
+          {
+            "tick": 1,
+            "hitter": "B",
+            "damage": 18,
+            "hpA": 82,
+            "hpB": 100
+          },
+          {
+            "tick": 2,
+            "hitter": "A",
+            "damage": 2.5,
+            "hpA": 82,
+            "hpB": 97.5
+          },
+          {
+            "tick": 3,
+            "hitter": "B",
+            "damage": 34,
+            "hpA": 48,
+            "hpB": 97.5
+          },
+          {
+            "tick": 4,
+            "hitter": "A",
+            "damage": 24,
+            "hpA": 48,
+            "hpB": 73.5
+          },
+          {
+            "tick": 5,
+            "hitter": "B",
+            "damage": 26.5,
+            "hpA": 21.5,
+            "hpB": 73.5
+          },
+          {
+            "tick": 6,
+            "hitter": "A",
+            "damage": 27,
+            "hpA": 21.5,
+            "hpB": 46.5
+          },
+          {
+            "tick": 7,
+            "hitter": "A",
+            "damage": 14,
+            "hpA": 21.5,
+            "hpB": 32.5
+          },
+          {
+            "tick": 8,
+            "hitter": "A",
+            "damage": 11,
+            "hpA": 21.5,
+            "hpB": 21.5
+          },
+          {
+            "tick": 9,
+            "hitter": "A",
+            "damage": 11.5,
+            "hpA": 21.5,
+            "hpB": 10
+          },
+          {
+            "tick": 10,
+            "hitter": "A",
+            "damage": 13.5,
+            "hpA": 21.5,
+            "hpB": 0
+          }
+        ],
+        "final": {
+          "hpA": 21.5,
+          "hpB": 0
+        },
+        "redraws": 1
+      },
+      "math": {
+        "u": 0.22953444463200867,
+        "pA": 0.4999999999999999
+      }
+    },
+    "B": {
+      "stake": 1000,
+      "win": 0,
+      "totalBetAmount": 1000,
+      "winner": "A",
+      "odds": 1.8999999999999995,
+      "cutscene": {
+        "how": "KO",
+        "ticks": 10,
+        "hits": [
+          {
+            "tick": 1,
+            "hitter": "B",
+            "damage": 18,
+            "hpA": 82,
+            "hpB": 100
+          },
+          {
+            "tick": 2,
+            "hitter": "A",
+            "damage": 2.5,
+            "hpA": 82,
+            "hpB": 97.5
+          },
+          {
+            "tick": 3,
+            "hitter": "B",
+            "damage": 34,
+            "hpA": 48,
+            "hpB": 97.5
+          },
+          {
+            "tick": 4,
+            "hitter": "A",
+            "damage": 24,
+            "hpA": 48,
+            "hpB": 73.5
+          },
+          {
+            "tick": 5,
+            "hitter": "B",
+            "damage": 26.5,
+            "hpA": 21.5,
+            "hpB": 73.5
+          },
+          {
+            "tick": 6,
+            "hitter": "A",
+            "damage": 27,
+            "hpA": 21.5,
+            "hpB": 46.5
+          },
+          {
+            "tick": 7,
+            "hitter": "A",
+            "damage": 14,
+            "hpA": 21.5,
+            "hpB": 32.5
+          },
+          {
+            "tick": 8,
+            "hitter": "A",
+            "damage": 11,
+            "hpA": 21.5,
+            "hpB": 21.5
+          },
+          {
+            "tick": 9,
+            "hitter": "A",
+            "damage": 11.5,
+            "hpA": 21.5,
+            "hpB": 10
+          },
+          {
+            "tick": 10,
+            "hitter": "A",
+            "damage": 13.5,
+            "hpA": 21.5,
+            "hpB": 0
+          }
+        ],
+        "final": {
+          "hpA": 21.5,
+          "hpB": 0
+        },
+        "redraws": 1
+      },
+      "math": {
+        "u": 0.22953444463200867,
+        "pA": 0.4999999999999999
+      }
+    }
+  }
+}

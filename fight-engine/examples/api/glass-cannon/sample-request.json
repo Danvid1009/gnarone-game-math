@@ -1,0 +1,64 @@
+{
+  "module": "api/rgs.js",
+  "create": "createGame({\"preset\":\"glass-cannon\"})",
+  "calls": [
+    {
+      "call": "bet",
+      "body": {
+        "sessionId": "f2694f1f-de55-4eca-ae47-aee4cfd94377",
+        "betAmount": 1000,
+        "betType": "A",
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "next-action",
+      "body": {
+        "roundId": "8b04031b-1d6a-4638-af1d-b1eef2cd15cd",
+        "actionCode": "CONTINUE"
+      }
+    },
+    {
+      "call": "next-action",
+      "body": {
+        "roundId": "8b04031b-1d6a-4638-af1d-b1eef2cd15cd",
+        "actionCode": "CONTINUE"
+      }
+    },
+    {
+      "call": "quote",
+      "body": {
+        "roundId": "8b04031b-1d6a-4638-af1d-b1eef2cd15cd"
+      }
+    },
+    {
+      "call": "linked-bet",
+      "body": {
+        "sessionId": "f2694f1f-de55-4eca-ae47-aee4cfd94377",
+        "roundId": "8b04031b-1d6a-4638-af1d-b1eef2cd15cd",
+        "betAmount": 1000,
+        "betType": "B"
+      }
+    },
+    {
+      "call": "next-action (last)",
+      "body": {
+        "roundId": "8b04031b-1d6a-4638-af1d-b1eef2cd15cd",
+        "actionCode": "CONTINUE"
+      }
+    },
+    {
+      "call": "collect",
+      "body": {
+        "roundId": "8b04031b-1d6a-4638-af1d-b1eef2cd15cd"
+      }
+    },
+    {
+      "call": "collect (live bet)",
+      "body": {
+        "roundId": "287ca831-ca16-460d-8bc7-f28347464bc4"
+      }
+    }
+  ],
+  "note": "deterministic: seed fixture-007; drop seed for a live roll"
+}
