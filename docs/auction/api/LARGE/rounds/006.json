@@ -4,48 +4,58 @@
   "results": {
     "LARGE": {
       "stake": 1000,
-      "survived": 3,
-      "outcome": "CRASH_ON_STEP_4",
+      "survived": 5,
+      "outcome": "CRASH_ON_STEP_6",
       "payoutIfTakenAfter": [
         {
           "step": 1,
           "reachable": true,
-          "win": 371,
+          "win": 2733,
           "locker": {
-            "multiplier": 0.26878147380415085,
-            "band": 0,
-            "contents": 371
+            "multiplier": 1.9803544460945104,
+            "band": 3,
+            "contents": 2733
           }
         },
         {
           "step": 2,
           "reachable": true,
-          "win": 511,
+          "win": 3763,
           "locker": {
-            "multiplier": 0.26878147380415085,
-            "band": 0,
-            "contents": 511
+            "multiplier": 1.9803544460945104,
+            "band": 3,
+            "contents": 3763
           }
         },
         {
           "step": 3,
           "reachable": true,
-          "win": 707,
+          "win": 5208,
           "locker": {
-            "multiplier": 0.26878147380415085,
-            "band": 0,
-            "contents": 707
+            "multiplier": 1.9803544460945104,
+            "band": 3,
+            "contents": 5208
           }
         },
         {
           "step": 4,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 7169,
+          "locker": {
+            "multiplier": 1.9803544460945104,
+            "band": 3,
+            "contents": 7169
+          }
         },
         {
           "step": 5,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 9902,
+          "locker": {
+            "multiplier": 1.9803544460945104,
+            "band": 3,
+            "contents": 9902
+          }
         },
         {
           "step": 6,
@@ -76,7 +86,7 @@
       "totalBetAmount": 1000,
       "totalWinAmount": 0,
       "size": "LARGE",
-      "currentStep": 4,
+      "currentStep": 6,
       "currentPayout": 0,
       "locker": null
     }

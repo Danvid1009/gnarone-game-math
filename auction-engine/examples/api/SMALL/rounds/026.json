@@ -4,48 +4,28 @@
   "results": {
     "SMALL": {
       "stake": 1000,
-      "survived": 4,
-      "outcome": "CRASH_ON_STEP_5",
+      "survived": 0,
+      "outcome": "CRASH_ON_STEP_1",
       "payoutIfTakenAfter": [
         {
           "step": 1,
-          "reachable": true,
-          "win": 1177,
-          "locker": {
-            "multiplier": 1.0060494508751172,
-            "band": 2,
-            "contents": 1177
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 2,
-          "reachable": true,
-          "win": 1388,
-          "locker": {
-            "multiplier": 1.0060494508751172,
-            "band": 2,
-            "contents": 1388
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 3,
-          "reachable": true,
-          "win": 1630,
-          "locker": {
-            "multiplier": 1.0060494508751172,
-            "band": 2,
-            "contents": 1630
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 4,
-          "reachable": true,
-          "win": 1911,
-          "locker": {
-            "multiplier": 1.0060494508751172,
-            "band": 2,
-            "contents": 1911
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 5,
@@ -81,7 +61,7 @@
       "totalBetAmount": 1000,
       "totalWinAmount": 0,
       "size": "SMALL",
-      "currentStep": 5,
+      "currentStep": 1,
       "currentPayout": 0,
       "locker": null
     }

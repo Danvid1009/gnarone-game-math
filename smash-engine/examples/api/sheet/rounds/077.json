@@ -10,7 +10,7 @@
       "hasBonus": false,
       "multiplier": 5,
       "math": {
-        "u": 0.015307037625461817,
+        "u": 0.03402636347668153,
         "zone": 8,
         "gem": null,
         "altAnimation": true,
@@ -19,15 +19,15 @@
     },
     "BOOSTED": {
       "stake": 1000,
-      "win": 5000,
+      "win": 2500,
       "totalBetAmount": 1000,
       "count": 3,
-      "hasBonus": true,
-      "multiplier": 5,
+      "hasBonus": false,
+      "multiplier": 2.5,
       "math": {
-        "u": 0.015307037625461817,
-        "zone": 5,
-        "gem": 2,
+        "u": 0.03402636347668153,
+        "zone": 8,
+        "gem": null,
         "altAnimation": true,
         "baseWin": 5
       }

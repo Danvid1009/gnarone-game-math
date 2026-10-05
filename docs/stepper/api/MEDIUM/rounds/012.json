@@ -4,8 +4,8 @@
   "results": {
     "MEDIUM": {
       "stake": 1000,
-      "survived": 2,
-      "outcome": "CRASH_ON_STEP_3",
+      "survived": 4,
+      "outcome": "CRASH_ON_STEP_5",
       "payoutIfTakenAfter": [
         {
           "step": 1,
@@ -19,13 +19,13 @@
         },
         {
           "step": 3,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 2630
         },
         {
           "step": 4,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 3620
         },
         {
           "step": 5,
@@ -61,7 +61,7 @@
       "totalBetAmount": 1000,
       "totalWinAmount": 0,
       "difficulty": "MEDIUM",
-      "currentStep": 3,
+      "currentStep": 5,
       "currentPayout": 0
     }
   }

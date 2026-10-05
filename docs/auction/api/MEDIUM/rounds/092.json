@@ -4,53 +4,58 @@
   "results": {
     "MEDIUM": {
       "stake": 1000,
-      "survived": 4,
-      "outcome": "CRASH_ON_STEP_5",
+      "survived": 5,
+      "outcome": "CRASH_ON_STEP_6",
       "payoutIfTakenAfter": [
         {
           "step": 1,
           "reachable": true,
-          "win": 288,
+          "win": 293,
           "locker": {
-            "multiplier": 0.22887546658641972,
+            "multiplier": 0.23264731034987995,
             "band": 0,
-            "contents": 288
+            "contents": 293
           }
         },
         {
           "step": 2,
           "reachable": true,
-          "win": 362,
+          "win": 368,
           "locker": {
-            "multiplier": 0.22887546658641972,
+            "multiplier": 0.23264731034987995,
             "band": 0,
-            "contents": 362
+            "contents": 368
           }
         },
         {
           "step": 3,
           "reachable": true,
-          "win": 458,
+          "win": 465,
           "locker": {
-            "multiplier": 0.22887546658641972,
+            "multiplier": 0.23264731034987995,
             "band": 0,
-            "contents": 458
+            "contents": 465
           }
         },
         {
           "step": 4,
           "reachable": true,
-          "win": 574,
+          "win": 584,
           "locker": {
-            "multiplier": 0.22887546658641972,
+            "multiplier": 0.23264731034987995,
             "band": 0,
-            "contents": 574
+            "contents": 584
           }
         },
         {
           "step": 5,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 735,
+          "locker": {
+            "multiplier": 0.23264731034987995,
+            "band": 0,
+            "contents": 735
+          }
         },
         {
           "step": 6,
@@ -81,7 +86,7 @@
       "totalBetAmount": 1000,
       "totalWinAmount": 0,
       "size": "MEDIUM",
-      "currentStep": 5,
+      "currentStep": 6,
       "currentPayout": 0,
       "locker": null
     }

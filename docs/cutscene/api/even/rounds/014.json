@@ -10,52 +10,73 @@
       "odds": 1.9000000000000004,
       "cutscene": {
         "how": "KO",
-        "ticks": 5,
+        "ticks": 8,
         "hits": [
           {
             "tick": 1,
             "hitter": "A",
-            "damage": 12,
+            "damage": 17.5,
             "hpA": 100,
-            "hpB": 88
+            "hpB": 82.5
           },
           {
             "tick": 2,
             "hitter": "B",
-            "damage": 9,
-            "hpA": 91,
-            "hpB": 88
+            "damage": 36,
+            "hpA": 64,
+            "hpB": 82.5
           },
           {
             "tick": 3,
-            "hitter": "A",
-            "damage": 35,
-            "hpA": 91,
-            "hpB": 53
+            "hitter": "B",
+            "damage": 1.5,
+            "hpA": 62.5,
+            "hpB": 82.5
           },
           {
             "tick": 4,
             "hitter": "A",
-            "damage": 7.5,
-            "hpA": 91,
-            "hpB": 45.5
+            "damage": 38.5,
+            "hpA": 62.5,
+            "hpB": 44
           },
           {
             "tick": 5,
             "hitter": "A",
-            "damage": 47,
-            "hpA": 91,
+            "damage": 21,
+            "hpA": 62.5,
+            "hpB": 23
+          },
+          {
+            "tick": 6,
+            "hitter": "A",
+            "damage": 6,
+            "hpA": 62.5,
+            "hpB": 17
+          },
+          {
+            "tick": 7,
+            "hitter": "A",
+            "damage": 3,
+            "hpA": 62.5,
+            "hpB": 14
+          },
+          {
+            "tick": 8,
+            "hitter": "A",
+            "damage": 20,
+            "hpA": 62.5,
             "hpB": 0
           }
         ],
         "final": {
-          "hpA": 91,
+          "hpA": 62.5,
           "hpB": 0
         },
-        "redraws": 1
+        "redraws": 3
       },
       "math": {
-        "u": 0.11351152905263007,
+        "u": 0.17082675712839468,
         "pA": 0.4999999999999999
       }
     },
@@ -67,52 +88,73 @@
       "odds": 1.8999999999999995,
       "cutscene": {
         "how": "KO",
-        "ticks": 5,
+        "ticks": 8,
         "hits": [
           {
             "tick": 1,
             "hitter": "A",
-            "damage": 12,
+            "damage": 17.5,
             "hpA": 100,
-            "hpB": 88
+            "hpB": 82.5
           },
           {
             "tick": 2,
             "hitter": "B",
-            "damage": 9,
-            "hpA": 91,
-            "hpB": 88
+            "damage": 36,
+            "hpA": 64,
+            "hpB": 82.5
           },
           {
             "tick": 3,
-            "hitter": "A",
-            "damage": 35,
-            "hpA": 91,
-            "hpB": 53
+            "hitter": "B",
+            "damage": 1.5,
+            "hpA": 62.5,
+            "hpB": 82.5
           },
           {
             "tick": 4,
             "hitter": "A",
-            "damage": 7.5,
-            "hpA": 91,
-            "hpB": 45.5
+            "damage": 38.5,
+            "hpA": 62.5,
+            "hpB": 44
           },
           {
             "tick": 5,
             "hitter": "A",
-            "damage": 47,
-            "hpA": 91,
+            "damage": 21,
+            "hpA": 62.5,
+            "hpB": 23
+          },
+          {
+            "tick": 6,
+            "hitter": "A",
+            "damage": 6,
+            "hpA": 62.5,
+            "hpB": 17
+          },
+          {
+            "tick": 7,
+            "hitter": "A",
+            "damage": 3,
+            "hpA": 62.5,
+            "hpB": 14
+          },
+          {
+            "tick": 8,
+            "hitter": "A",
+            "damage": 20,
+            "hpA": 62.5,
             "hpB": 0
           }
         ],
         "final": {
-          "hpA": 91,
+          "hpA": 62.5,
           "hpB": 0
         },
-        "redraws": 1
+        "redraws": 3
       },
       "math": {
-        "u": 0.11351152905263007,
+        "u": 0.17082675712839468,
         "pA": 0.4999999999999999
       }
     }

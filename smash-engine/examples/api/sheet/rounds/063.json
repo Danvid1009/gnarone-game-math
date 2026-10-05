@@ -4,32 +4,32 @@
   "results": {
     "BASE": {
       "stake": 1000,
-      "win": 5000,
+      "win": 0,
       "totalBetAmount": 1000,
-      "count": 3,
+      "count": 0,
       "hasBonus": false,
-      "multiplier": 5,
+      "multiplier": 0,
       "math": {
-        "u": 0.024024423211812973,
-        "zone": 8,
+        "u": 0.9209417324867853,
+        "zone": 15,
         "gem": null,
-        "altAnimation": true,
-        "baseWin": 5
+        "altAnimation": false,
+        "baseWin": 0
       }
     },
     "BOOSTED": {
       "stake": 1000,
-      "win": 2500,
+      "win": 0,
       "totalBetAmount": 1000,
-      "count": 3,
+      "count": 0,
       "hasBonus": false,
-      "multiplier": 2.5,
+      "multiplier": 0,
       "math": {
-        "u": 0.024024423211812973,
-        "zone": 8,
+        "u": 0.9209417324867853,
+        "zone": 15,
         "gem": null,
-        "altAnimation": true,
-        "baseWin": 5
+        "altAnimation": false,
+        "baseWin": 0
       }
     }
   }

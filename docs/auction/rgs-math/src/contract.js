@@ -15,12 +15,17 @@
 //   next-action       balance unchanged
 //   collect           balance = balance + totalWinAmount
 //
+// Randomness and commitment: every uniform an engine sees comes from HashRng (SHA-256 of seed | stream | k);
+// the seed is 128 bits from the platform CSPRNG and stays server-side. The bet response carries
+// `seedHash` = sha256('commit|' + seed) so the house is bound before any live money; `seed` is revealed on
+// every response once the round has ended, so the round can be recomputed and checked against the hash.
+//
 // `defineGame` turns a pure `play()` function into an object with those handlers, so a
 // math module never touches HTTP, sessions or balances. Keep play() pure in (bet,
 // betType, rng) and the round is replayable from its seed.
 
 const randomUUID = () => globalThis.crypto.randomUUID();   // Node ≥ 20 and browsers
-import { Rng, newSeed } from './rng.js';
+import { HashRng, newSeed, commit } from './rng.js';
 
 export const DEFAULT_CURRENCY = {
   code: 'USD', prefix: '$', suffix: '', grouping: ',', decimal: '.', precision: 1, denomination: 1,
@@ -107,9 +112,11 @@ export function defineGame(spec) {
     };
   }
   function publicRound(round, pub) {
-    if (round.linked) return { roundId: round.roundId, parentRoundId: round.parentRoundId, balance: sessions.get(round.sessionId).balance, totalBetAmount: round.totalBetAmount, totalWinAmount: round.totalWinAmount, betType: round.betType, odds: round.odds, placedAtStep: round.placedAtStep, roundEnded: round.ended, nextAction: round.nextAction };
+    if (round.linked) return { roundId: round.roundId, parentRoundId: round.parentRoundId, parentSeedHash: round.parentSeedHash, balance: sessions.get(round.sessionId).balance, totalBetAmount: round.totalBetAmount, totalWinAmount: round.totalWinAmount, betType: round.betType, odds: round.odds, placedAtStep: round.placedAtStep, roundEnded: round.ended, nextAction: round.nextAction };
     return {
       roundId: round.roundId,
+      seedHash: round.seedHash,
+      ...(round.ended ? { seed: round.seed } : {}),
       balance: sessions.get(round.sessionId).balance,
       totalBetAmount: round.totalBetAmount,
       totalWinAmount: round.totalWinAmount,
@@ -165,7 +172,7 @@ export function defineGame(spec) {
       if (!lv.includes(betAmount)) throw new Error(`Invalid bet amount ${betAmount} for betType ${betType}. Valid bets: ${lv.join(', ')}`);
       if (s.balance < betAmount) throw new Error('insufficient balance');
 
-      const rng = new Rng(seed, 'payout');
+      const rng = new HashRng(seed, 'payout');
       const r = splitResult(play({ bet: betAmount, betType, rng, seed, session: s }), 'play');
 
       s.balance -= betAmount;
@@ -173,7 +180,7 @@ export function defineGame(spec) {
       s.rounds += 1;
 
       const round = {
-        roundId: randomUUID(), sessionId, seed, betType,
+        roundId: randomUUID(), sessionId, seed, seedHash: commit(seed), betType,
         totalBetAmount: betAmount, totalWinAmount: r.totalWinAmount,
         ended: r.roundEnded, nextAction: r.nextAction, settled: false, state: r.state, steps: 0,
       };
@@ -187,7 +194,7 @@ export function defineGame(spec) {
       if (round.ended) throw new Error(`round ${roundId} has ended`);
       if (!round.nextAction.includes(actionCode)) throw new Error(`actionCode "${actionCode}" not allowed. Allowed: [${round.nextAction.join(', ')}]`);
       round.steps += 1;
-      const rng = new Rng(round.seed, `step:${round.steps}`);
+      const rng = new HashRng(round.seed, `step:${round.steps}`);
       const r = splitResult(step({ round: { ...round, state: round.state }, actionCode, rng }), 'step');
       round.totalWinAmount = r.totalWinAmount;
       round.ended = r.roundEnded;
@@ -209,15 +216,15 @@ export function defineGame(spec) {
       const lv = levels(defaultBetType);
       if (!lv.includes(betAmount)) throw new Error(`Invalid bet amount ${betAmount}. Valid bets: ${lv.join(', ')}`);
       if (s.balance < betAmount) throw new Error('insufficient balance');
-      const rng = new Rng(seed, 'side');
+      const rng = new HashRng(seed, 'side');
       const out = side({ bet: betAmount, params, rng, seed, session: s });
       if (!out || typeof out !== 'object') throw new Error('side() must return an object');
       assertMinor(out.totalWinAmount, 'side().totalWinAmount');
       const { totalWinAmount, ...pub } = out;
       s.balance -= betAmount; s.requestCounter += 1; s.rounds += 1;
-      const round = { roundId: randomUUID(), sessionId, seed, betType: `SIDE:${params.kind ?? 'side'}`, totalBetAmount: betAmount, totalWinAmount, ended: true, nextAction: COLLECT, settled: false, side: true, params };
+      const round = { roundId: randomUUID(), sessionId, seed, seedHash: commit(seed), betType: `SIDE:${params.kind ?? 'side'}`, totalBetAmount: betAmount, totalWinAmount, ended: true, nextAction: COLLECT, settled: false, side: true, params };
       rounds.set(round.roundId, round);
-      return { roundId: round.roundId, balance: s.balance, totalBetAmount: betAmount, totalWinAmount, side: params, ...pub, nextAction: COLLECT };
+      return { roundId: round.roundId, seedHash: round.seedHash, seed, balance: s.balance, totalBetAmount: betAmount, totalWinAmount, side: params, ...pub, nextAction: COLLECT };
     },
 
     /** Current prices for extra money on a running round (live bets). Public, no side effects. */
@@ -248,11 +255,11 @@ export function defineGame(spec) {
       const q = linked.price({ round: parent });
       if (!q.odds || !(betType in q.odds)) throw new Error(`invalid linked betType "${betType}". Allowed: [${Object.keys(q.odds ?? {}).join(', ')}]`);
       s.balance -= betAmount; s.requestCounter += 1; s.rounds += 1;
-      const child = { roundId: randomUUID(), parentRoundId: roundId, sessionId, betType, odds: q.odds[betType], placedAtStep: parent.steps,
+      const child = { roundId: randomUUID(), parentRoundId: roundId, parentSeedHash: parent.seedHash, sessionId, betType, odds: q.odds[betType], placedAtStep: parent.steps,
         totalBetAmount: betAmount, totalWinAmount: 0, ended: false, nextAction: [], settled: false, linked: true };
       rounds.set(child.roundId, child);
       (parent.children ??= []).push(child.roundId);
-      return { roundId: child.roundId, parentRoundId: roundId, balance: s.balance, totalBetAmount: betAmount, totalWinAmount: 0, betType, odds: child.odds, placedAtStep: child.placedAtStep, roundEnded: false, nextAction: [] };
+      return { roundId: child.roundId, parentRoundId: roundId, parentSeedHash: parent.seedHash, balance: s.balance, totalBetAmount: betAmount, totalWinAmount: 0, betType, odds: child.odds, placedAtStep: child.placedAtStep, roundEnded: false, nextAction: [] };
     },
 
     collect({ roundId }) {
@@ -278,7 +285,7 @@ export function defineGame(spec) {
      */
     simulate({ bet, betType = defaultBetType, seed = newSeed(), policy = null }) {
       requireBetType(betType);
-      const rng = new Rng(seed, 'payout');
+      const rng = new HashRng(seed, 'payout');
       let r = splitResult(play({ bet, betType, rng, seed, session: null }), 'play');
       let view = { totalBetAmount: bet, totalWinAmount: r.totalWinAmount, ...r.pub, nextAction: r.nextAction };
       let state = r.state;
@@ -288,7 +295,7 @@ export function defineGame(spec) {
         const actionCode = policy ? policy(view, steps) : r.nextAction[0];
         if (!r.nextAction.includes(actionCode)) throw new Error(`simulate: policy chose "${actionCode}", allowed [${r.nextAction.join(', ')}]`);
         const round = { seed, betType, totalBetAmount: bet, totalWinAmount: r.totalWinAmount, state, steps, nextAction: r.nextAction };
-        r = splitResult(step({ round, actionCode, rng: new Rng(seed, `step:${steps}`) }), 'step');
+        r = splitResult(step({ round, actionCode, rng: new HashRng(seed, `step:${steps}`) }), 'step');
         state = r.state;
         view = { totalBetAmount: bet, totalWinAmount: r.totalWinAmount, ...r.pub, roundEnded: r.roundEnded, nextAction: r.nextAction };
         if (steps > 10000) throw new Error('simulate: runaway round');

@@ -4,120 +4,111 @@
   "results": {
     "MEDIUM": {
       "stake": 1000,
-      "survived": 10,
-      "outcome": "TOP",
+      "survived": 9,
+      "outcome": "CRASH_ON_STEP_10",
       "payoutIfTakenAfter": [
         {
           "step": 1,
           "reachable": true,
-          "win": 2499,
+          "win": 659,
           "locker": {
-            "multiplier": 1.9832949661676094,
-            "band": 3,
-            "contents": 2499
+            "multiplier": 0.5232089383182609,
+            "band": 1,
+            "contents": 659
           }
         },
         {
           "step": 2,
           "reachable": true,
-          "win": 3134,
+          "win": 827,
           "locker": {
-            "multiplier": 1.9832949661676094,
-            "band": 3,
-            "contents": 3134
+            "multiplier": 0.5232089383182609,
+            "band": 1,
+            "contents": 827
           }
         },
         {
           "step": 3,
           "reachable": true,
-          "win": 3967,
+          "win": 1046,
           "locker": {
-            "multiplier": 1.9832949661676094,
-            "band": 3,
-            "contents": 3967
+            "multiplier": 0.5232089383182609,
+            "band": 1,
+            "contents": 1046
           }
         },
         {
           "step": 4,
           "reachable": true,
-          "win": 4978,
+          "win": 1313,
           "locker": {
-            "multiplier": 1.9832949661676094,
-            "band": 3,
-            "contents": 4978
+            "multiplier": 0.5232089383182609,
+            "band": 1,
+            "contents": 1313
           }
         },
         {
           "step": 5,
           "reachable": true,
-          "win": 6267,
+          "win": 1653,
           "locker": {
-            "multiplier": 1.9832949661676094,
-            "band": 3,
-            "contents": 6267
+            "multiplier": 0.5232089383182609,
+            "band": 1,
+            "contents": 1653
           }
         },
         {
           "step": 6,
           "reachable": true,
-          "win": 7894,
+          "win": 2082,
           "locker": {
-            "multiplier": 1.9832949661676094,
-            "band": 3,
-            "contents": 7894
+            "multiplier": 0.5232089383182609,
+            "band": 1,
+            "contents": 2082
           }
         },
         {
           "step": 7,
           "reachable": true,
-          "win": 9936,
+          "win": 2621,
           "locker": {
-            "multiplier": 1.9832949661676094,
-            "band": 3,
-            "contents": 9936
+            "multiplier": 0.5232089383182609,
+            "band": 1,
+            "contents": 2621
           }
         },
         {
           "step": 8,
           "reachable": true,
-          "win": 12515,
+          "win": 3301,
           "locker": {
-            "multiplier": 1.9832949661676094,
-            "band": 3,
-            "contents": 12515
+            "multiplier": 0.5232089383182609,
+            "band": 1,
+            "contents": 3301
           }
         },
         {
           "step": 9,
           "reachable": true,
-          "win": 15747,
+          "win": 4154,
           "locker": {
-            "multiplier": 1.9832949661676094,
-            "band": 3,
-            "contents": 15747
+            "multiplier": 0.5232089383182609,
+            "band": 1,
+            "contents": 4154
           }
         },
         {
           "step": 10,
-          "reachable": true,
-          "win": 19833,
-          "locker": {
-            "multiplier": 1.9832949661676094,
-            "band": 3,
-            "contents": 19833
-          }
+          "reachable": false,
+          "win": 0
         }
       ],
       "totalBetAmount": 1000,
-      "totalWinAmount": 19833,
+      "totalWinAmount": 0,
       "size": "MEDIUM",
       "currentStep": 10,
-      "currentPayout": 10000,
-      "locker": {
-        "multiplier": 1.9832949661676094,
-        "band": 3,
-        "contents": 19833
-      }
+      "currentPayout": 0,
+      "locker": null
     }
   }
 }

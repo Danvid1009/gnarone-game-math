@@ -10,52 +10,73 @@
       "odds": 1.3032467924394424,
       "cutscene": {
         "how": "KO",
-        "ticks": 5,
+        "ticks": 8,
         "hits": [
           {
             "tick": 1,
-            "hitter": "A",
-            "damage": 22.5,
-            "hpA": 100,
-            "hpB": 77.5
+            "hitter": "B",
+            "damage": 12,
+            "hpA": 88,
+            "hpB": 100
           },
           {
             "tick": 2,
             "hitter": "A",
-            "damage": 31,
-            "hpA": 100,
-            "hpB": 46.5
+            "damage": 21,
+            "hpA": 88,
+            "hpB": 79
           },
           {
             "tick": 3,
             "hitter": "A",
-            "damage": 43.5,
-            "hpA": 100,
-            "hpB": 3
+            "damage": 8.5,
+            "hpA": 88,
+            "hpB": 70.5
           },
           {
             "tick": 4,
-            "hitter": "B",
-            "damage": 30,
-            "hpA": 70,
-            "hpB": 3
+            "hitter": "A",
+            "damage": 17.5,
+            "hpA": 88,
+            "hpB": 53
           },
           {
             "tick": 5,
             "hitter": "A",
-            "damage": 29.5,
-            "hpA": 70,
+            "damage": 19,
+            "hpA": 88,
+            "hpB": 34
+          },
+          {
+            "tick": 6,
+            "hitter": "A",
+            "damage": 11,
+            "hpA": 88,
+            "hpB": 23
+          },
+          {
+            "tick": 7,
+            "hitter": "A",
+            "damage": 20.5,
+            "hpA": 88,
+            "hpB": 2.5
+          },
+          {
+            "tick": 8,
+            "hitter": "A",
+            "damage": 14,
+            "hpA": 88,
             "hpB": 0
           }
         ],
         "final": {
-          "hpA": 70,
+          "hpA": 88,
           "hpB": 0
         },
-        "redraws": 1
+        "redraws": 0
       },
       "math": {
-        "u": 0.5537736455444247,
+        "u": 0.18144960905790875,
         "pA": 0.7289486576995687
       }
     },
@@ -67,52 +88,73 @@
       "odds": 3.5048710400667455,
       "cutscene": {
         "how": "KO",
-        "ticks": 5,
+        "ticks": 8,
         "hits": [
           {
             "tick": 1,
-            "hitter": "A",
-            "damage": 22.5,
-            "hpA": 100,
-            "hpB": 77.5
+            "hitter": "B",
+            "damage": 12,
+            "hpA": 88,
+            "hpB": 100
           },
           {
             "tick": 2,
             "hitter": "A",
-            "damage": 31,
-            "hpA": 100,
-            "hpB": 46.5
+            "damage": 21,
+            "hpA": 88,
+            "hpB": 79
           },
           {
             "tick": 3,
             "hitter": "A",
-            "damage": 43.5,
-            "hpA": 100,
-            "hpB": 3
+            "damage": 8.5,
+            "hpA": 88,
+            "hpB": 70.5
           },
           {
             "tick": 4,
-            "hitter": "B",
-            "damage": 30,
-            "hpA": 70,
-            "hpB": 3
+            "hitter": "A",
+            "damage": 17.5,
+            "hpA": 88,
+            "hpB": 53
           },
           {
             "tick": 5,
             "hitter": "A",
-            "damage": 29.5,
-            "hpA": 70,
+            "damage": 19,
+            "hpA": 88,
+            "hpB": 34
+          },
+          {
+            "tick": 6,
+            "hitter": "A",
+            "damage": 11,
+            "hpA": 88,
+            "hpB": 23
+          },
+          {
+            "tick": 7,
+            "hitter": "A",
+            "damage": 20.5,
+            "hpA": 88,
+            "hpB": 2.5
+          },
+          {
+            "tick": 8,
+            "hitter": "A",
+            "damage": 14,
+            "hpA": 88,
             "hpB": 0
           }
         ],
         "final": {
-          "hpA": 70,
+          "hpA": 88,
           "hpB": 0
         },
-        "redraws": 1
+        "redraws": 0
       },
       "math": {
-        "u": 0.5537736455444247,
+        "u": 0.18144960905790875,
         "pA": 0.7289486576995687
       }
     }

@@ -4,9 +4,9 @@
   "results": {
     "A": {
       "stake": 1000,
-      "win": 0,
+      "win": 2108,
       "totalBetAmount": 1000,
-      "winner": "B",
+      "winner": "A",
       "odds": 2.107777600578952,
       "cutscene": {
         "how": "KO",
@@ -14,63 +14,63 @@
         "hits": [
           {
             "tick": 1,
-            "hitter": "B",
+            "hitter": "A",
             "damage": 17.5,
-            "hpA": 52.5,
-            "hpB": 120
+            "hpA": 70,
+            "hpB": 102.5
           },
           {
             "tick": 2,
             "hitter": "A",
-            "damage": 35.5,
-            "hpA": 52.5,
-            "hpB": 84.5
+            "damage": 31,
+            "hpA": 70,
+            "hpB": 71.5
           },
           {
             "tick": 3,
-            "hitter": "B",
-            "damage": 13,
-            "hpA": 39.5,
-            "hpB": 84.5
+            "hitter": "A",
+            "damage": 32.5,
+            "hpA": 70,
+            "hpB": 39
           },
           {
             "tick": 4,
             "hitter": "A",
-            "damage": 19,
-            "hpA": 39.5,
-            "hpB": 65.5
+            "damage": 29,
+            "hpA": 70,
+            "hpB": 10
           },
           {
             "tick": 5,
             "hitter": "B",
-            "damage": 36,
-            "hpA": 3.5,
-            "hpB": 65.5
+            "damage": 11.5,
+            "hpA": 58.5,
+            "hpB": 10
           },
           {
             "tick": 6,
-            "hitter": "B",
-            "damage": 23.5,
-            "hpA": 0,
-            "hpB": 65.5
+            "hitter": "A",
+            "damage": 17.5,
+            "hpA": 58.5,
+            "hpB": 0
           }
         ],
         "final": {
-          "hpA": 0,
-          "hpB": 65.5
+          "hpA": 58.5,
+          "hpB": 0
         },
-        "redraws": 4
+        "redraws": 0
       },
       "math": {
-        "u": 0.8211358492262661,
+        "u": 0.2696122705875762,
         "pA": 0.4507116878645354
       }
     },
     "B": {
       "stake": 1000,
-      "win": 1730,
+      "win": 0,
       "totalBetAmount": 1000,
-      "winner": "B",
+      "winner": "A",
       "odds": 1.7295106759266208,
       "cutscene": {
         "how": "KO",
@@ -78,55 +78,55 @@
         "hits": [
           {
             "tick": 1,
-            "hitter": "B",
+            "hitter": "A",
             "damage": 17.5,
-            "hpA": 52.5,
-            "hpB": 120
+            "hpA": 70,
+            "hpB": 102.5
           },
           {
             "tick": 2,
             "hitter": "A",
-            "damage": 35.5,
-            "hpA": 52.5,
-            "hpB": 84.5
+            "damage": 31,
+            "hpA": 70,
+            "hpB": 71.5
           },
           {
             "tick": 3,
-            "hitter": "B",
-            "damage": 13,
-            "hpA": 39.5,
-            "hpB": 84.5
+            "hitter": "A",
+            "damage": 32.5,
+            "hpA": 70,
+            "hpB": 39
           },
           {
             "tick": 4,
             "hitter": "A",
-            "damage": 19,
-            "hpA": 39.5,
-            "hpB": 65.5
+            "damage": 29,
+            "hpA": 70,
+            "hpB": 10
           },
           {
             "tick": 5,
             "hitter": "B",
-            "damage": 36,
-            "hpA": 3.5,
-            "hpB": 65.5
+            "damage": 11.5,
+            "hpA": 58.5,
+            "hpB": 10
           },
           {
             "tick": 6,
-            "hitter": "B",
-            "damage": 23.5,
-            "hpA": 0,
-            "hpB": 65.5
+            "hitter": "A",
+            "damage": 17.5,
+            "hpA": 58.5,
+            "hpB": 0
           }
         ],
         "final": {
-          "hpA": 0,
-          "hpB": 65.5
+          "hpA": 58.5,
+          "hpB": 0
         },
-        "redraws": 4
+        "redraws": 0
       },
       "math": {
-        "u": 0.8211358492262661,
+        "u": 0.2696122705875762,
         "pA": 0.4507116878645354
       }
     }

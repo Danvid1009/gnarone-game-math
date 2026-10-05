@@ -4,8 +4,8 @@
   "results": {
     "EASY": {
       "stake": 1000,
-      "survived": 7,
-      "outcome": "CRASH_ON_STEP_8",
+      "survived": 2,
+      "outcome": "CRASH_ON_STEP_3",
       "payoutIfTakenAfter": [
         {
           "step": 1,
@@ -19,28 +19,28 @@
         },
         {
           "step": 3,
-          "reachable": true,
-          "win": 2000
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 4,
-          "reachable": true,
-          "win": 2510
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 5,
-          "reachable": true,
-          "win": 3160
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 6,
-          "reachable": true,
-          "win": 3980
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 7,
-          "reachable": true,
-          "win": 5010
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 8,
@@ -61,7 +61,7 @@
       "totalBetAmount": 1000,
       "totalWinAmount": 0,
       "difficulty": "EASY",
-      "currentStep": 8,
+      "currentStep": 3,
       "currentPayout": 0
     }
   }

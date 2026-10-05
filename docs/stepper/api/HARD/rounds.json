@@ -8,13 +8,13 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 5,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      10000,
+      0,
+      0,
+      0,
+      0,
+      0,
       0,
       0,
       0,
@@ -30,10 +30,10 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 1,
+     "survived": 2,
      "winIfTakenAfter": [
       1580,
-      0,
+      2510,
       0,
       0,
       0,
@@ -52,10 +52,10 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 2,
      "winIfTakenAfter": [
-      0,
-      0,
+      1580,
+      2510,
       0,
       0,
       0,
@@ -74,10 +74,10 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 2,
      "winIfTakenAfter": [
-      0,
-      0,
+      1580,
+      2510,
       0,
       0,
       0,
@@ -118,9 +118,9 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 1,
      "winIfTakenAfter": [
-      0,
+      1580,
       0,
       0,
       0,
@@ -137,6 +137,28 @@
   {
    "round": 6,
    "seed": "fixture-006",
+   "results": {
+    "HARD": {
+     "stake": 1000,
+     "survived": 4,
+     "winIfTakenAfter": [
+      1580,
+      2510,
+      3980,
+      6310,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "round": 7,
+   "seed": "fixture-007",
    "results": {
     "HARD": {
      "stake": 1000,
@@ -157,42 +179,20 @@
    }
   },
   {
-   "round": 7,
-   "seed": "fixture-007",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 7,
-     "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      10000,
-      15850,
-      25120,
-      0,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
    "round": 8,
    "seed": "fixture-008",
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 7,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      10000,
-      15850,
-      25120,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
       0,
       0,
       0
@@ -203,72 +203,6 @@
   {
    "round": 9,
    "seed": "fixture-009",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 0,
-     "winIfTakenAfter": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
-   "round": 10,
-   "seed": "fixture-010",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 0,
-     "winIfTakenAfter": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
-   "round": 11,
-   "seed": "fixture-011",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 3,
-     "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
-   "round": 12,
-   "seed": "fixture-012",
    "results": {
     "HARD": {
      "stake": 1000,
@@ -289,8 +223,52 @@
    }
   },
   {
-   "round": 13,
-   "seed": "fixture-013",
+   "round": 10,
+   "seed": "fixture-010",
+   "results": {
+    "HARD": {
+     "stake": 1000,
+     "survived": 4,
+     "winIfTakenAfter": [
+      1580,
+      2510,
+      3980,
+      6310,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "round": 11,
+   "seed": "fixture-011",
+   "results": {
+    "HARD": {
+     "stake": 1000,
+     "survived": 1,
+     "winIfTakenAfter": [
+      1580,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "round": 12,
+   "seed": "fixture-012",
    "results": {
     "HARD": {
      "stake": 1000,
@@ -299,6 +277,28 @@
       1580,
       2510,
       3980,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "round": 13,
+   "seed": "fixture-013",
+   "results": {
+    "HARD": {
+     "stake": 1000,
+     "survived": 1,
+     "winIfTakenAfter": [
+      1580,
+      0,
+      0,
       0,
       0,
       0,
@@ -338,9 +338,9 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 1,
      "winIfTakenAfter": [
-      0,
+      1580,
       0,
       0,
       0,
@@ -360,12 +360,12 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 3,
+     "survived": 4,
      "winIfTakenAfter": [
       1580,
       2510,
       3980,
-      0,
+      6310,
       0,
       0,
       0,
@@ -382,13 +382,13 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 3,
+     "survived": 5,
      "winIfTakenAfter": [
       1580,
       2510,
       3980,
-      0,
-      0,
+      6310,
+      10000,
       0,
       0,
       0,
@@ -404,12 +404,12 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 4,
+     "survived": 2,
      "winIfTakenAfter": [
       1580,
       2510,
-      3980,
-      6310,
+      0,
+      0,
       0,
       0,
       0,
@@ -448,11 +448,11 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 3,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
+      0,
+      0,
+      0,
       0,
       0,
       0,
@@ -470,10 +470,10 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 2,
+     "survived": 1,
      "winIfTakenAfter": [
       1580,
-      2510,
+      0,
       0,
       0,
       0,
@@ -514,10 +514,10 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 2,
+     "survived": 1,
      "winIfTakenAfter": [
       1580,
-      2510,
+      0,
       0,
       0,
       0,
@@ -533,28 +533,6 @@
   {
    "round": 24,
    "seed": "fixture-024",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 5,
-     "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      10000,
-      0,
-      0,
-      0,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
-   "round": 25,
-   "seed": "fixture-025",
    "results": {
     "HARD": {
      "stake": 1000,
@@ -575,14 +553,36 @@
    }
   },
   {
+   "round": 25,
+   "seed": "fixture-025",
+   "results": {
+    "HARD": {
+     "stake": 1000,
+     "survived": 2,
+     "winIfTakenAfter": [
+      1580,
+      2510,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
    "round": 26,
    "seed": "fixture-026",
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 1,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
+      0,
       0,
       0,
       0,
@@ -624,9 +624,9 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 1,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
+      0,
       0,
       0,
       0,
@@ -646,13 +646,13 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 1,
+     "survived": 5,
      "winIfTakenAfter": [
       1580,
-      0,
-      0,
-      0,
-      0,
+      2510,
+      3980,
+      6310,
+      10000,
       0,
       0,
       0,
@@ -690,10 +690,10 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 2,
      "winIfTakenAfter": [
-      0,
-      0,
+      1580,
+      2510,
       0,
       0,
       0,
@@ -712,9 +712,9 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 1,
      "winIfTakenAfter": [
-      0,
+      1580,
       0,
       0,
       0,
@@ -734,9 +734,9 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 1,
      "winIfTakenAfter": [
-      0,
+      1580,
       0,
       0,
       0,
@@ -800,9 +800,9 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 1,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
+      0,
       0,
       0,
       0,
@@ -822,16 +822,16 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 8,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      10000,
-      15850,
-      25120,
-      39810,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
       0,
       0
      ]
@@ -866,9 +866,9 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 1,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
+      0,
       0,
       0,
       0,
@@ -888,10 +888,10 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 2,
+     "survived": 1,
      "winIfTakenAfter": [
       1580,
-      2510,
+      0,
       0,
       0,
       0,
@@ -932,9 +932,9 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 1,
      "winIfTakenAfter": [
-      0,
+      1580,
       0,
       0,
       0,
@@ -954,10 +954,10 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 2,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
+      0,
+      0,
       0,
       0,
       0,
@@ -976,15 +976,15 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 7,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      10000,
-      15850,
-      25120,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
       0,
       0,
       0
@@ -998,12 +998,12 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 2,
+     "survived": 4,
      "winIfTakenAfter": [
       1580,
       2510,
-      0,
-      0,
+      3980,
+      6310,
       0,
       0,
       0,
@@ -1042,15 +1042,15 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 1,
+     "survived": 7,
      "winIfTakenAfter": [
       1580,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      2510,
+      3980,
+      6310,
+      10000,
+      15850,
+      25120,
       0,
       0,
       0
@@ -1064,10 +1064,10 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 2,
+     "survived": 1,
      "winIfTakenAfter": [
       1580,
-      2510,
+      0,
       0,
       0,
       0,
@@ -1086,10 +1086,10 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 2,
      "winIfTakenAfter": [
-      0,
-      0,
+      1580,
+      2510,
       0,
       0,
       0,
@@ -1105,50 +1105,6 @@
   {
    "round": 50,
    "seed": "fixture-050",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 0,
-     "winIfTakenAfter": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
-   "round": 51,
-   "seed": "fixture-051",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 5,
-     "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      10000,
-      0,
-      0,
-      0,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
-   "round": 52,
-   "seed": "fixture-052",
    "results": {
     "HARD": {
      "stake": 1000,
@@ -1169,14 +1125,58 @@
    }
   },
   {
+   "round": 51,
+   "seed": "fixture-051",
+   "results": {
+    "HARD": {
+     "stake": 1000,
+     "survived": 3,
+     "winIfTakenAfter": [
+      1580,
+      2510,
+      3980,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "round": 52,
+   "seed": "fixture-052",
+   "results": {
+    "HARD": {
+     "stake": 1000,
+     "survived": 9,
+     "winIfTakenAfter": [
+      1580,
+      2510,
+      3980,
+      6310,
+      10000,
+      15850,
+      25120,
+      39810,
+      63100,
+      0
+     ]
+    }
+   }
+  },
+  {
    "round": 53,
    "seed": "fixture-053",
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 1,
      "winIfTakenAfter": [
-      0,
+      1580,
       0,
       0,
       0,
@@ -1196,13 +1196,13 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 5,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      10000,
+      0,
+      0,
+      0,
+      0,
+      0,
       0,
       0,
       0,
@@ -1215,28 +1215,6 @@
   {
    "round": 55,
    "seed": "fixture-055",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 5,
-     "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      10000,
-      0,
-      0,
-      0,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
-   "round": 56,
-   "seed": "fixture-056",
    "results": {
     "HARD": {
      "stake": 1000,
@@ -1257,17 +1235,39 @@
    }
   },
   {
+   "round": 56,
+   "seed": "fixture-056",
+   "results": {
+    "HARD": {
+     "stake": 1000,
+     "survived": 1,
+     "winIfTakenAfter": [
+      1580,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
    "round": 57,
    "seed": "fixture-057",
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 4,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
+      0,
+      0,
+      0,
+      0,
       0,
       0,
       0,
@@ -1284,18 +1284,18 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 2,
+     "survived": 10,
      "winIfTakenAfter": [
       1580,
       2510,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
+      3980,
+      6310,
+      10000,
+      15850,
+      25120,
+      39810,
+      63100,
+      100000
      ]
     }
    }
@@ -1328,10 +1328,10 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 2,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
+      0,
+      0,
       0,
       0,
       0,
@@ -1350,12 +1350,12 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 4,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
+      0,
+      0,
+      0,
+      0,
       0,
       0,
       0,
@@ -1372,10 +1372,10 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 2,
      "winIfTakenAfter": [
-      0,
-      0,
+      1580,
+      2510,
       0,
       0,
       0,
@@ -1394,13 +1394,13 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 5,
      "winIfTakenAfter": [
-      0,
-      0,
-      0,
-      0,
-      0,
+      1580,
+      2510,
+      3980,
+      6310,
+      10000,
       0,
       0,
       0,
@@ -1460,6 +1460,28 @@
    "results": {
     "HARD": {
      "stake": 1000,
+     "survived": 1,
+     "winIfTakenAfter": [
+      1580,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "round": 67,
+   "seed": "fixture-067",
+   "results": {
+    "HARD": {
+     "stake": 1000,
      "survived": 0,
      "winIfTakenAfter": [
       0,
@@ -1477,8 +1499,8 @@
    }
   },
   {
-   "round": 67,
-   "seed": "fixture-067",
+   "round": 68,
+   "seed": "fixture-068",
    "results": {
     "HARD": {
      "stake": 1000,
@@ -1499,38 +1521,16 @@
    }
   },
   {
-   "round": 68,
-   "seed": "fixture-068",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 7,
-     "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      10000,
-      15850,
-      25120,
-      0,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
    "round": 69,
    "seed": "fixture-069",
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 3,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
+      0,
+      0,
+      0,
       0,
       0,
       0,
@@ -1570,12 +1570,12 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 4,
+     "survived": 1,
      "winIfTakenAfter": [
       1580,
-      2510,
-      3980,
-      6310,
+      0,
+      0,
+      0,
       0,
       0,
       0,
@@ -1592,12 +1592,12 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 0,
+     "survived": 4,
      "winIfTakenAfter": [
-      0,
-      0,
-      0,
-      0,
+      1580,
+      2510,
+      3980,
+      6310,
       0,
       0,
       0,
@@ -1636,15 +1636,15 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 4,
+     "survived": 7,
      "winIfTakenAfter": [
       1580,
       2510,
       3980,
       6310,
-      0,
-      0,
-      0,
+      10000,
+      15850,
+      25120,
       0,
       0,
       0
@@ -1724,50 +1724,6 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 8,
-     "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      10000,
-      15850,
-      25120,
-      39810,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
-   "round": 79,
-   "seed": "fixture-079",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 0,
-     "winIfTakenAfter": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
-   "round": 80,
-   "seed": "fixture-080",
-   "results": {
-    "HARD": {
-     "stake": 1000,
      "survived": 4,
      "winIfTakenAfter": [
       1580,
@@ -1785,8 +1741,96 @@
    }
   },
   {
+   "round": 79,
+   "seed": "fixture-079",
+   "results": {
+    "HARD": {
+     "stake": 1000,
+     "survived": 3,
+     "winIfTakenAfter": [
+      1580,
+      2510,
+      3980,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "round": 80,
+   "seed": "fixture-080",
+   "results": {
+    "HARD": {
+     "stake": 1000,
+     "survived": 1,
+     "winIfTakenAfter": [
+      1580,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
    "round": 81,
    "seed": "fixture-081",
+   "results": {
+    "HARD": {
+     "stake": 1000,
+     "survived": 1,
+     "winIfTakenAfter": [
+      1580,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "round": 82,
+   "seed": "fixture-082",
+   "results": {
+    "HARD": {
+     "stake": 1000,
+     "survived": 3,
+     "winIfTakenAfter": [
+      1580,
+      2510,
+      3980,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "round": 83,
+   "seed": "fixture-083",
    "results": {
     "HARD": {
      "stake": 1000,
@@ -1807,8 +1851,8 @@
    }
   },
   {
-   "round": 82,
-   "seed": "fixture-082",
+   "round": 84,
+   "seed": "fixture-084",
    "results": {
     "HARD": {
      "stake": 1000,
@@ -1829,59 +1873,15 @@
    }
   },
   {
-   "round": 83,
-   "seed": "fixture-083",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 4,
-     "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
-   "round": 84,
-   "seed": "fixture-084",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 8,
-     "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
-      6310,
-      10000,
-      15850,
-      25120,
-      39810,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
    "round": 85,
    "seed": "fixture-085",
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 2,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
+      0,
+      0,
       0,
       0,
       0,
@@ -1900,18 +1900,18 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 2,
+     "survived": 10,
      "winIfTakenAfter": [
       1580,
       2510,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
+      3980,
+      6310,
+      10000,
+      15850,
+      25120,
+      39810,
+      63100,
+      100000
      ]
     }
    }
@@ -1944,14 +1944,14 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 2,
+     "survived": 6,
      "winIfTakenAfter": [
       1580,
       2510,
-      0,
-      0,
-      0,
-      0,
+      3980,
+      6310,
+      10000,
+      15850,
       0,
       0,
       0,
@@ -2054,11 +2054,11 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 3,
+     "survived": 0,
      "winIfTakenAfter": [
-      1580,
-      2510,
-      3980,
+      0,
+      0,
+      0,
       0,
       0,
       0,
@@ -2098,16 +2098,16 @@
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 8,
+     "survived": 4,
      "winIfTakenAfter": [
       1580,
       2510,
       3980,
       6310,
-      10000,
-      15850,
-      25120,
-      39810,
+      0,
+      0,
+      0,
+      0,
       0,
       0
      ]
@@ -2142,6 +2142,28 @@
    "results": {
     "HARD": {
      "stake": 1000,
+     "survived": 4,
+     "winIfTakenAfter": [
+      1580,
+      2510,
+      3980,
+      6310,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "round": 98,
+   "seed": "fixture-098",
+   "results": {
+    "HARD": {
+     "stake": 1000,
      "survived": 3,
      "winIfTakenAfter": [
       1580,
@@ -2159,12 +2181,12 @@
    }
   },
   {
-   "round": 98,
-   "seed": "fixture-098",
+   "round": 99,
+   "seed": "fixture-099",
    "results": {
     "HARD": {
      "stake": 1000,
-     "survived": 6,
+     "survived": 7,
      "winIfTakenAfter": [
       1580,
       2510,
@@ -2172,29 +2194,7 @@
       6310,
       10000,
       15850,
-      0,
-      0,
-      0,
-      0
-     ]
-    }
-   }
-  },
-  {
-   "round": 99,
-   "seed": "fixture-099",
-   "results": {
-    "HARD": {
-     "stake": 1000,
-     "survived": 0,
-     "winIfTakenAfter": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      25120,
       0,
       0,
       0

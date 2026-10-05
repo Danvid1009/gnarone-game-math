@@ -4,41 +4,15 @@
   "results": {
     "A": {
       "stake": 1000,
-      "win": 2108,
-      "totalBetAmount": 1000,
-      "tick": 9,
-      "ticksMax": 16,
-      "hp": {
-        "A": 2,
-        "B": 0
-      },
-      "pA": 1,
-      "odds": {
-        "opening": {
-          "A": 2.107777600578952,
-          "B": 1.7295106759266208
-        },
-        "live": null
-      },
-      "last": {
-        "hitter": "A",
-        "damage": 32
-      },
-      "winner": "A",
-      "how": "KO",
-      "decision": null
-    },
-    "B": {
-      "stake": 1000,
       "win": 0,
       "totalBetAmount": 1000,
       "tick": 9,
       "ticksMax": 16,
       "hp": {
-        "A": 2,
-        "B": 0
+        "A": 0,
+        "B": 53
       },
-      "pA": 1,
+      "pA": 0,
       "odds": {
         "opening": {
           "A": 2.107777600578952,
@@ -47,10 +21,36 @@
         "live": null
       },
       "last": {
-        "hitter": "A",
-        "damage": 32
+        "hitter": "B",
+        "damage": 31
       },
-      "winner": "A",
+      "winner": "B",
+      "how": "KO",
+      "decision": null
+    },
+    "B": {
+      "stake": 1000,
+      "win": 1730,
+      "totalBetAmount": 1000,
+      "tick": 9,
+      "ticksMax": 16,
+      "hp": {
+        "A": 0,
+        "B": 53
+      },
+      "pA": 0,
+      "odds": {
+        "opening": {
+          "A": 2.107777600578952,
+          "B": 1.7295106759266208
+        },
+        "live": null
+      },
+      "last": {
+        "hitter": "B",
+        "damage": 31
+      },
+      "winner": "B",
       "how": "KO",
       "decision": null
     }

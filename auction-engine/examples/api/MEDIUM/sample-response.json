@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "a9698dbc-3c4d-45a9-b956-b97dfbf2e651",
+    "sessionId": "77e6594b-8888-4428-a9d3-8d0030ab1fcf",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -119,7 +119,8 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "50058415-0cb8-4f1c-aa08-923d3ca35f59",
+        "roundId": "a28a8657-50a0-45d3-9094-2bc1ebc7a756",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -188,7 +189,8 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "50058415-0cb8-4f1c-aa08-923d3ca35f59",
+        "roundId": "a28a8657-50a0-45d3-9094-2bc1ebc7a756",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -258,7 +260,8 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "50058415-0cb8-4f1c-aa08-923d3ca35f59",
+        "roundId": "a28a8657-50a0-45d3-9094-2bc1ebc7a756",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -328,10 +331,12 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "50058415-0cb8-4f1c-aa08-923d3ca35f59",
+        "roundId": "a28a8657-50a0-45d3-9094-2bc1ebc7a756",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
         "balance": 99000,
         "totalBetAmount": 1000,
-        "totalWinAmount": 1592,
+        "totalWinAmount": 1608,
         "size": "MEDIUM",
         "currentStep": 2,
         "currentPayout": 1580,
@@ -388,9 +393,9 @@
           }
         ],
         "locker": {
-          "multiplier": 1.007477643501104,
+          "multiplier": 1.0174081080336177,
           "band": 2,
-          "contents": 1592
+          "contents": 1608
         },
         "roundEnded": true,
         "nextAction": [
@@ -401,7 +406,7 @@
     {
       "call": "collect",
       "response": {
-        "balance": 100592
+        "balance": 100608
       }
     }
   ]

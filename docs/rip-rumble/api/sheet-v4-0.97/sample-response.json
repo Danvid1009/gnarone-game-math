@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "9508ead1-075f-42af-9247-24c7619cb437",
+    "sessionId": "378952a3-c468-477b-98a5-a904cde2f661",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -59,40 +59,42 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "99edde96-993c-4720-af1a-7d8d3b32d1de",
+        "roundId": "24780725-523c-4a93-8955-f92398e0a29e",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
         "balance": 99000,
         "totalBetAmount": 1000,
-        "totalWinAmount": 300,
+        "totalWinAmount": 1200,
         "cardPacks": [
           {
             "cards": [
               {
                 "rarity": "RARE",
-                "id": 10,
-                "name": "R10"
+                "id": 3,
+                "name": "R03"
+              },
+              {
+                "rarity": "RARE",
+                "id": 14,
+                "name": "R14"
               },
               {
                 "rarity": "UNCOMMON",
-                "id": 13,
-                "name": "U13"
+                "id": 1,
+                "name": "U01"
+              },
+              {
+                "rarity": "UNCOMMON",
+                "id": 14,
+                "name": "U14"
               },
               {
                 "rarity": "COMMON",
-                "id": 7,
-                "name": "C07"
-              },
-              {
-                "rarity": "COMMON",
-                "id": 19,
-                "name": "C19"
-              },
-              {
-                "rarity": "COMMON",
-                "id": 20,
-                "name": "C20"
+                "id": 15,
+                "name": "C15"
               }
             ],
-            "totalPayout": 300,
+            "totalPayout": 1200,
             "legendary": {
               "count": 0,
               "valuePerCard": 600,
@@ -100,21 +102,21 @@
               "totalValue": 0
             },
             "rare": {
-              "count": 1,
+              "count": 2,
               "valuePerCard": 200,
-              "multiplier": 1,
-              "totalValue": 200
+              "multiplier": 2,
+              "totalValue": 800
             },
             "uncommon": {
-              "count": 1,
+              "count": 2,
               "valuePerCard": 100,
-              "multiplier": 1,
-              "totalValue": 100
+              "multiplier": 2,
+              "totalValue": 400
             },
             "common": {
-              "count": 3,
+              "count": 1,
               "valuePerCard": 0,
-              "multiplier": 3,
+              "multiplier": 1,
               "totalValue": 0
             }
           }
@@ -124,8 +126,8 @@
           "unit": 200,
           "packs": [
             {
-              "u": 0.9729229214135557,
-              "bucket": "high"
+              "u": 0.6806586483395238,
+              "bucket": "low"
             }
           ]
         },
@@ -137,7 +139,7 @@
     {
       "call": "collect",
       "response": {
-        "balance": 99300
+        "balance": 100200
       }
     }
   ]

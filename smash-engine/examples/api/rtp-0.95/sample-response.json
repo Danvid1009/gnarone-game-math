@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "6a181623-2398-4783-a15e-0372616aad13",
+    "sessionId": "ce3127ea-0f51-44bf-87e8-1ada8481c9ac",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -304,19 +304,21 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "8ba7b660-c8e4-48d1-b272-e1a20176dbcd",
+        "roundId": "b7db7254-e0c8-4621-90ea-069e34141299",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
         "balance": 99000,
         "totalBetAmount": 1000,
-        "totalWinAmount": 0,
-        "count": 0,
+        "totalWinAmount": 489,
+        "count": 1,
         "hasBonus": false,
-        "multiplier": 0,
+        "multiplier": 0.48935439560439553,
         "math": {
-          "u": 0.9729229214135557,
-          "zone": 15,
+          "u": 0.6806586483395238,
+          "zone": 14,
           "gem": null,
           "altAnimation": false,
-          "baseWin": 0
+          "baseWin": 0.48935439560439553
         },
         "nextAction": [
           "COLLECT"
@@ -326,7 +328,7 @@
     {
       "call": "collect",
       "response": {
-        "balance": 99000
+        "balance": 99489
       }
     }
   ]

@@ -4,68 +4,38 @@
   "results": {
     "MEDIUM": {
       "stake": 1000,
-      "survived": 6,
-      "outcome": "CRASH_ON_STEP_7",
+      "survived": 0,
+      "outcome": "CRASH_ON_STEP_1",
       "payoutIfTakenAfter": [
         {
           "step": 1,
-          "reachable": true,
-          "win": 6287,
-          "locker": {
-            "multiplier": 4.990012170736832,
-            "band": 4,
-            "contents": 6287
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 2,
-          "reachable": true,
-          "win": 7884,
-          "locker": {
-            "multiplier": 4.990012170736832,
-            "band": 4,
-            "contents": 7884
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 3,
-          "reachable": true,
-          "win": 9980,
-          "locker": {
-            "multiplier": 4.990012170736832,
-            "band": 4,
-            "contents": 9980
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 4,
-          "reachable": true,
-          "win": 12525,
-          "locker": {
-            "multiplier": 4.990012170736832,
-            "band": 4,
-            "contents": 12525
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 5,
-          "reachable": true,
-          "win": 15768,
-          "locker": {
-            "multiplier": 4.990012170736832,
-            "band": 4,
-            "contents": 15768
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 6,
-          "reachable": true,
-          "win": 19860,
-          "locker": {
-            "multiplier": 4.990012170736832,
-            "band": 4,
-            "contents": 19860
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 7,
@@ -91,7 +61,7 @@
       "totalBetAmount": 1000,
       "totalWinAmount": 0,
       "size": "MEDIUM",
-      "currentStep": 7,
+      "currentStep": 1,
       "currentPayout": 0,
       "locker": null
     }

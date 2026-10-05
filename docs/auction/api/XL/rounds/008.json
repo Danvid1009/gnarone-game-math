@@ -4,78 +4,43 @@
   "results": {
     "XL": {
       "stake": 1000,
-      "survived": 7,
-      "outcome": "CRASH_ON_STEP_8",
+      "survived": 0,
+      "outcome": "CRASH_ON_STEP_1",
       "payoutIfTakenAfter": [
         {
           "step": 1,
-          "reachable": true,
-          "win": 3141,
-          "locker": {
-            "multiplier": 1.9881343733254182,
-            "band": 3,
-            "contents": 3141
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 2,
-          "reachable": true,
-          "win": 4990,
-          "locker": {
-            "multiplier": 1.9881343733254182,
-            "band": 3,
-            "contents": 4990
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 3,
-          "reachable": true,
-          "win": 7913,
-          "locker": {
-            "multiplier": 1.9881343733254182,
-            "band": 3,
-            "contents": 7913
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 4,
-          "reachable": true,
-          "win": 12545,
-          "locker": {
-            "multiplier": 1.9881343733254182,
-            "band": 3,
-            "contents": 12545
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 5,
-          "reachable": true,
-          "win": 19881,
-          "locker": {
-            "multiplier": 1.9881343733254182,
-            "band": 3,
-            "contents": 19881
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 6,
-          "reachable": true,
-          "win": 31512,
-          "locker": {
-            "multiplier": 1.9881343733254182,
-            "band": 3,
-            "contents": 31512
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 7,
-          "reachable": true,
-          "win": 49942,
-          "locker": {
-            "multiplier": 1.9881343733254182,
-            "band": 3,
-            "contents": 49942
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 8,
@@ -96,7 +61,7 @@
       "totalBetAmount": 1000,
       "totalWinAmount": 0,
       "size": "XL",
-      "currentStep": 8,
+      "currentStep": 1,
       "currentPayout": 0,
       "locker": null
     }

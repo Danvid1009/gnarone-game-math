@@ -112,7 +112,20 @@ The fight is a multi-step round: `bet` on `A` or `B` opens it, each `CONTINUE` r
 references the running fight, priced from the public state by `quote`, settled when the fight
 ends, collected on its own. Money is integer minor units; wins are `round(stake × odds)`.
 
-## 9. Reference ratings (RTP 0.95, defaults)
+## 9. Where the security lives
+
+The fight is fixed by one seed at the bell, so the whole question is who can see it.
+
+1. **Entropy.** The seed is 128 bits from the platform CSPRNG, minted server-side per round.
+2. **Derivation.** Tick $k$'s uniform is $U_k = \mathrm{SHA\text{-}256}(\text{seed} \,|\, \text{stream} \,|\, k)$ mapped to 53 bits in $[0,1)$. Seeing any number of hits reveals nothing about the seed (preimage resistance), so no sequence of ticks lets a player predict the next one.
+3. **Secrecy.** The seed never leaves the server while the round is open; the client receives only the revealed ticks, exactly what it would receive if each tick were rolled fresh.
+4. **Commitment.** The bet response carries $\text{seedHash} = \mathrm{SHA\text{-}256}(\text{``commit''} \,|\, \text{seed})$, so the house is bound to the whole fight before any live money is placed and cannot steer a tick against the live book.
+5. **Reveal.** When the round ends every response carries the seed; anyone can recompute the ticks from (2), check the hits they saw, and check the hash from (4). This is the standard provably-fair commit-and-reveal, and it is only possible because the fight is predetermined; a fresh roll per hit cannot offer it.
+6. **Prices.** Live quotes use only the public state $(t, a, b)$, never the seed, so the seller of a live bet has no more information than the buyer.
+
+The browser sandbox on the site has none of this protection by construction: the client *is* the server there, so the seed is readable. That is why the sandbox is for integration, not money.
+
+## 10. Reference ratings (RTP 0.95, defaults)
 
 | pairing | $p_A$ | $p^{\ast}$ | opening odds A / B |
 |---|---|---|---|

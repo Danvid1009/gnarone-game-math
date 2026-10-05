@@ -8,19 +8,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1100
+     "win": 400
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 200
+     "win": 450
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 7400
+     "win": 3900
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 11350
+     "win": 5900
     }
    }
   },
@@ -30,11 +30,11 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 700
+     "win": 1200
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 550
+     "win": 950
     },
     "BASE_BUNDLE": {
      "stake": 5000,
@@ -42,7 +42,7 @@
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7600
+     "win": 9700
     }
    }
   },
@@ -52,19 +52,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 900
+     "win": 1200
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 900
+     "win": 1650
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 5300
+     "win": 4050
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 31000
+     "win": 8400
     }
    }
   },
@@ -74,19 +74,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 600
+     "win": 800
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 600
+     "win": 1500
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 6650
+     "win": 6150
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 5700
+     "win": 13900
     }
    }
   },
@@ -104,11 +104,11 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 6350
+     "win": 2600
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 14000
+     "win": 5500
     }
    }
   },
@@ -118,7 +118,7 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 600
+     "win": 800
     },
     "BOOSTED": {
      "stake": 1000,
@@ -126,11 +126,11 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 5200
+     "win": 4550
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 9550
+     "win": 7100
     }
    }
   },
@@ -140,19 +140,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1100
+     "win": 3200
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 1400
+     "win": 1200
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 5650
+     "win": 6300
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 10700
+     "win": 11850
     }
    }
   },
@@ -162,69 +162,25 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 300
+     "win": 1200
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 2900
+     "win": 950
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 6650
+     "win": 5700
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 11650
+     "win": 11850
     }
    }
   },
   {
    "round": 8,
    "seed": "fixture-008",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 2200
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 2900
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 4500
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 8800
-    }
-   }
-  },
-  {
-   "round": 9,
-   "seed": "fixture-009",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 400
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 600
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 5800
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 10050
-    }
-   }
-  },
-  {
-   "round": 10,
-   "seed": "fixture-010",
    "results": {
     "BASE": {
      "stake": 1000,
@@ -236,11 +192,55 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4100
+     "win": 3350
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 6450
+     "win": 8250
+    }
+   }
+  },
+  {
+   "round": 9,
+   "seed": "fixture-009",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 900
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 450
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4900
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 9350
+    }
+   }
+  },
+  {
+   "round": 10,
+   "seed": "fixture-010",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 900
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 2100
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4750
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 8150
     }
    }
   },
@@ -250,19 +250,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1700
+     "win": 200
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 1100
+     "win": 850
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 6200
+     "win": 6650
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 9600
+     "win": 11750
     }
    }
   },
@@ -272,19 +272,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1000
+     "win": 1500
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 750
+     "win": 1250
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4500
+     "win": 2700
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7850
+     "win": 6900
     }
    }
   },
@@ -294,19 +294,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1400
+     "win": 200
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 1250
+     "win": 850
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 5200
+     "win": 6750
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 10450
+     "win": 11100
     }
    }
   },
@@ -320,15 +320,15 @@
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 600
+     "win": 750
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 5050
+     "win": 4400
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 8400
+     "win": 8250
     }
    }
   },
@@ -338,19 +338,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 300
+     "win": 900
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 500
+     "win": 450
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 5150
+     "win": 3950
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 12550
+     "win": 11400
     }
    }
   },
@@ -360,19 +360,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 2500
+     "win": 4600
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 150
+     "win": 1200
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 11800
+     "win": 5650
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 48800
+     "win": 13800
     }
    }
   },
@@ -382,19 +382,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1500
+     "win": 1100
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 450
+     "win": 200
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4950
+     "win": 5650
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7300
+     "win": 7850
     }
    }
   },
@@ -408,15 +408,15 @@
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 1200
+     "win": 950
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4100
+     "win": 4700
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7000
+     "win": 10250
     }
    }
   },
@@ -426,19 +426,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 100
+     "win": 400
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 600
+     "win": 450
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 6700
+     "win": 5650
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 13850
+     "win": 11950
     }
    }
   },
@@ -448,19 +448,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 4000
+     "win": 600
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 150
+     "win": 600
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 6150
+     "win": 3650
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 9850
+     "win": 6050
     }
    }
   },
@@ -470,19 +470,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1200
+     "win": 700
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 850
+     "win": 550
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4000
+     "win": 3950
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 9500
+     "win": 8600
     }
    }
   },
@@ -492,19 +492,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 400
+     "win": 100
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 750
+     "win": 300
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 3700
+     "win": 3750
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 9450
+     "win": 8150
     }
    }
   },
@@ -514,19 +514,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1200
+     "win": 1000
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 950
+     "win": 500
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4450
+     "win": 2300
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 8300
+     "win": 5600
     }
    }
   },
@@ -536,19 +536,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 2700
+     "win": 400
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 2000
+     "win": 750
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 5400
+     "win": 3750
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 10500
+     "win": 6300
     }
    }
   },
@@ -558,179 +558,25 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 400
+     "win": 800
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 450
+     "win": 1500
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4500
+     "win": 3550
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 10450
+     "win": 7200
     }
    }
   },
   {
    "round": 26,
    "seed": "fixture-026",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 900
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 450
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 5150
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 11200
-    }
-   }
-  },
-  {
-   "round": 27,
-   "seed": "fixture-027",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 600
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 600
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 6100
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 8950
-    }
-   }
-  },
-  {
-   "round": 28,
-   "seed": "fixture-028",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 900
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 1350
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 5050
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 9100
-    }
-   }
-  },
-  {
-   "round": 29,
-   "seed": "fixture-029",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 700
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 550
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 5150
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 6450
-    }
-   }
-  },
-  {
-   "round": 30,
-   "seed": "fixture-030",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 200
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 850
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 5000
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 7650
-    }
-   }
-  },
-  {
-   "round": 31,
-   "seed": "fixture-031",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 900
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 300
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 4900
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 10750
-    }
-   }
-  },
-  {
-   "round": 32,
-   "seed": "fixture-032",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 900
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 300
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 5950
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 8950
-    }
-   }
-  },
-  {
-   "round": 33,
-   "seed": "fixture-033",
    "results": {
     "BASE": {
      "stake": 1000,
@@ -742,39 +588,17 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 2700
+     "win": 8050
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 8800
+     "win": 13600
     }
    }
   },
   {
-   "round": 34,
-   "seed": "fixture-034",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 700
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 550
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 3750
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 9450
-    }
-   }
-  },
-  {
-   "round": 35,
-   "seed": "fixture-035",
+   "round": 27,
+   "seed": "fixture-027",
    "results": {
     "BASE": {
      "stake": 1000,
@@ -786,83 +610,61 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 2500
+     "win": 3800
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 6350
+     "win": 5700
     }
    }
   },
   {
-   "round": 36,
-   "seed": "fixture-036",
+   "round": 28,
+   "seed": "fixture-028",
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 900
+     "win": 300
     },
     "BOOSTED": {
-     "stake": 1000,
-     "win": 900
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 4200
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 7850
-    }
-   }
-  },
-  {
-   "round": 37,
-   "seed": "fixture-037",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 700
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 4000
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 6000
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 15300
-    }
-   }
-  },
-  {
-   "round": 38,
-   "seed": "fixture-038",
-   "results": {
-    "BASE": {
      "stake": 1000,
      "win": 600
     },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 750
-    },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4200
+     "win": 5150
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 8550
+     "win": 6550
     }
    }
   },
   {
-   "round": 39,
-   "seed": "fixture-039",
+   "round": 29,
+   "seed": "fixture-029",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 900
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 400
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4300
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 5650
+    }
+   }
+  },
+  {
+   "round": 30,
+   "seed": "fixture-030",
    "results": {
     "BASE": {
      "stake": 1000,
@@ -874,127 +676,17 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 5100
+     "win": 5650
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 10250
+     "win": 11900
     }
    }
   },
   {
-   "round": 40,
-   "seed": "fixture-040",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 600
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 700
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 5150
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 9200
-    }
-   }
-  },
-  {
-   "round": 41,
-   "seed": "fixture-041",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 900
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 450
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 3000
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 6150
-    }
-   }
-  },
-  {
-   "round": 42,
-   "seed": "fixture-042",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 900
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 300
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 4450
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 8150
-    }
-   }
-  },
-  {
-   "round": 43,
-   "seed": "fixture-043",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 1100
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 1400
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 4700
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 10050
-    }
-   }
-  },
-  {
-   "round": 44,
-   "seed": "fixture-044",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 2200
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 2900
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 6950
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 12750
-    }
-   }
-  },
-  {
-   "round": 45,
-   "seed": "fixture-045",
+   "round": 31,
+   "seed": "fixture-031",
    "results": {
     "BASE": {
      "stake": 1000,
@@ -1006,25 +698,135 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4000
+     "win": 3950
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 8700
+     "win": 9100
     }
    }
   },
   {
-   "round": 46,
-   "seed": "fixture-046",
+   "round": 32,
+   "seed": "fixture-032",
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 600
+     "win": 700
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 750
+     "win": 550
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 6150
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 12300
+    }
+   }
+  },
+  {
+   "round": 33,
+   "seed": "fixture-033",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 700
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 550
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4200
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 8600
+    }
+   }
+  },
+  {
+   "round": 34,
+   "seed": "fixture-034",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 200
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 550
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 3650
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 8600
+    }
+   }
+  },
+  {
+   "round": 35,
+   "seed": "fixture-035",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 400
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 450
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 6800
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 13400
+    }
+   }
+  },
+  {
+   "round": 36,
+   "seed": "fixture-036",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 300
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 100
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 3350
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 6750
+    }
+   }
+  },
+  {
+   "round": 37,
+   "seed": "fixture-037",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 100
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 600
     },
     "BASE_BUNDLE": {
      "stake": 5000,
@@ -1037,8 +839,52 @@
    }
   },
   {
-   "round": 47,
-   "seed": "fixture-047",
+   "round": 38,
+   "seed": "fixture-038",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 100
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 600
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 3450
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 7250
+    }
+   }
+  },
+  {
+   "round": 39,
+   "seed": "fixture-039",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 600
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 750
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4000
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 8450
+    }
+   }
+  },
+  {
+   "round": 40,
+   "seed": "fixture-040",
    "results": {
     "BASE": {
      "stake": 1000,
@@ -1046,15 +892,169 @@
     },
     "BOOSTED": {
      "stake": 1000,
+     "win": 850
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 6100
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 12600
+    }
+   }
+  },
+  {
+   "round": 41,
+   "seed": "fixture-041",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 200
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 450
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 3800
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 6500
+    }
+   }
+  },
+  {
+   "round": 42,
+   "seed": "fixture-042",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 700
+    },
+    "BOOSTED": {
+     "stake": 1000,
      "win": 550
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 2600
+     "win": 3200
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 6650
+     "win": 8750
+    }
+   }
+  },
+  {
+   "round": 43,
+   "seed": "fixture-043",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 600
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 750
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 3900
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 5950
+    }
+   }
+  },
+  {
+   "round": 44,
+   "seed": "fixture-044",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 100
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 600
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4950
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 9550
+    }
+   }
+  },
+  {
+   "round": 45,
+   "seed": "fixture-045",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 900
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 350
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4900
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 6900
+    }
+   }
+  },
+  {
+   "round": 46,
+   "seed": "fixture-046",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 900
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 300
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4050
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 11750
+    }
+   }
+  },
+  {
+   "round": 47,
+   "seed": "fixture-047",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 2500
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 2800
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4400
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 9900
     }
    }
   },
@@ -1064,223 +1064,25 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 0
+     "win": 700
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 700
+     "win": 550
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 3800
+     "win": 6800
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 8700
+     "win": 10100
     }
    }
   },
   {
    "round": 49,
    "seed": "fixture-049",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 100
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 300
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 4200
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 7500
-    }
-   }
-  },
-  {
-   "round": 50,
-   "seed": "fixture-050",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 400
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 450
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 4650
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 9950
-    }
-   }
-  },
-  {
-   "round": 51,
-   "seed": "fixture-051",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 1700
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 200
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 6350
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 11350
-    }
-   }
-  },
-  {
-   "round": 52,
-   "seed": "fixture-052",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 600
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 700
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 5250
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 11650
-    }
-   }
-  },
-  {
-   "round": 53,
-   "seed": "fixture-053",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 300
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 600
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 4000
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 8850
-    }
-   }
-  },
-  {
-   "round": 54,
-   "seed": "fixture-054",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 1100
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 200
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 5550
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 8750
-    }
-   }
-  },
-  {
-   "round": 55,
-   "seed": "fixture-055",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 2700
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 2000
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 6900
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 9800
-    }
-   }
-  },
-  {
-   "round": 56,
-   "seed": "fixture-056",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 400
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 450
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 4900
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 7600
-    }
-   }
-  },
-  {
-   "round": 57,
-   "seed": "fixture-057",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 1500
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 1300
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 4600
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 9050
-    }
-   }
-  },
-  {
-   "round": 58,
-   "seed": "fixture-058",
    "results": {
     "BASE": {
      "stake": 1000,
@@ -1292,17 +1094,83 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 6200
+     "win": 4050
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 10900
+     "win": 10100
     }
    }
   },
   {
-   "round": 59,
-   "seed": "fixture-059",
+   "round": 50,
+   "seed": "fixture-050",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 1200
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 950
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 5000
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 11950
+    }
+   }
+  },
+  {
+   "round": 51,
+   "seed": "fixture-051",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 1900
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 450
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 3700
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 9400
+    }
+   }
+  },
+  {
+   "round": 52,
+   "seed": "fixture-052",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 4600
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 4300
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 3900
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 7200
+    }
+   }
+  },
+  {
+   "round": 53,
+   "seed": "fixture-053",
    "results": {
     "BASE": {
      "stake": 1000,
@@ -1310,21 +1178,65 @@
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 500
+     "win": 750
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4400
+     "win": 3650
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7750
+     "win": 7800
     }
    }
   },
   {
-   "round": 60,
-   "seed": "fixture-060",
+   "round": 54,
+   "seed": "fixture-054",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 300
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 600
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 3500
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 8000
+    }
+   }
+  },
+  {
+   "round": 55,
+   "seed": "fixture-055",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 400
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 450
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4000
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 11250
+    }
+   }
+  },
+  {
+   "round": 56,
+   "seed": "fixture-056",
    "results": {
     "BASE": {
      "stake": 1000,
@@ -1336,11 +1248,99 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4500
+     "win": 3150
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7800
+     "win": 5500
+    }
+   }
+  },
+  {
+   "round": 57,
+   "seed": "fixture-057",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 100
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 600
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 3600
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 8350
+    }
+   }
+  },
+  {
+   "round": 58,
+   "seed": "fixture-058",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 4200
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 100
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 6050
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 32850
+    }
+   }
+  },
+  {
+   "round": 59,
+   "seed": "fixture-059",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 900
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 900
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 5500
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 12050
+    }
+   }
+  },
+  {
+   "round": 60,
+   "seed": "fixture-060",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 600
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 750
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4350
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 5950
     }
    }
   },
@@ -1350,19 +1350,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1200
+     "win": 100
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 1200
+     "win": 600
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 5200
+     "win": 4800
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 22000
+     "win": 9750
     }
    }
   },
@@ -1372,19 +1372,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 100
+     "win": 1200
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 300
+     "win": 950
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 3000
+     "win": 3100
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7600
+     "win": 10050
     }
    }
   },
@@ -1394,19 +1394,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 300
+     "win": 1100
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 450
+     "win": 200
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 3900
+     "win": 4850
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7700
+     "win": 8050
     }
    }
   },
@@ -1424,11 +1424,11 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4100
+     "win": 4250
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 9800
+     "win": 5800
     }
    }
   },
@@ -1438,47 +1438,25 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1200
+     "win": 2400
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 1300
+     "win": 1600
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 5150
+     "win": 2950
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7000
+     "win": 6400
     }
    }
   },
   {
    "round": 66,
    "seed": "fixture-066",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 900
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 300
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 5600
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 8900
-    }
-   }
-  },
-  {
-   "round": 67,
-   "seed": "fixture-067",
    "results": {
     "BASE": {
      "stake": 1000,
@@ -1490,11 +1468,33 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 3950
+     "win": 4800
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 8250
+     "win": 9850
+    }
+   }
+  },
+  {
+   "round": 67,
+   "seed": "fixture-067",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 100
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 300
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 5700
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 11500
     }
    }
   },
@@ -1504,19 +1504,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1400
+     "win": 900
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 400
+     "win": 450
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4650
+     "win": 3850
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7900
+     "win": 8150
     }
    }
   },
@@ -1526,157 +1526,25 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1700
+     "win": 300
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 1100
+     "win": 150
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 5600
+     "win": 3100
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 11700
+     "win": 6300
     }
    }
   },
   {
    "round": 70,
    "seed": "fixture-070",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 0
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 850
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 3000
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 5300
-    }
-   }
-  },
-  {
-   "round": 71,
-   "seed": "fixture-071",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 900
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 350
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 6050
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 8700
-    }
-   }
-  },
-  {
-   "round": 72,
-   "seed": "fixture-072",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 600
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 750
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 6000
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 12050
-    }
-   }
-  },
-  {
-   "round": 73,
-   "seed": "fixture-073",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 100
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 600
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 3350
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 7750
-    }
-   }
-  },
-  {
-   "round": 74,
-   "seed": "fixture-074",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 3200
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 1200
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 4850
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 8650
-    }
-   }
-  },
-  {
-   "round": 75,
-   "seed": "fixture-075",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 300
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 600
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 6600
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 30200
-    }
-   }
-  },
-  {
-   "round": 76,
-   "seed": "fixture-076",
    "results": {
     "BASE": {
      "stake": 1000,
@@ -1688,11 +1556,143 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4250
+     "win": 3950
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7300
+     "win": 7250
+    }
+   }
+  },
+  {
+   "round": 71,
+   "seed": "fixture-071",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 700
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 550
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4200
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 8850
+    }
+   }
+  },
+  {
+   "round": 72,
+   "seed": "fixture-072",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 3000
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 1200
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 5100
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 8250
+    }
+   }
+  },
+  {
+   "round": 73,
+   "seed": "fixture-073",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 300
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 350
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 5050
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 10550
+    }
+   }
+  },
+  {
+   "round": 74,
+   "seed": "fixture-074",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 2500
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 400
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 5400
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 7650
+    }
+   }
+  },
+  {
+   "round": 75,
+   "seed": "fixture-075",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 600
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 750
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4150
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 7900
+    }
+   }
+  },
+  {
+   "round": 76,
+   "seed": "fixture-076",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 1200
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 1650
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4300
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 9600
     }
    }
   },
@@ -1706,15 +1706,15 @@
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 200
+     "win": 500
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 2950
+     "win": 2750
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 8050
+     "win": 7700
     }
    }
   },
@@ -1724,19 +1724,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 700
+     "win": 1200
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 4000
+     "win": 2100
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4500
+     "win": 5300
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 13250
+     "win": 8200
     }
    }
   },
@@ -1746,19 +1746,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 300
+     "win": 2800
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 50
+     "win": 1600
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 6350
+     "win": 3500
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 8600
+     "win": 5200
     }
    }
   },
@@ -1768,19 +1768,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1200
+     "win": 700
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 2100
+     "win": 550
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 5400
+     "win": 3100
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 9050
+     "win": 7700
     }
    }
   },
@@ -1790,19 +1790,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 2800
+     "win": 1000
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 2850
+     "win": 500
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4800
+     "win": 3450
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 13100
+     "win": 8000
     }
    }
   },
@@ -1812,19 +1812,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 100
+     "win": 1500
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 300
+     "win": 450
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4350
+     "win": 3600
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 8200
+     "win": 9450
     }
    }
   },
@@ -1834,11 +1834,11 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 8000
+     "win": 3000
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 1200
+     "win": 2850
     },
     "BASE_BUNDLE": {
      "stake": 5000,
@@ -1846,7 +1846,7 @@
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 10600
+     "win": 5850
     }
    }
   },
@@ -1856,19 +1856,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 2400
+     "win": 100
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 2100
+     "win": 600
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 3650
+     "win": 4000
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 8350
+     "win": 8800
     }
    }
   },
@@ -1878,19 +1878,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1100
+     "win": 600
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 1400
+     "win": 600
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4600
+     "win": 2850
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7350
+     "win": 5350
     }
    }
   },
@@ -1900,19 +1900,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1100
+     "win": 5800
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 1400
+     "win": 25000
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 6000
+     "win": 6800
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 9400
+     "win": 34150
     }
    }
   },
@@ -1922,19 +1922,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 900
+     "win": 200
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 1350
+     "win": 850
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 6150
+     "win": 3600
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 13500
+     "win": 9450
     }
    }
   },
@@ -1944,19 +1944,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 1100
+     "win": 3300
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 950
+     "win": 900
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4500
+     "win": 8900
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7350
+     "win": 12350
     }
    }
   },
@@ -1966,7 +1966,7 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 800
+     "win": 1000
     },
     "BOOSTED": {
      "stake": 1000,
@@ -1974,11 +1974,11 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4900
+     "win": 4750
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 9700
+     "win": 9300
     }
    }
   },
@@ -1988,19 +1988,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 800
+     "win": 900
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 750
+     "win": 450
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 3450
+     "win": 3250
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 7850
+     "win": 9300
     }
    }
   },
@@ -2010,19 +2010,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 900
+     "win": 400
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 300
+     "win": 450
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 9800
+     "win": 2300
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 9450
+     "win": 6850
     }
    }
   },
@@ -2032,19 +2032,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 800
+     "win": 1200
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 1500
+     "win": 1650
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4250
+     "win": 4900
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 6000
+     "win": 10150
     }
    }
   },
@@ -2054,19 +2054,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 2500
+     "win": 400
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 150
+     "win": 600
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4850
+     "win": 5650
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 11250
+     "win": 12850
     }
    }
   },
@@ -2076,19 +2076,19 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 900
+     "win": 400
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 300
+     "win": 600
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 2850
+     "win": 7500
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 5400
+     "win": 13500
     }
    }
   },
@@ -2098,33 +2098,11 @@
    "results": {
     "BASE": {
      "stake": 1000,
-     "win": 2600
+     "win": 1500
     },
     "BOOSTED": {
      "stake": 1000,
-     "win": 4050
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 5550
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 10950
-    }
-   }
-  },
-  {
-   "round": 96,
-   "seed": "fixture-096",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 100
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 300
+     "win": 1300
     },
     "BASE_BUNDLE": {
      "stake": 5000,
@@ -2132,57 +2110,13 @@
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 9450
+     "win": 11700
     }
    }
   },
   {
-   "round": 97,
-   "seed": "fixture-097",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 1500
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 1250
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 3800
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 7500
-    }
-   }
-  },
-  {
-   "round": 98,
-   "seed": "fixture-098",
-   "results": {
-    "BASE": {
-     "stake": 1000,
-     "win": 1900
-    },
-    "BOOSTED": {
-     "stake": 1000,
-     "win": 2750
-    },
-    "BASE_BUNDLE": {
-     "stake": 5000,
-     "win": 6100
-    },
-    "BOOSTED_BUNDLE": {
-     "stake": 10000,
-     "win": 15950
-    }
-   }
-  },
-  {
-   "round": 99,
-   "seed": "fixture-099",
+   "round": 96,
+   "seed": "fixture-096",
    "results": {
     "BASE": {
      "stake": 1000,
@@ -2194,11 +2128,77 @@
     },
     "BASE_BUNDLE": {
      "stake": 5000,
-     "win": 4100
+     "win": 3850
     },
     "BOOSTED_BUNDLE": {
      "stake": 10000,
-     "win": 9000
+     "win": 7400
+    }
+   }
+  },
+  {
+   "round": 97,
+   "seed": "fixture-097",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 1200
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 1200
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 4450
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 8450
+    }
+   }
+  },
+  {
+   "round": 98,
+   "seed": "fixture-098",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 1500
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 1250
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 3600
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 8550
+    }
+   }
+  },
+  {
+   "round": 99,
+   "seed": "fixture-099",
+   "results": {
+    "BASE": {
+     "stake": 1000,
+     "win": 2200
+    },
+    "BOOSTED": {
+     "stake": 1000,
+     "win": 2100
+    },
+    "BASE_BUNDLE": {
+     "stake": 5000,
+     "win": 5000
+    },
+    "BOOSTED_BUNDLE": {
+     "stake": 10000,
+     "win": 9950
     }
    }
   }

@@ -4,38 +4,68 @@
   "results": {
     "LARGE": {
       "stake": 1000,
-      "survived": 0,
-      "outcome": "CRASH_ON_STEP_1",
+      "survived": 6,
+      "outcome": "CRASH_ON_STEP_7",
       "payoutIfTakenAfter": [
         {
           "step": 1,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 1381,
+          "locker": {
+            "multiplier": 1.0008111430252453,
+            "band": 2,
+            "contents": 1381
+          }
         },
         {
           "step": 2,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 1902,
+          "locker": {
+            "multiplier": 1.0008111430252453,
+            "band": 2,
+            "contents": 1902
+          }
         },
         {
           "step": 3,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 2632,
+          "locker": {
+            "multiplier": 1.0008111430252453,
+            "band": 2,
+            "contents": 2632
+          }
         },
         {
           "step": 4,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 3623,
+          "locker": {
+            "multiplier": 1.0008111430252453,
+            "band": 2,
+            "contents": 3623
+          }
         },
         {
           "step": 5,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 5004,
+          "locker": {
+            "multiplier": 1.0008111430252453,
+            "band": 2,
+            "contents": 5004
+          }
         },
         {
           "step": 6,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 6906,
+          "locker": {
+            "multiplier": 1.0008111430252453,
+            "band": 2,
+            "contents": 6906
+          }
         },
         {
           "step": 7,
@@ -61,7 +91,7 @@
       "totalBetAmount": 1000,
       "totalWinAmount": 0,
       "size": "LARGE",
-      "currentStep": 1,
+      "currentStep": 7,
       "currentPayout": 0,
       "locker": null
     }

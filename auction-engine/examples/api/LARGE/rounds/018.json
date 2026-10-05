@@ -4,58 +4,48 @@
   "results": {
     "LARGE": {
       "stake": 1000,
-      "survived": 5,
-      "outcome": "CRASH_ON_STEP_6",
+      "survived": 3,
+      "outcome": "CRASH_ON_STEP_4",
       "payoutIfTakenAfter": [
         {
           "step": 1,
           "reachable": true,
-          "win": 2788,
+          "win": 724,
           "locker": {
-            "multiplier": 2.0199331572257253,
-            "band": 3,
-            "contents": 2788
+            "multiplier": 0.524821827738638,
+            "band": 1,
+            "contents": 724
           }
         },
         {
           "step": 2,
           "reachable": true,
-          "win": 3838,
+          "win": 997,
           "locker": {
-            "multiplier": 2.0199331572257253,
-            "band": 3,
-            "contents": 3838
+            "multiplier": 0.524821827738638,
+            "band": 1,
+            "contents": 997
           }
         },
         {
           "step": 3,
           "reachable": true,
-          "win": 5312,
+          "win": 1380,
           "locker": {
-            "multiplier": 2.0199331572257253,
-            "band": 3,
-            "contents": 5312
+            "multiplier": 0.524821827738638,
+            "band": 1,
+            "contents": 1380
           }
         },
         {
           "step": 4,
-          "reachable": true,
-          "win": 7312,
-          "locker": {
-            "multiplier": 2.0199331572257253,
-            "band": 3,
-            "contents": 7312
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 5,
-          "reachable": true,
-          "win": 10100,
-          "locker": {
-            "multiplier": 2.0199331572257253,
-            "band": 3,
-            "contents": 10100
-          }
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 6,
@@ -86,7 +76,7 @@
       "totalBetAmount": 1000,
       "totalWinAmount": 0,
       "size": "LARGE",
-      "currentStep": 6,
+      "currentStep": 4,
       "currentPayout": 0,
       "locker": null
     }

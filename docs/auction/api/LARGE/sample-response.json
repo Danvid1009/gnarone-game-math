@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "6af65485-470e-44d1-9683-52596cbf0f46",
+    "sessionId": "5dc9d03f-6121-4def-ba8c-477d0e1b5b27",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -119,7 +119,8 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "4443c70b-99e1-4601-98c9-d0c06c1d279f",
+        "roundId": "aa6de542-6700-45bd-8df1-8b1b914ab1a5",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -188,7 +189,8 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "4443c70b-99e1-4601-98c9-d0c06c1d279f",
+        "roundId": "aa6de542-6700-45bd-8df1-8b1b914ab1a5",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -258,7 +260,8 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "4443c70b-99e1-4601-98c9-d0c06c1d279f",
+        "roundId": "aa6de542-6700-45bd-8df1-8b1b914ab1a5",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -328,10 +331,12 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "4443c70b-99e1-4601-98c9-d0c06c1d279f",
+        "roundId": "aa6de542-6700-45bd-8df1-8b1b914ab1a5",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
         "balance": 99000,
         "totalBetAmount": 1000,
-        "totalWinAmount": 519,
+        "totalWinAmount": 947,
         "size": "LARGE",
         "currentStep": 2,
         "currentPayout": 1900,
@@ -388,9 +393,9 @@
           }
         ],
         "locker": {
-          "multiplier": 0.2732984879590545,
-          "band": 0,
-          "contents": 519
+          "multiplier": 0.49829444974057185,
+          "band": 1,
+          "contents": 947
         },
         "roundEnded": true,
         "nextAction": [
@@ -401,7 +406,7 @@
     {
       "call": "collect",
       "response": {
-        "balance": 99519
+        "balance": 99947
       }
     }
   ]

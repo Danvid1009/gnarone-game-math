@@ -104,3 +104,14 @@ test('linked bets: priced from the running round, settled when it ends, own coll
   assert.throws(() => g.linkedBet({ sessionId: s.sessionId, roundId: r.roundId, betAmount: 100, betType: 'A' }), /has ended/);
   assert.throws(() => g.quote({ roundId: r.roundId }), /has ended/);
 });
+
+test('commitment: seedHash on every bet, seed hidden until the round ends, then revealed and matching', async () => {
+  const { commit, HashRng } = await import('../src/rng.js');
+  const g = defineGame({ id: 'c', betTypes: ['X'], levels: () => [100],
+    play: ({ rng }) => ({ totalWinAmount: 0, roundEnded: false, nextAction: ['CONTINUE'], state: { u: rng.next() }, u: null }),
+    step: ({ round }) => ({ totalWinAmount: round.state.u < 0.5 ? 200 : 0, roundEnded: true, nextAction: ['COLLECT'], state: round.state, u: round.state.u }) });
+  const s = g.open(); let r = g.bet({ sessionId: s.sessionId, betAmount: 100, betType: 'X', seed: 'reveal-me' });
+  assert.equal(r.seedHash, commit('reveal-me')); assert.equal(r.seed, undefined, 'seed hidden while the round runs'); assert.equal(r.u, null);
+  r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' });
+  assert.equal(r.seed, 'reveal-me'); assert.equal(commit(r.seed), r.seedHash); assert.equal(r.u, new HashRng('reveal-me', 'payout').next(), 'anyone can recompute the round from the revealed seed');
+});

@@ -5,7 +5,7 @@
     {
       "call": "bet",
       "body": {
-        "sessionId": "93103bee-57cf-437e-9be6-7dc5b428412e",
+        "sessionId": "700562e7-01c7-4cd6-965d-573b738cb959",
         "betAmount": 1000,
         "betType": "EASY",
         "seed": "fixture-007"
@@ -14,28 +14,28 @@
     {
       "call": "next-action",
       "body": {
-        "roundId": "bd01cc99-732e-402c-bbb2-f8a41d09fa77",
+        "roundId": "c9981003-c6a2-42db-9fd9-1184da2395dc",
         "actionCode": "CONTINUE"
       }
     },
     {
       "call": "next-action",
       "body": {
-        "roundId": "bd01cc99-732e-402c-bbb2-f8a41d09fa77",
+        "roundId": "c9981003-c6a2-42db-9fd9-1184da2395dc",
         "actionCode": "CONTINUE"
       }
     },
     {
       "call": "next-action",
       "body": {
-        "roundId": "bd01cc99-732e-402c-bbb2-f8a41d09fa77",
+        "roundId": "c9981003-c6a2-42db-9fd9-1184da2395dc",
         "actionCode": "CASH_OUT"
       }
     },
     {
       "call": "collect",
       "body": {
-        "roundId": "bd01cc99-732e-402c-bbb2-f8a41d09fa77"
+        "roundId": "c9981003-c6a2-42db-9fd9-1184da2395dc"
       }
     }
   ],

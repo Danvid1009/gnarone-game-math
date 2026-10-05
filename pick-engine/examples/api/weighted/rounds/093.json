@@ -4,14 +4,14 @@
   "results": {
     "OPTION_1": {
       "stake": 1000,
-      "win": 0,
+      "win": 1900,
       "totalBetAmount": 1000,
       "math": {
-        "u": 0.8211358492262661,
-        "winner": 2,
-        "winnerName": "OPTION_3",
+        "u": 0.2696122705875762,
+        "winner": 0,
+        "winnerName": "OPTION_1",
         "backed": 0,
-        "hit": false,
+        "hit": true,
         "odds": 1.9
       }
     },
@@ -20,9 +20,9 @@
       "win": 0,
       "totalBetAmount": 1000,
       "math": {
-        "u": 0.8211358492262661,
-        "winner": 2,
-        "winnerName": "OPTION_3",
+        "u": 0.2696122705875762,
+        "winner": 0,
+        "winnerName": "OPTION_1",
         "backed": 1,
         "hit": false,
         "odds": 3.1666666666666665
@@ -30,14 +30,14 @@
     },
     "OPTION_3": {
       "stake": 1000,
-      "win": 4750,
+      "win": 0,
       "totalBetAmount": 1000,
       "math": {
-        "u": 0.8211358492262661,
-        "winner": 2,
-        "winnerName": "OPTION_3",
+        "u": 0.2696122705875762,
+        "winner": 0,
+        "winnerName": "OPTION_1",
         "backed": 2,
-        "hit": true,
+        "hit": false,
         "odds": 4.749999999999999
       }
     }

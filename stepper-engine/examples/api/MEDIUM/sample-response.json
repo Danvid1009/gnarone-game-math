@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "c24b7114-ff47-4f28-94c5-6b93573f8e65",
+    "sessionId": "156542ff-a3d7-4141-aae8-2fe310f18cf2",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -76,7 +76,8 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "70b77c3e-d92e-4997-a3ff-6cf35cb60370",
+        "roundId": "3cfc77f5-f31f-4dcd-8a3e-0647a162875d",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -144,7 +145,8 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "70b77c3e-d92e-4997-a3ff-6cf35cb60370",
+        "roundId": "3cfc77f5-f31f-4dcd-8a3e-0647a162875d",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -213,7 +215,8 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "70b77c3e-d92e-4997-a3ff-6cf35cb60370",
+        "roundId": "3cfc77f5-f31f-4dcd-8a3e-0647a162875d",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -282,7 +285,9 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "70b77c3e-d92e-4997-a3ff-6cf35cb60370",
+        "roundId": "3cfc77f5-f31f-4dcd-8a3e-0647a162875d",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 1900,

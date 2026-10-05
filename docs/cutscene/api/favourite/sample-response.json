@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "457e3ef0-9479-4438-8877-5097d8fa0673",
+    "sessionId": "0a8ec9e3-99c2-49fe-98d4-1eded9878fca",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -137,11 +137,13 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "c79c830b-7184-44bf-a884-ab0b4d7685e6",
+        "roundId": "8a46fab3-cbdd-41b1-9768-bf64620c46e3",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
         "balance": 99000,
         "totalBetAmount": 1000,
-        "totalWinAmount": 0,
-        "winner": "B",
+        "totalWinAmount": 1303,
+        "winner": "A",
         "odds": 1.3032467924394424,
         "cutscene": {
           "how": "KO",
@@ -149,55 +151,55 @@
           "hits": [
             {
               "tick": 1,
-              "hitter": "B",
-              "damage": 14,
-              "hpA": 86,
-              "hpB": 100
+              "hitter": "A",
+              "damage": 23,
+              "hpA": 100,
+              "hpB": 77
             },
             {
               "tick": 2,
-              "hitter": "B",
-              "damage": 11,
-              "hpA": 75,
-              "hpB": 100
+              "hitter": "A",
+              "damage": 23.5,
+              "hpA": 100,
+              "hpB": 53.5
             },
             {
               "tick": 3,
-              "hitter": "B",
-              "damage": 22.5,
-              "hpA": 52.5,
-              "hpB": 100
+              "hitter": "A",
+              "damage": 0.5,
+              "hpA": 100,
+              "hpB": 53
             },
             {
               "tick": 4,
-              "hitter": "B",
-              "damage": 33,
-              "hpA": 19.5,
-              "hpB": 100
+              "hitter": "A",
+              "damage": 4,
+              "hpA": 100,
+              "hpB": 49
             },
             {
               "tick": 5,
               "hitter": "A",
-              "damage": 21,
-              "hpA": 19.5,
-              "hpB": 79
+              "damage": 17,
+              "hpA": 100,
+              "hpB": 32
             },
             {
               "tick": 6,
-              "hitter": "B",
-              "damage": 24,
-              "hpA": 0,
-              "hpB": 79
+              "hitter": "A",
+              "damage": 43,
+              "hpA": 100,
+              "hpB": 0
             }
           ],
           "final": {
-            "hpA": 0,
-            "hpB": 79
+            "hpA": 100,
+            "hpB": 0
           },
-          "redraws": 0
+          "redraws": 1
         },
         "math": {
-          "u": 0.9729229214135557,
+          "u": 0.6806586483395238,
           "pA": 0.7289486576995687
         },
         "nextAction": [
@@ -208,18 +210,20 @@
     {
       "call": "side-bet",
       "response": {
-        "roundId": "81921c6f-b0a8-4100-9443-08b262639c30",
+        "roundId": "a566b936-910d-45d1-ad4d-72e3647da52d",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
         "balance": 98000,
         "totalBetAmount": 1000,
-        "totalWinAmount": 1900,
+        "totalWinAmount": 0,
         "side": "coin",
         "kind": "coin",
-        "outcome": "OPTION_1",
+        "outcome": "OPTION_2",
         "pick": "OPTION_1",
-        "hit": true,
+        "hit": false,
         "odds": 1.9,
         "math": {
-          "u": 0.07044307538308203,
+          "u": 0.6457388901279505,
           "probs": [
             0.5,
             0.5
@@ -233,13 +237,13 @@
     {
       "call": "collect (side bet)",
       "response": {
-        "balance": 99900
+        "balance": 98000
       }
     },
     {
       "call": "collect",
       "response": {
-        "balance": 99900
+        "balance": 99303
       }
     }
   ]

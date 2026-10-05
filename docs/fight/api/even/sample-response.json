@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "b6e5f51a-8361-49b6-b5ef-69aec0a992bb",
+    "sessionId": "fd884224-4b4e-430a-8435-a717671ba6f3",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -1045,7 +1045,8 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "25164341-a4b5-4a80-8d9b-4c9afe5c0fd6",
+        "roundId": "efe52fb8-a41f-435c-9000-4c5f5aa87181",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
@@ -1079,30 +1080,31 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "25164341-a4b5-4a80-8d9b-4c9afe5c0fd6",
+        "roundId": "efe52fb8-a41f-435c-9000-4c5f5aa87181",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
         "tick": 1,
         "ticksMax": 16,
         "hp": {
-          "A": 61.5,
+          "A": 90.5,
           "B": 100
         },
-        "pA": 0.27654403646374465,
+        "pA": 0.4464114854290008,
         "odds": {
           "opening": {
             "A": 1.9000000000000004,
             "B": 1.8999999999999995
           },
           "live": {
-            "A": 3.616060620172157,
-            "B": 1.3822541390245735
+            "A": 2.240085733992712,
+            "B": 1.8063958584381854
           }
         },
         "last": {
           "hitter": "B",
-          "damage": 38.5
+          "damage": 9.5
         },
         "winner": null,
         "how": null,
@@ -1116,30 +1118,31 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "25164341-a4b5-4a80-8d9b-4c9afe5c0fd6",
+        "roundId": "efe52fb8-a41f-435c-9000-4c5f5aa87181",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
         "tick": 2,
         "ticksMax": 16,
         "hp": {
-          "A": 31.5,
+          "A": 79,
           "B": 100
         },
-        "pA": 0.11694164916081207,
+        "pA": 0.3793036231589022,
         "odds": {
           "opening": {
             "A": 1.9000000000000004,
             "B": 1.8999999999999995
           },
           "live": {
-            "A": 8.551273281812984,
-            "B": 1.1324279975945872
+            "A": 2.636410355566439,
+            "B": 1.611093664005721
           }
         },
         "last": {
           "hitter": "B",
-          "damage": 30
+          "damage": 11.5
         },
         "winner": null,
         "how": null,
@@ -1153,16 +1156,16 @@
     {
       "call": "quote",
       "response": {
-        "roundId": "25164341-a4b5-4a80-8d9b-4c9afe5c0fd6",
+        "roundId": "efe52fb8-a41f-435c-9000-4c5f5aa87181",
         "step": 2,
         "odds": {
-          "A": 8.551273281812984,
-          "B": 1.1324279975945872
+          "A": 2.636410355566439,
+          "B": 1.611093664005721
         },
-        "pA": 0.11694164916081207,
+        "pA": 0.3793036231589022,
         "tick": 2,
         "hp": {
-          "A": 31.5,
+          "A": 79,
           "B": 100
         }
       }
@@ -1170,13 +1173,14 @@
     {
       "call": "linked-bet",
       "response": {
-        "roundId": "5072d7a9-3786-4f19-be11-62deb7a5446c",
-        "parentRoundId": "25164341-a4b5-4a80-8d9b-4c9afe5c0fd6",
+        "roundId": "4f518458-2f27-496a-9dee-e2d13480cafb",
+        "parentRoundId": "efe52fb8-a41f-435c-9000-4c5f5aa87181",
+        "parentSeedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 98000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
         "betType": "B",
-        "odds": 1.1324279975945872,
+        "odds": 1.611093664005721,
         "placedAtStep": 2,
         "roundEnded": false,
         "nextAction": []
@@ -1185,15 +1189,17 @@
     {
       "call": "next-action (last)",
       "response": {
-        "roundId": "25164341-a4b5-4a80-8d9b-4c9afe5c0fd6",
+        "roundId": "efe52fb8-a41f-435c-9000-4c5f5aa87181",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
         "balance": 98000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
-        "tick": 4,
+        "tick": 6,
         "ticksMax": 16,
         "hp": {
           "A": 0,
-          "B": 100
+          "B": 94.5
         },
         "pA": 0,
         "odds": {
@@ -1205,7 +1211,7 @@
         },
         "last": {
           "hitter": "B",
-          "damage": 12
+          "damage": 46.5
         },
         "winner": "B",
         "how": "KO",
@@ -1225,7 +1231,7 @@
     {
       "call": "collect (live bet)",
       "response": {
-        "balance": 99132
+        "balance": 99611
       }
     }
   ]

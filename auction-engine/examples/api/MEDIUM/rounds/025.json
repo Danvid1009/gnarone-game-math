@@ -4,28 +4,48 @@
   "results": {
     "MEDIUM": {
       "stake": 1000,
-      "survived": 0,
-      "outcome": "CRASH_ON_STEP_1",
+      "survived": 4,
+      "outcome": "CRASH_ON_STEP_5",
       "payoutIfTakenAfter": [
         {
           "step": 1,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 328,
+          "locker": {
+            "multiplier": 0.26010871961937526,
+            "band": 0,
+            "contents": 328
+          }
         },
         {
           "step": 2,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 411,
+          "locker": {
+            "multiplier": 0.26010871961937526,
+            "band": 0,
+            "contents": 411
+          }
         },
         {
           "step": 3,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 520,
+          "locker": {
+            "multiplier": 0.26010871961937526,
+            "band": 0,
+            "contents": 520
+          }
         },
         {
           "step": 4,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 653,
+          "locker": {
+            "multiplier": 0.26010871961937526,
+            "band": 0,
+            "contents": 653
+          }
         },
         {
           "step": 5,
@@ -61,7 +81,7 @@
       "totalBetAmount": 1000,
       "totalWinAmount": 0,
       "size": "MEDIUM",
-      "currentStep": 1,
+      "currentStep": 5,
       "currentPayout": 0,
       "locker": null
     }

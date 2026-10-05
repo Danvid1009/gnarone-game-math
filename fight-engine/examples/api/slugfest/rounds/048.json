@@ -6,11 +6,11 @@
       "stake": 1000,
       "win": 0,
       "totalBetAmount": 1000,
-      "tick": 10,
+      "tick": 9,
       "ticksMax": 10,
       "hp": {
-        "A": 13.5,
-        "B": 30.5
+        "A": 0,
+        "B": 26
       },
       "pA": 0,
       "odds": {
@@ -22,24 +22,21 @@
       },
       "last": {
         "hitter": "B",
-        "damage": 12
+        "damage": 41.5
       },
       "winner": "B",
-      "how": "DECISION",
-      "decision": {
-        "pA": 0.3068181818181818,
-        "u": 0.5180273284204304
-      }
+      "how": "KO",
+      "decision": null
     },
     "B": {
       "stake": 1000,
       "win": 1900,
       "totalBetAmount": 1000,
-      "tick": 10,
+      "tick": 9,
       "ticksMax": 10,
       "hp": {
-        "A": 13.5,
-        "B": 30.5
+        "A": 0,
+        "B": 26
       },
       "pA": 0,
       "odds": {
@@ -51,14 +48,11 @@
       },
       "last": {
         "hitter": "B",
-        "damage": 12
+        "damage": 41.5
       },
       "winner": "B",
-      "how": "DECISION",
-      "decision": {
-        "pA": 0.3068181818181818,
-        "u": 0.5180273284204304
-      }
+      "how": "KO",
+      "decision": null
     }
   }
 }

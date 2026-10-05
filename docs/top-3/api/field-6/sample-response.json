@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "153428f1-973d-405b-9085-eaa22869a75c",
+    "sessionId": "622358f2-53ff-42db-b3d4-a6225a4a6c30",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -122,29 +122,31 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "c1f32695-da99-4666-aca3-be93934aae08",
+        "roundId": "adce96e2-5108-4f55-ac78-8a4ac2f78886",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 1049,
         "math": {
-          "u": 0.9729229214135557,
+          "u": 0.6806586483395238,
           "order": [
-            5,
+            2,
             1,
             0,
-            2,
+            3,
             4,
-            3
+            5
           ],
           "names": [
-            "RACER_6",
+            "RACER_3",
             "RACER_2",
             "RACER_1",
-            "RACER_3",
+            "RACER_4",
             "RACER_5",
-            "RACER_4"
+            "RACER_6"
           ],
-          "zone": 104,
+          "zone": 44,
           "backed": 0,
           "place": 3,
           "multiple": 1.0486919620942634,

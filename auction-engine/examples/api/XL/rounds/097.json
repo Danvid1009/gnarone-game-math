@@ -4,43 +4,48 @@
   "results": {
     "XL": {
       "stake": 1000,
-      "survived": 3,
-      "outcome": "CRASH_ON_STEP_4",
+      "survived": 4,
+      "outcome": "CRASH_ON_STEP_5",
       "payoutIfTakenAfter": [
         {
           "step": 1,
           "reachable": true,
-          "win": 758,
+          "win": 412,
           "locker": {
-            "multiplier": 0.47951832688102,
-            "band": 1,
-            "contents": 758
+            "multiplier": 0.26107179240682576,
+            "band": 0,
+            "contents": 412
           }
         },
         {
           "step": 2,
           "reachable": true,
-          "win": 1204,
+          "win": 655,
           "locker": {
-            "multiplier": 0.47951832688102,
-            "band": 1,
-            "contents": 1204
+            "multiplier": 0.26107179240682576,
+            "band": 0,
+            "contents": 655
           }
         },
         {
           "step": 3,
           "reachable": true,
-          "win": 1908,
+          "win": 1039,
           "locker": {
-            "multiplier": 0.47951832688102,
-            "band": 1,
-            "contents": 1908
+            "multiplier": 0.26107179240682576,
+            "band": 0,
+            "contents": 1039
           }
         },
         {
           "step": 4,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 1647,
+          "locker": {
+            "multiplier": 0.26107179240682576,
+            "band": 0,
+            "contents": 1647
+          }
         },
         {
           "step": 5,
@@ -76,7 +81,7 @@
       "totalBetAmount": 1000,
       "totalWinAmount": 0,
       "size": "XL",
-      "currentStep": 4,
+      "currentStep": 5,
       "currentPayout": 0,
       "locker": null
     }

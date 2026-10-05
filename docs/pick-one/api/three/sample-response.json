@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "cd432a19-f106-4503-92ac-e49fe8644553",
+    "sessionId": "fa7916bc-128e-40e7-beb3-779944f89dfb",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -58,12 +58,14 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "dd412ad0-0524-4bb6-9e66-9cdbcff27397",
+        "roundId": "6f6efb19-7c05-41b5-a03e-973a6cccba8e",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
         "balance": 99000,
         "totalBetAmount": 1000,
         "totalWinAmount": 0,
         "math": {
-          "u": 0.9729229214135557,
+          "u": 0.6806586483395238,
           "winner": 2,
           "winnerName": "OPTION_3",
           "backed": 0,

@@ -4,13 +4,13 @@
   "results": {
     "EASY": {
       "stake": 1000,
-      "survived": 1,
-      "outcome": "CRASH_ON_STEP_2",
+      "survived": 0,
+      "outcome": "CRASH_ON_STEP_1",
       "payoutIfTakenAfter": [
         {
           "step": 1,
-          "reachable": true,
-          "win": 1260
+          "reachable": false,
+          "win": 0
         },
         {
           "step": 2,
@@ -61,7 +61,7 @@
       "totalBetAmount": 1000,
       "totalWinAmount": 0,
       "difficulty": "EASY",
-      "currentStep": 2,
+      "currentStep": 1,
       "currentPayout": 0
     }
   }

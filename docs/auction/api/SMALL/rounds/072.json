@@ -4,66 +4,120 @@
   "results": {
     "SMALL": {
       "stake": 1000,
-      "survived": 0,
-      "outcome": "CRASH_ON_STEP_1",
+      "survived": 10,
+      "outcome": "TOP",
       "payoutIfTakenAfter": [
         {
           "step": 1,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 309,
+          "locker": {
+            "multiplier": 0.26407673681585964,
+            "band": 0,
+            "contents": 309
+          }
         },
         {
           "step": 2,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 364,
+          "locker": {
+            "multiplier": 0.26407673681585964,
+            "band": 0,
+            "contents": 364
+          }
         },
         {
           "step": 3,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 428,
+          "locker": {
+            "multiplier": 0.26407673681585964,
+            "band": 0,
+            "contents": 428
+          }
         },
         {
           "step": 4,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 502,
+          "locker": {
+            "multiplier": 0.26407673681585964,
+            "band": 0,
+            "contents": 502
+          }
         },
         {
           "step": 5,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 592,
+          "locker": {
+            "multiplier": 0.26407673681585964,
+            "band": 0,
+            "contents": 592
+          }
         },
         {
           "step": 6,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 695,
+          "locker": {
+            "multiplier": 0.26407673681585964,
+            "band": 0,
+            "contents": 695
+          }
         },
         {
           "step": 7,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 816,
+          "locker": {
+            "multiplier": 0.26407673681585964,
+            "band": 0,
+            "contents": 816
+          }
         },
         {
           "step": 8,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 956,
+          "locker": {
+            "multiplier": 0.26407673681585964,
+            "band": 0,
+            "contents": 956
+          }
         },
         {
           "step": 9,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 1125,
+          "locker": {
+            "multiplier": 0.26407673681585964,
+            "band": 0,
+            "contents": 1125
+          }
         },
         {
           "step": 10,
-          "reachable": false,
-          "win": 0
+          "reachable": true,
+          "win": 1320,
+          "locker": {
+            "multiplier": 0.26407673681585964,
+            "band": 0,
+            "contents": 1320
+          }
         }
       ],
       "totalBetAmount": 1000,
-      "totalWinAmount": 0,
+      "totalWinAmount": 1320,
       "size": "SMALL",
-      "currentStep": 1,
-      "currentPayout": 0,
-      "locker": null
+      "currentStep": 10,
+      "currentPayout": 5000,
+      "locker": {
+        "multiplier": 0.26407673681585964,
+        "band": 0,
+        "contents": 1320
+      }
     }
   }
 }
