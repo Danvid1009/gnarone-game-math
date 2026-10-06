@@ -31,6 +31,7 @@
   "multiStep": false,
   "how_to_settle": "find the band with rn_from ≤ u < rn_to; if payout is 0 the win is 0; else t = (u − rn_from)/(rn_to − rn_from), multiple = payout + r·(2t − 1), win = round(stake × multiple)",
   "rtp": 0.9499999999999997,
+  "method": "geometric",
   "r": 0.05,
   "bands": [
     {

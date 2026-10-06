@@ -1,0 +1,174 @@
+{
+  "open": {
+    "sessionId": "f4fe9490-8dfb-4c81-aa6e-70522e42f4e2",
+    "requestCounter": 0,
+    "balance": 100000,
+    "currency": {
+      "code": "USD",
+      "prefix": "$",
+      "suffix": "",
+      "grouping": ",",
+      "decimal": ".",
+      "precision": 1,
+      "denomination": 1
+    },
+    "chipLevels": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "minBet": 100,
+    "maxBet": 10000,
+    "defaultBet": 200,
+    "playerAlias": "Player",
+    "seconds": 0,
+    "rounds": 0,
+    "winLoss": 0,
+    "preset": "ragency",
+    "rtp": 0.9899720000000001,
+    "method": "given",
+    "r": 0.019999999999999997,
+    "bands": [
+      {
+        "payout": 0,
+        "p": 0.0622,
+        "rn_from": 0,
+        "rn_to": 0.0622,
+        "pays_from": 0,
+        "pays_to": 0,
+        "prize": "No grab"
+      },
+      {
+        "payout": 0.25,
+        "p": 0.05,
+        "rn_from": 0.0622,
+        "rn_to": 0.1122,
+        "pays_from": 0.23,
+        "pays_to": 0.27,
+        "prize": "Old bones"
+      },
+      {
+        "payout": 0.5,
+        "p": 0.12,
+        "rn_from": 0.1122,
+        "rn_to": 0.2322,
+        "pays_from": 0.48,
+        "pays_to": 0.52,
+        "prize": "Scaly imp"
+      },
+      {
+        "payout": 0.8,
+        "p": 0.2356,
+        "rn_from": 0.2322,
+        "rn_to": 0.4678,
+        "pays_from": 0.78,
+        "pays_to": 0.8200000000000001,
+        "prize": "Scaly imp"
+      },
+      {
+        "payout": 1,
+        "p": 0.25,
+        "rn_from": 0.4678,
+        "rn_to": 0.7178,
+        "pays_from": 0.98,
+        "pays_to": 1.02,
+        "prize": "Ember beast"
+      },
+      {
+        "payout": 1.2,
+        "p": 0.17,
+        "rn_from": 0.7178,
+        "rn_to": 0.8878,
+        "pays_from": 1.18,
+        "pays_to": 1.22,
+        "prize": "Credit ingots"
+      },
+      {
+        "payout": 1.5,
+        "p": 0.07,
+        "rn_from": 0.8878,
+        "rn_to": 0.9578,
+        "pays_from": 1.48,
+        "pays_to": 1.52,
+        "prize": "Dragon hatchling"
+      },
+      {
+        "payout": 2,
+        "p": 0.03,
+        "rn_from": 0.9578,
+        "rn_to": 0.9878,
+        "pays_from": 1.98,
+        "pays_to": 2.02,
+        "prize": "Dragon hatchling"
+      },
+      {
+        "payout": 5,
+        "p": 0.008,
+        "rn_from": 0.9878,
+        "rn_to": 0.9958,
+        "pays_from": 4.98,
+        "pays_to": 5.02,
+        "prize": "Blood gems"
+      },
+      {
+        "payout": 10,
+        "p": 0.003,
+        "rn_from": 0.9958,
+        "rn_to": 0.9988,
+        "pays_from": 9.98,
+        "pays_to": 10.02,
+        "prize": "Blood gems"
+      },
+      {
+        "payout": 25,
+        "p": 0.0008,
+        "rn_from": 0.9988,
+        "rn_to": 0.9996,
+        "pays_from": 24.98,
+        "pays_to": 25.02,
+        "prize": "Relic hoard"
+      },
+      {
+        "payout": 49.98,
+        "p": 0.0004,
+        "rn_from": 0.9996,
+        "rn_to": 1,
+        "pays_from": 49.959999999999994,
+        "pays_to": 50,
+        "prize": "Golden dragon"
+      }
+    ]
+  },
+  "calls": [
+    {
+      "call": "bet",
+      "response": {
+        "roundId": "4b88a00b-d671-4a97-bb0b-24496118bd2d",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 1014,
+        "math": {
+          "u": 0.6806586483395238,
+          "band": 4,
+          "multiple": 1.0140573837343239,
+          "r": 0.019999999999999997
+        },
+        "nextAction": [
+          "COLLECT"
+        ]
+      }
+    },
+    {
+      "call": "collect",
+      "response": {
+        "balance": 100014
+      }
+    }
+  ]
+}

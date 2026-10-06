@@ -1,0 +1,22 @@
+{
+  "module": "api/rgs.js",
+  "create": "createGame({\"preset\":\"ragency\"})",
+  "calls": [
+    {
+      "call": "bet",
+      "body": {
+        "sessionId": "f4fe9490-8dfb-4c81-aa6e-70522e42f4e2",
+        "betAmount": 1000,
+        "betType": "BASE",
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "collect",
+      "body": {
+        "roundId": "4b88a00b-d671-4a97-bb0b-24496118bd2d"
+      }
+    }
+  ],
+  "note": "deterministic: seed fixture-007; drop seed for a live roll"
+}

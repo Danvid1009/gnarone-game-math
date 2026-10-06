@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "c1d656bb-44bc-4454-8e56-30a592f50a67",
+    "sessionId": "c060e89a-ed23-4fb7-8993-9b05b4bdf1cf",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -30,6 +30,7 @@
     "winLoss": 0,
     "preset": "always-pays",
     "rtp": 0.95,
+    "method": "geometric",
     "r": 0.03,
     "bands": [
       {
@@ -78,7 +79,7 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "84e890b9-f282-45a4-9c0f-8da23c20c660",
+        "roundId": "4cfd3f62-b408-4244-b6f3-e3e90c244979",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "balance": 99000,
