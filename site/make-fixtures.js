@@ -22,6 +22,7 @@ const ENGINES = {
   'auction-engine': [{ dir: 'examples/api' }],
   'fight-engine':   [{ dir: 'examples/api' }],
   'cutscene-engine': [{ dir: 'examples/api' }],
+  'dist-engine':    [{ dir: 'examples/api' }],
 };
 const only = process.argv.slice(2);
 const seedOf = k => `fixture-${String(k).padStart(3, '0')}`;
@@ -80,6 +81,7 @@ for (const [folder, variants] of Object.entries(ENGINES)) {
       let liveId = null;
       if (g.hasLinkedBets && !r.roundEnded) { const q = g.quote({ roundId: r.roundId }); seq.push({ call: 'quote', body: { roundId: r.roundId }, response: q }); const lb = g.linkedBet({ sessionId: s.sessionId, roundId: r.roundId, betAmount: stake, betType: g.betTypes[1] }); liveId = lb.roundId; seq.push({ call: 'linked-bet', body: { sessionId: s.sessionId, roundId: r.roundId, betAmount: stake, betType: g.betTypes[1] }, response: lb }); }
       while (g.isMultiStep && !r.roundEnded) { r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' }); if (r.roundEnded) seq.push({ call: 'next-action (last)', body: { roundId: r.roundId, actionCode: 'CONTINUE' }, response: r }); }
+      if (g.hasDraws) { for (const dp of [{ dist: 'normal', mu: 10, sigma: 2 }, { dist: 'categorical', weights: [5, 3, 2] }, { dist: 'permutation', n: 5 }]) { const d = g.draw({ sessionId: s.sessionId, params: dp, seed: seedOf(7) }); seq.push({ call: 'draw', body: { sessionId: s.sessionId, params: dp, seed: seedOf(7) }, response: d }); } }
       if (g.hasSideBets) { const sb = g.sideBet({ sessionId: s.sessionId, betAmount: stake, params: 'coin', seed: seedOf(7) }); seq.push({ call: 'side-bet', body: { sessionId: s.sessionId, betAmount: stake, params: 'coin', seed: seedOf(7) }, response: sb }); seq.push({ call: 'collect (side bet)', body: { roundId: sb.roundId }, response: g.collect({ roundId: sb.roundId }) }); }
       const c = g.collect({ roundId: r.roundId }); seq.push({ call: 'collect', body: { roundId: r.roundId }, response: c });
       if (liveId) seq.push({ call: 'collect (live bet)', body: { roundId: liveId }, response: g.collect({ roundId: liveId }) });

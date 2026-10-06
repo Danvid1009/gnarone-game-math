@@ -157,13 +157,23 @@ story += [PageBreak()] + section('10. Cutscene Fight', 'One bet on the winner, d
    '<b>Preset:</b> any pairing (rated exactly), any entries in the side-bet library: a coin probability, a pick vector, a payout array, each with its own RTP.',
    '<b>Structural (ticket):</b> side bets that depend on the fight (who lands next, round of the KO), or a cutscene that is not purely cosmetic.'],
   [['even', '50/50 coin, 1.90x each side'], ['favourite', '73% favourite'], ['glass-cannon', 'power against health, 45%']])
+# ---- Distributions
+ds = facts['dist']
+story += [PageBreak()] + section('11. Distributions', 'A library of sixteen named distributions behind one uniform: a sample is the inverse CDF of a seeded draw, reproducible and auditable. Free sealed draws for anything a game needs random (bot speeds, timings, Ragency targets), and a money mode where the stake pays a multiple sampled from a chosen distribution, clamped to [min, max] and scaled so its mean is exactly the RTP. Single-call wire shape plus draw().',
+  [['parameter', 'type', 'default', 'constraint'], ['dist', 'library name', '(preset)', 'any entry except permutation for money mode'], ['params', 'per distribution', 'library defaults', 'validated per entry (see table)'], ['min', 'number', '0', 'floor on the raw sample, >= 0'], ['max', 'number', 'none', 'cap on the raw sample; required when the raw mean is infinite'], ['rtp', 'number', '0.95', 'E[multiple] exactly; the scale c = rtp / E[clamped sample]']],
+  tbl([['preset', 'distribution', 'parameters', 'clamp', 'scale c', 'max multiple', 'P(win > 0)']] + [[d['name'], d['dist'], json.dumps(d['params']), f"[{d['min']}, {d['max'] if d['max'] is not None else 'none'}]", d['scale'], f"{d['maxMultiple']}x" if d['maxMultiple'] is not None else 'unbounded', f"{d['hit']}%"] for d in ds['presets']], [26*mm, 24*mm, 40*mm, 22*mm, 20*mm, 26*mm, 24*mm]),
+  ['<b>Runtime:</b> draw() with any library entry and parameters, as often as needed, no money; bet on the preset\'s money distribution.',
+   '<b>Preset:</b> any distribution, parameters, floor, cap and RTP for money mode; the scale is solved and the RTP verified by summation. The library itself can grow (gamma, beta, mixtures) as preset-level work since each entry is one quantile function.',
+   '<b>Structural (ticket):</b> payouts that depend on more than one draw, correlated draws, or a multiple that depends on the bet size.'],
+  None)
+story += [para('Library', H3), tbl([['entry', 'kind', 'parameters (defaults)']] + [[k, kind, pr] for k, kind, pr in ds['library']], [30*mm, 24*mm, 128*mm])]
 story += [PageBreak(), para('Appendix A: race fields', H2), para('Every racer in every Top 3 / Top 1 preset, with the closed-form win probability and the multipliers each mode pays (Top 3: first / second / third; Top 1: winner).')]
 for r in rc:
     story += [para(f"{r['name']}  ({r['n']} racers, Elo {r['elo'][0]} to {r['elo'][1]})", H3),
               tbl([['racer', 'Elo', 'P(win)', 'Top 1 pays', 'Top 3 pays 1st / 2nd / 3rd']] + [[n, e, f"{q}%", f"{o}x", ' / '.join(f"{m}x" for m in M)] for n, e, q, o, M in r['field']], [30*mm, 22*mm, 26*mm, 30*mm, 74*mm])]
 story += [Spacer(1, 10), para('Appendix B: files per game', H2),
   para(BASE + '/&lt;game&gt;/api/rgs.js — the module (createGame)<br/>' + BASE + '/&lt;game&gt;/api/index.json — presets, parameters, bet types, realised RTP<br/>' + BASE + '/&lt;game&gt;/api/&lt;preset&gt;/field.json — frozen config, derived tables, how_to_settle<br/>' + BASE + '/&lt;game&gt;/api/&lt;preset&gt;/rounds.json, rounds/NNN.json — 100 seeded rounds settled for every bet type<br/>' + BASE + '/&lt;game&gt;/api/&lt;preset&gt;/sample-request.json, sample-response.json — round 007 through the real calls', CODE),
-  para('Games: stepper, single-shot, top-3, top-1, rip-rumble, game-of-three, pick-one, auction, fight, cutscene. Each page also carries the full algorithm write-up, figures, and a playable demo. Live Fight adds quote() and linkedBet(); Cutscene Fight adds sideBet().', SM)]
+  para('Games: stepper, single-shot, top-3, top-1, rip-rumble, game-of-three, pick-one, auction, fight, cutscene, distributions. Each page also carries the full algorithm write-up, figures, and a playable demo. Live Fight adds quote() and linkedBet(); Cutscene Fight adds sideBet().', SM)]
 
 def footer(c, d):
     c.saveState(); c.setFont('Helvetica', 7.5); c.setFillColor(INK2)

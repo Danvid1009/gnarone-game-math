@@ -1,0 +1,95 @@
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Distributions</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#0a0c11;--bg-2:#11141c;--panel:#151923;--line:#252b38;--ink:#f1efe8;--ink-2:#a8adb8;--ink-3:#6b7180;--pink:#e8336d;--pink-2:#ff6b9d;--teal:#6fd3c7;--teal-2:#2a8f86;--gold:#f2c14e;--danger:#ff4d6d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:14px;line-height:1.45}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}.display{font-family:"Bebas Neue",sans-serif;letter-spacing:.04em}
+header{display:flex;align-items:baseline;justify-content:space-between;padding:16px 22px 0;gap:16px;flex-wrap:wrap}header h1{margin:0;font-size:34px;font-weight:400;line-height:1}header h1 span{color:var(--pink)}
+.balance{font-size:13px;color:var(--ink-2)}.balance b{display:block;font-size:26px;color:var(--ink);font-weight:500}
+.app{display:grid;grid-template-columns:1fr 360px;gap:18px;padding:14px 22px 28px;max-width:1300px;margin:0 auto;align-items:start}@media (max-width:960px){.app{grid-template-columns:1fr}}
+.stage{position:relative;height:640px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,#1a1a2c 0%,var(--bg-2) 55%,#07080c 100%);user-select:none;display:flex;flex-direction:column}
+.stage::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(232,51,109,.035) 38px 40px);pointer-events:none}
+canvas{display:block;width:100%;flex:1;min-height:0}
+.strip{position:relative;height:34px;margin:0 20px 10px;border:1px solid var(--line);border-radius:3px;background:rgba(111,211,199,.08)}.strip .u{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--gold);transform:translateX(-50%);transition:left .4s}.strip .u i{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font:11px "IBM Plex Mono",monospace;color:var(--gold);white-space:nowrap}
+.strip .lab{position:absolute;left:6px;bottom:4px;font-size:10px;color:var(--ink-3)}
+.callout{position:absolute;left:16px;top:16px;background:rgba(10,12,17,.86);border:1px solid var(--line);border-radius:4px;padding:10px 12px;max-width:440px;font-size:12.5px;color:var(--ink-2);z-index:6}
+.callout .big{font-size:28px;color:var(--teal);line-height:1;margin-bottom:4px}.callout.win .big{color:var(--gold)}.callout.lose .big{color:var(--danger)}
+.side{display:flex;flex-direction:column;gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px}.card h2{margin:0 0 10px;font-size:20px;font-weight:400;color:var(--ink-2)}
+select,input{width:100%;padding:8px;border:1px solid var(--line);border-radius:4px;background:var(--bg-2);color:var(--ink);font:13px "IBM Plex Mono",monospace}label.small{display:block;margin-top:8px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.params{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.chips button,.seg button{padding:8px 6px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);border-radius:4px;cursor:pointer;font:inherit;font-weight:500;font-size:12.5px}.chips button.on{border-color:var(--teal);color:var(--ink);background:rgba(111,211,199,.14)}.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.seg button.on{border-color:var(--pink);color:var(--ink);background:rgba(232,51,109,.16)}
+.btn{width:100%;margin-top:10px;padding:14px 10px;border:none;border-radius:4px;font:22px "Bebas Neue",sans-serif;letter-spacing:.06em;cursor:pointer;color:#fff;background:var(--pink)}.btn.draw{background:var(--teal-2)}
+.stat{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-2)}.stat:last-child{border-bottom:0}.stat b{color:var(--ink);font-weight:500;text-align:right;word-break:break-all}
+.disclose{font-size:12px;color:var(--ink-3);line-height:1.5}.disclose b{color:var(--ink-2);font-weight:500}.err{color:var(--danger);font-size:12px;min-height:1em;margin-top:6px}
+.log{font-size:12px;max-height:150px;overflow:auto}.log div{padding:3px 0;border-bottom:1px solid var(--line);color:var(--ink-2)}.log .w{color:var(--gold)}.log .l{color:var(--danger)}
+</style>
+<header><h1 class="display">DISTRI<span>BUTIONS</span></h1><div class="balance">demo balance<b class="mono" id="balance">1,000.00</b></div></header>
+<div class="app">
+  <section class="stage" id="stage"><div class="callout" id="callout"><div class="big display" id="coBig">ONE UNIFORM, ANY SHAPE</div><div id="coText">Pick a distribution and parameters. The curve is its quantile Q(u): one seeded uniform goes in on the strip, the sample comes out on the curve. DRAW is free and sealed; BET pays a multiple from the money preset, scaled so the mean is exactly 0.95.</div></div>
+    <canvas id="cv"></canvas><div class="strip"><div class="lab mono">u</div><div class="u" id="uMark" style="left:-10px"><i id="uLab"></i></div></div></section>
+  <aside class="side">
+    <div class="card"><h2 class="display">DRAW · FREE</h2><label class="small">distribution</label><select id="dist"></select><div class="params" id="params"></div><div class="err" id="err"></div><button class="btn draw" id="btnDraw">DRAW</button>
+      <div class="stat" style="margin-top:8px"><span>value</span><b class="mono" id="dValue">—</b></div><div class="stat"><span>u</span><b class="mono" id="dU">—</b></div><div class="stat"><span>seed hash</span><b class="mono" id="dHash" style="font-size:10px">—</b></div></div>
+    <div class="card"><h2 class="display">BET · MONEY MODE</h2><div class="seg" id="presets"></div><div class="chips mono" id="chips"></div><button class="btn" id="btnBet">BET</button>
+      <div class="stat" style="margin-top:8px"><span>shape</span><b class="mono" id="mShape">—</b></div><div class="stat"><span>scale · max multiple</span><b class="mono" id="mScale">—</b></div><div class="stat"><span>P(win > 0)</span><b class="mono" id="mHit">—</b></div><div class="stat"><span>last</span><b class="mono" id="mLast">—</b></div></div>
+    <div class="card"><h2 class="display">LOG</h2><div class="log mono" id="log"></div></div>
+  </aside>
+</div>
+<script type="module">
+import { createGame, PRESETS } from './api/rgs.js';
+import { getDist } from './api/src/dists.js';
+const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+let preset = 'lognormal', stake = 5, balance = 1000, g = createGame({ preset }), s = g.open({ balance: 100000 });
+const lib = s.library; $('dist').innerHTML = Object.keys(lib).map(k => `<option value="${k}">${k}</option>`).join(''); $('dist').value = 'normal';
+$('presets').innerHTML = Object.keys(PRESETS).map(n => `<button data-p="${n}" class="${n === preset ? 'on' : ''}">${n}</button>`).join('');
+$('chips').innerHTML = [1, 2, 5, 10, 25, 50].map(v => `<button data-v="${v}" class="${v === stake ? 'on' : ''}">${v}</button>`).join('');
+$('chips').onclick = e => { const b = e.target.closest('button'); if (!b) return; stake = +b.dataset.v; [...$('chips').children].forEach(x => x.classList.toggle('on', x === b)); };
+$('presets').onclick = e => { const b = e.target.closest('button'); if (!b) return; preset = b.dataset.p; [...$('presets').children].forEach(x => x.classList.toggle('on', x === b)); g = createGame({ preset }); s = g.open({ balance: Math.round(balance * 100) }); money(); };
+function money() { const m = s.money; $('mShape').textContent = `${m.dist} ${JSON.stringify(m.params)} [${m.min}, ${Number.isFinite(m.max) ? m.max : '∞'}]`; $('mScale').textContent = `${m.scale.toFixed(3)} · ${Number.isFinite(m.maxMultiple) ? m.maxMultiple.toFixed(2) + '×' : '∞'}`; $('mHit').textContent = (100 * m.hitRate).toFixed(1) + '%'; }
+function paramsUI() { const k = $('dist').value, P = lib[k].params; $('params').innerHTML = Object.entries(P).map(([n, p]) => `<div><label class="small" title="${p.doc}">${n}</label><input data-p="${n}" value="${Array.isArray(p.default) ? p.default.join(',') : p.default}"></div>`).join(''); curve(); }
+function readParams() { const o = { dist: $('dist').value }; for (const i of $('params').querySelectorAll('input')) o[i.dataset.p] = i.dataset.p === 'weights' ? i.value.split(',').map(Number) : Number(i.value); return o; }
+function curve(markU, markV) { const cv = $('cv'), W = cv.width = cv.clientWidth * devicePixelRatio, H = cv.height = cv.clientHeight * devicePixelRatio, ctx = cv.getContext('2d'); ctx.clearRect(0, 0, W, H); let d; try { const p = readParams(); d = getDist(p.dist, p); $('err').textContent = ''; } catch (e) { $('err').textContent = e.message; return; }
+  if (d.name === 'permutation') { ctx.fillStyle = '#a8adb8'; ctx.font = `${16 * devicePixelRatio}px IBM Plex Mono`; ctx.fillText('permutation: the uniform is recycled through a Fisher–Yates shuffle; draw to see an ordering', 30, H / 2); return; }
+  const N = 400, pts = []; let lo = Infinity, hi = -Infinity; for (let i = 1; i < N; i++) { const u = i / N, q = d.quantile(u); if (Number.isFinite(q)) { pts.push([u, q]); lo = Math.min(lo, q); hi = Math.max(hi, q); } }
+  const q01 = d.quantile(0.01), q99 = d.quantile(0.99); lo = Math.min(lo, q01); hi = Math.max(hi, q99); const pad = (hi - lo) * 0.08 || 1; lo -= pad; hi += pad;
+  const X = u => 40 * devicePixelRatio + u * (W - 60 * devicePixelRatio), Y = q => H - 30 * devicePixelRatio - (q - lo) / (hi - lo) * (H - 70 * devicePixelRatio);
+  ctx.strokeStyle = '#252b38'; ctx.lineWidth = devicePixelRatio; for (let t = 0; t <= 4; t++) { const y = Y(lo + (hi - lo) * t / 4); ctx.beginPath(); ctx.moveTo(X(0), y); ctx.lineTo(X(1), y); ctx.stroke(); ctx.fillStyle = '#6b7180'; ctx.font = `${11 * devicePixelRatio}px IBM Plex Mono`; ctx.fillText((lo + (hi - lo) * t / 4).toFixed(2), 4 * devicePixelRatio, y + 4 * devicePixelRatio); }
+  ctx.strokeStyle = d.kind === 'discrete' ? '#f2c14e' : '#6fd3c7'; ctx.lineWidth = 2.5 * devicePixelRatio; ctx.beginPath(); pts.forEach(([u, q], i) => { const x = X(u), y = Y(Math.max(lo, Math.min(hi, q))); if (i === 0) ctx.moveTo(x, y); else if (d.kind === 'discrete') { ctx.lineTo(x, Y(Math.max(lo, Math.min(hi, pts[i - 1][1])))); ctx.lineTo(x, y); } else ctx.lineTo(x, y); }); ctx.stroke();
+  if (Number.isFinite(d.mean)) { ctx.strokeStyle = '#a8adb8'; ctx.setLineDash([6 * devicePixelRatio, 6 * devicePixelRatio]); ctx.lineWidth = devicePixelRatio; ctx.beginPath(); ctx.moveTo(X(0), Y(d.mean)); ctx.lineTo(X(1), Y(d.mean)); ctx.stroke(); ctx.setLineDash([]); ctx.fillStyle = '#a8adb8'; ctx.fillText('mean ' + d.mean.toFixed(3), X(0.02), Y(d.mean) - 6 * devicePixelRatio); }
+  if (markU !== undefined && Number.isFinite(markV)) { ctx.strokeStyle = '#f2c14e'; ctx.lineWidth = 1.5 * devicePixelRatio; ctx.beginPath(); ctx.moveTo(X(markU), Y(lo)); ctx.lineTo(X(markU), Y(markV)); ctx.lineTo(X(0), Y(markV)); ctx.stroke(); ctx.fillStyle = '#f2c14e'; ctx.beginPath(); ctx.arc(X(markU), Y(markV), 5 * devicePixelRatio, 0, 7); ctx.fill(); }
+}
+function callout(cls, big, text) { $('callout').className = 'callout ' + cls; $('coBig').textContent = big; $('coText').textContent = text; }
+function log(msg, cls = '') { const d = document.createElement('div'); d.className = cls; d.textContent = msg; $('log').prepend(d); }
+$('dist').onchange = paramsUI; $('params').oninput = () => curve();
+$('btnDraw').onclick = () => { let r; try { r = g.draw({ sessionId: s.sessionId, params: readParams() }); } catch (e) { $('err').textContent = e.message; return; } const v = Array.isArray(r.value) ? JSON.stringify(r.value) : r.label ? `${r.label} (${r.value})` : r.value.toFixed(4); $('dValue').textContent = v; $('dU').textContent = r.u.toFixed(6); $('dHash').textContent = r.seedHash.slice(0, 24) + '…'; $('uMark').style.left = (100 * r.u) + '%'; $('uLab').textContent = r.u.toFixed(4); curve(r.u, Array.isArray(r.value) ? NaN : r.value); callout('', `${r.dist.toUpperCase()} → ${v}`, `u = ${r.u.toFixed(6)} from seed ${r.seed.slice(0, 8)}… (hash ${r.seedHash.slice(0, 12)}…). Free: no money moved.`); log(`draw · ${r.dist} ${JSON.stringify(r.params)} → ${v}`); };
+$('btnBet').onclick = () => { if (balance < stake) return callout('lose', 'NO CREDIT', 'Demo balance is empty. Reload.'); const r = g.bet({ sessionId: s.sessionId, betAmount: stake * 100, betType: 'BASE' }); g.collect({ roundId: r.roundId }); balance = g.getSession(s.sessionId).balance / 100; $('balance').textContent = fmt(balance); const win = r.totalWinAmount / 100; $('mLast').textContent = `${r.multiple.toFixed(3)}× → ${fmt(win)}`; $('uMark').style.left = (100 * r.math.u) + '%'; $('uLab').textContent = r.math.u.toFixed(4); callout(win >= stake ? 'win' : 'lose', `${r.multiple.toFixed(3)}× · ${fmt(win)}`, `${preset}: raw sample ${r.math.raw.toFixed(3)}, clamped and scaled by ${r.math.scale.toFixed(3)}. Mean of the multiple is exactly 0.95.`); log(`bet · ${preset} · ${r.multiple.toFixed(3)}× · ${win - stake >= 0 ? '+' : ''}${fmt(win - stake)}`, win >= stake ? 'w' : 'l'); };
+paramsUI(); money(); $('balance').textContent = fmt(balance); window.addEventListener('resize', () => curve());
+</script>
+
+<section class="api-foot" style="max-width:1300px;margin:0 auto;padding:10px 22px 32px;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#a8adb8;font-size:13px;line-height:1.5">
+  <div style="border-top:1px solid #252b38;padding-top:16px">
+    <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin-bottom:6px">LIVE API · HOW TO CALL</div>
+    <p style="margin:0 0 10px;max-width:80ch">The engine ships as a browser module at <code>https://danvid1009.github.io/gnarone-game-math/distributions/api/rgs.js</code>. It speaks the RGS provider contract (open, valid-bets, bet, next-action, collect; money in integer minor units; bet debits, collect credits) and rolls with <code>crypto.getRandomValues</code> in your page, so there is no server and every round is live. Pass <code>seed</code> to replay a round.</p>
+<pre style="background:#151923;border:1px solid #252b38;border-radius:4px;padding:12px 14px;overflow-x:auto;font:12.5px 'IBM Plex Mono',ui-monospace,monospace;color:#f1efe8;margin:0 0 10px"><code>import { createGame } from 'https://danvid1009.github.io/gnarone-game-math/distributions/api/rgs.js';
+
+const g = createGame({ preset: 'lognormal' });               // presets: lognormal, exponential, uniform, normal-clipped, pareto, poisson
+                                                       // bet types: BASE
+const s = g.open();                                    // session, balance 100000, chipLevels [100,200,500,1000,2500,5000,10000]
+const r = g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'BASE' });   // fresh crypto seed; win in r.totalWinAmount
+g.collect({ roundId: r.roundId });                                           // credits the win → { balance }
+
+// Replay any fixture: same seed, same code path, same answer as rounds/007.json
+g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'BASE', seed: 'fixture-007' });</code></pre>
+    <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;font-size:20px;color:#a8adb8;margin:18px 0 6px">STATIC FIXTURES · 100 PRE-DRAWN ROUNDS</div>
+    <p style="margin:0 0 10px;max-width:80ch">Seeds <code>fixture-000</code> … <code>fixture-099</code>, served as plain JSON (GET, no auth, deterministic). Stake unit is 1000 minor units; scale linearly. The live module reproduces any of them when given the same seed.</p>
+<pre style="background:#151923;border:1px solid #252b38;border-radius:4px;padding:12px 14px;overflow-x:auto;font:12.5px 'IBM Plex Mono',ui-monospace,monospace;color:#f1efe8;margin:0 0 10px"><code>curl -s https://danvid1009.github.io/gnarone-game-math/distributions/api/index.json                 # presets, parameters, bet types, realised RTP
+curl -s https://danvid1009.github.io/gnarone-game-math/distributions/api/lognormal/field.json            # one preset: frozen config + tables + how to settle
+curl -s https://danvid1009.github.io/gnarone-game-math/distributions/api/lognormal/rounds/007.json       # one round (000–099), settled for every bet type
+curl -s https://danvid1009.github.io/gnarone-game-math/distributions/api/lognormal/rounds.json           # all 100 rounds (stake + win per bet type)
+curl -s https://danvid1009.github.io/gnarone-game-math/distributions/api/lognormal/sample-request.json   # RGS-shaped request
+curl -s https://danvid1009.github.io/gnarone-game-math/distributions/api/lognormal/sample-response.json  # …and its response</code></pre>
+    <p style="margin:0;max-width:80ch">One folder per preset: <code>lognormal</code>, <code>exponential</code>, <code>uniform</code>, <code>normal-clipped</code>, <code>pareto</code>, <code>poisson</code>. Settlement rule is spelled out in each preset's <code>field.json</code> under <code>how_to_settle</code>; the same seed drives every preset, so round 007 has the same u in all of them.</p>
+    <p style="margin:10px 0 0;max-width:80ch">Full write-up: <a href="./" style="color:#6fd3c7">Distributions page</a>.</p>
+  </div>
+</section>

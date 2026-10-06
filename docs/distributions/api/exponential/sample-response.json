@@ -1,0 +1,341 @@
+{
+  "open": {
+    "sessionId": "af19e626-d6de-441a-80ff-9e94a633283a",
+    "requestCounter": 0,
+    "balance": 100000,
+    "currency": {
+      "code": "USD",
+      "prefix": "$",
+      "suffix": "",
+      "grouping": ",",
+      "decimal": ".",
+      "precision": 1,
+      "denomination": 1
+    },
+    "chipLevels": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "minBet": 100,
+    "maxBet": 10000,
+    "defaultBet": 200,
+    "playerAlias": "Player",
+    "seconds": 0,
+    "rounds": 0,
+    "winLoss": 0,
+    "preset": "exponential",
+    "rtp": 0.95,
+    "money": {
+      "name": "exponential",
+      "dist": "exponential",
+      "params": {
+        "rate": 1
+      },
+      "kind": "continuous",
+      "rtp": 0.95,
+      "min": 0,
+      "max": 20,
+      "meanRaw": 1,
+      "meanClamped": 0.9999999979388464,
+      "scale": 0.9500000019580959,
+      "hitRate": 1,
+      "maxMultiple": 19.000000039161918
+    },
+    "library": {
+      "uniform": {
+        "kind": "continuous",
+        "params": {
+          "a": {
+            "default": 0,
+            "doc": "lower bound"
+          },
+          "b": {
+            "default": 1,
+            "doc": "upper bound, > a"
+          }
+        }
+      },
+      "triangular": {
+        "kind": "continuous",
+        "params": {
+          "a": {
+            "default": 0,
+            "doc": ""
+          },
+          "b": {
+            "default": 1,
+            "doc": ""
+          },
+          "c": {
+            "default": 0.5,
+            "doc": "mode, a ≤ c ≤ b"
+          }
+        }
+      },
+      "normal": {
+        "kind": "continuous",
+        "params": {
+          "mu": {
+            "default": 0,
+            "doc": ""
+          },
+          "sigma": {
+            "default": 1,
+            "doc": "> 0"
+          }
+        }
+      },
+      "lognormal": {
+        "kind": "continuous",
+        "params": {
+          "mu": {
+            "default": 0,
+            "doc": "mean of log"
+          },
+          "sigma": {
+            "default": 0.5,
+            "doc": "sd of log, > 0"
+          }
+        }
+      },
+      "halfnormal": {
+        "kind": "continuous",
+        "params": {
+          "sigma": {
+            "default": 1,
+            "doc": "scale, > 0 (mean = sigma·√(2/π))"
+          }
+        }
+      },
+      "exponential": {
+        "kind": "continuous",
+        "params": {
+          "rate": {
+            "default": 1,
+            "doc": "λ > 0 (mean 1/λ)"
+          }
+        }
+      },
+      "logistic": {
+        "kind": "continuous",
+        "params": {
+          "mu": {
+            "default": 0,
+            "doc": ""
+          },
+          "s": {
+            "default": 1,
+            "doc": "scale > 0"
+          }
+        }
+      },
+      "weibull": {
+        "kind": "continuous",
+        "params": {
+          "k": {
+            "default": 1.5,
+            "doc": "shape > 0"
+          },
+          "lambda": {
+            "default": 1,
+            "doc": "scale > 0"
+          }
+        }
+      },
+      "pareto": {
+        "kind": "continuous",
+        "params": {
+          "xm": {
+            "default": 1,
+            "doc": "minimum > 0"
+          },
+          "alpha": {
+            "default": 2,
+            "doc": "tail index > 0 (mean needs α > 1)"
+          }
+        }
+      },
+      "bernoulli": {
+        "kind": "discrete",
+        "params": {
+          "p": {
+            "default": 0.5,
+            "doc": "P(1)"
+          }
+        }
+      },
+      "binomial": {
+        "kind": "discrete",
+        "params": {
+          "n": {
+            "default": 10,
+            "doc": "trials, integer ≥ 1"
+          },
+          "p": {
+            "default": 0.5,
+            "doc": ""
+          }
+        }
+      },
+      "poisson": {
+        "kind": "discrete",
+        "params": {
+          "lambda": {
+            "default": 3,
+            "doc": "mean > 0"
+          }
+        }
+      },
+      "geometric": {
+        "kind": "discrete",
+        "params": {
+          "p": {
+            "default": 0.3,
+            "doc": "success probability; value = failures before the first success"
+          }
+        }
+      },
+      "categorical": {
+        "kind": "discrete",
+        "params": {
+          "weights": {
+            "default": [
+              1,
+              1
+            ],
+            "doc": "relative weights; outcome i is OPTION_i+1"
+          }
+        }
+      },
+      "dice": {
+        "kind": "discrete",
+        "params": {
+          "sides": {
+            "default": 6,
+            "doc": "integer ≥ 2"
+          }
+        }
+      },
+      "permutation": {
+        "kind": "discrete",
+        "params": {
+          "n": {
+            "default": 5,
+            "doc": "items, integer 2..20; returns an ordering of 0..n−1"
+          }
+        }
+      }
+    },
+    "dists": [
+      "uniform",
+      "triangular",
+      "normal",
+      "lognormal",
+      "halfnormal",
+      "exponential",
+      "logistic",
+      "weibull",
+      "pareto",
+      "bernoulli",
+      "binomial",
+      "poisson",
+      "geometric",
+      "categorical",
+      "dice",
+      "permutation"
+    ]
+  },
+  "calls": [
+    {
+      "call": "bet",
+      "response": {
+        "roundId": "586bb908-0425-4ace-88d8-45457d130db0",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
+        "balance": 99000,
+        "totalBetAmount": 1000,
+        "totalWinAmount": 1084,
+        "multiple": 1.0844199486252943,
+        "math": {
+          "u": 0.6806586483395238,
+          "raw": 1.141494680410672,
+          "scale": 0.9500000019580959
+        },
+        "nextAction": [
+          "COLLECT"
+        ]
+      }
+    },
+    {
+      "call": "draw",
+      "response": {
+        "roundId": "48951306-da44-470f-8460-b7a4b7ca972e",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
+        "params": {
+          "mu": 10,
+          "sigma": 2
+        },
+        "dist": "normal",
+        "u": 0.9932696019968691,
+        "value": 14.94267993169159,
+        "mean": 10,
+        "kind": "continuous"
+      }
+    },
+    {
+      "call": "draw",
+      "response": {
+        "roundId": "f4be2baa-4e91-426d-a412-593a7157d5e5",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
+        "params": {
+          "weights": [
+            5,
+            3,
+            2
+          ]
+        },
+        "dist": "categorical",
+        "u": 0.9932696019968691,
+        "value": 2,
+        "label": "OPTION_3",
+        "mean": 0.7,
+        "kind": "discrete"
+      }
+    },
+    {
+      "call": "draw",
+      "response": {
+        "roundId": "472d7738-7dfc-45e8-83af-bac35f369e2b",
+        "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
+        "seed": "fixture-007",
+        "params": {
+          "n": 5
+        },
+        "dist": "permutation",
+        "u": 0.9932696019968691,
+        "value": [
+          4,
+          0,
+          1,
+          2,
+          3
+        ],
+        "mean": null,
+        "kind": "discrete"
+      }
+    },
+    {
+      "call": "collect",
+      "response": {
+        "balance": 100084
+      }
+    }
+  ]
+}

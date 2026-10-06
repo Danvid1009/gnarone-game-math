@@ -1,0 +1,222 @@
+{
+  "engine": "dist-engine",
+  "stake": 1000,
+  "rounds": 100,
+  "seeds": "fixture-000 … fixture-099 (the same seed drives every preset)",
+  "default_preset": "lognormal",
+  "presets": {
+    "lognormal": {
+      "parameters": {
+        "dist": "lognormal",
+        "params": {
+          "mu": 0,
+          "sigma": 0.8
+        },
+        "max": 50,
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE"
+      ],
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 1.0316
+      },
+      "files": [
+        "lognormal/field.json",
+        "lognormal/rounds.json",
+        "lognormal/rounds/NNN.json",
+        "lognormal/sample-request.json",
+        "lognormal/sample-response.json"
+      ]
+    },
+    "exponential": {
+      "parameters": {
+        "dist": "exponential",
+        "params": {
+          "rate": 1
+        },
+        "max": 20,
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE"
+      ],
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 1.0289
+      },
+      "files": [
+        "exponential/field.json",
+        "exponential/rounds.json",
+        "exponential/rounds/NNN.json",
+        "exponential/sample-request.json",
+        "exponential/sample-response.json"
+      ]
+    },
+    "uniform": {
+      "parameters": {
+        "dist": "uniform",
+        "params": {
+          "a": 0,
+          "b": 1
+        },
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE"
+      ],
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 0.9844
+      },
+      "files": [
+        "uniform/field.json",
+        "uniform/rounds.json",
+        "uniform/rounds/NNN.json",
+        "uniform/sample-request.json",
+        "uniform/sample-response.json"
+      ]
+    },
+    "normal-clipped": {
+      "parameters": {
+        "dist": "normal",
+        "params": {
+          "mu": 1,
+          "sigma": 0.5
+        },
+        "min": 0,
+        "max": 3,
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE"
+      ],
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 0.9901
+      },
+      "files": [
+        "normal-clipped/field.json",
+        "normal-clipped/rounds.json",
+        "normal-clipped/rounds/NNN.json",
+        "normal-clipped/sample-request.json",
+        "normal-clipped/sample-response.json"
+      ]
+    },
+    "pareto": {
+      "parameters": {
+        "dist": "pareto",
+        "params": {
+          "xm": 0.5,
+          "alpha": 2.5
+        },
+        "max": 100,
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE"
+      ],
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 1.0077
+      },
+      "files": [
+        "pareto/field.json",
+        "pareto/rounds.json",
+        "pareto/rounds/NNN.json",
+        "pareto/sample-request.json",
+        "pareto/sample-response.json"
+      ]
+    },
+    "poisson": {
+      "parameters": {
+        "dist": "poisson",
+        "params": {
+          "lambda": 1
+        },
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE"
+      ],
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "realisedRtp": {
+        "BASE": 0.988
+      },
+      "files": [
+        "poisson/field.json",
+        "poisson/rounds.json",
+        "poisson/rounds/NNN.json",
+        "poisson/sample-request.json",
+        "poisson/sample-response.json"
+      ]
+    }
+  }
+}

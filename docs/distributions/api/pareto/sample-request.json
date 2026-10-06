@@ -1,0 +1,60 @@
+{
+  "module": "api/rgs.js",
+  "create": "createGame({\"preset\":\"pareto\"})",
+  "calls": [
+    {
+      "call": "bet",
+      "body": {
+        "sessionId": "454045b5-07d8-4092-91b7-e4ce68583def",
+        "betAmount": 1000,
+        "betType": "BASE",
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "draw",
+      "body": {
+        "sessionId": "454045b5-07d8-4092-91b7-e4ce68583def",
+        "params": {
+          "dist": "normal",
+          "mu": 10,
+          "sigma": 2
+        },
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "draw",
+      "body": {
+        "sessionId": "454045b5-07d8-4092-91b7-e4ce68583def",
+        "params": {
+          "dist": "categorical",
+          "weights": [
+            5,
+            3,
+            2
+          ]
+        },
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "draw",
+      "body": {
+        "sessionId": "454045b5-07d8-4092-91b7-e4ce68583def",
+        "params": {
+          "dist": "permutation",
+          "n": 5
+        },
+        "seed": "fixture-007"
+      }
+    },
+    {
+      "call": "collect",
+      "body": {
+        "roundId": "28bd1f2c-b327-45a5-a4f6-2345c291308e"
+      }
+    }
+  ],
+  "note": "deterministic: seed fixture-007; drop seed for a live roll"
+}

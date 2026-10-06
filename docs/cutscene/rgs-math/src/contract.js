@@ -57,6 +57,9 @@ function assertMinor(n, what) {
  *                    enables linkedBet(): extra money placed on a running multi-step round (live bets),
  *                    priced from the round's current state and settled when the round ends
  *   side?:           ({bet, params, rng, seed, session}) => { totalWinAmount, ...public }
+ *   draw?:           ({params, rng, seed, session}) => { ...public }
+ *                    enables draw(): a free, sealed, committed sample (no money) with free-form params —
+ *                    for presentation randomness and Ragency targets that must be reproducible and auditable
  *                    enables sideBet(): an independent single-call bet with free-form params (a side-bet
  *                    library), its own round and collect, unrelated to any running round
  *   currency?, startingBalance?, minBet?, maxBet?, defaultBet?, sessionExtras?
@@ -64,7 +67,7 @@ function assertMinor(n, what) {
  */
 export function defineGame(spec) {
   const {
-    id, betTypes, levels, play, step = null, linked = null, side = null,
+    id, betTypes, levels, play, step = null, linked = null, side = null, draw = null,
     defaultBetType = betTypes?.[0], boostedBetType = null,
     currency = DEFAULT_CURRENCY, startingBalance = 100000,
     minBet, maxBet, defaultBet, sessionExtras = {},
@@ -131,6 +134,7 @@ export function defineGame(spec) {
     isMultiStep: typeof step === 'function',
     hasLinkedBets: !!linked,
     hasSideBets: !!side,
+    hasDraws: !!draw,
 
     levels(betType = defaultBetType) { return levels(requireBetType(betType)); },
 
@@ -206,6 +210,19 @@ export function defineGame(spec) {
         child.ended = true; child.nextAction = COLLECT;
       }
       return publicRound(round, r.pub);
+    },
+
+    /** A free sealed draw: no money moves; the result is committed (seedHash) and revealed (seed) at once. */
+    draw({ sessionId, params = {}, seed = newSeed() }) {
+      if (!draw) throw new Error(`${id}: draws not supported`);
+      const s = requireSession(sessionId);
+      const rng = new HashRng(seed, 'draw');
+      const out = draw({ params, rng, seed, session: s });
+      if (!out || typeof out !== 'object') throw new Error('draw() must return an object');
+      s.requestCounter += 1;
+      const round = { roundId: randomUUID(), sessionId, seed, seedHash: commit(seed), betType: `DRAW:${params.dist ?? 'draw'}`, totalBetAmount: 0, totalWinAmount: 0, ended: true, nextAction: [], settled: true, draw: true, params };
+      rounds.set(round.roundId, round);
+      return { roundId: round.roundId, seedHash: round.seedHash, seed, params, ...out };
     },
 
     /** An independent side bet from the provider's library: params are free-form and validated by spec.side. */

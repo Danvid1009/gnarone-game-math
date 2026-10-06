@@ -1,0 +1,11 @@
+{
+  "name": "dist-engine",
+  "version": "1.0.0",
+  "description": "Distributions: sealed, seeded samples from a library of named distributions (one uniform through the inverse CDF), plus a money mode that pays a sampled multiple scaled to an exact RTP",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "bin": { "build-dist": "bin/build-dist.js" },
+  "scripts": { "test": "node --test", "fixtures": "node ../site/make-fixtures.js dist-engine", "examples": "sh scripts/make-examples.sh" },
+  "license": "UNLICENSED",
+  "private": true
+}

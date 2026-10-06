@@ -245,5 +245,29 @@
     ],
     "cli": "node bin/build-cutscene.js --a 1700,100 --b 1550,100",
     "api": "examples/api"
+  },
+  {
+    "slug": "distributions",
+    "folder": "dist-engine",
+    "title": "Distributions",
+    "accent": "DISTRIBUTIONS",
+    "lead": "A library of sixteen named distributions behind one uniform: every sample is the inverse CDF of a seeded draw, so it is reproducible and auditable. Two uses: free sealed draws for anything a game needs random (bot speeds, timings, Ragency targets), and a money mode where the stake pays a multiple sampled from a chosen distribution, clamped and scaled so its mean is exactly the RTP.",
+    "tags": [
+      "16 distributions, one uniform each",
+      "free sealed draws",
+      "money mode: any shape, exact RTP"
+    ],
+    "figures": [
+      [
+        "examples/shapes.png",
+        "The six money presets: paid-multiple density and the exact mean at the RTP."
+      ],
+      [
+        "examples/library.png",
+        "Quantile functions of the library at their defaults."
+      ]
+    ],
+    "cli": "node bin/build-dist.js --dist lognormal --mu 0 --sigma 0.8 --max 50",
+    "api": "examples/api"
   }
 ]
