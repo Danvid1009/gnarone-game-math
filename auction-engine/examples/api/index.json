@@ -14,6 +14,8 @@
       "betTypes": [
         "SMALL"
       ],
+      "defaultBetType": "SMALL",
+      "defaultBet": 200,
       "levels": {
         "SMALL": [
           100,
@@ -26,6 +28,95 @@
         ]
       },
       "multiStep": true,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "K = successful bids (from u and cum); v = residual of u in its interval; X = locker multiplier at v. CONTINUE on bid k is SAFE if k ≤ K else CRASH (win 0). CASH_OUT after s ≤ K bids pays round(round(stake × bids[s − 1]) × X)",
+      "tables": {
+        "maxWin": 5,
+        "steps": 10,
+        "bids": [
+          1.17,
+          1.38,
+          1.62,
+          1.9,
+          2.24,
+          2.63,
+          3.09,
+          3.62,
+          4.26,
+          5
+        ],
+        "survival": [
+          1,
+          0.811965811965812,
+          0.6884057971014493,
+          0.5864197530864197,
+          0.5,
+          0.4241071428571428,
+          0.3612167300380228,
+          0.3074433656957929,
+          0.26243093922651933,
+          0.22300469483568075,
+          0.19
+        ],
+        "cum": [
+          0,
+          0.18803418803418803,
+          0.31159420289855067,
+          0.4135802469135803,
+          0.5,
+          0.5758928571428572,
+          0.6387832699619772,
+          0.6925566343042071,
+          0.7375690607734806,
+          0.7769953051643192,
+          0.81,
+          1
+        ],
+        "locker": [
+          {
+            "multiple": 0.25,
+            "p": 0.29757173827099437,
+            "residual_from": 0,
+            "residual_to": 0.29757173827099437,
+            "pays_from": 0.225,
+            "pays_to": 0.275
+          },
+          {
+            "multiple": 0.5,
+            "p": 0.27115705607475704,
+            "residual_from": 0.29757173827099437,
+            "residual_to": 0.5687287943457514,
+            "pays_from": 0.475,
+            "pays_to": 0.525
+          },
+          {
+            "multiple": 1,
+            "p": 0.22515384435445532,
+            "residual_from": 0.5687287943457514,
+            "residual_to": 0.7938826387002067,
+            "pays_from": 0.975,
+            "pays_to": 1.025
+          },
+          {
+            "multiple": 2,
+            "p": 0.1552373711528497,
+            "residual_from": 0.7938826387002067,
+            "residual_to": 0.9491200098530563,
+            "pays_from": 1.975,
+            "pays_to": 2.025
+          },
+          {
+            "multiple": 5,
+            "p": 0.05087999014694362,
+            "residual_from": 0.9491200098530563,
+            "residual_to": 1,
+            "pays_from": 4.975,
+            "pays_to": 5.025
+          }
+        ],
+        "locker_r": 0.025
+      },
       "realisedRtp": {
         "SMALL · take after 1": 1.2632,
         "SMALL · take after 2": 1.1207,
@@ -55,6 +146,8 @@
       "betTypes": [
         "MEDIUM"
       ],
+      "defaultBetType": "MEDIUM",
+      "defaultBet": 200,
       "levels": {
         "MEDIUM": [
           100,
@@ -67,6 +160,95 @@
         ]
       },
       "multiStep": true,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "K = successful bids (from u and cum); v = residual of u in its interval; X = locker multiplier at v. CONTINUE on bid k is SAFE if k ≤ K else CRASH (win 0). CASH_OUT after s ≤ K bids pays round(round(stake × bids[s − 1]) × X)",
+      "tables": {
+        "maxWin": 10,
+        "steps": 10,
+        "bids": [
+          1.26,
+          1.58,
+          2,
+          2.51,
+          3.16,
+          3.98,
+          5.01,
+          6.31,
+          7.94,
+          10
+        ],
+        "survival": [
+          1,
+          0.753968253968254,
+          0.6012658227848101,
+          0.475,
+          0.3784860557768924,
+          0.30063291139240506,
+          0.2386934673366834,
+          0.18962075848303392,
+          0.15055467511885895,
+          0.11964735516372794,
+          0.095
+        ],
+        "cum": [
+          0,
+          0.24603174603174605,
+          0.3987341772151899,
+          0.525,
+          0.6215139442231076,
+          0.6993670886075949,
+          0.7613065326633166,
+          0.810379241516966,
+          0.849445324881141,
+          0.880352644836272,
+          0.9049999999999999,
+          1
+        ],
+        "locker": [
+          {
+            "multiple": 0.25,
+            "p": 0.29757173827099437,
+            "residual_from": 0,
+            "residual_to": 0.29757173827099437,
+            "pays_from": 0.225,
+            "pays_to": 0.275
+          },
+          {
+            "multiple": 0.5,
+            "p": 0.27115705607475704,
+            "residual_from": 0.29757173827099437,
+            "residual_to": 0.5687287943457514,
+            "pays_from": 0.475,
+            "pays_to": 0.525
+          },
+          {
+            "multiple": 1,
+            "p": 0.22515384435445532,
+            "residual_from": 0.5687287943457514,
+            "residual_to": 0.7938826387002067,
+            "pays_from": 0.975,
+            "pays_to": 1.025
+          },
+          {
+            "multiple": 2,
+            "p": 0.1552373711528497,
+            "residual_from": 0.7938826387002067,
+            "residual_to": 0.9491200098530563,
+            "pays_from": 1.975,
+            "pays_to": 2.025
+          },
+          {
+            "multiple": 5,
+            "p": 0.05087999014694362,
+            "residual_from": 0.9491200098530563,
+            "residual_to": 1,
+            "pays_from": 4.975,
+            "pays_to": 5.025
+          }
+        ],
+        "locker_r": 0.025
+      },
       "realisedRtp": {
         "MEDIUM · take after 1": 0.9618,
         "MEDIUM · take after 2": 1.0672,
@@ -96,6 +278,8 @@
       "betTypes": [
         "LARGE"
       ],
+      "defaultBetType": "LARGE",
+      "defaultBet": 200,
       "levels": {
         "LARGE": [
           100,
@@ -108,6 +292,95 @@
         ]
       },
       "multiStep": true,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "K = successful bids (from u and cum); v = residual of u in its interval; X = locker multiplier at v. CONTINUE on bid k is SAFE if k ≤ K else CRASH (win 0). CASH_OUT after s ≤ K bids pays round(round(stake × bids[s − 1]) × X)",
+      "tables": {
+        "maxWin": 25,
+        "steps": 10,
+        "bids": [
+          1.38,
+          1.9,
+          2.63,
+          3.62,
+          5,
+          6.9,
+          9.52,
+          13.13,
+          18.12,
+          25
+        ],
+        "survival": [
+          1,
+          0.6884057971014493,
+          0.5,
+          0.3612167300380228,
+          0.26243093922651933,
+          0.19,
+          0.13768115942028983,
+          0.09978991596638656,
+          0.07235338918507235,
+          0.052428256070640174,
+          0.038
+        ],
+        "cum": [
+          0,
+          0.31159420289855067,
+          0.5,
+          0.6387832699619772,
+          0.7375690607734806,
+          0.8099999999999999,
+          0.8623188405797101,
+          0.9002100840336134,
+          0.9276466108149276,
+          0.9475717439293598,
+          0.962,
+          1
+        ],
+        "locker": [
+          {
+            "multiple": 0.25,
+            "p": 0.29757173827099437,
+            "residual_from": 0,
+            "residual_to": 0.29757173827099437,
+            "pays_from": 0.225,
+            "pays_to": 0.275
+          },
+          {
+            "multiple": 0.5,
+            "p": 0.27115705607475704,
+            "residual_from": 0.29757173827099437,
+            "residual_to": 0.5687287943457514,
+            "pays_from": 0.475,
+            "pays_to": 0.525
+          },
+          {
+            "multiple": 1,
+            "p": 0.22515384435445532,
+            "residual_from": 0.5687287943457514,
+            "residual_to": 0.7938826387002067,
+            "pays_from": 0.975,
+            "pays_to": 1.025
+          },
+          {
+            "multiple": 2,
+            "p": 0.1552373711528497,
+            "residual_from": 0.7938826387002067,
+            "residual_to": 0.9491200098530563,
+            "pays_from": 1.975,
+            "pays_to": 2.025
+          },
+          {
+            "multiple": 5,
+            "p": 0.05087999014694362,
+            "residual_from": 0.9491200098530563,
+            "residual_to": 1,
+            "pays_from": 4.975,
+            "pays_to": 5.025
+          }
+        ],
+        "locker_r": 0.025
+      },
       "realisedRtp": {
         "LARGE · take after 1": 1.1888,
         "LARGE · take after 2": 1.1606,
@@ -137,6 +410,8 @@
       "betTypes": [
         "XL"
       ],
+      "defaultBetType": "XL",
+      "defaultBet": 200,
       "levels": {
         "XL": [
           100,
@@ -149,6 +424,95 @@
         ]
       },
       "multiStep": true,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "K = successful bids (from u and cum); v = residual of u in its interval; X = locker multiplier at v. CONTINUE on bid k is SAFE if k ≤ K else CRASH (win 0). CASH_OUT after s ≤ K bids pays round(round(stake × bids[s − 1]) × X)",
+      "tables": {
+        "maxWin": 100,
+        "steps": 10,
+        "bids": [
+          1.58,
+          2.51,
+          3.98,
+          6.31,
+          10,
+          15.85,
+          25.12,
+          39.81,
+          63.1,
+          100
+        ],
+        "survival": [
+          1,
+          0.6012658227848101,
+          0.3784860557768924,
+          0.2386934673366834,
+          0.15055467511885895,
+          0.095,
+          0.05993690851735015,
+          0.037818471337579616,
+          0.02386335091685506,
+          0.015055467511885894,
+          0.0095
+        ],
+        "cum": [
+          0,
+          0.3987341772151899,
+          0.6215139442231076,
+          0.7613065326633166,
+          0.8494453248811411,
+          0.905,
+          0.9400630914826499,
+          0.9621815286624205,
+          0.976136649083145,
+          0.9849445324881142,
+          0.9905,
+          1
+        ],
+        "locker": [
+          {
+            "multiple": 0.25,
+            "p": 0.29757173827099437,
+            "residual_from": 0,
+            "residual_to": 0.29757173827099437,
+            "pays_from": 0.225,
+            "pays_to": 0.275
+          },
+          {
+            "multiple": 0.5,
+            "p": 0.27115705607475704,
+            "residual_from": 0.29757173827099437,
+            "residual_to": 0.5687287943457514,
+            "pays_from": 0.475,
+            "pays_to": 0.525
+          },
+          {
+            "multiple": 1,
+            "p": 0.22515384435445532,
+            "residual_from": 0.5687287943457514,
+            "residual_to": 0.7938826387002067,
+            "pays_from": 0.975,
+            "pays_to": 1.025
+          },
+          {
+            "multiple": 2,
+            "p": 0.1552373711528497,
+            "residual_from": 0.7938826387002067,
+            "residual_to": 0.9491200098530563,
+            "pays_from": 1.975,
+            "pays_to": 2.025
+          },
+          {
+            "multiple": 5,
+            "p": 0.05087999014694362,
+            "residual_from": 0.9491200098530563,
+            "residual_to": 1,
+            "pays_from": 4.975,
+            "pays_to": 5.025
+          }
+        ],
+        "locker_r": 0.025
+      },
       "realisedRtp": {
         "XL · take after 1": 0.8236,
         "XL · take after 2": 0.7773,

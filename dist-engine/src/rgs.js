@@ -14,6 +14,8 @@ export const PRESETS = {
   'normal-clipped': { dist: 'normal',      params: { mu: 1, sigma: 0.5 }, min: 0, max: 3, rtp: RTP },
   pareto:           { dist: 'pareto',      params: { xm: 0.5, alpha: 2.5 }, max: 100, rtp: RTP },
   poisson:          { dist: 'poisson',     params: { lambda: 1 },                  rtp: RTP },
+  gamma:            { dist: 'gamma',       params: { k: 2, theta: 0.5 },    max: 20, rtp: RTP },
+  loglogistic:      { dist: 'loglogistic', params: { alpha: 1, beta: 3 },   max: 50, rtp: RTP },
 };
 export const DEFAULT_PRESET = 'lognormal';
 export const HOW_TO_SETTLE = 'multiple = scale × clamp(quantile(u), min, max); win = round(stake × multiple). scale = rtp / E[clamp(X)], so E[multiple] = rtp exactly. draw(): value = quantile(u) of the requested distribution, no money.';

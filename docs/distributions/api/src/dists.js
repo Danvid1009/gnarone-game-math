@@ -27,6 +27,23 @@ const num = (v, name, { min = -Infinity, max = Infinity, int = false, gt, ge } =
 const clampU = u => (u >= 1 ? 1 - 1e-12 : u < 0 ? 0 : u);
 const discrete = (pmf, support) => { const cum = [0]; for (const p of pmf) cum.push(cum[cum.length - 1] + p); cum[cum.length - 1] = 1; return { pmf, values: support, cum, quantile: u => { u = clampU(u); let i = 0; while (cum[i + 1] <= u) i++; return support[i]; } }; };
 
+/** Regularised lower incomplete gamma P(a, x) (series for x < a+1, Lentz continued fraction otherwise; |err| ≈ 1e-14). */
+function gammaP(a, x) {
+  if (!(x > 0)) return 0; const gln = lnGamma(a);
+  if (x < a + 1) { let ap = a, sum = 1 / a, del = sum; for (let n = 0; n < 500; n++) { ap += 1; del *= x / ap; sum += del; if (Math.abs(del) < Math.abs(sum) * 1e-15) break; } return Math.min(1, sum * Math.exp(-x + a * Math.log(x) - gln)); }
+  let b = x + 1 - a, c = 1 / 1e-300, d = 1 / b, h = d;
+  for (let i = 1; i < 500; i++) { const an = -i * (i - a); b += 2; d = an * d + b; if (Math.abs(d) < 1e-300) d = 1e-300; c = b + an / c; if (Math.abs(c) < 1e-300) c = 1e-300; d = 1 / d; const del = d * c; h *= del; if (Math.abs(del - 1) < 1e-15) break; }
+  return Math.max(0, 1 - Math.exp(-x + a * Math.log(x) - gln) * h);
+}
+const lnGamma = z => Math.log(Math.abs(gammaFn(z)));
+/** Gamma quantile: bracket on the CDF then bisect to 1e-13 in u (monotone, so the inverse-CDF audit still holds). */
+function gammaQuantile(k, theta, u) {
+  u = clampU(u); if (u <= 0) return 0;
+  let lo = 0, hi = Math.max(1, k) * 2; while (gammaP(k, hi) < u && hi < 1e300) hi *= 2;
+  for (let i = 0; i < 200; i++) { const mid = (lo + hi) / 2; if (gammaP(k, mid) < u) lo = mid; else hi = mid; if (hi - lo <= 1e-13 * Math.max(1, hi)) break; }
+  return theta * (lo + hi) / 2;
+}
+
 export const LIBRARY = {
   uniform: { kind: 'continuous', params: { a: { default: 0, doc: 'lower bound' }, b: { default: 1, doc: 'upper bound, > a' } },
     build: p => { const a = num(p.a ?? 0, 'a'), b = num(p.b ?? 1, 'b', { gt: a }); return { params: { a, b }, support: [a, b], mean: (a + b) / 2, variance: (b - a) ** 2 / 12, quantile: u => a + (b - a) * clampU(u) }; } },
@@ -46,6 +63,17 @@ export const LIBRARY = {
     build: p => { const k = num(p.k ?? 1.5, 'k', { gt: 0 }), lambda = num(p.lambda ?? 1, 'lambda', { gt: 0 }); const g = x => gammaFn(x); return { params: { k, lambda }, support: [0, Infinity], mean: lambda * g(1 + 1 / k), variance: lambda * lambda * (g(1 + 2 / k) - g(1 + 1 / k) ** 2), quantile: u => lambda * Math.pow(-Math.log(1 - clampU(u)), 1 / k) }; } },
   pareto: { kind: 'continuous', params: { xm: { default: 1, doc: 'minimum > 0' }, alpha: { default: 2, doc: 'tail index > 0 (mean needs α > 1)' } },
     build: p => { const xm = num(p.xm ?? 1, 'xm', { gt: 0 }), alpha = num(p.alpha ?? 2, 'alpha', { gt: 0 }); return { params: { xm, alpha }, support: [xm, Infinity], mean: alpha > 1 ? alpha * xm / (alpha - 1) : Infinity, variance: alpha > 2 ? xm * xm * alpha / ((alpha - 1) ** 2 * (alpha - 2)) : Infinity, quantile: u => xm * Math.pow(1 - clampU(u), -1 / alpha) }; } },
+  // --- non-negative support (multipliers can't be negative) ---
+  gamma: { kind: 'continuous', params: { k: { default: 2, doc: 'shape > 0 (k = 1 is exponential)' }, theta: { default: 1, doc: 'scale > 0 (mean k·theta)' } },
+    build: p => { const k = num(p.k ?? 2, 'k', { gt: 0, max: 1e4 }), theta = num(p.theta ?? 1, 'theta', { gt: 0 }); return { params: { k, theta }, support: [0, Infinity], mean: k * theta, variance: k * theta * theta, quantile: u => gammaQuantile(k, theta, u) }; } },
+  chisquare: { kind: 'continuous', params: { df: { default: 3, doc: 'degrees of freedom > 0 (gamma with k = df/2, theta = 2)' } },
+    build: p => { const df = num(p.df ?? 3, 'df', { gt: 0, max: 2e4 }); return { params: { df }, support: [0, Infinity], mean: df, variance: 2 * df, quantile: u => gammaQuantile(df / 2, 2, u) }; } },
+  loglogistic: { kind: 'continuous', params: { alpha: { default: 1, doc: 'scale > 0 (median)' }, beta: { default: 3, doc: 'shape > 0 (mean needs β > 1, variance β > 2)' } },
+    build: p => { const alpha = num(p.alpha ?? 1, 'alpha', { gt: 0 }), beta = num(p.beta ?? 3, 'beta', { gt: 0 }); const b = Math.PI / beta; return { params: { alpha, beta }, support: [0, Infinity], mean: beta > 1 ? alpha * b / Math.sin(b) : Infinity, variance: beta > 2 ? alpha * alpha * (2 * b / Math.sin(2 * b) - b * b / Math.sin(b) ** 2) : Infinity, quantile: u => { u = clampU(Math.max(u, 1e-300)); return alpha * Math.pow(u / (1 - u), 1 / beta); } }; } },
+  rayleigh: { kind: 'continuous', params: { sigma: { default: 1, doc: 'scale > 0 (mean σ·√(π/2); Weibull with k = 2)' } },
+    build: p => { const sigma = num(p.sigma ?? 1, 'sigma', { gt: 0 }); return { params: { sigma }, support: [0, Infinity], mean: sigma * Math.sqrt(Math.PI / 2), variance: (4 - Math.PI) / 2 * sigma * sigma, quantile: u => sigma * Math.sqrt(-2 * Math.log(1 - clampU(u))) }; } },
+  frechet: { kind: 'continuous', params: { alpha: { default: 3, doc: 'shape > 0 (mean needs α > 1, variance α > 2)' }, s: { default: 1, doc: 'scale > 0' }, m: { default: 0, doc: 'minimum ≥ 0' } },
+    build: p => { const alpha = num(p.alpha ?? 3, 'alpha', { gt: 0 }), s = num(p.s ?? 1, 's', { gt: 0 }), m = num(p.m ?? 0, 'm', { ge: 0 }); return { params: { alpha, s, m }, support: [m, Infinity], mean: alpha > 1 ? m + s * gammaFn(1 - 1 / alpha) : Infinity, variance: alpha > 2 ? s * s * (gammaFn(1 - 2 / alpha) - gammaFn(1 - 1 / alpha) ** 2) : Infinity, quantile: u => { u = clampU(Math.max(u, 1e-300)); return m + s * Math.pow(-Math.log(u), -1 / alpha); } }; } },
   bernoulli: { kind: 'discrete', params: { p: { default: 0.5, doc: 'P(1)' } },
     build: q => { const p = num(q.p ?? 0.5, 'p', { min: 0, max: 1 }); const d = discrete([1 - p, p], [0, 1]); return { params: { p }, support: [0, 1], mean: p, variance: p * (1 - p), ...d }; } },
   binomial: { kind: 'discrete', params: { n: { default: 10, doc: 'trials, integer ≥ 1' }, p: { default: 0.5 } },

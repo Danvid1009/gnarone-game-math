@@ -18,6 +18,8 @@
       "betTypes": [
         "BASE"
       ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
       "levels": {
         "BASE": [
           100,
@@ -30,6 +32,297 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "multiple = scale × clamp(quantile(u), min, max); win = round(stake × multiple). scale = rtp / E[clamp(X)], so E[multiple] = rtp exactly. draw(): value = quantile(u) of the requested distribution, no money.",
+      "tables": {
+        "money": {
+          "name": "lognormal",
+          "dist": "lognormal",
+          "params": {
+            "mu": 0,
+            "sigma": 0.8
+          },
+          "kind": "continuous",
+          "rtp": 0.95,
+          "min": 0,
+          "max": 50,
+          "meanRaw": 1.3771277643359572,
+          "meanClamped": 1.377124007655234,
+          "scale": 0.6898434670509604,
+          "hitRate": 1,
+          "maxMultiple": 34.49217335254802
+        },
+        "library": {
+          "uniform": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": "lower bound"
+              },
+              "b": {
+                "default": 1,
+                "doc": "upper bound, > a"
+              }
+            }
+          },
+          "triangular": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": ""
+              },
+              "b": {
+                "default": 1,
+                "doc": ""
+              },
+              "c": {
+                "default": 0.5,
+                "doc": "mode, a ≤ c ≤ b"
+              }
+            }
+          },
+          "normal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "sigma": {
+                "default": 1,
+                "doc": "> 0"
+              }
+            }
+          },
+          "lognormal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": "mean of log"
+              },
+              "sigma": {
+                "default": 0.5,
+                "doc": "sd of log, > 0"
+              }
+            }
+          },
+          "halfnormal": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale, > 0 (mean = sigma·√(2/π))"
+              }
+            }
+          },
+          "exponential": {
+            "kind": "continuous",
+            "params": {
+              "rate": {
+                "default": 1,
+                "doc": "λ > 0 (mean 1/λ)"
+              }
+            }
+          },
+          "logistic": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "weibull": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 1.5,
+                "doc": "shape > 0"
+              },
+              "lambda": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "pareto": {
+            "kind": "continuous",
+            "params": {
+              "xm": {
+                "default": 1,
+                "doc": "minimum > 0"
+              },
+              "alpha": {
+                "default": 2,
+                "doc": "tail index > 0 (mean needs α > 1)"
+              }
+            }
+          },
+          "gamma": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 2,
+                "doc": "shape > 0 (k = 1 is exponential)"
+              },
+              "theta": {
+                "default": 1,
+                "doc": "scale > 0 (mean k·theta)"
+              }
+            }
+          },
+          "chisquare": {
+            "kind": "continuous",
+            "params": {
+              "df": {
+                "default": 3,
+                "doc": "degrees of freedom > 0 (gamma with k = df/2, theta = 2)"
+              }
+            }
+          },
+          "loglogistic": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 1,
+                "doc": "scale > 0 (median)"
+              },
+              "beta": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs β > 1, variance β > 2)"
+              }
+            }
+          },
+          "rayleigh": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale > 0 (mean σ·√(π/2); Weibull with k = 2)"
+              }
+            }
+          },
+          "frechet": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs α > 1, variance α > 2)"
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              },
+              "m": {
+                "default": 0,
+                "doc": "minimum ≥ 0"
+              }
+            }
+          },
+          "bernoulli": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.5,
+                "doc": "P(1)"
+              }
+            }
+          },
+          "binomial": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 10,
+                "doc": "trials, integer ≥ 1"
+              },
+              "p": {
+                "default": 0.5,
+                "doc": ""
+              }
+            }
+          },
+          "poisson": {
+            "kind": "discrete",
+            "params": {
+              "lambda": {
+                "default": 3,
+                "doc": "mean > 0"
+              }
+            }
+          },
+          "geometric": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.3,
+                "doc": "success probability; value = failures before the first success"
+              }
+            }
+          },
+          "categorical": {
+            "kind": "discrete",
+            "params": {
+              "weights": {
+                "default": [
+                  1,
+                  1
+                ],
+                "doc": "relative weights; outcome i is OPTION_i+1"
+              }
+            }
+          },
+          "dice": {
+            "kind": "discrete",
+            "params": {
+              "sides": {
+                "default": 6,
+                "doc": "integer ≥ 2"
+              }
+            }
+          },
+          "permutation": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 5,
+                "doc": "items, integer 2..20; returns an ordering of 0..n−1"
+              }
+            }
+          }
+        },
+        "dists": [
+          "uniform",
+          "triangular",
+          "normal",
+          "lognormal",
+          "halfnormal",
+          "exponential",
+          "logistic",
+          "weibull",
+          "pareto",
+          "gamma",
+          "chisquare",
+          "loglogistic",
+          "rayleigh",
+          "frechet",
+          "bernoulli",
+          "binomial",
+          "poisson",
+          "geometric",
+          "categorical",
+          "dice",
+          "permutation"
+        ]
+      },
       "realisedRtp": {
         "BASE": 1.0316
       },
@@ -53,6 +346,8 @@
       "betTypes": [
         "BASE"
       ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
       "levels": {
         "BASE": [
           100,
@@ -65,6 +360,296 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "multiple = scale × clamp(quantile(u), min, max); win = round(stake × multiple). scale = rtp / E[clamp(X)], so E[multiple] = rtp exactly. draw(): value = quantile(u) of the requested distribution, no money.",
+      "tables": {
+        "money": {
+          "name": "exponential",
+          "dist": "exponential",
+          "params": {
+            "rate": 1
+          },
+          "kind": "continuous",
+          "rtp": 0.95,
+          "min": 0,
+          "max": 20,
+          "meanRaw": 1,
+          "meanClamped": 0.9999999979388464,
+          "scale": 0.9500000019580959,
+          "hitRate": 1,
+          "maxMultiple": 19.000000039161918
+        },
+        "library": {
+          "uniform": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": "lower bound"
+              },
+              "b": {
+                "default": 1,
+                "doc": "upper bound, > a"
+              }
+            }
+          },
+          "triangular": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": ""
+              },
+              "b": {
+                "default": 1,
+                "doc": ""
+              },
+              "c": {
+                "default": 0.5,
+                "doc": "mode, a ≤ c ≤ b"
+              }
+            }
+          },
+          "normal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "sigma": {
+                "default": 1,
+                "doc": "> 0"
+              }
+            }
+          },
+          "lognormal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": "mean of log"
+              },
+              "sigma": {
+                "default": 0.5,
+                "doc": "sd of log, > 0"
+              }
+            }
+          },
+          "halfnormal": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale, > 0 (mean = sigma·√(2/π))"
+              }
+            }
+          },
+          "exponential": {
+            "kind": "continuous",
+            "params": {
+              "rate": {
+                "default": 1,
+                "doc": "λ > 0 (mean 1/λ)"
+              }
+            }
+          },
+          "logistic": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "weibull": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 1.5,
+                "doc": "shape > 0"
+              },
+              "lambda": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "pareto": {
+            "kind": "continuous",
+            "params": {
+              "xm": {
+                "default": 1,
+                "doc": "minimum > 0"
+              },
+              "alpha": {
+                "default": 2,
+                "doc": "tail index > 0 (mean needs α > 1)"
+              }
+            }
+          },
+          "gamma": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 2,
+                "doc": "shape > 0 (k = 1 is exponential)"
+              },
+              "theta": {
+                "default": 1,
+                "doc": "scale > 0 (mean k·theta)"
+              }
+            }
+          },
+          "chisquare": {
+            "kind": "continuous",
+            "params": {
+              "df": {
+                "default": 3,
+                "doc": "degrees of freedom > 0 (gamma with k = df/2, theta = 2)"
+              }
+            }
+          },
+          "loglogistic": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 1,
+                "doc": "scale > 0 (median)"
+              },
+              "beta": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs β > 1, variance β > 2)"
+              }
+            }
+          },
+          "rayleigh": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale > 0 (mean σ·√(π/2); Weibull with k = 2)"
+              }
+            }
+          },
+          "frechet": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs α > 1, variance α > 2)"
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              },
+              "m": {
+                "default": 0,
+                "doc": "minimum ≥ 0"
+              }
+            }
+          },
+          "bernoulli": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.5,
+                "doc": "P(1)"
+              }
+            }
+          },
+          "binomial": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 10,
+                "doc": "trials, integer ≥ 1"
+              },
+              "p": {
+                "default": 0.5,
+                "doc": ""
+              }
+            }
+          },
+          "poisson": {
+            "kind": "discrete",
+            "params": {
+              "lambda": {
+                "default": 3,
+                "doc": "mean > 0"
+              }
+            }
+          },
+          "geometric": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.3,
+                "doc": "success probability; value = failures before the first success"
+              }
+            }
+          },
+          "categorical": {
+            "kind": "discrete",
+            "params": {
+              "weights": {
+                "default": [
+                  1,
+                  1
+                ],
+                "doc": "relative weights; outcome i is OPTION_i+1"
+              }
+            }
+          },
+          "dice": {
+            "kind": "discrete",
+            "params": {
+              "sides": {
+                "default": 6,
+                "doc": "integer ≥ 2"
+              }
+            }
+          },
+          "permutation": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 5,
+                "doc": "items, integer 2..20; returns an ordering of 0..n−1"
+              }
+            }
+          }
+        },
+        "dists": [
+          "uniform",
+          "triangular",
+          "normal",
+          "lognormal",
+          "halfnormal",
+          "exponential",
+          "logistic",
+          "weibull",
+          "pareto",
+          "gamma",
+          "chisquare",
+          "loglogistic",
+          "rayleigh",
+          "frechet",
+          "bernoulli",
+          "binomial",
+          "poisson",
+          "geometric",
+          "categorical",
+          "dice",
+          "permutation"
+        ]
+      },
       "realisedRtp": {
         "BASE": 1.0289
       },
@@ -88,6 +673,8 @@
       "betTypes": [
         "BASE"
       ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
       "levels": {
         "BASE": [
           100,
@@ -100,6 +687,297 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "multiple = scale × clamp(quantile(u), min, max); win = round(stake × multiple). scale = rtp / E[clamp(X)], so E[multiple] = rtp exactly. draw(): value = quantile(u) of the requested distribution, no money.",
+      "tables": {
+        "money": {
+          "name": "uniform",
+          "dist": "uniform",
+          "params": {
+            "a": 0,
+            "b": 1
+          },
+          "kind": "continuous",
+          "rtp": 0.95,
+          "min": 0,
+          "max": null,
+          "meanRaw": 0.5,
+          "meanClamped": 0.49999999900000003,
+          "scale": 1.9000000037999998,
+          "hitRate": 1,
+          "maxMultiple": 1.9000000037999998
+        },
+        "library": {
+          "uniform": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": "lower bound"
+              },
+              "b": {
+                "default": 1,
+                "doc": "upper bound, > a"
+              }
+            }
+          },
+          "triangular": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": ""
+              },
+              "b": {
+                "default": 1,
+                "doc": ""
+              },
+              "c": {
+                "default": 0.5,
+                "doc": "mode, a ≤ c ≤ b"
+              }
+            }
+          },
+          "normal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "sigma": {
+                "default": 1,
+                "doc": "> 0"
+              }
+            }
+          },
+          "lognormal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": "mean of log"
+              },
+              "sigma": {
+                "default": 0.5,
+                "doc": "sd of log, > 0"
+              }
+            }
+          },
+          "halfnormal": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale, > 0 (mean = sigma·√(2/π))"
+              }
+            }
+          },
+          "exponential": {
+            "kind": "continuous",
+            "params": {
+              "rate": {
+                "default": 1,
+                "doc": "λ > 0 (mean 1/λ)"
+              }
+            }
+          },
+          "logistic": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "weibull": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 1.5,
+                "doc": "shape > 0"
+              },
+              "lambda": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "pareto": {
+            "kind": "continuous",
+            "params": {
+              "xm": {
+                "default": 1,
+                "doc": "minimum > 0"
+              },
+              "alpha": {
+                "default": 2,
+                "doc": "tail index > 0 (mean needs α > 1)"
+              }
+            }
+          },
+          "gamma": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 2,
+                "doc": "shape > 0 (k = 1 is exponential)"
+              },
+              "theta": {
+                "default": 1,
+                "doc": "scale > 0 (mean k·theta)"
+              }
+            }
+          },
+          "chisquare": {
+            "kind": "continuous",
+            "params": {
+              "df": {
+                "default": 3,
+                "doc": "degrees of freedom > 0 (gamma with k = df/2, theta = 2)"
+              }
+            }
+          },
+          "loglogistic": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 1,
+                "doc": "scale > 0 (median)"
+              },
+              "beta": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs β > 1, variance β > 2)"
+              }
+            }
+          },
+          "rayleigh": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale > 0 (mean σ·√(π/2); Weibull with k = 2)"
+              }
+            }
+          },
+          "frechet": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs α > 1, variance α > 2)"
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              },
+              "m": {
+                "default": 0,
+                "doc": "minimum ≥ 0"
+              }
+            }
+          },
+          "bernoulli": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.5,
+                "doc": "P(1)"
+              }
+            }
+          },
+          "binomial": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 10,
+                "doc": "trials, integer ≥ 1"
+              },
+              "p": {
+                "default": 0.5,
+                "doc": ""
+              }
+            }
+          },
+          "poisson": {
+            "kind": "discrete",
+            "params": {
+              "lambda": {
+                "default": 3,
+                "doc": "mean > 0"
+              }
+            }
+          },
+          "geometric": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.3,
+                "doc": "success probability; value = failures before the first success"
+              }
+            }
+          },
+          "categorical": {
+            "kind": "discrete",
+            "params": {
+              "weights": {
+                "default": [
+                  1,
+                  1
+                ],
+                "doc": "relative weights; outcome i is OPTION_i+1"
+              }
+            }
+          },
+          "dice": {
+            "kind": "discrete",
+            "params": {
+              "sides": {
+                "default": 6,
+                "doc": "integer ≥ 2"
+              }
+            }
+          },
+          "permutation": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 5,
+                "doc": "items, integer 2..20; returns an ordering of 0..n−1"
+              }
+            }
+          }
+        },
+        "dists": [
+          "uniform",
+          "triangular",
+          "normal",
+          "lognormal",
+          "halfnormal",
+          "exponential",
+          "logistic",
+          "weibull",
+          "pareto",
+          "gamma",
+          "chisquare",
+          "loglogistic",
+          "rayleigh",
+          "frechet",
+          "bernoulli",
+          "binomial",
+          "poisson",
+          "geometric",
+          "categorical",
+          "dice",
+          "permutation"
+        ]
+      },
       "realisedRtp": {
         "BASE": 0.9844
       },
@@ -125,6 +1003,8 @@
       "betTypes": [
         "BASE"
       ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
       "levels": {
         "BASE": [
           100,
@@ -137,6 +1017,297 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "multiple = scale × clamp(quantile(u), min, max); win = round(stake × multiple). scale = rtp / E[clamp(X)], so E[multiple] = rtp exactly. draw(): value = quantile(u) of the requested distribution, no money.",
+      "tables": {
+        "money": {
+          "name": "normal-clipped",
+          "dist": "normal",
+          "params": {
+            "mu": 1,
+            "sigma": 0.5
+          },
+          "kind": "continuous",
+          "rtp": 0.95,
+          "min": 0,
+          "max": 3,
+          "meanRaw": 1,
+          "meanClamped": 1.0042418046775907,
+          "scale": 0.9459873066178469,
+          "hitRate": 0.9772499371127186,
+          "maxMultiple": 2.837961919853541
+        },
+        "library": {
+          "uniform": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": "lower bound"
+              },
+              "b": {
+                "default": 1,
+                "doc": "upper bound, > a"
+              }
+            }
+          },
+          "triangular": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": ""
+              },
+              "b": {
+                "default": 1,
+                "doc": ""
+              },
+              "c": {
+                "default": 0.5,
+                "doc": "mode, a ≤ c ≤ b"
+              }
+            }
+          },
+          "normal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "sigma": {
+                "default": 1,
+                "doc": "> 0"
+              }
+            }
+          },
+          "lognormal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": "mean of log"
+              },
+              "sigma": {
+                "default": 0.5,
+                "doc": "sd of log, > 0"
+              }
+            }
+          },
+          "halfnormal": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale, > 0 (mean = sigma·√(2/π))"
+              }
+            }
+          },
+          "exponential": {
+            "kind": "continuous",
+            "params": {
+              "rate": {
+                "default": 1,
+                "doc": "λ > 0 (mean 1/λ)"
+              }
+            }
+          },
+          "logistic": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "weibull": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 1.5,
+                "doc": "shape > 0"
+              },
+              "lambda": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "pareto": {
+            "kind": "continuous",
+            "params": {
+              "xm": {
+                "default": 1,
+                "doc": "minimum > 0"
+              },
+              "alpha": {
+                "default": 2,
+                "doc": "tail index > 0 (mean needs α > 1)"
+              }
+            }
+          },
+          "gamma": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 2,
+                "doc": "shape > 0 (k = 1 is exponential)"
+              },
+              "theta": {
+                "default": 1,
+                "doc": "scale > 0 (mean k·theta)"
+              }
+            }
+          },
+          "chisquare": {
+            "kind": "continuous",
+            "params": {
+              "df": {
+                "default": 3,
+                "doc": "degrees of freedom > 0 (gamma with k = df/2, theta = 2)"
+              }
+            }
+          },
+          "loglogistic": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 1,
+                "doc": "scale > 0 (median)"
+              },
+              "beta": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs β > 1, variance β > 2)"
+              }
+            }
+          },
+          "rayleigh": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale > 0 (mean σ·√(π/2); Weibull with k = 2)"
+              }
+            }
+          },
+          "frechet": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs α > 1, variance α > 2)"
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              },
+              "m": {
+                "default": 0,
+                "doc": "minimum ≥ 0"
+              }
+            }
+          },
+          "bernoulli": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.5,
+                "doc": "P(1)"
+              }
+            }
+          },
+          "binomial": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 10,
+                "doc": "trials, integer ≥ 1"
+              },
+              "p": {
+                "default": 0.5,
+                "doc": ""
+              }
+            }
+          },
+          "poisson": {
+            "kind": "discrete",
+            "params": {
+              "lambda": {
+                "default": 3,
+                "doc": "mean > 0"
+              }
+            }
+          },
+          "geometric": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.3,
+                "doc": "success probability; value = failures before the first success"
+              }
+            }
+          },
+          "categorical": {
+            "kind": "discrete",
+            "params": {
+              "weights": {
+                "default": [
+                  1,
+                  1
+                ],
+                "doc": "relative weights; outcome i is OPTION_i+1"
+              }
+            }
+          },
+          "dice": {
+            "kind": "discrete",
+            "params": {
+              "sides": {
+                "default": 6,
+                "doc": "integer ≥ 2"
+              }
+            }
+          },
+          "permutation": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 5,
+                "doc": "items, integer 2..20; returns an ordering of 0..n−1"
+              }
+            }
+          }
+        },
+        "dists": [
+          "uniform",
+          "triangular",
+          "normal",
+          "lognormal",
+          "halfnormal",
+          "exponential",
+          "logistic",
+          "weibull",
+          "pareto",
+          "gamma",
+          "chisquare",
+          "loglogistic",
+          "rayleigh",
+          "frechet",
+          "bernoulli",
+          "binomial",
+          "poisson",
+          "geometric",
+          "categorical",
+          "dice",
+          "permutation"
+        ]
+      },
       "realisedRtp": {
         "BASE": 0.9901
       },
@@ -161,6 +1332,8 @@
       "betTypes": [
         "BASE"
       ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
       "levels": {
         "BASE": [
           100,
@@ -173,6 +1346,297 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "multiple = scale × clamp(quantile(u), min, max); win = round(stake × multiple). scale = rtp / E[clamp(X)], so E[multiple] = rtp exactly. draw(): value = quantile(u) of the requested distribution, no money.",
+      "tables": {
+        "money": {
+          "name": "pareto",
+          "dist": "pareto",
+          "params": {
+            "xm": 0.5,
+            "alpha": 2.5
+          },
+          "kind": "continuous",
+          "rtp": 0.95,
+          "min": 0,
+          "max": 100,
+          "meanRaw": 0.8333333333333334,
+          "meanClamped": 0.8332154822031356,
+          "scale": 1.1401612431493353,
+          "hitRate": 1,
+          "maxMultiple": 114.01612431493353
+        },
+        "library": {
+          "uniform": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": "lower bound"
+              },
+              "b": {
+                "default": 1,
+                "doc": "upper bound, > a"
+              }
+            }
+          },
+          "triangular": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": ""
+              },
+              "b": {
+                "default": 1,
+                "doc": ""
+              },
+              "c": {
+                "default": 0.5,
+                "doc": "mode, a ≤ c ≤ b"
+              }
+            }
+          },
+          "normal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "sigma": {
+                "default": 1,
+                "doc": "> 0"
+              }
+            }
+          },
+          "lognormal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": "mean of log"
+              },
+              "sigma": {
+                "default": 0.5,
+                "doc": "sd of log, > 0"
+              }
+            }
+          },
+          "halfnormal": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale, > 0 (mean = sigma·√(2/π))"
+              }
+            }
+          },
+          "exponential": {
+            "kind": "continuous",
+            "params": {
+              "rate": {
+                "default": 1,
+                "doc": "λ > 0 (mean 1/λ)"
+              }
+            }
+          },
+          "logistic": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "weibull": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 1.5,
+                "doc": "shape > 0"
+              },
+              "lambda": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "pareto": {
+            "kind": "continuous",
+            "params": {
+              "xm": {
+                "default": 1,
+                "doc": "minimum > 0"
+              },
+              "alpha": {
+                "default": 2,
+                "doc": "tail index > 0 (mean needs α > 1)"
+              }
+            }
+          },
+          "gamma": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 2,
+                "doc": "shape > 0 (k = 1 is exponential)"
+              },
+              "theta": {
+                "default": 1,
+                "doc": "scale > 0 (mean k·theta)"
+              }
+            }
+          },
+          "chisquare": {
+            "kind": "continuous",
+            "params": {
+              "df": {
+                "default": 3,
+                "doc": "degrees of freedom > 0 (gamma with k = df/2, theta = 2)"
+              }
+            }
+          },
+          "loglogistic": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 1,
+                "doc": "scale > 0 (median)"
+              },
+              "beta": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs β > 1, variance β > 2)"
+              }
+            }
+          },
+          "rayleigh": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale > 0 (mean σ·√(π/2); Weibull with k = 2)"
+              }
+            }
+          },
+          "frechet": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs α > 1, variance α > 2)"
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              },
+              "m": {
+                "default": 0,
+                "doc": "minimum ≥ 0"
+              }
+            }
+          },
+          "bernoulli": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.5,
+                "doc": "P(1)"
+              }
+            }
+          },
+          "binomial": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 10,
+                "doc": "trials, integer ≥ 1"
+              },
+              "p": {
+                "default": 0.5,
+                "doc": ""
+              }
+            }
+          },
+          "poisson": {
+            "kind": "discrete",
+            "params": {
+              "lambda": {
+                "default": 3,
+                "doc": "mean > 0"
+              }
+            }
+          },
+          "geometric": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.3,
+                "doc": "success probability; value = failures before the first success"
+              }
+            }
+          },
+          "categorical": {
+            "kind": "discrete",
+            "params": {
+              "weights": {
+                "default": [
+                  1,
+                  1
+                ],
+                "doc": "relative weights; outcome i is OPTION_i+1"
+              }
+            }
+          },
+          "dice": {
+            "kind": "discrete",
+            "params": {
+              "sides": {
+                "default": 6,
+                "doc": "integer ≥ 2"
+              }
+            }
+          },
+          "permutation": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 5,
+                "doc": "items, integer 2..20; returns an ordering of 0..n−1"
+              }
+            }
+          }
+        },
+        "dists": [
+          "uniform",
+          "triangular",
+          "normal",
+          "lognormal",
+          "halfnormal",
+          "exponential",
+          "logistic",
+          "weibull",
+          "pareto",
+          "gamma",
+          "chisquare",
+          "loglogistic",
+          "rayleigh",
+          "frechet",
+          "bernoulli",
+          "binomial",
+          "poisson",
+          "geometric",
+          "categorical",
+          "dice",
+          "permutation"
+        ]
+      },
       "realisedRtp": {
         "BASE": 1.0077
       },
@@ -195,6 +1659,8 @@
       "betTypes": [
         "BASE"
       ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
       "levels": {
         "BASE": [
           100,
@@ -207,6 +1673,296 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "multiple = scale × clamp(quantile(u), min, max); win = round(stake × multiple). scale = rtp / E[clamp(X)], so E[multiple] = rtp exactly. draw(): value = quantile(u) of the requested distribution, no money.",
+      "tables": {
+        "money": {
+          "name": "poisson",
+          "dist": "poisson",
+          "params": {
+            "lambda": 1
+          },
+          "kind": "discrete",
+          "rtp": 0.95,
+          "min": 0,
+          "max": null,
+          "meanRaw": 1,
+          "meanClamped": 0.9999999999957804,
+          "scale": 0.9500000000040086,
+          "hitRate": 0.6321205588284475,
+          "maxMultiple": 13.300000000056121
+        },
+        "library": {
+          "uniform": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": "lower bound"
+              },
+              "b": {
+                "default": 1,
+                "doc": "upper bound, > a"
+              }
+            }
+          },
+          "triangular": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": ""
+              },
+              "b": {
+                "default": 1,
+                "doc": ""
+              },
+              "c": {
+                "default": 0.5,
+                "doc": "mode, a ≤ c ≤ b"
+              }
+            }
+          },
+          "normal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "sigma": {
+                "default": 1,
+                "doc": "> 0"
+              }
+            }
+          },
+          "lognormal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": "mean of log"
+              },
+              "sigma": {
+                "default": 0.5,
+                "doc": "sd of log, > 0"
+              }
+            }
+          },
+          "halfnormal": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale, > 0 (mean = sigma·√(2/π))"
+              }
+            }
+          },
+          "exponential": {
+            "kind": "continuous",
+            "params": {
+              "rate": {
+                "default": 1,
+                "doc": "λ > 0 (mean 1/λ)"
+              }
+            }
+          },
+          "logistic": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "weibull": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 1.5,
+                "doc": "shape > 0"
+              },
+              "lambda": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "pareto": {
+            "kind": "continuous",
+            "params": {
+              "xm": {
+                "default": 1,
+                "doc": "minimum > 0"
+              },
+              "alpha": {
+                "default": 2,
+                "doc": "tail index > 0 (mean needs α > 1)"
+              }
+            }
+          },
+          "gamma": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 2,
+                "doc": "shape > 0 (k = 1 is exponential)"
+              },
+              "theta": {
+                "default": 1,
+                "doc": "scale > 0 (mean k·theta)"
+              }
+            }
+          },
+          "chisquare": {
+            "kind": "continuous",
+            "params": {
+              "df": {
+                "default": 3,
+                "doc": "degrees of freedom > 0 (gamma with k = df/2, theta = 2)"
+              }
+            }
+          },
+          "loglogistic": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 1,
+                "doc": "scale > 0 (median)"
+              },
+              "beta": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs β > 1, variance β > 2)"
+              }
+            }
+          },
+          "rayleigh": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale > 0 (mean σ·√(π/2); Weibull with k = 2)"
+              }
+            }
+          },
+          "frechet": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs α > 1, variance α > 2)"
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              },
+              "m": {
+                "default": 0,
+                "doc": "minimum ≥ 0"
+              }
+            }
+          },
+          "bernoulli": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.5,
+                "doc": "P(1)"
+              }
+            }
+          },
+          "binomial": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 10,
+                "doc": "trials, integer ≥ 1"
+              },
+              "p": {
+                "default": 0.5,
+                "doc": ""
+              }
+            }
+          },
+          "poisson": {
+            "kind": "discrete",
+            "params": {
+              "lambda": {
+                "default": 3,
+                "doc": "mean > 0"
+              }
+            }
+          },
+          "geometric": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.3,
+                "doc": "success probability; value = failures before the first success"
+              }
+            }
+          },
+          "categorical": {
+            "kind": "discrete",
+            "params": {
+              "weights": {
+                "default": [
+                  1,
+                  1
+                ],
+                "doc": "relative weights; outcome i is OPTION_i+1"
+              }
+            }
+          },
+          "dice": {
+            "kind": "discrete",
+            "params": {
+              "sides": {
+                "default": 6,
+                "doc": "integer ≥ 2"
+              }
+            }
+          },
+          "permutation": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 5,
+                "doc": "items, integer 2..20; returns an ordering of 0..n−1"
+              }
+            }
+          }
+        },
+        "dists": [
+          "uniform",
+          "triangular",
+          "normal",
+          "lognormal",
+          "halfnormal",
+          "exponential",
+          "logistic",
+          "weibull",
+          "pareto",
+          "gamma",
+          "chisquare",
+          "loglogistic",
+          "rayleigh",
+          "frechet",
+          "bernoulli",
+          "binomial",
+          "poisson",
+          "geometric",
+          "categorical",
+          "dice",
+          "permutation"
+        ]
+      },
       "realisedRtp": {
         "BASE": 0.988
       },
@@ -216,6 +1972,664 @@
         "poisson/rounds/NNN.json",
         "poisson/sample-request.json",
         "poisson/sample-response.json"
+      ]
+    },
+    "gamma": {
+      "parameters": {
+        "dist": "gamma",
+        "params": {
+          "k": 2,
+          "theta": 0.5
+        },
+        "max": 20,
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE"
+      ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "multiple = scale × clamp(quantile(u), min, max); win = round(stake × multiple). scale = rtp / E[clamp(X)], so E[multiple] = rtp exactly. draw(): value = quantile(u) of the requested distribution, no money.",
+      "tables": {
+        "money": {
+          "name": "gamma",
+          "dist": "gamma",
+          "params": {
+            "k": 2,
+            "theta": 0.5
+          },
+          "kind": "continuous",
+          "rtp": 0.95,
+          "min": 0,
+          "max": 20,
+          "meanRaw": 1,
+          "meanClamped": 0.9999999999999982,
+          "scale": 0.9500000000000016,
+          "hitRate": 1,
+          "maxMultiple": 19.000000000000032
+        },
+        "library": {
+          "uniform": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": "lower bound"
+              },
+              "b": {
+                "default": 1,
+                "doc": "upper bound, > a"
+              }
+            }
+          },
+          "triangular": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": ""
+              },
+              "b": {
+                "default": 1,
+                "doc": ""
+              },
+              "c": {
+                "default": 0.5,
+                "doc": "mode, a ≤ c ≤ b"
+              }
+            }
+          },
+          "normal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "sigma": {
+                "default": 1,
+                "doc": "> 0"
+              }
+            }
+          },
+          "lognormal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": "mean of log"
+              },
+              "sigma": {
+                "default": 0.5,
+                "doc": "sd of log, > 0"
+              }
+            }
+          },
+          "halfnormal": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale, > 0 (mean = sigma·√(2/π))"
+              }
+            }
+          },
+          "exponential": {
+            "kind": "continuous",
+            "params": {
+              "rate": {
+                "default": 1,
+                "doc": "λ > 0 (mean 1/λ)"
+              }
+            }
+          },
+          "logistic": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "weibull": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 1.5,
+                "doc": "shape > 0"
+              },
+              "lambda": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "pareto": {
+            "kind": "continuous",
+            "params": {
+              "xm": {
+                "default": 1,
+                "doc": "minimum > 0"
+              },
+              "alpha": {
+                "default": 2,
+                "doc": "tail index > 0 (mean needs α > 1)"
+              }
+            }
+          },
+          "gamma": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 2,
+                "doc": "shape > 0 (k = 1 is exponential)"
+              },
+              "theta": {
+                "default": 1,
+                "doc": "scale > 0 (mean k·theta)"
+              }
+            }
+          },
+          "chisquare": {
+            "kind": "continuous",
+            "params": {
+              "df": {
+                "default": 3,
+                "doc": "degrees of freedom > 0 (gamma with k = df/2, theta = 2)"
+              }
+            }
+          },
+          "loglogistic": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 1,
+                "doc": "scale > 0 (median)"
+              },
+              "beta": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs β > 1, variance β > 2)"
+              }
+            }
+          },
+          "rayleigh": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale > 0 (mean σ·√(π/2); Weibull with k = 2)"
+              }
+            }
+          },
+          "frechet": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs α > 1, variance α > 2)"
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              },
+              "m": {
+                "default": 0,
+                "doc": "minimum ≥ 0"
+              }
+            }
+          },
+          "bernoulli": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.5,
+                "doc": "P(1)"
+              }
+            }
+          },
+          "binomial": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 10,
+                "doc": "trials, integer ≥ 1"
+              },
+              "p": {
+                "default": 0.5,
+                "doc": ""
+              }
+            }
+          },
+          "poisson": {
+            "kind": "discrete",
+            "params": {
+              "lambda": {
+                "default": 3,
+                "doc": "mean > 0"
+              }
+            }
+          },
+          "geometric": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.3,
+                "doc": "success probability; value = failures before the first success"
+              }
+            }
+          },
+          "categorical": {
+            "kind": "discrete",
+            "params": {
+              "weights": {
+                "default": [
+                  1,
+                  1
+                ],
+                "doc": "relative weights; outcome i is OPTION_i+1"
+              }
+            }
+          },
+          "dice": {
+            "kind": "discrete",
+            "params": {
+              "sides": {
+                "default": 6,
+                "doc": "integer ≥ 2"
+              }
+            }
+          },
+          "permutation": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 5,
+                "doc": "items, integer 2..20; returns an ordering of 0..n−1"
+              }
+            }
+          }
+        },
+        "dists": [
+          "uniform",
+          "triangular",
+          "normal",
+          "lognormal",
+          "halfnormal",
+          "exponential",
+          "logistic",
+          "weibull",
+          "pareto",
+          "gamma",
+          "chisquare",
+          "loglogistic",
+          "rayleigh",
+          "frechet",
+          "bernoulli",
+          "binomial",
+          "poisson",
+          "geometric",
+          "categorical",
+          "dice",
+          "permutation"
+        ]
+      },
+      "realisedRtp": {
+        "BASE": 1.0062
+      },
+      "files": [
+        "gamma/field.json",
+        "gamma/rounds.json",
+        "gamma/rounds/NNN.json",
+        "gamma/sample-request.json",
+        "gamma/sample-response.json"
+      ]
+    },
+    "loglogistic": {
+      "parameters": {
+        "dist": "loglogistic",
+        "params": {
+          "alpha": 1,
+          "beta": 3
+        },
+        "max": 50,
+        "rtp": 0.95
+      },
+      "betTypes": [
+        "BASE"
+      ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
+      "levels": {
+        "BASE": [
+          100,
+          200,
+          500,
+          1000,
+          2500,
+          5000,
+          10000
+        ]
+      },
+      "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "multiple = scale × clamp(quantile(u), min, max); win = round(stake × multiple). scale = rtp / E[clamp(X)], so E[multiple] = rtp exactly. draw(): value = quantile(u) of the requested distribution, no money.",
+      "tables": {
+        "money": {
+          "name": "loglogistic",
+          "dist": "loglogistic",
+          "params": {
+            "alpha": 1,
+            "beta": 3
+          },
+          "kind": "continuous",
+          "rtp": 0.95,
+          "min": 0,
+          "max": 50,
+          "meanRaw": 1.2091995761561452,
+          "meanClamped": 1.208999576796142,
+          "scale": 0.7857736414743065,
+          "hitRate": 1,
+          "maxMultiple": 39.28868207371533
+        },
+        "library": {
+          "uniform": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": "lower bound"
+              },
+              "b": {
+                "default": 1,
+                "doc": "upper bound, > a"
+              }
+            }
+          },
+          "triangular": {
+            "kind": "continuous",
+            "params": {
+              "a": {
+                "default": 0,
+                "doc": ""
+              },
+              "b": {
+                "default": 1,
+                "doc": ""
+              },
+              "c": {
+                "default": 0.5,
+                "doc": "mode, a ≤ c ≤ b"
+              }
+            }
+          },
+          "normal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "sigma": {
+                "default": 1,
+                "doc": "> 0"
+              }
+            }
+          },
+          "lognormal": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": "mean of log"
+              },
+              "sigma": {
+                "default": 0.5,
+                "doc": "sd of log, > 0"
+              }
+            }
+          },
+          "halfnormal": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale, > 0 (mean = sigma·√(2/π))"
+              }
+            }
+          },
+          "exponential": {
+            "kind": "continuous",
+            "params": {
+              "rate": {
+                "default": 1,
+                "doc": "λ > 0 (mean 1/λ)"
+              }
+            }
+          },
+          "logistic": {
+            "kind": "continuous",
+            "params": {
+              "mu": {
+                "default": 0,
+                "doc": ""
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "weibull": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 1.5,
+                "doc": "shape > 0"
+              },
+              "lambda": {
+                "default": 1,
+                "doc": "scale > 0"
+              }
+            }
+          },
+          "pareto": {
+            "kind": "continuous",
+            "params": {
+              "xm": {
+                "default": 1,
+                "doc": "minimum > 0"
+              },
+              "alpha": {
+                "default": 2,
+                "doc": "tail index > 0 (mean needs α > 1)"
+              }
+            }
+          },
+          "gamma": {
+            "kind": "continuous",
+            "params": {
+              "k": {
+                "default": 2,
+                "doc": "shape > 0 (k = 1 is exponential)"
+              },
+              "theta": {
+                "default": 1,
+                "doc": "scale > 0 (mean k·theta)"
+              }
+            }
+          },
+          "chisquare": {
+            "kind": "continuous",
+            "params": {
+              "df": {
+                "default": 3,
+                "doc": "degrees of freedom > 0 (gamma with k = df/2, theta = 2)"
+              }
+            }
+          },
+          "loglogistic": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 1,
+                "doc": "scale > 0 (median)"
+              },
+              "beta": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs β > 1, variance β > 2)"
+              }
+            }
+          },
+          "rayleigh": {
+            "kind": "continuous",
+            "params": {
+              "sigma": {
+                "default": 1,
+                "doc": "scale > 0 (mean σ·√(π/2); Weibull with k = 2)"
+              }
+            }
+          },
+          "frechet": {
+            "kind": "continuous",
+            "params": {
+              "alpha": {
+                "default": 3,
+                "doc": "shape > 0 (mean needs α > 1, variance α > 2)"
+              },
+              "s": {
+                "default": 1,
+                "doc": "scale > 0"
+              },
+              "m": {
+                "default": 0,
+                "doc": "minimum ≥ 0"
+              }
+            }
+          },
+          "bernoulli": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.5,
+                "doc": "P(1)"
+              }
+            }
+          },
+          "binomial": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 10,
+                "doc": "trials, integer ≥ 1"
+              },
+              "p": {
+                "default": 0.5,
+                "doc": ""
+              }
+            }
+          },
+          "poisson": {
+            "kind": "discrete",
+            "params": {
+              "lambda": {
+                "default": 3,
+                "doc": "mean > 0"
+              }
+            }
+          },
+          "geometric": {
+            "kind": "discrete",
+            "params": {
+              "p": {
+                "default": 0.3,
+                "doc": "success probability; value = failures before the first success"
+              }
+            }
+          },
+          "categorical": {
+            "kind": "discrete",
+            "params": {
+              "weights": {
+                "default": [
+                  1,
+                  1
+                ],
+                "doc": "relative weights; outcome i is OPTION_i+1"
+              }
+            }
+          },
+          "dice": {
+            "kind": "discrete",
+            "params": {
+              "sides": {
+                "default": 6,
+                "doc": "integer ≥ 2"
+              }
+            }
+          },
+          "permutation": {
+            "kind": "discrete",
+            "params": {
+              "n": {
+                "default": 5,
+                "doc": "items, integer 2..20; returns an ordering of 0..n−1"
+              }
+            }
+          }
+        },
+        "dists": [
+          "uniform",
+          "triangular",
+          "normal",
+          "lognormal",
+          "halfnormal",
+          "exponential",
+          "logistic",
+          "weibull",
+          "pareto",
+          "gamma",
+          "chisquare",
+          "loglogistic",
+          "rayleigh",
+          "frechet",
+          "bernoulli",
+          "binomial",
+          "poisson",
+          "geometric",
+          "categorical",
+          "dice",
+          "permutation"
+        ]
+      },
+      "realisedRtp": {
+        "BASE": 1.0163
+      },
+      "files": [
+        "loglogistic/field.json",
+        "loglogistic/rounds.json",
+        "loglogistic/rounds/NNN.json",
+        "loglogistic/sample-request.json",
+        "loglogistic/sample-response.json"
       ]
     }
   }

@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "eab4ffe0-3574-4c1c-95b0-7d61202cc5b4",
+    "sessionId": "cb0aefdf-7168-42ae-8900-fe3426884c05",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -161,6 +161,67 @@
           }
         }
       },
+      "gamma": {
+        "kind": "continuous",
+        "params": {
+          "k": {
+            "default": 2,
+            "doc": "shape > 0 (k = 1 is exponential)"
+          },
+          "theta": {
+            "default": 1,
+            "doc": "scale > 0 (mean k·theta)"
+          }
+        }
+      },
+      "chisquare": {
+        "kind": "continuous",
+        "params": {
+          "df": {
+            "default": 3,
+            "doc": "degrees of freedom > 0 (gamma with k = df/2, theta = 2)"
+          }
+        }
+      },
+      "loglogistic": {
+        "kind": "continuous",
+        "params": {
+          "alpha": {
+            "default": 1,
+            "doc": "scale > 0 (median)"
+          },
+          "beta": {
+            "default": 3,
+            "doc": "shape > 0 (mean needs β > 1, variance β > 2)"
+          }
+        }
+      },
+      "rayleigh": {
+        "kind": "continuous",
+        "params": {
+          "sigma": {
+            "default": 1,
+            "doc": "scale > 0 (mean σ·√(π/2); Weibull with k = 2)"
+          }
+        }
+      },
+      "frechet": {
+        "kind": "continuous",
+        "params": {
+          "alpha": {
+            "default": 3,
+            "doc": "shape > 0 (mean needs α > 1, variance α > 2)"
+          },
+          "s": {
+            "default": 1,
+            "doc": "scale > 0"
+          },
+          "m": {
+            "default": 0,
+            "doc": "minimum ≥ 0"
+          }
+        }
+      },
       "bernoulli": {
         "kind": "discrete",
         "params": {
@@ -242,6 +303,11 @@
       "logistic",
       "weibull",
       "pareto",
+      "gamma",
+      "chisquare",
+      "loglogistic",
+      "rayleigh",
+      "frechet",
       "bernoulli",
       "binomial",
       "poisson",
@@ -255,7 +321,7 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "609502ab-edf7-4634-b520-f2407b0dd616",
+        "roundId": "3aebce95-3841-45da-9175-1b98ee50d851",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "balance": 99000,
@@ -275,7 +341,7 @@
     {
       "call": "draw",
       "response": {
-        "roundId": "b7afaba3-cb2e-46a5-9d43-7e83c53cc6c7",
+        "roundId": "ab9619b6-13c6-4fc7-b8e0-2662f44b2ead",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "params": {
@@ -292,7 +358,7 @@
     {
       "call": "draw",
       "response": {
-        "roundId": "640dba09-40f1-4760-81ae-178d30b7fdc0",
+        "roundId": "c167a0b7-58c8-4827-b44c-23defc2c19e1",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "params": {
@@ -313,7 +379,7 @@
     {
       "call": "draw",
       "response": {
-        "roundId": "54b2c762-b1bb-4f6e-ba40-0ece26df8e95",
+        "roundId": "090dd81c-6133-488d-890a-47695ba750e5",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "params": {

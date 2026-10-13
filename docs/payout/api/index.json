@@ -21,6 +21,8 @@
       "betTypes": [
         "BASE"
       ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
       "levels": {
         "BASE": [
           100,
@@ -33,6 +35,63 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "find the band with rn_from ≤ u < rn_to; if payout is 0 the win is 0; else t = (u − rn_from)/(rn_to − rn_from), multiple = payout + r·(2t − 1), win = round(stake × multiple)",
+      "tables": {
+        "method": "geometric",
+        "r": 0.05,
+        "bands": [
+          {
+            "payout": 0,
+            "p": 0.48945417907758887,
+            "rn_from": 0,
+            "rn_to": 0.48945417907758887,
+            "pays_from": 0,
+            "pays_to": 0
+          },
+          {
+            "payout": 0.5,
+            "p": 0.2546388540585609,
+            "rn_from": 0.48945417907758887,
+            "rn_to": 0.7440930331361497,
+            "pays_from": 0.45,
+            "pays_to": 0.55
+          },
+          {
+            "payout": 1,
+            "p": 0.132476028948112,
+            "rn_from": 0.7440930331361497,
+            "rn_to": 0.8765690620842617,
+            "pays_from": 0.95,
+            "pays_to": 1.05
+          },
+          {
+            "payout": 2,
+            "p": 0.06892073996619917,
+            "rn_from": 0.8765690620842617,
+            "rn_to": 0.9454898020504608,
+            "pays_from": 1.95,
+            "pays_to": 2.05
+          },
+          {
+            "payout": 5,
+            "p": 0.035856059660038124,
+            "rn_from": 0.9454898020504608,
+            "rn_to": 0.981345861710499,
+            "pays_from": 4.95,
+            "pays_to": 5.05
+          },
+          {
+            "payout": 20,
+            "p": 0.01865413828950094,
+            "rn_from": 0.981345861710499,
+            "rn_to": 1,
+            "pays_from": 19.95,
+            "pays_to": 20.05
+          }
+        ]
+      },
       "realisedRtp": {
         "BASE": 1.1872
       },
@@ -60,6 +119,8 @@
       "betTypes": [
         "BASE"
       ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
       "levels": {
         "BASE": [
           100,
@@ -72,6 +133,63 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "find the band with rn_from ≤ u < rn_to; if payout is 0 the win is 0; else t = (u − rn_from)/(rn_to − rn_from), multiple = payout + r·(2t − 1), win = round(stake × multiple)",
+      "tables": {
+        "method": "geometric",
+        "r": 0.05,
+        "bands": [
+          {
+            "payout": 0,
+            "p": 0.2810184860326199,
+            "rn_from": 0,
+            "rn_to": 0.2810184860326199,
+            "pays_from": 0,
+            "pays_to": 0
+          },
+          {
+            "payout": 0.5,
+            "p": 0.22045294740898477,
+            "rn_from": 0.2810184860326199,
+            "rn_to": 0.5014714334416047,
+            "pays_from": 0.45,
+            "pays_to": 0.55
+          },
+          {
+            "payout": 1,
+            "p": 0.17294058731661982,
+            "rn_from": 0.5014714334416047,
+            "rn_to": 0.6744120207582245,
+            "pays_from": 0.95,
+            "pays_to": 1.05
+          },
+          {
+            "payout": 1.5,
+            "p": 0.135668164535497,
+            "rn_from": 0.6744120207582245,
+            "rn_to": 0.8100801852937215,
+            "pays_from": 1.45,
+            "pays_to": 1.55
+          },
+          {
+            "payout": 2,
+            "p": 0.1064287519431932,
+            "rn_from": 0.8100801852937215,
+            "rn_to": 0.9165089372369147,
+            "pays_from": 1.95,
+            "pays_to": 2.05
+          },
+          {
+            "payout": 3,
+            "p": 0.08349106276308524,
+            "rn_from": 0.9165089372369147,
+            "rn_to": 1,
+            "pays_from": 2.95,
+            "pays_to": 3.05
+          }
+        ]
+      },
       "realisedRtp": {
         "BASE": 1.0124
       },
@@ -99,6 +217,8 @@
       "betTypes": [
         "BASE"
       ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
       "levels": {
         "BASE": [
           100,
@@ -111,6 +231,63 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "find the band with rn_from ≤ u < rn_to; if payout is 0 the win is 0; else t = (u − rn_from)/(rn_to − rn_from), multiple = payout + r·(2t − 1), win = round(stake × multiple)",
+      "tables": {
+        "method": "geometric",
+        "r": 0.1,
+        "bands": [
+          {
+            "payout": 0,
+            "p": 0.6654753048644279,
+            "rn_from": 0,
+            "rn_to": 0.6654753048644279,
+            "pays_from": 0,
+            "pays_to": 0
+          },
+          {
+            "payout": 1,
+            "p": 0.22324918825374657,
+            "rn_from": 0.6654753048644279,
+            "rn_to": 0.8887244931181744,
+            "pays_from": 0.9,
+            "pays_to": 1.1
+          },
+          {
+            "payout": 2,
+            "p": 0.07489413910875375,
+            "rn_from": 0.8887244931181744,
+            "rn_to": 0.9636186322269281,
+            "pays_from": 1.9,
+            "pays_to": 2.1
+          },
+          {
+            "payout": 5,
+            "p": 0.0251249830591365,
+            "rn_from": 0.9636186322269281,
+            "rn_to": 0.9887436152860646,
+            "pays_from": 4.9,
+            "pays_to": 5.1
+          },
+          {
+            "payout": 20,
+            "p": 0.008428760664505895,
+            "rn_from": 0.9887436152860646,
+            "rn_to": 0.9971723759505705,
+            "pays_from": 19.9,
+            "pays_to": 20.1
+          },
+          {
+            "payout": 100,
+            "p": 0.00282762404942945,
+            "rn_from": 0.9971723759505705,
+            "rn_to": 1,
+            "pays_from": 99.9,
+            "pays_to": 100.1
+          }
+        ]
+      },
       "realisedRtp": {
         "BASE": 1.099
       },
@@ -137,6 +314,8 @@
       "betTypes": [
         "BASE"
       ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
       "levels": {
         "BASE": [
           100,
@@ -149,6 +328,55 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "find the band with rn_from ≤ u < rn_to; if payout is 0 the win is 0; else t = (u − rn_from)/(rn_to − rn_from), multiple = payout + r·(2t − 1), win = round(stake × multiple)",
+      "tables": {
+        "method": "geometric",
+        "r": 0.03,
+        "bands": [
+          {
+            "payout": 0.2,
+            "p": 0.3945829318159956,
+            "rn_from": 0,
+            "rn_to": 0.3945829318159956,
+            "pays_from": 0.17,
+            "pays_to": 0.23
+          },
+          {
+            "payout": 0.5,
+            "p": 0.25721219606328677,
+            "rn_from": 0.3945829318159956,
+            "rn_to": 0.6517951278792824,
+            "pays_from": 0.47,
+            "pays_to": 0.53
+          },
+          {
+            "payout": 1,
+            "p": 0.1676659289321464,
+            "rn_from": 0.6517951278792824,
+            "rn_to": 0.8194610568114288,
+            "pays_from": 0.97,
+            "pays_to": 1.03
+          },
+          {
+            "payout": 2,
+            "p": 0.1092944430899485,
+            "rn_from": 0.8194610568114288,
+            "rn_to": 0.9287554999013773,
+            "pays_from": 1.97,
+            "pays_to": 2.03
+          },
+          {
+            "payout": 5,
+            "p": 0.0712445000986228,
+            "rn_from": 0.9287554999013773,
+            "rn_to": 1,
+            "pays_from": 4.97,
+            "pays_to": 5.03
+          }
+        ]
+      },
       "realisedRtp": {
         "BASE": 1.0446
       },
@@ -208,6 +436,8 @@
       "betTypes": [
         "BASE"
       ],
+      "defaultBetType": "BASE",
+      "defaultBet": 200,
       "levels": {
         "BASE": [
           100,
@@ -220,6 +450,123 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "find the band with rn_from ≤ u < rn_to; if payout is 0 the win is 0; else t = (u − rn_from)/(rn_to − rn_from), multiple = payout + r·(2t − 1), win = round(stake × multiple)",
+      "tables": {
+        "method": "given",
+        "r": 0.019999999999999997,
+        "bands": [
+          {
+            "payout": 0,
+            "p": 0.0622,
+            "rn_from": 0,
+            "rn_to": 0.0622,
+            "pays_from": 0,
+            "pays_to": 0,
+            "prize": "No grab"
+          },
+          {
+            "payout": 0.25,
+            "p": 0.05,
+            "rn_from": 0.0622,
+            "rn_to": 0.1122,
+            "pays_from": 0.23,
+            "pays_to": 0.27,
+            "prize": "Old bones"
+          },
+          {
+            "payout": 0.5,
+            "p": 0.12,
+            "rn_from": 0.1122,
+            "rn_to": 0.2322,
+            "pays_from": 0.48,
+            "pays_to": 0.52,
+            "prize": "Scaly imp"
+          },
+          {
+            "payout": 0.8,
+            "p": 0.2356,
+            "rn_from": 0.2322,
+            "rn_to": 0.4678,
+            "pays_from": 0.78,
+            "pays_to": 0.8200000000000001,
+            "prize": "Scaly imp"
+          },
+          {
+            "payout": 1,
+            "p": 0.25,
+            "rn_from": 0.4678,
+            "rn_to": 0.7178,
+            "pays_from": 0.98,
+            "pays_to": 1.02,
+            "prize": "Ember beast"
+          },
+          {
+            "payout": 1.2,
+            "p": 0.17,
+            "rn_from": 0.7178,
+            "rn_to": 0.8878,
+            "pays_from": 1.18,
+            "pays_to": 1.22,
+            "prize": "Credit ingots"
+          },
+          {
+            "payout": 1.5,
+            "p": 0.07,
+            "rn_from": 0.8878,
+            "rn_to": 0.9578,
+            "pays_from": 1.48,
+            "pays_to": 1.52,
+            "prize": "Dragon hatchling"
+          },
+          {
+            "payout": 2,
+            "p": 0.03,
+            "rn_from": 0.9578,
+            "rn_to": 0.9878,
+            "pays_from": 1.98,
+            "pays_to": 2.02,
+            "prize": "Dragon hatchling"
+          },
+          {
+            "payout": 5,
+            "p": 0.008,
+            "rn_from": 0.9878,
+            "rn_to": 0.9958,
+            "pays_from": 4.98,
+            "pays_to": 5.02,
+            "prize": "Blood gems"
+          },
+          {
+            "payout": 10,
+            "p": 0.003,
+            "rn_from": 0.9958,
+            "rn_to": 0.9988,
+            "pays_from": 9.98,
+            "pays_to": 10.02,
+            "prize": "Blood gems"
+          },
+          {
+            "payout": 25,
+            "p": 0.0008,
+            "rn_from": 0.9988,
+            "rn_to": 0.9996,
+            "pays_from": 24.98,
+            "pays_to": 25.02,
+            "prize": "Relic hoard"
+          },
+          {
+            "payout": 49.98,
+            "p": 0.0004,
+            "rn_from": 0.9996,
+            "rn_to": 1,
+            "pays_from": 49.959999999999994,
+            "pays_to": 50,
+            "prize": "Golden dragon"
+          }
+        ]
+      },
       "realisedRtp": {
         "BASE": 1.14
       },

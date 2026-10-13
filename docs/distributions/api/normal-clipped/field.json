@@ -160,6 +160,67 @@
         }
       }
     },
+    "gamma": {
+      "kind": "continuous",
+      "params": {
+        "k": {
+          "default": 2,
+          "doc": "shape > 0 (k = 1 is exponential)"
+        },
+        "theta": {
+          "default": 1,
+          "doc": "scale > 0 (mean k·theta)"
+        }
+      }
+    },
+    "chisquare": {
+      "kind": "continuous",
+      "params": {
+        "df": {
+          "default": 3,
+          "doc": "degrees of freedom > 0 (gamma with k = df/2, theta = 2)"
+        }
+      }
+    },
+    "loglogistic": {
+      "kind": "continuous",
+      "params": {
+        "alpha": {
+          "default": 1,
+          "doc": "scale > 0 (median)"
+        },
+        "beta": {
+          "default": 3,
+          "doc": "shape > 0 (mean needs β > 1, variance β > 2)"
+        }
+      }
+    },
+    "rayleigh": {
+      "kind": "continuous",
+      "params": {
+        "sigma": {
+          "default": 1,
+          "doc": "scale > 0 (mean σ·√(π/2); Weibull with k = 2)"
+        }
+      }
+    },
+    "frechet": {
+      "kind": "continuous",
+      "params": {
+        "alpha": {
+          "default": 3,
+          "doc": "shape > 0 (mean needs α > 1, variance α > 2)"
+        },
+        "s": {
+          "default": 1,
+          "doc": "scale > 0"
+        },
+        "m": {
+          "default": 0,
+          "doc": "minimum ≥ 0"
+        }
+      }
+    },
     "bernoulli": {
       "kind": "discrete",
       "params": {
@@ -241,6 +302,11 @@
     "logistic",
     "weibull",
     "pareto",
+    "gamma",
+    "chisquare",
+    "loglogistic",
+    "rayleigh",
+    "frechet",
     "bernoulli",
     "binomial",
     "poisson",

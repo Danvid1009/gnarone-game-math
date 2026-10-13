@@ -13,4 +13,6 @@ npm run fixtures
 
 RGS module `src/rgs.js`: `createGame({ preset })` → `bet` (money) and `draw({ params: { dist, … } })`
 (free, sealed, committed). Library: uniform, triangular, normal, lognormal, halfnormal, exponential,
-logistic, weibull, pareto, bernoulli, binomial, poisson, geometric, categorical, dice, permutation.
+logistic, weibull, pareto, gamma, chisquare, loglogistic, rayleigh, frechet, bernoulli, binomial, poisson,
+geometric, categorical, dice, permutation. The five after pareto are the non-negative-support shapes added
+for multiplier payouts (a multiplier can't go below 0).

@@ -14,6 +14,8 @@
         "OPTION_1",
         "OPTION_2"
       ],
+      "defaultBetType": "OPTION_1",
+      "defaultBet": 200,
       "levels": {
         "OPTION_1": [
           100,
@@ -35,6 +37,27 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "the winner is the option whose [rn_from, rn_to) contains u; win = round(stake × odds[backed]) if backed === winner, else 0",
+      "tables": {
+        "options": [
+          {
+            "name": "OPTION_1",
+            "p": 0.5,
+            "odds": 1.9,
+            "rn_from": 0,
+            "rn_to": 0.5
+          },
+          {
+            "name": "OPTION_2",
+            "p": 0.5,
+            "odds": 1.9,
+            "rn_from": 0.5,
+            "rn_to": 1
+          }
+        ]
+      },
       "realisedRtp": {
         "OPTION_1": 0.931,
         "OPTION_2": 0.969
@@ -57,6 +80,8 @@
         "OPTION_2",
         "OPTION_3"
       ],
+      "defaultBetType": "OPTION_1",
+      "defaultBet": 200,
       "levels": {
         "OPTION_1": [
           100,
@@ -87,6 +112,34 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "the winner is the option whose [rn_from, rn_to) contains u; win = round(stake × odds[backed]) if backed === winner, else 0",
+      "tables": {
+        "options": [
+          {
+            "name": "OPTION_1",
+            "p": 0.3333333333333333,
+            "odds": 2.85,
+            "rn_from": 0,
+            "rn_to": 0.3333333333333333
+          },
+          {
+            "name": "OPTION_2",
+            "p": 0.3333333333333333,
+            "odds": 2.85,
+            "rn_from": 0.3333333333333333,
+            "rn_to": 0.6666666666666666
+          },
+          {
+            "name": "OPTION_3",
+            "p": 0.3333333333333333,
+            "odds": 2.85,
+            "rn_from": 0.6666666666666666,
+            "rn_to": 1
+          }
+        ]
+      },
       "realisedRtp": {
         "OPTION_1": 0.969,
         "OPTION_2": 0.8835,
@@ -112,6 +165,8 @@
         "OPTION_4",
         "OPTION_5"
       ],
+      "defaultBetType": "OPTION_1",
+      "defaultBet": 200,
       "levels": {
         "OPTION_1": [
           100,
@@ -160,6 +215,48 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "the winner is the option whose [rn_from, rn_to) contains u; win = round(stake × odds[backed]) if backed === winner, else 0",
+      "tables": {
+        "options": [
+          {
+            "name": "OPTION_1",
+            "p": 0.2,
+            "odds": 4.749999999999999,
+            "rn_from": 0,
+            "rn_to": 0.2
+          },
+          {
+            "name": "OPTION_2",
+            "p": 0.2,
+            "odds": 4.749999999999999,
+            "rn_from": 0.2,
+            "rn_to": 0.4
+          },
+          {
+            "name": "OPTION_3",
+            "p": 0.2,
+            "odds": 4.749999999999999,
+            "rn_from": 0.4,
+            "rn_to": 0.6000000000000001
+          },
+          {
+            "name": "OPTION_4",
+            "p": 0.2,
+            "odds": 4.749999999999999,
+            "rn_from": 0.6000000000000001,
+            "rn_to": 0.8
+          },
+          {
+            "name": "OPTION_5",
+            "p": 0.2,
+            "odds": 4.749999999999999,
+            "rn_from": 0.8,
+            "rn_to": 1
+          }
+        ]
+      },
       "realisedRtp": {
         "OPTION_1": 0.76,
         "OPTION_2": 0.9975,
@@ -189,6 +286,8 @@
         "OPTION_2",
         "OPTION_3"
       ],
+      "defaultBetType": "OPTION_1",
+      "defaultBet": 200,
       "levels": {
         "OPTION_1": [
           100,
@@ -219,6 +318,34 @@
         ]
       },
       "multiStep": false,
+      "linkedBets": false,
+      "sideBets": false,
+      "how_to_settle": "the winner is the option whose [rn_from, rn_to) contains u; win = round(stake × odds[backed]) if backed === winner, else 0",
+      "tables": {
+        "options": [
+          {
+            "name": "OPTION_1",
+            "p": 0.5,
+            "odds": 1.9,
+            "rn_from": 0,
+            "rn_to": 0.5
+          },
+          {
+            "name": "OPTION_2",
+            "p": 0.3,
+            "odds": 3.1666666666666665,
+            "rn_from": 0.5,
+            "rn_to": 0.8
+          },
+          {
+            "name": "OPTION_3",
+            "p": 0.2,
+            "odds": 4.749999999999999,
+            "rn_from": 0.8,
+            "rn_to": 1
+          }
+        ]
+      },
       "realisedRtp": {
         "OPTION_1": 0.931,
         "OPTION_2": 0.9501,

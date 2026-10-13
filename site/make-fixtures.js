@@ -87,7 +87,7 @@ for (const [folder, variants] of Object.entries(ENGINES)) {
       if (liveId) seq.push({ call: 'collect (live bet)', body: { roundId: liveId }, response: g.collect({ roundId: liveId }) });
       writeFileSync(join(pdir, 'sample-request.json'), JSON.stringify({ module: `api/rgs.js`, create: `createGame(${JSON.stringify({ preset, ...opts })})`, calls: seq.map(x => ({ call: x.call, body: x.body })), note: `deterministic: seed ${seedOf(7)}; drop seed for a live roll` }, null, 2));
       writeFileSync(join(pdir, 'sample-response.json'), JSON.stringify({ open: s, calls: seq.map(x => ({ call: x.call, response: x.response })) }, null, 2));
-      index.presets[preset] = { parameters: g.params, betTypes: g.betTypes, levels, multiStep: g.isMultiStep, realisedRtp: Object.fromEntries(Object.entries(totals).map(([k, v]) => [k, +(v.won / v.staked).toFixed(4)])), files: ['field.json', 'rounds.json', 'rounds/NNN.json', 'sample-request.json', 'sample-response.json'].map(f => `${preset}/${f}`) };
+      index.presets[preset] = { parameters: g.params, betTypes: g.betTypes, defaultBetType: g.defaultBetType, defaultBet: g.open().defaultBet, levels, multiStep: g.isMultiStep, linkedBets: !!g.hasLinkedBets, sideBets: !!g.hasSideBets, how_to_settle: g.howToSettle, tables: strip(info, ['preset', 'rtp', 'mode', 'set']), realisedRtp: Object.fromEntries(Object.entries(totals).map(([k, v]) => [k, +(v.won / v.staked).toFixed(4)])), files: ['field.json', 'rounds.json', 'rounds/NNN.json', 'sample-request.json', 'sample-response.json'].map(f => `${preset}/${f}`) };
       console.log(`${folder}/${dir}/${preset}: ${g.betTypes.length} bet types, ${COUNT} rounds`);
     }
     writeFileSync(join(out, 'index.json'), JSON.stringify(index, null, 2));

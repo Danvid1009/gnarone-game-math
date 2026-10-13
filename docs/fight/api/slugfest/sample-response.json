@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "07daa0b2-16e8-4a03-a45c-3cf21e045bea",
+    "sessionId": "e8a44646-4423-4fc8-bf29-3b4e4fcfea79",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -1525,7 +1525,7 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "85397462-fb0c-4327-8efa-bab0e49ca57b",
+        "roundId": "ebabeaf7-d87e-472f-a990-e1a150b3c50d",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
@@ -1560,7 +1560,7 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "85397462-fb0c-4327-8efa-bab0e49ca57b",
+        "roundId": "ebabeaf7-d87e-472f-a990-e1a150b3c50d",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
@@ -1598,7 +1598,7 @@
     {
       "call": "next-action",
       "response": {
-        "roundId": "85397462-fb0c-4327-8efa-bab0e49ca57b",
+        "roundId": "ebabeaf7-d87e-472f-a990-e1a150b3c50d",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 99000,
         "totalBetAmount": 1000,
@@ -1636,7 +1636,7 @@
     {
       "call": "quote",
       "response": {
-        "roundId": "85397462-fb0c-4327-8efa-bab0e49ca57b",
+        "roundId": "ebabeaf7-d87e-472f-a990-e1a150b3c50d",
         "step": 2,
         "odds": {
           "A": 2.8587062269955728,
@@ -1653,8 +1653,8 @@
     {
       "call": "linked-bet",
       "response": {
-        "roundId": "e571d6fb-a148-46d6-9bf2-2c5d324ba54a",
-        "parentRoundId": "85397462-fb0c-4327-8efa-bab0e49ca57b",
+        "roundId": "848bffbe-1d2c-44d5-b660-03d2d4c878ba",
+        "parentRoundId": "ebabeaf7-d87e-472f-a990-e1a150b3c50d",
         "parentSeedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "balance": 98000,
         "totalBetAmount": 1000,
@@ -1669,7 +1669,7 @@
     {
       "call": "next-action (last)",
       "response": {
-        "roundId": "85397462-fb0c-4327-8efa-bab0e49ca57b",
+        "roundId": "ebabeaf7-d87e-472f-a990-e1a150b3c50d",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "balance": 98000,

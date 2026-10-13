@@ -5,7 +5,7 @@
     {
       "call": "bet",
       "body": {
-        "sessionId": "af19e626-d6de-441a-80ff-9e94a633283a",
+        "sessionId": "1b6a0b5e-f0cc-4598-b735-d843f6dcdf72",
         "betAmount": 1000,
         "betType": "BASE",
         "seed": "fixture-007"
@@ -14,7 +14,7 @@
     {
       "call": "draw",
       "body": {
-        "sessionId": "af19e626-d6de-441a-80ff-9e94a633283a",
+        "sessionId": "1b6a0b5e-f0cc-4598-b735-d843f6dcdf72",
         "params": {
           "dist": "normal",
           "mu": 10,
@@ -26,7 +26,7 @@
     {
       "call": "draw",
       "body": {
-        "sessionId": "af19e626-d6de-441a-80ff-9e94a633283a",
+        "sessionId": "1b6a0b5e-f0cc-4598-b735-d843f6dcdf72",
         "params": {
           "dist": "categorical",
           "weights": [
@@ -41,7 +41,7 @@
     {
       "call": "draw",
       "body": {
-        "sessionId": "af19e626-d6de-441a-80ff-9e94a633283a",
+        "sessionId": "1b6a0b5e-f0cc-4598-b735-d843f6dcdf72",
         "params": {
           "dist": "permutation",
           "n": 5
@@ -52,7 +52,7 @@
     {
       "call": "collect",
       "body": {
-        "roundId": "586bb908-0425-4ace-88d8-45457d130db0"
+        "roundId": "cd53ca7d-3365-4125-b5ea-340cfc53666e"
       }
     }
   ],

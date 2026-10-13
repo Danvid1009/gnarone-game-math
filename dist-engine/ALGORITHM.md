@@ -28,6 +28,11 @@ recycles $u$ through a Fisher–Yates shuffle.
 | logistic | $\mu, s > 0$ | $\mu + s \ln\frac{u}{1-u}$ | $\mu$ |
 | weibull | $k, \lambda > 0$ | $\lambda(-\ln(1-u))^{1/k}$ | $\lambda\,\Gamma(1 + 1/k)$ |
 | pareto | $x_m, \alpha > 0$ | $x_m (1-u)^{-1/\alpha}$ | $\alpha x_m/(\alpha-1)$ for $\alpha > 1$ |
+| gamma | $k, \theta > 0$ | $\theta\,P^{-1}(k, u)$, bisection on the regularised incomplete gamma | $k\theta$ |
+| chisquare | $\nu > 0$ | gamma with $k = \nu/2,\ \theta = 2$ | $\nu$ |
+| loglogistic | $\alpha, \beta > 0$ | $\alpha \left(\tfrac{u}{1-u}\right)^{1/\beta}$ | $\alpha\,\tfrac{\pi/\beta}{\sin(\pi/\beta)}$ for $\beta > 1$ |
+| rayleigh | $\sigma > 0$ | $\sigma\sqrt{-2\ln(1-u)}$ | $\sigma\sqrt{\pi/2}$ |
+| frechet | $\alpha, s > 0,\ m \ge 0$ | $m + s(-\ln u)^{-1/\alpha}$ | $m + s\,\Gamma(1 - 1/\alpha)$ for $\alpha > 1$ |
 | bernoulli | $p$ | $[u \ge 1-p]$ | $p$ |
 | binomial | $n, p$ | cumulative table | $np$ |
 | poisson | $\lambda$ | cumulative table | $\lambda$ |
@@ -78,5 +83,7 @@ with parameter documentation and defaults, so a client can build a picker withou
 | normal-clipped | $\mu = 1,\ \sigma = 0.5$ | [0, 3] | | [0, 3c] | 97.7% |
 | pareto | $x_m = 0.5,\ \alpha = 2.5$ | [0, 100] | | [0.5c, 100c] | 100% |
 | poisson | $\lambda = 1$ | — | | multiples of c | 63.2% |
+| gamma | $k = 2,\ \theta = 0.5$ | [0, 20] | 0.95 | up to 19 | 100% |
+| loglogistic | $\alpha = 1,\ \beta = 3$ | [0, 50] | 0.786 | up to 39.3 | 100% |
 
 The live numbers for each preset are in `distributions/api/<preset>/field.json`.

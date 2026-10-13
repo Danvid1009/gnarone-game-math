@@ -251,9 +251,9 @@
     "folder": "dist-engine",
     "title": "Distributions",
     "accent": "DISTRIBUTIONS",
-    "lead": "A library of sixteen named distributions behind one uniform: every sample is the inverse CDF of a seeded draw, so it is reproducible and auditable. Two uses: free sealed draws for anything a game needs random (bot speeds, timings, Ragency targets), and a money mode where the stake pays a multiple sampled from a chosen distribution, clamped and scaled so its mean is exactly the RTP.",
+    "lead": "A library of twenty-one named distributions behind one uniform: every sample is the inverse CDF of a seeded draw, so it is reproducible and auditable. Two uses: free sealed draws for anything a game needs random (bot speeds, timings, Ragency targets), and a money mode where the stake pays a multiple sampled from a chosen distribution, clamped and scaled so its mean is exactly the RTP.",
     "tags": [
-      "16 distributions, one uniform each",
+      "21 distributions, one uniform each",
       "free sealed draws",
       "money mode: any shape, exact RTP"
     ],
