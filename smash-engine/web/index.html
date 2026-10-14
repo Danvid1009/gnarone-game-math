@@ -44,27 +44,31 @@ table.t{width:100%;border-collapse:collapse;font-size:11.5px}.t td,.t th{padding
     <div class="card disclose"><b>How this is fair.</b> The number of rocks crushed is drawn from a fixed table; on 2 or 3 a gem fires with a fixed chance and its multiplier comes from a weighted table. Return is the exact sum over the 16 outcomes: 97.07% base, 97.15% boosted. Boosted stakes are two chips, so its multiples of stake are the sheet's wins ÷ 2.</div>
   </aside>
 </div>
-<script>
-const GEMS=[[10,1],[8,1],[5,2],[4,3],[3,4],[2,7]],GW=18;
-const MODES={BASE:{d:1,rows:[[3,.08,.05,5],[2,.28,.05,1],[1,.40,0,.5],[0,.24,0,0]]},BOOSTED:{d:2,rows:[[3,.23,.075,5],[2,.34,.075,1],[1,.31,0,.5],[0,.12,0,0]]}};
-function build(m){const M=MODES[m],z=[];for(const[c,p,g,w]of M.rows){if(g>0)for(const[gm,gw]of GEMS)z.push({c,gem:gm,p:p*g*gw/GW,mult:w*gm/M.d});z.push({c,gem:null,p:p*(1-g),mult:w/M.d})}z.sort((a,b)=>b.mult-a.mult);let a=0;for(const x of z){x.from=a;a+=x.p;x.to=a}z[z.length-1].to=1;return{zones:z,rtp:z.reduce((s,x)=>s+x.p*x.mult,0),rows:M.rows,d:M.d}}
-function uniform(){const a=new Uint32Array(2);crypto.getRandomValues(a);return(a[0]*4294967296+a[1])/18446744073709551616}
-const $=id=>document.getElementById(id),fmt=x=>x.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}),pct=x=>(100*x).toFixed(2)+'%';
-const CHIPS=[1,5,10,25,50,100];let balance=1000,chip=10,mode='BASE',T=build(mode),busy=false;
-function rebuild(){T=build(mode);$('rocks').innerHTML=[0,1,2].map(i=>`<div class="rock" id="rock${i}"><div class="body"></div><div class="gem" id="gem${i}"></div><div class="lbl display" id="lbl${i}">ROCK ${i+1}</div></div>`).join('');
- $('chips').innerHTML=CHIPS.map(c=>`<button data-c="${c}" class="${c===chip?'on':''}">${c}</button>`).join('');$('chips').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(!busy){chip=+b.dataset.c;rebuild()}}));
- $('tbl').innerHTML=`<tr><th>rocks</th><th>P</th><th>P(gem)</th><th>win</th><th>return</th></tr>`+T.rows.map(([c,p,g,w])=>`<tr data-c="${c}"><td>${c}</td><td>${pct(p)}</td><td>${pct(g)}</td><td>${(w/T.d).toFixed(2)}×${g?' (×gem)':''}</td><td>${(p*w*(g*3.6666667+(1-g))/T.d).toFixed(4)}</td></tr>`).join('');
- $('stRtp').textContent=T.rtp.toFixed(6);refresh()}
-function refresh(){$('balance').textContent=fmt(balance);$('btnSmash').disabled=busy}
-$('mode').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(busy)return;mode=b.dataset.m;$('mode').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));rebuild()}));
-function say(b,t,m){$('coBig').textContent=b;$('coText').textContent=t;$('callout').className='callout'+(m?' '+m:'')}
-function shatter(el){const r=el.getBoundingClientRect(),s=$('stage').getBoundingClientRect();for(let i=0;i<14;i++){const d=document.createElement('div');d.className='shard';d.style.left=(r.left-s.left+r.width/2)+'px';d.style.top=(r.top-s.top+r.height/2)+'px';d.style.setProperty('--dx',(Math.random()*160-80)+'px');d.style.setProperty('--dy',(Math.random()*120-20)+'px');d.style.setProperty('--r',(Math.random()*720-360)+'deg');$('stage').appendChild(d);setTimeout(()=>d.remove(),900)}}
-function smash(){if(busy)return;const stake=chip*T.d;if(stake>balance){say('NOT ENOUGH','Lower the stake or reload.','lose');return}busy=true;balance-=stake;refresh();rebuild();busy=true;refresh();
- const u=uniform();let z=0;while(z<T.zones.length-1&&T.zones[z].to<=u)z++;const o=T.zones[z];const win=Math.round(stake*o.mult*100)/100;
- $('tbl').querySelectorAll('tr[data-c]').forEach(tr=>tr.classList.toggle('hit',+tr.dataset.c===o.c));
- const order=[0,1,2].sort(()=>Math.random()-.5);say('SMASHING',`u = ${u.toFixed(6)} landed in zone ${z}. Watch the rocks.`);
- order.forEach((i,k)=>setTimeout(()=>{const R=$('rock'+i);R.classList.add('shake');setTimeout(()=>{R.classList.remove('shake');if(k<o.c){R.classList.add('crushed');shatter(R);$('lbl'+i).textContent='CRUSHED';if(o.gem&&k===o.c-1){const g=$('gem'+i);g.textContent=o.gem+'×';g.classList.add('on')}}else $('lbl'+i).textContent='SOLID'},350)},300+k*650));
- setTimeout(()=>{balance+=win;$('stU').textContent=u.toFixed(6);$('stC').textContent=o.c;$('stG').textContent=o.gem?o.gem+'×':'none';$('stM').textContent=o.mult.toFixed(2)+'×';$('stP').textContent=fmt(win);
-  say(win>0?`${o.mult.toFixed(2)}×`:'NOTHING',win>0?`${o.c} rock${o.c>1?'s':''} crushed${o.gem?`, gem ${o.gem}×`:''}. Paid ${fmt(win)} on ${fmt(stake)}.`:`No rocks crushed. Stake of ${fmt(stake)} lost.`,win>0?'win':'lose');busy=false;refresh()},300+3*650+500)}
-$('btnSmash').addEventListener('click',smash);document.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();smash()}});rebuild();
+<script type="module">
+// Sample game built on the published engine module: open → bet (BASE | BOOSTED) → collect.
+import { createGame } from './api/rgs.js';
+const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(2) + '%';
+const CHIPS = [1, 5, 10, 25, 50, 100]; let chip = 10, mode = 'BASE', busy = false;
+const g = createGame({ preset: 'sheet' }), s = g.open(); const balance = () => g.getSession(s.sessionId).balance / 100;
+const T = () => s.modes[mode];
+function rebuild() { $('rocks').innerHTML = [0, 1, 2].map(i => `<div class="rock" id="rock${i}"><div class="body"></div><div class="gem" id="gem${i}"></div><div class="lbl display" id="lbl${i}">ROCK ${i + 1}</div></div>`).join('');
+  $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === chip ? 'on' : ''}">${c}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (!busy) { chip = +b.dataset.c; rebuild(); } }));
+  const byCount = {}; for (const z of T().zones) { const r = (byCount[z.count] ??= { p: 0, gemP: 0, win: 0, ret: 0 }); r.p += z.p; if (z.gem) r.gemP += z.p; else r.win = z.multiple; r.ret += z.p * z.multiple; }
+  $('tbl').innerHTML = `<tr><th>rocks</th><th>P</th><th>P(gem)</th><th>win</th><th>return</th></tr>` + [3, 2, 1, 0].map(c => { const r = byCount[c]; return `<tr data-c="${c}"><td>${c}</td><td>${pct(r.p)}</td><td>${r.p ? pct(r.gemP / r.p) : '—'}</td><td>${r.win.toFixed(2)}×${r.gemP ? ' (×gem)' : ''}</td><td>${r.ret.toFixed(4)}</td></tr>`; }).join('');
+  $('stRtp').textContent = T().rtp.toFixed(6); refresh(); }
+function refresh() { $('balance').textContent = fmt(balance()); $('btnSmash').disabled = busy; }
+$('mode').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (busy) return; mode = b.dataset.m; $('mode').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); rebuild(); }));
+function say(b, t, m) { $('coBig').textContent = b; $('coText').textContent = t; $('callout').className = 'callout' + (m ? ' ' + m : ''); }
+function shatter(el) { const r = el.getBoundingClientRect(), st = $('stage').getBoundingClientRect(); for (let i = 0; i < 14; i++) { const d = document.createElement('div'); d.className = 'shard'; d.style.left = (r.left - st.left + r.width / 2) + 'px'; d.style.top = (r.top - st.top + r.height / 2) + 'px'; d.style.setProperty('--dx', (Math.random() * 160 - 80) + 'px'); d.style.setProperty('--dy', (Math.random() * 120 - 20) + 'px'); d.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg'); $('stage').appendChild(d); setTimeout(() => d.remove(), 900); } }
+function smash() {
+  if (busy) return; const stake = chip; if (stake > balance()) { say('NOT ENOUGH', 'Lower the stake or reload.', 'lose'); return; } busy = true; rebuild(); busy = true; refresh();
+  const r = g.bet({ sessionId: s.sessionId, betAmount: stake * 100, betType: mode }); refresh();
+  const u = r.math.u, z = r.math.zone, count = r.count, gem = r.math.gem, mult = r.multiplier, win = r.totalWinAmount / 100;
+  $('tbl').querySelectorAll('tr[data-c]').forEach(tr => tr.classList.toggle('hit', +tr.dataset.c === count));
+  const order = [0, 1, 2].sort(() => Math.random() - .5); say('SMASHING', `u = ${u.toFixed(6)} landed in zone ${z}. Watch the rocks.`);
+  order.forEach((i, k) => setTimeout(() => { const R = $('rock' + i); R.classList.add('shake'); setTimeout(() => { R.classList.remove('shake'); if (k < count) { R.classList.add('crushed'); shatter(R); $('lbl' + i).textContent = 'CRUSHED'; if (gem && k === count - 1) { const gg = $('gem' + i); gg.textContent = gem + '×'; gg.classList.add('on'); } } else $('lbl' + i).textContent = 'SOLID'; }, 350); }, 300 + k * 650));
+  setTimeout(() => { g.collect({ roundId: r.roundId }); $('stU').textContent = u.toFixed(6); $('stC').textContent = count; $('stG').textContent = gem ? gem + '×' : 'none'; $('stM').textContent = mult.toFixed(2) + '×'; $('stP').textContent = fmt(win);
+    say(win > 0 ? `${mult.toFixed(2)}×` : 'NOTHING', win > 0 ? `${count} rock${count > 1 ? 's' : ''} crushed${gem ? `, gem ${gem}×` : ''}. Paid ${fmt(win)} on ${fmt(stake)}.` : `No rocks crushed. Stake of ${fmt(stake)} lost.`, win > 0 ? 'win' : 'lose'); busy = false; refresh(); }, 300 + 3 * 650 + 500);
+}
+$('btnSmash').addEventListener('click', smash); document.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); smash(); } }); rebuild();
 </script>

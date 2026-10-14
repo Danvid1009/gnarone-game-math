@@ -70,6 +70,21 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
   <a class="card" href="cutscene/"><div class="k">FIGHT <b>CUTSCENE</b></div><p>One bet on the winner, decided by a single biased coin whose probability is the Live Fight rating of the pairing (power and HP in one number), then a predetermined cutscene that plays it out. During the cutscene the developer can call any number of side bets from a library: biased coins, n-way picks at RTP ÷ p, Single Shot tables. Each side bet is its own independent draw at its own RTP.</p><span class="tag">one coin, exact RTP</span></a>
   <a class="card" href="distributions/"><div class="k"> <b>DISTRIBUTIONS</b></div><p>A library of twenty-one named distributions behind one uniform: every sample is the inverse CDF of a seeded draw, so it is reproducible and auditable. Two uses: free sealed draws for anything a game needs random (bot speeds, timings, Ragency targets), and a money mode where the stake pays a multiple sampled from a chosen distribution, clamped and scaled so its mean is exactly the RTP.</p><span class="tag">21 distributions, one uniform each</span></a>
 </div>
+<h2>Sample games</h2>
+<p class="lead">One playable game per engine, each built the way an SDK game would be: the page imports its engine's published module and only ever calls open → bet → next-action → collect. No math in the page.</p>
+<div class="grid">
+  <a class="card" href="stepper/play.html"><div class="k">STEPPER</div><p>built on <code>stepper/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>
+  <a class="card" href="single-shot/play.html"><div class="k">SINGLE SHOT</div><p>built on <code>single-shot/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>
+  <a class="card" href="top-3/play.html"><div class="k">TOP 3</div><p>built on <code>top-3/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>
+  <a class="card" href="top-1/play.html?mode=top1"><div class="k">TOP 1</div><p>built on <code>top-1/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>
+  <a class="card" href="rip-rumble/play.html"><div class="k">RIP &amp; RUMBLE</div><p>built on <code>rip-rumble/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>
+  <a class="card" href="game-of-three/play.html"><div class="k">GAME OF THREE</div><p>built on <code>game-of-three/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>
+  <a class="card" href="pick-one/play.html"><div class="k">PICK ONE</div><p>built on <code>pick-one/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>
+  <a class="card" href="auction/play.html"><div class="k">STORAGE AUCTION</div><p>built on <code>auction/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>
+  <a class="card" href="fight/play.html"><div class="k">LIVE FIGHT</div><p>built on <code>fight/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>
+  <a class="card" href="cutscene/play.html"><div class="k">CUTSCENE FIGHT</div><p>built on <code>cutscene/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>
+  <a class="card" href="distributions/play.html"><div class="k">DISTRIBUTIONS</div><p>built on <code>distributions/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>
+</div>
 <h2>For integrators</h2>
 <ul class="links">
   <li><a href="presets.pdf">Preset catalogue (PDF)</a> — every engine's parameters, shipped presets, who each is for, and what is a preset change versus a ticket.</li>

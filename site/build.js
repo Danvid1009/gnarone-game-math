@@ -262,6 +262,11 @@ ${engines.map(e => {
   return `  <a class="card" href="${e.slug}/"><div class="k">${esc(t1)} ${t2 ? `<b>${esc(t2)}</b>` : ''}</div><p>${esc(e.lead)}</p><span class="tag">${esc(e.tags[0])}</span></a>`;
 }).join('\n')}
 </div>
+<h2>Sample games</h2>
+<p class="lead">One playable game per engine, each built the way an SDK game would be: the page imports its engine's published module and only ever calls open → bet → next-action → collect. No math in the page.</p>
+<div class="grid">
+${engines.map(e => `  <a class="card" href="${e.slug}/play.html${e.query ? '?' + e.query : ''}"><div class="k">${esc(e.title.toUpperCase())}</div><p>built on <code>${e.slug}/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>`).join('\n')}
+</div>
 <h2>For integrators</h2>
 <ul class="links">
   <li><a href="presets.pdf">Preset catalogue (PDF)</a> — every engine's parameters, shipped presets, who each is for, and what is a preset change versus a ticket.</li>

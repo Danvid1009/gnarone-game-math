@@ -112,109 +112,60 @@ input.pay{width:100%;margin-top:6px;padding:8px;border:1px solid var(--line);bor
   </aside>
 </div>
 
-<script>
-// ── engine (mirrors race-engine/src/engine.js) ───────────────────────────────────────
+<script type="module">
+// Sample game built on the published engine module: createGame({ preset, mode, racers?, rtp?, structure? }) → open → bet(RACER_i) → collect. This skin names the racers.
+import { createGame } from './api/rgs.js';
 const TOP1 = new URLSearchParams(location.search).get('mode') === 'top1';
-function buildRace(racers, rtp, pa, pb) {
-  const n = racers.length; if (n < 3) throw new Error('need at least three racers');
-  if (!(rtp > 0 && rtp < 1)) throw new Error('rtp must be between 0 and 1'); if (!TOP1 && !(pa > 0 && pa <= 1 && pb > 0 && pb <= pa)) throw new Error('fractions: need 0 < 3rd ≤ 2nd ≤ 1');
-  const eMax = Math.max(...racers.map(r => r.elo));
-  const R = racers.map((r, i) => ({ ...r, i, w: Math.pow(10, (r.elo - eMax) / 400) })); const w = R.map(r => r.w), W = w.reduce((s, x) => s + x, 0);
-  const q1 = w.map(x => x / W);
-  const q2 = w.map((wi, i) => { let s = 0; for (let j = 0; j < n; j++) if (j !== i) s += (w[j] / W) * (wi / (W - w[j])); return s; });
-  const q3 = w.map((wi, i) => { let s = 0; for (let j = 0; j < n; j++) if (j !== i) for (let k = 0; k < n; k++) if (k !== i && k !== j) s += (w[j] / W) * (w[k] / (W - w[j])) * (wi / (W - w[j] - w[k])); return s; });
-  const top3 = q1.map((_, i) => q1[i] + q2[i] + q3[i]), bound = TOP1 ? 1 : rtp;
-  const bad = TOP1 ? [] : R.filter((_, i) => top3[i] >= bound);
-  if (bad.length) throw new Error(`Infeasible field: ${bad.map(r => `${r.name} (top-3 ${(100 * top3[r.i]).toFixed(1)}%)`).join(', ')} at or above the RTP ${(100 * rtp).toFixed(1)}%: no positive win profit can return it. Weaken the favourite.`);
-  const M = TOP1 ? R.map((_, i) => [rtp / q1[i], 0, 0]) : R.map((_, i) => { const P = (rtp - top3[i]) / (q1[i] + pa * q2[i] + pb * q3[i]); return [1 + P, 1 + pa * P, 1 + pb * P]; });
-  function finish(u) {
-    const rem = R.map(r => r.i), order = [];
-    if (u >= 1) u = 1 - 1e-15;
-    while (rem.length > 1) {
-      const tot = rem.reduce((s, i) => s + w[i], 0); let a = 0, pick = rem[rem.length - 1], pa = 1 - w[pick] / tot, pp = w[pick] / tot;
-      for (const i of rem) { const p = w[i] / tot; if (u < a + p) { pick = i; pa = a; pp = p; break; } a += p; }
-      u = Math.min(Math.max((u - pa) / pp, 0), 1 - 1e-15); order.push(pick); rem.splice(rem.indexOf(pick), 1);
-    }
-    order.push(rem[0]); return { order, top: order.slice(0, 3) };
-  }
-  function zones(limit) { const out = []; for (let a = 0; a < n; a++) for (let b = 0; b < n; b++) { if (b === a) continue; for (let c = 0; c < n; c++) { if (c === a || c === b) continue; out.push({ top: [a, b, c], p: (w[a] / W) * (w[b] / (W - w[a])) * (w[c] / (W - w[a] - w[b])) }); } } out.sort((x, y) => y.p - x.p); return { total: out.length, top: out.slice(0, limit) }; }
-  return { R, W, rtp, pa, pb, q1, q2, q3, top3, bound, M, finish, zones, multiple(i, top) { const k = top.indexOf(i); return k < 0 ? 0 : M[i][k]; } };
+const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(2) + '%';
+const CHIPS = [1, 5, 10, 25, 50, 100]; const NAMES = ['Ace', 'Bolt', 'Cinder', 'Dash', 'Ember', 'Flint', 'Gale', 'Hex', 'Iris', 'Jolt', 'Kite', 'Lux'];
+let elos = [1850, 1780, 1720, 1680, 1640, 1600, 1560, 1520, 1480, 1430, 1380, 1300], stake = 10, backed = 0, g = null, s = null, race = null, busy = false, last = null;
+const balance = () => g ? g.getSession(s.sessionId).balance / 100 : 1000;
+function build() {
+  const bal = g ? Math.round(balance() * 100) : 100000; const rtp = Number($('rtp').value), place = Number($('place').value), show = Number($('show').value);
+  g = createGame({ preset: 'field-12', mode: TOP1 ? 'top1' : 'top3', racers: elos.map(elo => ({ elo })), rtp, structure: TOP1 ? undefined : { kind: 'place-terms', place, show } });   // the engine throws on an infeasible field
+  s = g.open({ balance: bal }); const R = g.engine;
+  return { ids: s.racers.map(r => r.name), R: s.racers.map((r, i) => ({ name: NAMES[i], elo: r.elo, q1: r.q[0], top3: r.q[0] + r.q[1] + r.q[2], M: r.multipliers })), bound: TOP1 ? 1 : rtp, zones: R.zones ? R.zones() : null };
 }
-function uniform() { const a = new Uint32Array(2); crypto.getRandomValues(a); return (a[0] * 4294967296 + a[1]) / 18446744073709551616; }
-
-// ── state ───────────────────────────────────────────────────────────────────────────
-const $ = id => document.getElementById(id);
-const fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const pct = x => (100 * x).toFixed(2) + '%';
-const CHIPS = [1, 5, 10, 25, 50, 100];
-let racers = [['Ace', 1850], ['Bolt', 1780], ['Cinder', 1720], ['Dash', 1680], ['Ember', 1640], ['Flint', 1600], ['Gale', 1560], ['Hex', 1520], ['Iris', 1480], ['Jolt', 1430], ['Kite', 1380], ['Lux', 1300]].map(([name, elo]) => ({ name, elo }));
-let balance = 1000, stake = 10, backed = 0, race = null, busy = false, last = null;
-
 function rebuild() {
-  try { race = buildRace(racers, Number($('rtp').value), Number($('place').value), Number($('show').value)); $('err').textContent = ''; }
-  catch (e) { $('err').textContent = e.message; if (!race) return; }
+  try { race = build(); $('err').textContent = ''; } catch (e) { $('err').textContent = e.message; if (!race) return; }
   const L = $('lanes'); L.innerHTML = '';
-  race.R.forEach((r, i) => {
-    const lane = document.createElement('div'); lane.className = 'lane' + (i === backed ? ' backed' : ''); lane.dataset.i = i;
-    lane.innerHTML = `<div class="tag"><b>${r.name}</b><span class="mono">${r.elo}</span></div><div class="runner" id="run${i}"><div class="medal"></div><div class="head"></div><div class="body" data-n="${String(456 - i).padStart(3, '0')}"></div></div><div class="odds mono">${TOP1 ? race.M[i][0].toFixed(2) + '×' : race.M[i].map(m => m.toFixed(2)).join(' / ')} · win ${pct(race.q1[i])}</div>`;
-    lane.addEventListener('click', () => { if (!busy) { backed = i; rebuild(); } });
-    L.appendChild(lane);
-  });
-  $('racers').innerHTML = `<li class="head"><span></span><span>racer</span><span class="r">elo</span><span class="r">top-3</span><span class="r">M₁ / M₂ / M₃</span></li>` +
-    race.R.map((r, i) => `<li data-i="${i}" class="${i === backed ? 'backed' : ''}"><span>${i === backed ? '▶' : ''}</span><span>${r.name}</span><span class="r"><input type="number" step="10" value="${racers[i].elo}" data-i="${i}" aria-label="${r.name} Elo"></span><span class="r">${(100 * race.top3[i]).toFixed(1)}%</span><span class="r m">${TOP1 ? race.M[i][0].toFixed(2) + '×' : race.M[i].map(m => m.toFixed(2)).join(' / ')}</span></li>`).join('');
+  race.R.forEach((r, i) => { const lane = document.createElement('div'); lane.className = 'lane' + (i === backed ? ' backed' : ''); lane.dataset.i = i;
+    lane.innerHTML = `<div class="tag"><b>${r.name}</b><span class="mono">${r.elo}</span></div><div class="runner" id="run${i}"><div class="medal"></div><div class="head"></div><div class="body" data-n="${String(456 - i).padStart(3, '0')}"></div></div><div class="odds mono">${TOP1 ? r.M[0].toFixed(2) + '×' : r.M.map(m => m.toFixed(2)).join(' / ')} · win ${pct(r.q1)}</div>`;
+    lane.addEventListener('click', () => { if (!busy) { backed = i; rebuild(); } }); L.appendChild(lane); });
+  $('racers').innerHTML = `<li class="head"><span></span><span>racer</span><span class="r">elo</span><span class="r">top-3</span><span class="r">M₁ / M₂ / M₃</span></li>` + race.R.map((r, i) => `<li data-i="${i}" class="${i === backed ? 'backed' : ''}"><span>${i === backed ? '▶' : ''}</span><span>${r.name} <span class="mono" style="color:var(--ink-3);font-size:10px">${race.ids[i]}</span></span><span class="r"><input type="number" step="10" value="${elos[i]}" data-i="${i}" aria-label="${r.name} Elo"></span><span class="r">${(100 * r.top3).toFixed(1)}%</span><span class="r m">${TOP1 ? r.M[0].toFixed(2) + '×' : r.M.map(m => m.toFixed(2)).join(' / ')}</span></li>`).join('');
   $('racers').querySelectorAll('li[data-i]').forEach(li => li.addEventListener('click', e => { if (e.target.tagName === 'INPUT' || busy) return; backed = +li.dataset.i; rebuild(); }));
-  $('racers').querySelectorAll('input').forEach(inp => inp.addEventListener('change', () => { racers[+inp.dataset.i].elo = Number(inp.value); rebuild(); }));
-  const Z = race.zones(60);
-  $('zones').innerHTML = Z.top.map(z => `<li data-top="${z.top.join('-')}"><span>${z.top.map(i => race.R[i].name).join(' › ')}</span><span class="r p">${pct(z.p)}</span></li>`).join('');
-  $('stZ').textContent = TOP1 ? `${Z.total} ordered podiums · winner takes all` : `${Z.total} ordered podiums · feasible while top-3 < ${pct(race.bound)}`;
+  $('racers').querySelectorAll('input').forEach(inp => inp.addEventListener('change', () => { elos[+inp.dataset.i] = Number(inp.value); rebuild(); }));
+  if (race.zones) { const Z = race.zones.slice(0, 60); $('zones').innerHTML = Z.map(z => `<li data-top="${z.top.join('-')}"><span>${z.top.map(i => race.R[i].name).join(' › ')}</span><span class="r p">${pct(z.p)}</span></li>`).join(''); $('stZ').textContent = TOP1 ? `${race.zones.length} ordered podiums · winner takes all` : `${race.zones.length} ordered podiums · feasible while top-3 < ${pct(race.bound)}`; }
   refresh();
 }
 ['rtp', 'place', 'show'].forEach(id => $(id).addEventListener('change', rebuild));
 function buildChips() { $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === stake ? 'on' : ''}">${c}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (busy) return; stake = +b.dataset.c; buildChips(); })); }
-
-// ── race ────────────────────────────────────────────────────────────────────────────
 function say(big, text, mood) { $('coBig').textContent = big; $('coText').textContent = text; $('callout').className = 'callout' + (mood ? ' ' + mood : ''); }
 const ordinal = k => k + (['th', 'st', 'nd', 'rd'][(k % 100 > 10 && k % 100 < 14) ? 0 : (k % 10 < 4 ? k % 10 : 0)]);
 function run() {
-  if (busy || !race || $('err').textContent) return;
-  if (stake > balance) { say('NOT ENOUGH', 'Lower the stake or reload for a fresh demo balance.', 'lose'); return; }
-  busy = true; balance -= stake; refresh();
-  const u = uniform(), fin = race.finish(u), mult = race.multiple(backed, fin.top), win = Math.round(stake * mult * 100) / 100;
-  last = { u, fin, mult, win, stake, backed };
+  if (busy || !race || $('err').textContent) return; if (stake > balance()) { say('NOT ENOUGH', 'Lower the stake or reload for a fresh demo balance.', 'lose'); return; } busy = true;
+  const r = g.bet({ sessionId: s.sessionId, betAmount: stake * 100, betType: race.ids[backed] }); refresh();
+  const order = r.math.order, top = order.slice(0, 3), mult = r.math.multiple, win = r.totalWinAmount / 100; last = { u: r.math.u, top, mult, win, stake, backed };
   document.querySelectorAll('.zones li.hit').forEach(l => l.classList.remove('hit'));
   const laneW = $('lanes').getBoundingClientRect().width, finishX = laneW - 70 - 24 - 6, n = race.R.length;
   race.R.forEach((_, i) => { const el = $('run' + i); el.className = 'runner run'; el.style.setProperty('--dur', '0s'); el.style.left = '118px'; el.querySelector('.medal').className = 'medal'; });
-  say('GO', TOP1 ? `Backing ${race.R[backed].name} at ${race.M[backed][0].toFixed(2)}× to win. The whole order is already decided by one number.` : `Backing ${race.R[backed].name}: pays ${race.M[backed].map(m => m.toFixed(2)).join(' / ')} for 1st / 2nd / 3rd. The whole order is already decided by one number.`);
+  say('GO', TOP1 ? `Backing ${race.R[backed].name} at ${race.R[backed].M[0].toFixed(2)}× to win. The whole order is already decided by one number (committed as ${r.seedHash.slice(0, 12)}…).` : `Backing ${race.R[backed].name}: pays ${race.R[backed].M.map(m => m.toFixed(2)).join(' / ')} for 1st / 2nd / 3rd. The whole order is already decided by one number.`);
   setTimeout(() => {
-    fin.order.forEach((i, place) => {
-      const el = $('run' + i), dur = 2.4 + place * 0.22 + (place ? Math.random() * 0.12 : 0);
-      el.style.setProperty('--dur', dur + 's'); el.style.left = (finishX - place * 16) + 'px';
-      setTimeout(() => { el.classList.remove('run'); if (place < 3) { const m = el.querySelector('.medal'); m.textContent = place + 1; m.className = 'medal on ' + ['g', 's', 'b'][place]; } }, dur * 1000);
-    });
-    setTimeout(() => {
-      const zli = document.querySelector(`.zones li[data-top="${fin.top.join('-')}"]`); if (zli) { zli.classList.add('hit'); zli.scrollIntoView({ block: 'nearest' }); }
-      const place = fin.top.indexOf(backed), pod = fin.top.map(i => race.R[i].name).join(' › ');
-      if (mult > 0) { balance += win; say(`${mult.toFixed(3)}×`, `${race.R[backed].name} finished ${['1st', '2nd', '3rd'][place]}. Paid ${fmt(win)}. Podium: ${pod}.`, 'win'); }
-      else say('NO PLACE', `${race.R[backed].name} finished ${ordinal(fin.order.indexOf(backed) + 1)} of ${n}. Podium: ${pod}. Stake of ${fmt(stake)} lost.`, 'lose');
-      busy = false; refresh();
-    }, (2.4 + (n - 1) * 0.22 + 0.25) * 1000);
+    order.forEach((i, place) => { const el = $('run' + i), dur = 2.4 + place * 0.22 + (place ? Math.random() * 0.12 : 0); el.style.setProperty('--dur', dur + 's'); el.style.left = (finishX - place * 16) + 'px'; setTimeout(() => { el.classList.remove('run'); if (place < 3) { const m = el.querySelector('.medal'); m.textContent = place + 1; m.className = 'medal on ' + ['g', 's', 'b'][place]; } }, dur * 1000); });
+    setTimeout(() => { const zli = document.querySelector(`.zones li[data-top="${top.join('-')}"]`); if (zli) { zli.classList.add('hit'); zli.scrollIntoView({ block: 'nearest' }); }
+      g.collect({ roundId: r.roundId }); const place = top.indexOf(backed), pod = top.map(i => race.R[i].name).join(' › ');
+      if (mult > 0) say(`${mult.toFixed(3)}×`, `${race.R[backed].name} finished ${['1st', '2nd', '3rd'][place]}. Paid ${fmt(win)}. Podium: ${pod}.`, 'win');
+      else say('NO PLACE', `${race.R[backed].name} finished ${ordinal(order.indexOf(backed) + 1)} of ${n}. Podium: ${pod}. Stake of ${fmt(stake)} lost.`, 'lose');
+      busy = false; refresh(); }, (2.4 + (n - 1) * 0.22 + 0.25) * 1000);
   }, 400);
 }
-$('btnRace').addEventListener('click', run);
-document.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); run(); } });
+$('btnRace').addEventListener('click', run); document.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); run(); } });
 function refresh() {
-  $('balance').textContent = fmt(balance); $('btnRace').disabled = busy || !!$('err').textContent;
-  $('stBack').textContent = race ? `${race.R[backed].name} (Elo ${race.R[backed].elo})` : '—';
-  $('stM').textContent = race ? (TOP1 ? race.M[backed][0].toFixed(3) + '× to win' : race.M[backed].map(m => m.toFixed(3) + '×').join(' / ')) : '—';
-  $('stU').textContent = last && !busy ? last.u.toFixed(6) : (busy ? '…' : '—');
-  $('stPod').textContent = last && !busy ? last.fin.top.map(i => race.R[i].name).join(' › ') : (busy ? '…' : '—');
-  $('stPaid').textContent = last && !busy ? fmt(last.win) : (busy ? '…' : '—');
+  $('balance').textContent = fmt(balance()); $('btnRace').disabled = busy || !!$('err').textContent;
+  $('stBack').textContent = race ? `${race.R[backed].name} · ${race.ids[backed]} (Elo ${race.R[backed].elo})` : '—';
+  $('stM').textContent = race ? (TOP1 ? race.R[backed].M[0].toFixed(3) + '× to win' : race.R[backed].M.map(m => m.toFixed(3) + '×').join(' / ')) : '—';
+  $('stU').textContent = last && !busy ? last.u.toFixed(6) : (busy ? '…' : '—'); $('stPod').textContent = last && !busy ? last.top.map(i => race.R[i].name).join(' › ') : (busy ? '…' : '—'); $('stPaid').textContent = last && !busy ? fmt(last.win) : (busy ? '…' : '—');
 }
-if (TOP1) {
-  document.querySelector('header h1').innerHTML = 'RATED RACERS · <span>TOP 1</span>';
-  document.querySelector('.row2').hidden = true;
-  document.querySelector('#coText').textContent = 'Click a lane to back that racer, pick a stake, press Race. One uniform number, recycled, produces the whole finishing order. Only the winner pays: odds are RTP ÷ P(win).';
-  document.querySelector('.disclose').innerHTML = '<b>How this is fair.</b> Strength is 10^(Elo/400), so pairwise odds are Elo\'s own formula. One uniform picks the winner from intervals sized by strength, and its leftover is recycled to fill the rest of the order (Plackett–Luce, exactly). Backing racer i pays RTP ÷ P(i wins) for a win and nothing otherwise, so every racer returns exactly the target RTP.';
-}
+if (TOP1) { document.querySelector('header h1').innerHTML = 'RATED RACERS · <span>TOP 1</span>'; document.querySelector('.row2').hidden = true; document.querySelector('#coText').textContent = 'Click a lane to back that racer, pick a stake, press Race. One uniform number, recycled, produces the whole finishing order. Only the winner pays: odds are RTP ÷ P(win).'; document.querySelector('.disclose').innerHTML = '<b>How this is fair.</b> Strength is 10^(Elo/400), so pairwise odds are Elo\'s own formula. One uniform picks the winner from intervals sized by strength, and its leftover is recycled to fill the rest of the order (Plackett–Luce, exactly). Backing racer i pays RTP ÷ P(i wins) for a win and nothing otherwise, so every racer returns exactly the target RTP.'; }
 rebuild(); buildChips();
 </script>

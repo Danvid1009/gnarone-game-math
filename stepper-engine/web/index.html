@@ -129,126 +129,79 @@ button:disabled{opacity:.4;cursor:not-allowed}
   </aside>
 </div>
 
-<script>
-// ── ladder math (mirrors stepper-engine/src/engine.js) ─────────────────────────────
-const RTP = 0.97, STEPS = 10;
-const DIFF = { easy: 10, medium: 25, hard: 100 };
-function buildLadder(maxWin) {
-  const m = Math.pow(maxWin, 1 / STEPS);
-  const c = Array.from({ length: STEPS }, (_, i) => Math.round(Math.pow(m, i + 1) * 100) / 100);
-  const G = [1, ...c.map(ck => RTP / ck)];                       // survival to at least rung k
-  const p = G.map((g, k) => (k < STEPS ? g - G[k + 1] : g));     // event k: crash after k rungs; event N: golden egg
-  const cum = [0]; for (const x of p) cum.push(cum[cum.length - 1] + x); cum[cum.length - 1] = 1;
-  const hazard = c.map((_, i) => G[i + 1] / G[i]);               // P(survive rung k | reached it)
-  return { maxWin, c, G, p, cum, hazard, crashStep(u) { let k = 0; while (cum[k + 1] <= u) k++; return k; } };
-}
-function uniform() { const a = new Uint32Array(2); crypto.getRandomValues(a); return (a[0] * 4294967296 + a[1]) / 18446744073709551616; }
-
-// ── state ───────────────────────────────────────────────────────────────────────────
-const CHIPS = [1, 5, 10, 25, 50, 100];
-let balance = 1000, diff = 'easy', ladder = buildLadder(DIFF[diff]), stake = 10;
-let round = null;   // { K, u, step, bet, ended }
+<script type="module">
+// Sample game built on the published engine module (the SDK stand-in): open → bet → next-action → collect.
+import { createGame, PRESETS } from './api/rgs.js';
+import { HashRng, commit } from './rgs-math/src/rng.js';
+const STEPS = 10, CHIPS = [1, 5, 10, 25, 50, 100];
+const DIFF = { easy: 'EASY', medium: 'MEDIUM', hard: 'HARD' };
+let diff = 'easy', stake = 10, g = null, s = null, L = null, round = null;
 const $ = id => document.getElementById(id);
 const fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const pct = x => (100 * x).toFixed(1) + '%';
-
-// ── build DOM ───────────────────────────────────────────────────────────────────────
+const balance = () => g.getSession(s.sessionId).balance / 100;
+function setup() { const bal = g ? Math.round(balance() * 100) : 100000; g = createGame({ preset: DIFF[diff] }); s = g.open({ balance: bal }); L = { c: s.returns, G: s.survival, cum: s.cum, hazard: s.returns.map((_, i) => s.survival[i + 1] / s.survival[i]) }; }
 function buildBridge() {
-  const b = $('bridge'); b.querySelectorAll('.row').forEach(r => r.remove());
-  const player = $('player');
-  for (let k = STEPS; k >= 1; k--) {            // far rung first (top of screen)
-    const row = document.createElement('div'); row.className = 'row'; row.dataset.k = k;
-    row.innerHTML = `<div class="pane" data-side="L" role="button" tabindex="-1" aria-label="rung ${k} left pane"></div><div class="pane" data-side="R" role="button" tabindex="-1" aria-label="rung ${k} right pane"></div><div class="rung display">${ladder.c[k - 1].toFixed(2)}×</div>`;
-    row.querySelectorAll('.pane').forEach(p => p.addEventListener('click', () => step(k, p)));
-    b.insertBefore(row, player);
-  }
-  $('goalMult').textContent = ladder.c[STEPS - 1].toFixed(2) + '×';
-  $('goal').classList.remove('lit');
+  const b = $('bridge'); b.querySelectorAll('.row').forEach(r => r.remove()); const player = $('player');
+  for (let k = STEPS; k >= 1; k--) { const row = document.createElement('div'); row.className = 'row'; row.dataset.k = k;
+    row.innerHTML = `<div class="pane" data-side="L" role="button" tabindex="-1" aria-label="rung ${k} left pane"></div><div class="pane" data-side="R" role="button" tabindex="-1" aria-label="rung ${k} right pane"></div><div class="rung display">${L.c[k - 1].toFixed(2)}×</div>`;
+    row.querySelectorAll('.pane').forEach(p => p.addEventListener('click', () => step(k, p))); b.insertBefore(row, player); }
+  $('goalMult').textContent = L.c[STEPS - 1].toFixed(2) + '×'; $('goal').classList.remove('lit');
 }
-function buildLadderList() {
-  const ul = $('ladder');
-  ul.innerHTML = `<li class="head"><span>k</span><span>pays</span><span class="r">reach</span><span class="r">holds</span></li>` +
-    ladder.c.map((ck, i) => `<li data-k="${i + 1}" class="${i === STEPS - 1 ? 'egg' : ''}"><span>${i + 1}</span><span class="m">${ck.toFixed(2)}×</span><span class="r">${pct(ladder.G[i + 1])}</span><span class="r">${pct(ladder.hazard[i])}</span></li>`).join('');
-}
-function buildChips() {
-  $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === stake ? 'on' : ''}">${c}</button>`).join('');
-  $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (round && !round.ended) return; stake = +b.dataset.c; buildChips(); }));
-}
-$('diff').querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
-  if (round && !round.ended) return;
-  diff = b.dataset.d; ladder = buildLadder(DIFF[diff]);
-  $('diff').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
-  buildBridge(); buildLadderList(); resetPlayer(); refresh();
-}));
-
-// ── round flow ──────────────────────────────────────────────────────────────────────
+function buildLadderList() { $('ladder').innerHTML = `<li class="head"><span>k</span><span>pays</span><span class="r">reach</span><span class="r">holds</span></li>` + L.c.map((ck, i) => `<li data-k="${i + 1}" class="${i === STEPS - 1 ? 'egg' : ''}"><span>${i + 1}</span><span class="m">${ck.toFixed(2)}×</span><span class="r">${pct(L.G[i + 1])}</span><span class="r">${pct(L.hazard[i])}</span></li>`).join(''); }
+function buildChips() { $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === stake ? 'on' : ''}">${c}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (round && !round.ended) return; stake = +b.dataset.c; buildChips(); })); }
+$('diff').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (round && !round.ended) return; diff = b.dataset.d; setup(); $('diff').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); buildBridge(); buildLadderList(); resetPlayer(); round = null; refresh(); }));
 function play() {
   if (round && !round.ended) return;
-  if (stake > balance) { say('NOT ENOUGH', 'Lower the stake or reload the page for a fresh demo balance.', 'lose'); return; }
-  balance -= stake;
-  const u = uniform();
-  round = { u, K: ladder.crashStep(u), step: 0, bet: stake, ended: false };
+  if (stake > balance()) { say('NOT ENOUGH', 'Lower the stake or reload the page for a fresh demo balance.', 'lose'); return; }
+  const r = g.bet({ sessionId: s.sessionId, betAmount: stake * 100, betType: DIFF[diff] });    // the crash rung is drawn now, server-side; you get only seedHash
+  round = { id: r.roundId, seedHash: r.seedHash, step: 0, bet: stake, ended: false, view: r };
   buildBridge(); resetPlayer(); $('goal').classList.remove('lit');
-  say('STEP ONTO THE BRIDGE', `Tap a pane on the first row. It holds with ${pct(ladder.hazard[0])} — that is the only step where the house takes its 3%.`);
+  say('STEP ONTO THE BRIDGE', `Tap a pane on the first row. It holds with ${pct(L.hazard[0])} — that is the only step where the house takes its 3%. Commitment: ${r.seedHash.slice(0, 16)}…`);
   refresh();
 }
 function step(k, pane) {
   if (!round || round.ended || k !== round.step + 1) return;
-  const row = pane.parentElement;
-  round.step = k;
-  if (k > round.K) {                       // crash
+  const r = g.nextAction({ roundId: round.id, actionCode: 'CONTINUE' }); round.view = r; round.step = r.currentStep; const row = pane.parentElement;
+  if (r.steps[k - 1].outcome === 'CRASH') {
     pane.classList.add('broken'); shatter(pane); $('stage').classList.add('shake'); setTimeout(() => $('stage').classList.remove('shake'), 500);
-    movePlayer(k, pane.dataset.side); setTimeout(fall, 300);
-    round.ended = true;
-    say('SHATTERED', `Rung ${k} gave way. Stake of ${fmt(round.bet)} lost. The crash pane was rung ${k} from the moment you bet.`, 'lose');
+    movePlayer(k, pane.dataset.side); setTimeout(fall, 300); end(r);
+    say('SHATTERED', `Rung ${k} gave way. Stake of ${fmt(round.bet)} lost. The crash pane was rung ${k} from the moment you bet — check the revealed seed below.`, 'lose');
     document.querySelectorAll('#ladder li[data-k]').forEach(li => li.classList.toggle('dead', +li.dataset.k >= k));
-  } else {                                  // safe
+  } else {
     pane.classList.add('safe'); row.classList.add('done'); movePlayer(k, pane.dataset.side);
-    if (k === STEPS) {
-      round.ended = true; const win = round.bet * ladder.c[k - 1]; balance += win; $('goal').classList.add('lit'); $('player').classList.add('win');
-      say('GOLDEN EGG', `You crossed all ${STEPS} rungs. Paid ${fmt(win)} at ${ladder.c[k - 1].toFixed(2)}×.`, 'win');
-    } else {
-      say(`${ladder.c[k - 1].toFixed(2)}×  HELD`, `You hold ${fmt(round.bet * ladder.c[k - 1])}. Next pane pays ${ladder.c[k].toFixed(2)}× and holds ${pct(ladder.hazard[k])} of the time. Stepping keeps your expected value exactly where it is.`);
-    }
+    if (r.roundEnded) { end(r); $('goal').classList.add('lit'); $('player').classList.add('win'); say('GOLDEN EGG', `You crossed all ${STEPS} rungs. Paid ${fmt(r.totalWinAmount / 100)} at ${L.c[k - 1].toFixed(2)}×.`, 'win'); }
+    else say(`${L.c[k - 1].toFixed(2)}×  HELD`, `You hold ${fmt(r.currentPayout / 100)}. Next pane pays ${L.c[k].toFixed(2)}× and holds ${pct(L.hazard[k])} of the time. Stepping keeps your expected value exactly where it is.`);
   }
   refresh();
 }
 function cashOut() {
   if (!round || round.ended || round.step === 0) return;
-  const win = round.bet * ladder.c[round.step - 1]; balance += win; round.ended = true;
-  $('player').classList.add('win');
-  say('CASHED OUT', `Paid ${fmt(win)} at ${ladder.c[round.step - 1].toFixed(2)}× after ${round.step} rung${round.step > 1 ? 's' : ''}. The bridge would have held to rung ${Math.min(round.K, STEPS)}${round.K >= STEPS ? ' (all the way)' : ''}.`, 'win');
+  const r = g.nextAction({ roundId: round.id, actionCode: 'CASH_OUT' }); round.view = r; end(r); $('player').classList.add('win');
+  say('CASHED OUT', `Paid ${fmt(r.totalWinAmount / 100)} at ${L.c[round.step - 1].toFixed(2)}× after ${round.step} rung${round.step > 1 ? 's' : ''}. The bridge would have held to rung ${Math.min(round.K, STEPS)}${round.K >= STEPS ? ' (all the way)' : ''}.`, 'win');
   refresh();
 }
+function end(r) { round.ended = true; round.seed = r.seed; g.collect({ roundId: round.id });
+  // provably fair: recompute the crash slot from the revealed seed and check it against the commitment given at bet time
+  const u = new HashRng(r.seed, 'payout').next(); let K = 0; while (L.cum[K + 1] <= u) K++; round.u = u; round.K = K; round.verified = commit(r.seed) === round.seedHash; }
 $('btnPlay').addEventListener('click', play); $('btnCash').addEventListener('click', cashOut);
 document.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { if (!round || round.ended) play(); else { const row = document.querySelector('.row.active .pane'); if (row) step(round.step + 1, row); } } if (e.key.toLowerCase() === 'c') cashOut(); });
-
-// ── presentation ────────────────────────────────────────────────────────────────────
 function refresh() {
-  $('balance').textContent = fmt(balance);
-  const live = round && !round.ended;
-  $('btnPlay').disabled = !!live; $('btnCash').disabled = !live || round.step === 0;
+  $('balance').textContent = fmt(balance());
+  const live = round && !round.ended; $('btnPlay').disabled = !!live; $('btnCash').disabled = !live || round.step === 0;
   document.querySelectorAll('.row').forEach(r => r.classList.toggle('active', !!live && +r.dataset.k === round.step + 1));
   document.querySelectorAll('#ladder li[data-k]').forEach(li => li.classList.toggle('cur', !!round && +li.dataset.k === round.step));
-  const k = round ? round.step : 0;
-  $('stHold').textContent = round && k > 0 && !(round.ended && round.step > round.K) ? fmt(round.bet * ladder.c[k - 1]) : (round ? fmt(0) : '—');
-  $('stNext').textContent = live && k < STEPS ? `${ladder.c[k].toFixed(2)}× = ${fmt(round.bet * ladder.c[k])}` : '—';
-  $('stSurv').textContent = live && k < STEPS ? pct(ladder.hazard[k]) : '—';
-  $('stEv').textContent = live && k < STEPS ? `${fmt(round.bet * ladder.c[k] * ladder.hazard[k])}  (= holding${k === 0 ? ' × 0.97' : ''})` : '—';
-  $('seedLine').textContent = round && round.ended ? `last round: u = ${round.u.toFixed(6)} → slot ${round.K} (${round.K === 0 ? 'instant crash' : round.K >= STEPS ? 'golden egg' : 'crash after rung ' + round.K}) · RN band [${ladder.cum[round.K].toFixed(4)}, ${ladder.cum[round.K + 1].toFixed(4)})` : (round ? 'round in progress — the draw is revealed when it ends' : '');
+  const k = round ? round.step : 0, v = round ? round.view : null;
+  $('stHold').textContent = round ? fmt((round.ended ? v.totalWinAmount : v.currentPayout) / 100) : '—';
+  $('stNext').textContent = live && k < STEPS ? `${L.c[k].toFixed(2)}× = ${fmt(round.bet * L.c[k])}` : '—';
+  $('stSurv').textContent = live && k < STEPS ? pct(L.hazard[k]) : '—';
+  $('stEv').textContent = live && k < STEPS ? `${fmt(round.bet * L.c[k] * L.hazard[k])}  (= holding${k === 0 ? ' × 0.97' : ''})` : '—';
+  $('seedLine').textContent = round && round.ended ? `seed ${round.seed.slice(0, 12)}… → u = ${round.u.toFixed(6)} → slot ${round.K} (${round.K === 0 ? 'instant crash' : round.K >= STEPS ? 'golden egg' : 'crash after rung ' + round.K}) · commitment ${round.verified ? 'verified ✓' : 'MISMATCH ✗'}` : (round ? `round in progress — committed to ${round.seedHash.slice(0, 16)}…; the seed is revealed when it ends` : '');
 }
 function say(big, text, mood) { $('coBig').textContent = big; $('coText').textContent = text; $('callout').className = 'callout' + (mood ? ' ' + mood : ''); }
 function movePlayer(k, side) { const p = $('player'); p.style.bottom = ((k - 1) * 70 + 8) + 'px'; p.style.left = side === 'L' ? '25%' : side === 'R' ? '75%' : '50%'; }
 function resetPlayer() { const p = $('player'); p.className = 'player'; p.style.bottom = '-70px'; p.style.left = '50%'; }
 function fall() { const p = $('player'); p.style.bottom = (parseFloat(p.style.bottom) - 120) + 'px'; p.classList.add('fall'); }
-function shatter(pane) {
-  const r = pane.getBoundingClientRect(), s = $('stage').getBoundingClientRect();
-  for (let i = 0; i < 16; i++) {
-    const d = document.createElement('div'); d.className = 'shard';
-    d.style.left = (r.left - s.left + Math.random() * r.width) + 'px'; d.style.top = (r.top - s.top + Math.random() * r.height) + 'px';
-    d.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px'); d.style.setProperty('--dy', (60 + Math.random() * 140) + 'px'); d.style.setProperty('--rot', (Math.random() * 720 - 360) + 'deg');
-    $('stage').appendChild(d); setTimeout(() => d.remove(), 1000);
-  }
-}
-buildBridge(); buildLadderList(); buildChips(); refresh();
+function shatter(pane) { const r = pane.getBoundingClientRect(), st = $('stage').getBoundingClientRect(); for (let i = 0; i < 16; i++) { const d = document.createElement('div'); d.className = 'shard'; d.style.left = (r.left - st.left + Math.random() * r.width) + 'px'; d.style.top = (r.top - st.top + Math.random() * r.height) + 'px'; d.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px'); d.style.setProperty('--dy', (60 + Math.random() * 140) + 'px'); d.style.setProperty('--rot', (Math.random() * 720 - 360) + 'deg'); $('stage').appendChild(d); setTimeout(() => d.remove(), 1000); } }
+setup(); buildBridge(); buildLadderList(); buildChips(); resetPlayer(); refresh();
 </script>

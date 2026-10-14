@@ -85,35 +85,34 @@ table.box{width:100%;border-collapse:collapse;font-size:12.5px}table.box td,tabl
     <div class="card"><h2 class="display">LOG</h2><div class="log mono" id="log"></div></div>
   </aside>
 </div>
-<script>
-const RTP = 0.95, N = 10, BOX = [0.25, 0.5, 1, 2, 5];
+<script type="module">
+// Sample game built on the published engine module: open → bet → next-action (CONTINUE = bid, CASH_OUT = hammer) → collect.
+import { createGame, PRESETS } from './api/rgs.js';
+const N = 10, SIZES = { 5: 'SMALL', 10: 'MEDIUM', 25: 'LARGE', 100: 'XL' };
 const TIERS = { 0.25: ['🪑', 'MOSTLY JUNK', 'Broken furniture, old tyres, a box of cables.'], 0.5: ['🔧', 'ODDS AND ENDS', 'Tools, a bicycle, some kitchenware.'], 1: ['📺', 'SOLID HAUL', 'Appliances, boxed electronics, furniture that sells.'], 2: ['🎸', "COLLECTOR'S FIND", 'Vintage guitars, coins, a signed jersey.'], 5: ['🚗', 'JACKPOT', 'A classic car under the tarp.'] };
-function ladder(M) { const m = Math.pow(M, 1 / N), c = Array.from({ length: N }, (_, i) => Math.round(Math.pow(m, i + 1) * 100) / 100); const G = [1, ...c.map(x => RTP / x)]; const p = Array.from({ length: N + 1 }, (_, k) => k < N ? G[k] - G[k + 1] : G[N]); const cum = [0]; for (const x of p) cum.push(cum[cum.length - 1] + x); cum[N + 1] = 1; return { c, G, p, cum, hazard: c.map((_, i) => G[i + 1] / G[i]) }; }
-function box() { const A = BOX, amin = A[0], amax = A[A.length - 1]; const w = l => A.map(a => Math.exp(-l * (a - amin) / amax)); const mean = l => { const x = w(l), Z = x.reduce((s, v) => s + v, 0); return x.reduce((s, v, i) => s + v / Z * A[i], 0); }; let lo = -2000, hi = 2000; for (let i = 0; i < 300; i++) { const mid = (lo + hi) / 2; if (mean(mid) > 1) lo = mid; else hi = mid; } const x = w((lo + hi) / 2), Z = x.reduce((s, v) => s + v, 0), p = x.map(v => v / Z); const br = [0]; for (const q of p) br.push(br[br.length - 1] + q); br[A.length] = 1; const pos = A.filter(a => a > 0), gap = Math.min(...pos.slice(1).map((a, i) => a - pos[i])), r = 0.1 * gap; return { A, p, br, r, mult(v) { if (v >= 1) v = 1 - 1e-12; let i = 0; while (br[i + 1] <= v) i++; if (A[i] <= 0) return { X: 0, band: i }; const t = (v - br[i]) / (br[i + 1] - br[i]); return { X: A[i] + r * (2 * t - 1), band: i }; } }; }
-const B = box();
-function uniform() { const a = new Uint32Array(2); crypto.getRandomValues(a); return (a[0] * 4294967296 + a[1]) / 18446744073709551616; }
 const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(1) + '%';
-let balance = 1000, M = 5, L = ladder(M), stake = 5, round = null;
+let M = 5, stake = 5, g = null, s = null, L = null, B = null, round = null;
+const balance = () => g.getSession(s.sessionId).balance / 100;
+function setup() { const bal = g ? Math.round(balance() * 100) : 100000; g = createGame({ preset: SIZES[M] }); s = g.open({ balance: bal }); L = { c: s.bids, hazard: s.bids.map((_, i) => s.survival[i + 1] / s.survival[i]) }; B = { A: s.locker.map(b => b.multiple), p: s.locker.map(b => b.p), r: s.locker_r };
+  $('boxTable').innerHTML = `<tr><th>multiple</th><th>p</th><th>pays</th></tr>` + B.A.map((a, i) => `<tr data-b="${i}"><td>${a}×</td><td>${pct(B.p[i])}</td><td>${(a - B.r).toFixed(3)} → ${(a + B.r).toFixed(3)}</td></tr>`).join(''); }
 const RIVALS = ['Dave', 'Brandi', 'Barry', 'Darrell', 'Ivy'];
 $('rivals').innerHTML = RIVALS.map(n => `<div class="rival"><div class="paddle">!</div><div class="head"></div><div class="body"></div>${n}</div>`).join('');
 $('chips').innerHTML = [1, 2, 5, 10, 25, 50].map(v => `<button data-v="${v}" class="${v === stake ? 'on' : ''}">${v}</button>`).join('');
-$('chips').onclick = e => { const b = e.target.closest('button'); if (!b || round) return; stake = +b.dataset.v; [...$('chips').children].forEach(x => x.classList.toggle('on', x === b)); };
-$('sizes').onclick = e => { const b = e.target.closest('button'); if (!b || round) return; M = +b.dataset.m; L = ladder(M); [...$('sizes').children].forEach(x => x.classList.toggle('on', x === b)); renderRungs(); renderStats(); };
-$('boxTable').innerHTML = `<tr><th>multiple</th><th>p</th><th>pays</th></tr>` + B.A.map((a, i) => `<tr data-b="${i}"><td>${a}×</td><td>${pct(B.p[i])}</td><td>${(a - B.r).toFixed(3)} → ${(a + B.r).toFixed(3)}</td></tr>`).join('');
-function renderRungs() { const k = round ? round.k : 0; $('rungs').innerHTML = `<li class="head"><span>bid</span><span>locker worth</span><span class="r">P(fold)</span></li>` + L.c.map((c, i) => { const s = i + 1; let cls = s === k ? 'cur' : s < k ? 'won' : ''; if (round && round.ended && round.K < s && s === round.K + 1 && !round.took) cls = 'dead'; if (s === N) cls += ' top'; return `<li class="${cls}"><span>${s}</span><span class="v">${c.toFixed(2)}× · ${fmt(c * stake)}</span><span class="r">${pct(L.hazard[i])}</span></li>`; }).join(''); }
-function renderStats() { const k = round ? round.k : 0, hold = k ? L.c[k - 1] * stake : 0; $('stHold').textContent = round && !round.ended ? fmt(hold) : '—'; if (round && !round.ended && k < N) { $('stNext').textContent = fmt(L.c[k] * stake); $('stFold').textContent = pct(L.hazard[k]); $('stEv').textContent = fmt(L.hazard[k] * L.c[k] * stake) + (k ? ' (= held)' : ' (= 0.95 × stake)'); } else { $('stNext').textContent = $('stFold').textContent = $('stEv').textContent = '—'; } $('stTake').textContent = round && !round.ended && k ? fmt(hold) : '—'; }
+$('chips').onclick = e => { const b = e.target.closest('button'); if (!b || round) return; stake = +b.dataset.v; [...$('chips').children].forEach(x => x.classList.toggle('on', x === b)); renderRungs(); };
+$('sizes').onclick = e => { const b = e.target.closest('button'); if (!b || round) return; M = +b.dataset.m; setup(); [...$('sizes').children].forEach(x => x.classList.toggle('on', x === b)); renderRungs(); renderStats(); };
+function renderRungs() { const k = round ? round.k : 0; $('rungs').innerHTML = `<li class="head"><span>bid</span><span>locker worth</span><span class="r">P(fold)</span></li>` + L.c.map((c, i) => { const st = i + 1; let cls = st === k ? 'cur' : st < k ? 'won' : ''; if (round && round.ended && !round.took && st === round.k) cls = 'dead'; if (st === N) cls += ' top'; return `<li class="${cls}"><span>${st}</span><span class="v">${c.toFixed(2)}× · ${fmt(c * stake)}</span><span class="r">${pct(L.hazard[i])}</span></li>`; }).join(''); }
+function renderStats() { const k = round ? round.k : 0, hold = k ? L.c[k - 1] * stake : 0; $('stHold').textContent = round && !round.ended ? fmt(hold) : '—'; if (round && !round.ended && k < N) { $('stNext').textContent = fmt(L.c[k] * stake); $('stFold').textContent = pct(L.hazard[k]); $('stEv').textContent = fmt(L.hazard[k] * L.c[k] * stake) + (k ? ' (= held)' : ' (= 0.95 × stake)'); } else { $('stNext').textContent = $('stFold').textContent = $('stEv').textContent = '—'; } $('stTake').textContent = round && !round.ended && k ? fmt(hold) : '—'; $('balance').textContent = fmt(balance()); }
 function callout(cls, big, text) { $('callout').className = 'callout ' + cls; $('coBig').textContent = big; $('coText').textContent = text; }
 function log(msg, cls = '') { const d = document.createElement('div'); d.className = cls; d.textContent = msg; $('log').prepend(d); }
 function setTag(txt, cls = '') { const t = $('tag'); t.textContent = txt; t.className = 'tag display mono ' + cls; }
 function paddles(k) { const rs = [...$('rivals').children]; rs.forEach(r => r.classList.remove('up', 'win')); const n = Math.max(1, Math.min(5, 5 - Math.floor(k / 2))); rs.slice(0, n).forEach(r => r.classList.add('up')); return rs.slice(0, n); }
 function start() {
-  if (balance < stake) return callout('lose', 'NO CREDIT', 'Demo balance is empty. Reload the page.');
-  balance -= stake; $('balance').textContent = fmt(balance);
-  const u = uniform(); let K = 0; while (L.cum[K + 1] <= u) K++; const v = (u - L.cum[K]) / (L.cum[K + 1] - L.cum[K]); const { X, band } = B.mult(v);
-  round = { u, K, v, X, band, k: 0, ended: false, took: false };
-  $('locker').className = 'locker'; $('lotNo').textContent = '#' + String(Math.floor(u * 9999)).padStart(4, '0'); setTag('LOT · SEALED');
-  $('you').style.display = 'block'; [...$('rivals').children].forEach(r => r.className = 'rival'); [...$('boxTable').rows].forEach(r => r.classList.remove('hit'));
-  $('mU').textContent = u.toFixed(6); $('mV').textContent = 'hidden until the hammer';
+  if (balance() < stake) return callout('lose', 'NO CREDIT', 'Demo balance is empty. Reload the page.');
+  const r = g.bet({ sessionId: s.sessionId, betAmount: stake * 100, betType: SIZES[M] });
+  round = { id: r.roundId, seedHash: r.seedHash, k: 0, ended: false, took: false, view: r };
+  $('locker').className = 'locker'; $('lotNo').textContent = '#' + r.seedHash.slice(0, 4).toUpperCase(); setTag('LOT · SEALED');
+  $('you').style.display = 'block'; [...$('rivals').children].forEach(x => x.className = 'rival'); [...$('boxTable').rows].forEach(x => x.classList.remove('hit'));
+  $('mU').textContent = 'committed ' + r.seedHash.slice(0, 16) + '…'; $('mV').textContent = 'hidden until the hammer';
   $('btnStart').disabled = true; $('btnBid').disabled = false; $('btnTake').disabled = true; [...$('chips').children, ...$('sizes').children].forEach(b => b.disabled = true);
   callout('', 'BIDDING IS OPEN', `Your first bid: the lot is worth ${fmt(L.c[0] * stake)} if the rivals fold (${pct(L.hazard[0])}). This is the only bid that carries the house edge.`);
   renderRungs(); renderStats();
@@ -121,25 +120,26 @@ function start() {
 function bid() {
   if (!round || round.ended) return; const k = round.k + 1; const up = paddles(k); $('btnBid').disabled = $('btnTake').disabled = true;
   setTimeout(() => {
-    if (k > round.K) { round.ended = true; round.k = k; const w = up[Math.floor(round.v * up.length)]; w.classList.add('win'); $('locker').classList.add('lost'); setTag('SOLD · TO ' + w.textContent.toUpperCase(), 'red'); $('stage').classList.add('shake'); setTimeout(() => $('stage').classList.remove('shake'), 500);
-      callout('lose', 'OUTBID', `${w.textContent} took the lot on bid ${k}. Your stake is gone. The locker held ${round.X.toFixed(3)}× — you never found out.`); log(`${M}× lot · outbid on bid ${k} · −${fmt(stake)}`, 'l'); finish(); }
-    else { round.k = k; up.forEach(r => r.classList.remove('up')); setTag(fmt(L.c[k - 1] * stake) + ' · ' + L.c[k - 1].toFixed(2) + '×', 'flash'); setTimeout(() => $('tag').classList.remove('flash'), 300);
-      if (k === N) { callout('win', 'TOP OF THE LADDER', 'No one bids against you at the top. The hammer falls.'); take(true); }
-      else { $('btnBid').disabled = false; $('btnTake').disabled = false; callout('', `YOURS AT ${fmt(L.c[k - 1] * stake)}`, `Bid again: worth ${fmt(L.c[k] * stake)} if rivals fold (${pct(L.hazard[k])}); EV of bidding = ${fmt(L.hazard[k] * L.c[k] * stake)}, exactly what you hold. Or take the locker and open it.`); }
+    const r = g.nextAction({ roundId: round.id, actionCode: 'CONTINUE' }); round.view = r; round.k = r.currentStep;
+    if (r.steps[k - 1].outcome === 'CRASH') { round.ended = true; g.collect({ roundId: round.id }); const w = up[k % up.length]; w.classList.add('win'); $('locker').classList.add('lost'); setTag('SOLD · TO ' + w.textContent.toUpperCase(), 'red'); $('stage').classList.add('shake'); setTimeout(() => $('stage').classList.remove('shake'), 500);
+      $('mU').textContent = 'seed ' + r.seed.slice(0, 12) + '…'; callout('lose', 'OUTBID', `${w.textContent} took the lot on bid ${k}. Your stake is gone. The locker's contents stay sealed.`); log(`${M}× lot · outbid on bid ${k} · −${fmt(stake)}`, 'l'); finish(); }
+    else { up.forEach(x => x.classList.remove('up')); setTag(fmt(r.currentPayout / 100) + ' · ' + L.c[k - 1].toFixed(2) + '×', 'flash'); setTimeout(() => $('tag').classList.remove('flash'), 300);
+      if (r.roundEnded) { callout('win', 'TOP OF THE LADDER', 'No one bids against you at the top. The hammer falls.'); reveal(r, true); }
+      else { $('btnBid').disabled = false; $('btnTake').disabled = false; callout('', `YOURS AT ${fmt(r.currentPayout / 100)}`, `Bid again: worth ${fmt(L.c[k] * stake)} if rivals fold (${pct(L.hazard[k])}); EV of bidding = ${fmt(L.hazard[k] * L.c[k] * stake)}, exactly what you hold. Or take the locker and open it.`); }
     }
     renderRungs(); renderStats();
   }, 650);
 }
-function take(auto) {
-  if (!round || round.ended || !round.k) return; round.ended = true; round.took = true; $('btnBid').disabled = $('btnTake').disabled = true;
-  const value = Math.round(L.c[round.k - 1] * stake * 100) / 100, win = Math.round(value * round.X * 100) / 100, tier = TIERS[B.A[round.band]];
-  setTag('SOLD · ' + fmt(value), 'gold'); [...$('rivals').children].forEach(r => r.classList.add('fold'));
-  setTimeout(() => { $('inIcon').textContent = tier[0]; $('inTier').textContent = tier[1]; $('inDesc').textContent = tier[2]; $('inAmt').textContent = `${round.X.toFixed(3)}× → ${fmt(win)}`; $('locker').classList.add('open'); $('boxTable').rows[round.band + 1].classList.add('hit'); $('mV').textContent = round.v.toFixed(6) + ` → band ${B.A[round.band]}×`;
-    balance += win; $('balance').textContent = fmt(balance);
-    callout(win >= stake ? 'win' : 'lose', `${tier[1]} · ${fmt(win)}`, `Locker worth ${fmt(value)} after ${round.k} bid${round.k > 1 ? 's' : ''}, contents ${round.X.toFixed(3)}× of that. ${auto ? 'Top of the ladder.' : ''} Net ${win >= stake ? '+' : ''}${fmt(win - stake)}.`);
-    log(`${M}× lot · took after ${round.k} · ${B.A[round.band]}× locker · ${win >= stake ? '+' : ''}${fmt(win - stake)}`, win >= stake ? 'w' : 'l'); finish(); }, 700);
+function take() { if (!round || round.ended || !round.k) return; $('btnBid').disabled = $('btnTake').disabled = true; const r = g.nextAction({ roundId: round.id, actionCode: 'CASH_OUT' }); round.view = r; reveal(r, false); }
+function reveal(r, auto) {
+  round.ended = true; round.took = true; const value = r.currentPayout / 100, win = r.totalWinAmount / 100, X = r.locker.multiplier, band = r.locker.band, tier = TIERS[B.A[band]];
+  setTag('SOLD · ' + fmt(value), 'gold'); [...$('rivals').children].forEach(x => x.classList.add('fold'));
+  setTimeout(() => { $('inIcon').textContent = tier[0]; $('inTier').textContent = tier[1]; $('inDesc').textContent = tier[2]; $('inAmt').textContent = `${X.toFixed(3)}× → ${fmt(win)}`; $('locker').classList.add('open'); $('boxTable').rows[band + 1].classList.add('hit'); $('mU').textContent = 'seed ' + r.seed.slice(0, 12) + '…'; $('mV').textContent = `band ${B.A[band]}× · X = ${X.toFixed(4)}`;
+    g.collect({ roundId: round.id });
+    const net = win - stake; callout(net >= 0 ? 'win' : 'lose', `${tier[1]} · ${fmt(win)}`, `Locker worth ${fmt(value)} after ${round.k} bid${round.k > 1 ? 's' : ''}, contents ${X.toFixed(3)}× of that. ${auto ? 'Top of the ladder.' : ''} Net ${net >= 0 ? '+' : ''}${fmt(net)}.`);
+    log(`${M}× lot · took after ${round.k} · ${B.A[band]}× locker · ${net >= 0 ? '+' : ''}${fmt(net)}`, net >= 0 ? 'w' : 'l'); finish(); }, 700);
 }
-function finish() { setTimeout(() => { $('btnStart').disabled = false; [...$('chips').children, ...$('sizes').children].forEach(b => b.disabled = false); }, 900); renderRungs(); renderStats(); }
-$('btnStart').onclick = start; $('btnBid').onclick = () => bid(); $('btnTake').onclick = () => take(false);
-renderRungs(); renderStats();
+function finish() { setTimeout(() => { $('btnStart').disabled = false; [...$('chips').children, ...$('sizes').children].forEach(b => b.disabled = false); round = null; renderRungs(); renderStats(); }, 900); renderRungs(); renderStats(); }
+$('btnStart').onclick = start; $('btnBid').onclick = () => bid(); $('btnTake').onclick = () => take();
+setup(); renderRungs(); renderStats();
 </script>

@@ -135,99 +135,57 @@ label.small{display:block;margin-top:10px;font-size:11px;letter-spacing:.06em;te
   </aside>
 </div>
 
-<script>
-// ── engine (mirrors payout-engine/src/engine.js) ─────────────────────────────────────
-function bisect(f, target, lo, hi) { const inc = f(hi) > f(lo); for (let i = 0; i < 200; i++) { const m = (lo + hi) / 2; if ((f(m) < target) === inc) lo = m; else hi = m; } return (lo + hi) / 2; }
-function assign(A, rtp, method, weights) {
-  const n = A.length, amin = A[0], amax = A[n - 1];
-  if (!(rtp > amin && rtp < amax)) throw new Error(`rtp must lie strictly between ${amin} and ${amax}`);
-  const norm = x => { const Z = x.reduce((s, v) => s + v, 0); return x.map(v => v / Z); };
-  const meanOf = w => norm(w).reduce((s, v, i) => s + v * A[i], 0);
-  if (method === 'maxent') { const w = l => A.map(a => Math.exp(-l * (a - amin) / amax)); return norm(w(bisect(l => meanOf(w(l)), rtp, -2000, 2000))); }
-  if (method === 'geometric') { const w = q => A.map((_, i) => Math.exp(q * i)); return norm(w(bisect(q => meanOf(w(q)), rtp, -60, 60))); }
-  const iz = A.indexOf(0); if (iz < 0) throw new Error('weights needs a 0 payout');
-  if (!weights || weights.length !== n) throw new Error(`need ${n} weights`);
-  const W = weights.map((w, i) => (i === iz ? 0 : w)); const Wt = W.reduce((s, w) => s + w, 0); if (!(Wt > 0) || W.some(w => w < 0)) throw new Error('weights must be ≥ 0 with a positive total');
-  const Enz = W.reduce((s, w, i) => s + (w / Wt) * A[i], 0); if (!(Enz > rtp)) throw new Error(`E[payout | win] = ${Enz.toFixed(3)} must exceed rtp`);
-  const p0 = 1 - rtp / Enz; return W.map((w, i) => (i === iz ? p0 : (1 - p0) * w / Wt));
-}
-function build({ payouts, rtp, method, weights }) {
-  const order = payouts.map((_, i) => i).sort((i, j) => payouts[i] - payouts[j]);
-  const A = order.map(i => payouts[i]); if (new Set(A).size !== A.length) throw new Error('payouts must be distinct');
-  const W = weights ? order.map(i => weights[i]) : undefined;
-  const p = assign(A, rtp, method, W);
-  const breaks = [0]; let acc = 0; for (const x of p) { acc += x; breaks.push(acc); } breaks[breaks.length - 1] = 1;
-  const pos = A.filter(a => a > 0); if (pos.length < 2) throw new Error('need two positive payouts');
-  const gap = Math.min(...pos.slice(1).map((a, i) => a - pos[i])), r = 0.1 * gap;
-  if (pos[0] - r <= 0) throw new Error('lowest payout too close to zero');
-  const bandOf = u => { let i = 0; while (breaks[i + 1] <= u) i++; return i; };
-  const payout = u => { const i = bandOf(u); if (A[i] <= 0) return 0; const t = (u - breaks[i]) / (breaks[i + 1] - breaks[i]); return A[i] + r * (2 * t - 1); };
-  return { A, p, breaks, r, gap, rtp: p.reduce((s, x, i) => s + x * A[i], 0), hitRate: p.reduce((s, x, i) => s + (A[i] > 0 ? x : 0), 0), bandOf, payout };
-}
-function uniform() { const a = new Uint32Array(2); crypto.getRandomValues(a); return (a[0] * 4294967296 + a[1]) / 18446744073709551616; }
-
-// ── state ───────────────────────────────────────────────────────────────────────────
+<script type="module">
+// Sample game built on the published engine module: createGame (preset or your own payout array) → open → bet → collect.
+import { createGame } from './api/rgs.js';
 const CHIPS = [1, 5, 10, 25, 50, 100];
-const $ = id => document.getElementById(id);
-const fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const pct = x => (100 * x).toFixed(2) + '%';
-let balance = 1000, stake = 10, method = 'maxent', E = null, busy = false, last = null;
-
+const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(2) + '%';
+let stake = 10, method = 'maxent', g = null, s = null, E = null, busy = false, last = null;
+const balance = () => g ? g.getSession(s.sessionId).balance / 100 : 1000;
 function readConfig() {
-  const payouts = $('payouts').value.split(',').map(s => Number(s.trim())).filter(s => !Number.isNaN(s));
-  const rtp = Number($('rtp').value);
-  const weights = method === 'weights' ? $('weights').value.split(',').map(s => Number(s.trim())) : undefined;
-  E = build({ payouts, rtp, method, weights });
+  const bal = g ? Math.round(balance() * 100) : 100000;
+  const payouts = $('payouts').value.split(',').map(x => Number(x.trim())).filter(x => !Number.isNaN(x)), rtp = Number($('rtp').value);
+  const weights = method === 'weights' ? $('weights').value.split(',').map(x => Number(x.trim())) : undefined;
+  g = createGame({ preset: 'classic', payouts, rtp, method, weights }); s = g.open({ balance: bal });   // direct input: the engine validates and throws on a bad array
+  E = { A: s.bands.map(b => b.payout), p: s.bands.map(b => b.p), breaks: [...s.bands.map(b => b.rn_from), 1], r: s.r, rtp: s.rtp, hitRate: s.bands.reduce((t, b) => t + (b.payout > 0 ? b.p : 0), 0) };
 }
 function rebuild() {
   try { readConfig(); $('err').textContent = ''; } catch (e) { $('err').textContent = e.message; return; }
   const zones = $('zones'); zones.innerHTML = '';
-  E.A.forEach((a, i) => {
-    const z = document.createElement('div'); z.className = `zone z${Math.min(i, 5)}`; z.style.flex = `${E.p[i]} 0 0`; z.dataset.i = i;
-    if (E.p[i] > 0.04) z.innerHTML = `<div class="pr">${pct(E.p[i])}</div><div class="lbl display">${a > 0 ? a + '×' : 'OUT'}</div>`;
-    zones.appendChild(z);
-  });
-  // sloped curve above the field (log-ish scale so 20× fits)
-  const ymax = Math.max(...E.A) + E.r, sc = v => 105 - 100 * Math.log1p(v * 8 / ymax) / Math.log1p(8);
-  let d = '';
+  E.A.forEach((a, i) => { const z = document.createElement('div'); z.className = `zone z${Math.min(i, 5)}`; z.style.flex = `${E.p[i]} 0 0`; z.dataset.i = i; if (E.p[i] > 0.04) z.innerHTML = `<div class="pr">${pct(E.p[i])}</div><div class="lbl display">${a > 0 ? a + '×' : 'OUT'}</div>`; zones.appendChild(z); });
+  const ymax = Math.max(...E.A) + E.r, sc = v => 105 - 100 * Math.log1p(v * 8 / ymax) / Math.log1p(8); let d = '';
   E.A.forEach((a, i) => { const x0 = 1000 * E.breaks[i], x1 = 1000 * E.breaks[i + 1]; const y0 = sc(a > 0 ? a - E.r : 0), y1 = sc(a > 0 ? a + E.r : 0); d += `${i ? 'L' : 'M'}${x0},${y0} L${x1},${y1} `; });
   $('svg').innerHTML = `<path d="${d}" fill="none" stroke="#f1efe8" stroke-width="2.5" vector-effect="non-scaling-stroke"/>` + E.A.map((a, i) => a > 0 && E.p[i] > 0.06 ? `<text x="${1000 * (E.breaks[i] + E.breaks[i + 1]) / 2}" y="${sc(a + E.r) - 8}" fill="#f1efe8" font-size="12" text-anchor="middle" font-family="IBM Plex Mono">${(a - E.r).toFixed(2)}→${(a + E.r).toFixed(2)}</text>` : '').join('');
   $('axis').innerHTML = [0, 2000, 4000, 6000, 8000, 10000].map(v => `<span>${v}</span>`).join('');
-  $('bands').innerHTML = `<li class="head"><span>zone</span><span>pays</span><span class="r">p</span><span class="r">x range</span></li>` +
-    E.A.map((a, i) => `<li data-i="${i}"><span>${i}</span><span class="m">${a > 0 ? `${(a - E.r).toFixed(2)}–${(a + E.r).toFixed(2)}×` : 'no win'}</span><span class="r">${pct(E.p[i])}</span><span class="r">${Math.round(1e4 * E.breaks[i])}–${Math.round(1e4 * E.breaks[i + 1])}</span></li>`).join('');
+  $('bands').innerHTML = `<li class="head"><span>zone</span><span>pays</span><span class="r">p</span><span class="r">x range</span></li>` + E.A.map((a, i) => `<li data-i="${i}"><span>${i}</span><span class="m">${a > 0 ? `${(a - E.r).toFixed(2)}–${(a + E.r).toFixed(2)}×` : 'no win'}</span><span class="r">${pct(E.p[i])}</span><span class="r">${Math.round(1e4 * E.breaks[i])}–${Math.round(1e4 * E.breaks[i + 1])}</span></li>`).join('');
   $('stRtp').textContent = E.rtp.toFixed(4); $('stHit').textContent = pct(E.hitRate); $('stR').textContent = E.r.toFixed(4) + '×';
-  $('marker').classList.remove('on'); document.querySelectorAll('.zone.hit').forEach(z => z.classList.remove('hit'));
+  $('marker').classList.remove('on'); document.querySelectorAll('.zone.hit').forEach(z => z.classList.remove('hit')); refresh();
 }
 $('method').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { method = b.dataset.m; $('method').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); $('wRow').hidden = method !== 'weights'; rebuild(); }));
 ['payouts', 'rtp', 'weights'].forEach(id => $(id).addEventListener('change', rebuild));
 function buildChips() { $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === stake ? 'on' : ''}">${c}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (busy) return; stake = +b.dataset.c; buildChips(); })); }
-
-// ── round ───────────────────────────────────────────────────────────────────────────
 function say(big, text, mood) { $('coBig').textContent = big; $('coText').textContent = text; $('callout').className = 'callout' + (mood ? ' ' + mood : ''); }
 function setLight(which, txt) { $('lg').classList.toggle('on', which === 'g'); $('lr').classList.toggle('on', which === 'r'); $('lightTxt').textContent = txt; }
-function fieldX(u) { const f = document.querySelector('.field').getBoundingClientRect(), s = $('stage').getBoundingClientRect(); return (f.left - s.left) + u * f.width; }
+function fieldX(u) { const f = document.querySelector('.field').getBoundingClientRect(), st = $('stage').getBoundingClientRect(); return (f.left - st.left) + u * f.width; }
 function play() {
   if (busy || !E) return;
-  if (stake > balance) { say('NOT ENOUGH', 'Lower the stake or reload for a fresh demo balance.', 'lose'); return; }
-  busy = true; balance -= stake; refresh();
-  const u = uniform(), i = E.bandOf(u), mult = E.payout(u), t = (u - E.breaks[i]) / (E.breaks[i + 1] - E.breaks[i]);
-  last = { u, i, mult, t, bet: stake };
+  if (stake > balance()) { say('NOT ENOUGH', 'Lower the stake or reload for a fresh demo balance.', 'lose'); return; }
+  busy = true;
+  const r = g.bet({ sessionId: s.sessionId, betAmount: stake * 100, betType: 'BASE' }); refresh();
+  const u = r.math.u, i = r.math.band, mult = r.math.multiple, t = (u - E.breaks[i]) / (E.breaks[i + 1] - E.breaks[i]);
+  last = { u, i, mult, t, bet: stake, seed: r.seed, seedHash: r.seedHash };
   const runner = $('runner'), doll = $('doll'), marker = $('marker');
   runner.className = 'runner'; runner.style.setProperty('--dur', '0s'); runner.style.left = fieldX(0) + 'px'; marker.classList.remove('on'); document.querySelectorAll('.zone.hit').forEach(z => z.classList.remove('hit')); document.querySelectorAll('#bands li.hit').forEach(z => z.classList.remove('hit'));
-  doll.className = 'doll away'; setLight('g', 'GREEN LIGHT'); say('RUN', 'The number is already drawn. The runner is heading for it.');
+  doll.className = 'doll away'; setLight('g', 'GREEN LIGHT'); say('RUN', `The number is already drawn (commitment ${r.seedHash.slice(0, 12)}…). The runner is heading for it.`);
   setTimeout(() => {
     runner.classList.add('run'); const dur = 1.6 + 1.6 * u; runner.style.setProperty('--dur', dur + 's'); runner.style.left = fieldX(u) + 'px';
     setTimeout(() => {
       runner.classList.remove('run'); doll.className = 'doll' + (mult > 0 ? '' : ' red'); setLight('r', 'RED LIGHT');
       marker.style.left = fieldX(u) + 'px'; $('markerTag').textContent = `x = ${Math.round(u * 1e4)}`; marker.classList.add('on');
       document.querySelector(`.zone[data-i="${i}"]`).classList.add('hit'); document.querySelector(`#bands li[data-i="${i}"]`).classList.add('hit');
-      if (mult > 0) {
-        const win = Math.round(last.bet * mult * 100) / 100; balance += win; runner.classList.add('win');
-        say(`${mult.toFixed(3)}×`, `Stopped at x = ${Math.round(u * 1e4)} in the ${E.A[i]}× zone, ${(100 * t).toFixed(0)}% of the way across it, so the slope pays ${mult.toFixed(4)}×. Paid ${fmt(win)}.`, 'win');
-      } else {
-        $('flash').classList.add('on'); setTimeout(() => $('flash').classList.remove('on'), 600); runner.classList.add('dead');
-        say('ELIMINATED', `Stopped at x = ${Math.round(u * 1e4)}, inside the no-win zone (${pct(E.p[i])} of the field). Stake of ${fmt(last.bet)} lost.`, 'lose');
-      }
+      g.collect({ roundId: r.roundId });
+      if (mult > 0) { runner.classList.add('win'); say(`${mult.toFixed(3)}×`, `Stopped at x = ${Math.round(u * 1e4)} in the ${E.A[i]}× zone, ${(100 * t).toFixed(0)}% of the way across it, so the slope pays ${mult.toFixed(4)}×. Paid ${fmt(r.totalWinAmount / 100)}.`, 'win'); }
+      else { $('flash').classList.add('on'); setTimeout(() => $('flash').classList.remove('on'), 600); runner.classList.add('dead'); say('ELIMINATED', `Stopped at x = ${Math.round(u * 1e4)}, inside the no-win zone (${pct(E.p[i])} of the field). Stake of ${fmt(last.bet)} lost.`, 'lose'); }
       busy = false; refresh();
     }, dur * 1000 + 150);
   }, 500);
@@ -235,7 +193,7 @@ function play() {
 $('btnPlay').addEventListener('click', play);
 document.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { if (document.activeElement.tagName !== 'INPUT') { e.preventDefault(); play(); } } });
 function refresh() {
-  $('balance').textContent = fmt(balance); $('btnPlay').disabled = busy;
+  $('balance').textContent = fmt(balance()); $('btnPlay').disabled = busy;
   $('stX').textContent = last ? `${Math.round(last.u * 1e4)}  (u = ${last.u.toFixed(6)})` : '—';
   $('stZone').textContent = last ? `${last.i} · ${E.A[last.i] > 0 ? E.A[last.i] + '×' : 'no win'}` : '—';
   $('stT').textContent = last ? `${(100 * last.t).toFixed(1)}%` : '—';
