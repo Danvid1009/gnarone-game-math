@@ -1,6 +1,6 @@
 // getSdk(): the real Rollerz SDK when the page is opened with ?sdk=live (loads the script tag from the testing
 // environment and inits), otherwise the local stand-in that runs the engine modules in the page.
-export const LIVE_SDK_URL = 'https://rollerzsdk-develop.up.railway.app/sdk/sdk.global.js/sdk';
+export const LIVE_SDK_URL = 'https://rollerzsdk-develop.up.railway.app/sdk';
 export async function getSdk(gameId = 'gnarone-sample') {
   const live = new URLSearchParams(location.search).get('sdk') === 'live';
   if (live) {
