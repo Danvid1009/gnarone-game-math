@@ -174,7 +174,7 @@ async function cashOut() {
   say('CASHED OUT', `Paid ${fmt(c.totalWinAmount ?? round.view.currentPayout)} at ${L.c[round.step - 1].toFixed(2)}× after ${round.step} rung${round.step > 1 ? 's' : ''}.${round.K !== undefined ? ` The bridge would have held to rung ${Math.min(round.K, STEPS)}${round.K >= STEPS ? ' (all the way)' : ''}.` : ''}`, 'win');
   refresh();
 }
-function end(r) { round.ended = true; balance = r.balance ?? balance; round.view = { ...round.view, totalWinAmount: r.totalWinAmount ?? 0 };
+function end(r) { round.ended = true; balance = r.balance ?? balance; round.view = { ...round.view, totalWinAmount: r.totalWinAmount ?? (r.roundEnded && r.currentPayout && !r.steps?.some(x => x.outcome === 'CRASH') ? r.currentPayout : 0) };
   if (r.seed && L.cum) { const u = new HashRng(r.seed, 'payout').next(); let K = 0; while (L.cum[K + 1] <= u) K++; round.seed = r.seed; round.u = u; round.K = K; round.verified = commit(r.seed) === round.seedHash; } }
 $('btnPlay').addEventListener('click', play); $('btnCash').addEventListener('click', cashOut);
 document.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { if (!round || round.ended) play(); else { const row = document.querySelector('.row.active .pane'); if (row) step(round.step + 1, row); } } if (e.key.toLowerCase() === 'c') cashOut(); });

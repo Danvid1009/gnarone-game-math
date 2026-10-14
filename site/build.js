@@ -267,7 +267,7 @@ ${engines.map(e => {
 }).join('\n')}
 </div>
 <h2>Sample games</h2>
-<p class="lead">One playable game per engine, each built the way an SDK game would be: the page imports its engine's published module and only ever calls open → bet → next-action → collect. No math in the page.</p>
+<p class="lead">One playable game per engine, each written against the Rollerz SDK surface (<code>openGame → placeBet → step → collect</code>). By default a page runs on a local stand-in over the engine's published module, with no server; add <code>?sdk=live</code> to the URL and the same page loads the real SDK and plays against the Rollerz testing environment. No math in the pages.</p>
 <div class="grid">
 ${engines.map(e => `  <a class="card" href="${e.slug}/play.html${e.query ? '?' + e.query : ''}"><div class="k">${esc(e.title.toUpperCase())}</div><p>built on <code>${e.slug}/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>`).join('\n')}
 </div>
