@@ -54,37 +54,35 @@ table.t{width:100%;border-collapse:collapse;font-size:11.5px}.t td,.t th{padding
   </aside>
 </div>
 <script type="module">
-// Sample game written against the Rollerz SDK: sdk.rippinrumble.openGame({ preset }) / getValidBets({ betType }) / placeBet(amount, { betType }) / collect.
-import { getSdk, fmtMoney as fmt } from '../sdk/loader.js';
-const RAR = ['LEGENDARY', 'RARE', 'UNCOMMON', 'COMMON'], PRESETS = ['sheet-v4', 'sheet-v4-0.93', 'sheet-v4-0.97'], PACKS = { BASE: 1, BOOSTED: 1, BASE_BUNDLE: 11, BOOSTED_BUNDLE: 11 };
-const $ = id => document.getElementById(id), pct = x => (100 * x).toFixed(2) + '%';
-const sdk = await getSdk('gnarone-rumble');
-let preset = 'sheet-v4', chip = 500, type = 'BASE', balance = 0, busy = false, lib = null;
-// the rtp input becomes a preset picker
-const rtpEl = $('rtp'); const seg = document.createElement('div'); seg.className = 'seg'; seg.id = 'presetSeg'; seg.style.gridTemplateColumns = 'repeat(3,1fr)'; seg.innerHTML = PRESETS.map(p => `<button data-p="${p}" class="${p === preset ? 'on' : ''}">${p}</button>`).join(''); rtpEl.previousElementSibling.textContent = 'preset'; rtpEl.replaceWith(seg);
-$('presetSeg').addEventListener('click', async e => { const b = e.target.closest('button'); if (!b || busy) return; preset = b.dataset.p; [...$('presetSeg').children].forEach(x => x.classList.toggle('on', x === b)); await setup(false); rebuild(); });
-async function setup(first) { const s = first ? await sdk.rippinrumble.openGame({ preset }) : (await sdk.rippinrumble.setPreset(preset), await sdk.rippinrumble.getSession()); balance = s.balance; lib = sdk.isLocal ? sdk.rippinrumble.getLibrary() : null; }
+// Sample game built on the published engine module: open → bet (BASE | BOOSTED | BASE_BUNDLE | BOOSTED_BUNDLE) → collect.
+import { createGame } from './api/rgs.js';
+const RAR = ['LEGENDARY', 'RARE', 'UNCOMMON', 'COMMON'], CHIPS = [1, 5, 10, 25, 50, 100];
+const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(2) + '%';
+let chip = 10, type = 'BASE', busy = false, g = null, s = null, R = null;
+const balance = () => g ? g.getSession(s.sessionId).balance / 100 : 1000;
 function rebuild() {
-  const types = sdk.rippinrumble.getBetTypes();
-  $('types').innerHTML = types.map(t => `<button data-t="${t}" class="${t === type ? 'on' : ''}">${t.replace('_', ' ')}<br><span class="mono" style="font-size:10px;color:var(--ink-3)">${PACKS[t]} pack${PACKS[t] > 1 ? 's' : ''} · from ${fmt(sdk.rippinrumble.getValidBets({ betType: t })[0])}</span></button>`).join('');
-  $('types').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (!busy) { type = b.dataset.t; const lv = sdk.rippinrumble.getValidBets({ betType: type }); if (!lv.includes(chip)) chip = lv[0]; rebuild(); } }));
-  const lv = sdk.rippinrumble.getValidBets({ betType: type }); if (!lv.includes(chip)) chip = lv[0];
-  $('chips').innerHTML = lv.map(c => `<button data-c="${c}" class="${c === chip ? 'on' : ''}">${fmt(c)}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (!busy) { chip = +b.dataset.c; rebuild(); } }));
-  $('decks').innerHTML = lib ? `<tr><th>bet type</th><th>packs</th><th>P(low deck)</th></tr>` + types.map(t => `<tr><td>${t}</td><td>${lib.betTypes[t].packs}</td><td>${pct(lib.betTypes[t].pLow)}</td></tr>`).join('') : '';
+  try { const bal = g ? Math.round(balance() * 100) : 100000; g = createGame({ preset: 'sheet-v4', rtp: Number($('rtp').value), multiples: CHIPS }); s = g.open({ balance: bal }); R = g.engine; $('err').textContent = ''; } catch (e) { $('err').textContent = e.message; if (!g) return; }
+  const T = s.betTypes;
+  $('types').innerHTML = Object.keys(T).map(t => `<button data-t="${t}" class="${t === type ? 'on' : ''}">${t.replace('_', ' ')}<br><span class="mono" style="font-size:10px;color:var(--ink-3)">×${T[t].cost * T[t].paidPacks} chips · ${T[t].packs} pack${T[t].packs > 1 ? 's' : ''}</span></button>`).join('');
+  $('types').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (!busy) { type = b.dataset.t; rebuild(); } }));
+  $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === chip ? 'on' : ''}">${c}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (!busy) { chip = +b.dataset.c; rebuild(); } }));
+  const B = R.buckets, pays = R.config.pays;
+  $('decks').innerHTML = `<tr><th>deck</th><th>cost</th>${RAR.map(r => `<th>${r[0]}</th>`).join('')}<th>E[win]</th></tr>` + Object.entries(B).map(([k, b]) => `<tr><td>${k}</td><td>${b.cost}</td>${RAR.map(r => `<td>${b.deck[r]}</td>`).join('')}<td><b>${b.meanCredits.toFixed(3)}</b></td></tr>`).join('') + `<tr><td>pays/card</td><td></td>${RAR.map(r => `<td>${pays[r]}</td>`).join('')}<td></td></tr>`;
   refresh();
 }
-function refresh() { $('balance').textContent = fmt(balance); $('btnOpen').disabled = busy; $('stType').textContent = type; $('stStake').textContent = fmt(chip) + ` · ${PACKS[type]} pack${PACKS[type] > 1 ? 's' : ''}`; $('stMix').textContent = lib ? pct(lib.betTypes[type].pLow) : '—'; }
-async function rip() {
-  if (busy) return; if (chip > balance) { say('NOT ENOUGH', 'Lower the stake or reload.', 'lose'); return; } busy = true;
-  const r = await sdk.rippinrumble.placeBet(chip, { betType: type }); balance = r.balance; refresh();
-  const packsEl = $('packs'); packsEl.innerHTML = ''; const total = r.totalWinAmount;
-  r.cardPacks.forEach((p, k) => { const sums = RAR.map(rr => { const x = p[rr.toLowerCase()]; return { r: rr, c: x.count, vpc: x.valuePerCard, m: x.multiplier, tv: x.totalValue }; });
-    const el = document.createElement('div'); el.className = 'pack'; el.innerHTML = `<div class="hd"><span>pack ${k + 1}</span><span class="mono">${p.cards.length} cards</span></div><div class="cards">${p.cards.map((c, j) => `<div class="card" style="--rc:var(--${c.rarity[0]})"><div class="face back"></div><div class="face front"><span class="tag">${c.rarity[0]}</span><span class="mono">${c.rarity[0]}${String(j + 1).padStart(2, '0')}</span></div></div>`).join('')}</div><div class="sum mono">${sums.map(x => `<div class="${x.tv > 0 ? 'hit' : ''}">${x.r.slice(0, 3)} ×${x.c}<b>${x.c ? `${x.c}×${fmt(x.vpc)}×${x.m} = ${fmt(x.tv)}` : '—'}</b></div>`).join('')}</div><div class="tot">pack pays <b class="mono">${fmt(p.totalPayout)}</b></div>`; packsEl.appendChild(el); });
-  say('RIPPING', `Cards flip one by one. The result was fixed the moment you bet${r.seedHash ? ` (commitment ${r.seedHash.slice(0, 12)}…)` : ''}.`);
-  const allCards = [...packsEl.querySelectorAll('.card')]; const many = r.cardPacks.length > 1; allCards.forEach((c, i) => setTimeout(() => { c.classList.add('flip'); if (c.querySelector('.tag').textContent === 'L') c.classList.add('legend'); }, 250 + i * (many ? 60 : 260)));
-  setTimeout(async () => { const c = await sdk.rippinrumble.collect(r.roundId); balance = c.balance; $('stBuckets').textContent = `${r.cardPacks.length}`; $('stPaid').textContent = fmt(total); say(total > 0 ? `${(total / chip).toFixed(3)}×` : 'NOTHING', total > 0 ? `Paid ${fmt(total)} on a ${fmt(chip)} stake across ${r.cardPacks.length} pack${many ? 's' : ''}.` : `No paying combination. Stake of ${fmt(chip)} lost.`, total > 0 ? 'win' : 'lose'); busy = false; refresh(); }, 400 + allCards.length * (many ? 60 : 260));
+function refresh() { const bt = s.betTypes[type], stake = chip * bt.cost * bt.paidPacks; $('balance').textContent = fmt(balance()); $('btnOpen').disabled = busy || !!$('err').textContent; $('stType').textContent = type; $('stStake').textContent = fmt(stake) + ` (${bt.paidPacks} paid pack${bt.paidPacks > 1 ? 's' : ''} @ ${bt.cost})`; $('stMix').textContent = pct(bt.pLow); }
+$('rtp').addEventListener('change', rebuild);
+function rip() {
+  if (busy || $('err').textContent) return; const bt = s.betTypes[type], stake = chip * bt.cost * bt.paidPacks; if (stake > balance()) { say('NOT ENOUGH', 'Lower the stake or reload.', 'lose'); return; } busy = true;
+  const r = g.bet({ sessionId: s.sessionId, betAmount: stake * 100, betType: type }); refresh();
+  const packsEl = $('packs'); packsEl.innerHTML = ''; const buckets = { low: 0, high: 0 }; const total = r.totalWinAmount;
+  r.cardPacks.forEach((p, k) => { const bucket = r.math.packs[k].bucket; buckets[bucket]++;
+    const sums = RAR.map(rr => { const x = p[rr.toLowerCase()]; return { r: rr, c: x.count, vpc: x.valuePerCard, m: x.multiplier, tv: x.totalValue }; });
+    const el = document.createElement('div'); el.className = 'pack'; el.innerHTML = `<div class="hd"><span>pack ${k + 1} · <b>${bucket}</b> bucket</span><span class="mono">u = ${r.math.packs[k].u.toFixed(4)}</span></div><div class="cards">${p.cards.map(c => `<div class="card" style="--rc:var(--${c.rarity[0]})"><div class="face back"></div><div class="face front"><span class="tag">${c.rarity[0]}</span><span class="mono">${c.name}</span></div></div>`).join('')}</div><div class="sum mono">${sums.map(x => `<div class="${x.tv > 0 ? 'hit' : ''}">${x.r.slice(0, 3)} ×${x.c}<b>${x.c ? `${x.c}×${(x.vpc / 100).toFixed(2)}×${x.m} = ${(x.tv / 100).toFixed(2)}` : '—'}</b></div>`).join('')}</div><div class="tot">pack pays <b class="mono">${fmt(p.totalPayout / 100)}</b></div>`; packsEl.appendChild(el); });
+  say('RIPPING', `Cards flip one by one. The result was fixed the moment you bet (commitment ${r.seedHash.slice(0, 12)}…).`);
+  const allCards = [...packsEl.querySelectorAll('.card')]; allCards.forEach((c, i) => setTimeout(() => { c.classList.add('flip'); if (c.querySelector('.tag').textContent === 'L') c.classList.add('legend'); }, 250 + i * (bt.packs > 1 ? 60 : 260)));
+  setTimeout(() => { g.collect({ roundId: r.roundId }); $('stBuckets').textContent = `${bt.packs} · low ${buckets.low} / high ${buckets.high}`; $('stPaid').textContent = fmt(total / 100); say(total > 0 ? `${(total / 100 / stake).toFixed(3)}×` : 'NOTHING', total > 0 ? `Paid ${fmt(total / 100)} on a ${fmt(stake)} stake across ${bt.packs} pack${bt.packs > 1 ? 's' : ''}.` : `No paying combination. Stake of ${fmt(stake)} lost.`, total > 0 ? 'win' : 'lose'); busy = false; refresh(); }, 400 + allCards.length * (bt.packs > 1 ? 60 : 260));
 }
 function say(b, t, m) { $('coBig').textContent = b; $('coText').textContent = t; $('callout').className = 'callout' + (m ? ' ' + m : ''); }
-$('btnOpen').addEventListener('click', rip); document.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); rip(); } });
-await setup(true); rebuild();
+$('btnOpen').addEventListener('click', rip); document.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); rip(); } }); rebuild();
 </script>

@@ -248,10 +248,6 @@ ${FOOT}`;
   console.log(`docs/${e.slug}/  ← ${e.folder}  (${figs.length} figures${hasApi ? ', api' : ''}${e.aliases?.length ? ', alias ' + e.aliases.join(',') : ''})`);
 }
 
-// the SDK stand-in and loader used by the sample games
-mkdirSync(join(docs, 'sdk'), { recursive: true });
-for (const f of ['local-sdk.js', 'loader.js']) copyFileSync(join(root, 'site/sdk', f), join(docs, 'sdk', f));
-
 // the preset catalogue PDF, if built (python3 site/make-presets-pdf.py)
 if (existsSync(join(root, 'PRESETS.pdf'))) copyFileSync(join(root, 'PRESETS.pdf'), join(docs, 'presets.pdf'));
 
@@ -267,7 +263,7 @@ ${engines.map(e => {
 }).join('\n')}
 </div>
 <h2>Sample games</h2>
-<p class="lead">One playable game per engine, each written against the Rollerz SDK surface (<code>openGame → placeBet → step → collect</code>). By default a page runs on a local stand-in over the engine's published module, with no server; add <code>?sdk=live</code> to the URL and the same page loads the real SDK and plays against the Rollerz testing environment. No math in the pages.</p>
+<p class="lead">One playable demo per engine. Each page imports its engine's published module and only ever calls open → bet → next-action → collect; no math in the page. The SDK-based versions of these games (written against the Rollerz SDK, with a <code>?sdk=live</code> switch) live in the <a href="https://github.com/RoomOneUS/engine-playground">engine-playground</a> repo.</p>
 <div class="grid">
 ${engines.map(e => `  <a class="card" href="${e.slug}/play.html${e.query ? '?' + e.query : ''}"><div class="k">${esc(e.title.toUpperCase())}</div><p>built on <code>${e.slug}/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>`).join('\n')}
 </div>

@@ -71,7 +71,7 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
   <a class="card" href="distributions/"><div class="k"> <b>DISTRIBUTIONS</b></div><p>A library of twenty-one named distributions behind one uniform: every sample is the inverse CDF of a seeded draw, so it is reproducible and auditable. Two uses: free sealed draws for anything a game needs random (bot speeds, timings, Ragency targets), and a money mode where the stake pays a multiple sampled from a chosen distribution, clamped and scaled so its mean is exactly the RTP.</p><span class="tag">21 distributions, one uniform each</span></a>
 </div>
 <h2>Sample games</h2>
-<p class="lead">One playable game per engine, each written against the Rollerz SDK surface (<code>openGame → placeBet → step → collect</code>). By default a page runs on a local stand-in over the engine's published module, with no server; add <code>?sdk=live</code> to the URL and the same page loads the real SDK and plays against the Rollerz testing environment. No math in the pages.</p>
+<p class="lead">One playable demo per engine. Each page imports its engine's published module and only ever calls open → bet → next-action → collect; no math in the page. The SDK-based versions of these games (written against the Rollerz SDK, with a <code>?sdk=live</code> switch) live in the <a href="https://github.com/RoomOneUS/engine-playground">engine-playground</a> repo.</p>
 <div class="grid">
   <a class="card" href="stepper/play.html"><div class="k">STEPPER</div><p>built on <code>stepper/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>
   <a class="card" href="single-shot/play.html"><div class="k">SINGLE SHOT</div><p>built on <code>single-shot/api/rgs.js</code></p><span class="tag">play full screen ↗</span></a>

@@ -86,59 +86,62 @@ table.box{width:100%;border-collapse:collapse;font-size:12.5px}table.box td,tabl
   </aside>
 </div>
 <script type="module">
-// Sample game written against the proposed sdk.auction provider (same methods as sdk.stepper): openGame / placeBet / step / collect.
-import { getSdk, fmtMoney as fmt } from '../sdk/loader.js';
-const N = 10, RTP = 0.95, SIZES = { 5: 'SMALL', 10: 'MEDIUM', 25: 'LARGE', 100: 'XL' };
+// Sample game built on the published engine module: open → bet → next-action (CONTINUE = bid, CASH_OUT = hammer) → collect.
+import { createGame, PRESETS } from './api/rgs.js';
+const N = 10, SIZES = { 5: 'SMALL', 10: 'MEDIUM', 25: 'LARGE', 100: 'XL' };
 const TIERS = { 0.25: ['🪑', 'MOSTLY JUNK', 'Broken furniture, old tyres, a box of cables.'], 0.5: ['🔧', 'ODDS AND ENDS', 'Tools, a bicycle, some kitchenware.'], 1: ['📺', 'SOLID HAUL', 'Appliances, boxed electronics, furniture that sells.'], 2: ['🎸', "COLLECTOR'S FIND", 'Vintage guitars, coins, a signed jersey.'], 5: ['🚗', 'JACKPOT', 'A classic car under the tarp.'] };
-const $ = id => document.getElementById(id), pct = x => (100 * x).toFixed(1) + '%';
-const sdk = await getSdk('gnarone-auction'); if (!sdk.auction) { document.body.innerHTML = '<p style="padding:40px">The live Rollerz SDK has no auction provider yet. Open without ?sdk=live.</p>'; throw new Error('no auction provider'); }
-let M = 5, stake = 500, balance = 0, L = null, B = null, round = null, busy = false;
-async function setup(first) { const s = first ? await sdk.auction.openGame({ preset: SIZES[M] }) : (await sdk.auction.setPreset(SIZES[M]), await sdk.auction.getSession()); balance = s.balance; const lib = sdk.auction.getLibrary(); L = { c: lib.bids, hazard: lib.bids.map((_, i) => lib.survival[i + 1] / lib.survival[i]) }; B = { A: lib.locker.map(b => b.multiple), p: lib.locker.map(b => b.p), r: lib.locker_r };
+const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(1) + '%';
+let M = 5, stake = 5, g = null, s = null, L = null, B = null, round = null;
+const balance = () => g.getSession(s.sessionId).balance / 100;
+function setup() { const bal = g ? Math.round(balance() * 100) : 100000; g = createGame({ preset: SIZES[M] }); s = g.open({ balance: bal }); L = { c: s.bids, hazard: s.bids.map((_, i) => s.survival[i + 1] / s.survival[i]) }; B = { A: s.locker.map(b => b.multiple), p: s.locker.map(b => b.p), r: s.locker_r };
   $('boxTable').innerHTML = `<tr><th>multiple</th><th>p</th><th>pays</th></tr>` + B.A.map((a, i) => `<tr data-b="${i}"><td>${a}×</td><td>${pct(B.p[i])}</td><td>${(a - B.r).toFixed(3)} → ${(a + B.r).toFixed(3)}</td></tr>`).join(''); }
 const RIVALS = ['Dave', 'Brandi', 'Barry', 'Darrell', 'Ivy'];
 $('rivals').innerHTML = RIVALS.map(n => `<div class="rival"><div class="paddle">!</div><div class="head"></div><div class="body"></div>${n}</div>`).join('');
-$('chips').innerHTML = [100, 200, 500, 1000, 2500, 5000].map(v => `<button data-v="${v}" class="${v === stake ? 'on' : ''}">${fmt(v)}</button>`).join('');
+$('chips').innerHTML = [1, 2, 5, 10, 25, 50].map(v => `<button data-v="${v}" class="${v === stake ? 'on' : ''}">${v}</button>`).join('');
 $('chips').onclick = e => { const b = e.target.closest('button'); if (!b || round) return; stake = +b.dataset.v; [...$('chips').children].forEach(x => x.classList.toggle('on', x === b)); renderRungs(); };
-$('sizes').onclick = async e => { const b = e.target.closest('button'); if (!b || round || busy) return; M = +b.dataset.m; busy = true; await setup(false); busy = false; [...$('sizes').children].forEach(x => x.classList.toggle('on', x === b)); renderRungs(); renderStats(); };
+$('sizes').onclick = e => { const b = e.target.closest('button'); if (!b || round) return; M = +b.dataset.m; setup(); [...$('sizes').children].forEach(x => x.classList.toggle('on', x === b)); renderRungs(); renderStats(); };
 function renderRungs() { const k = round ? round.k : 0; $('rungs').innerHTML = `<li class="head"><span>bid</span><span>locker worth</span><span class="r">P(fold)</span></li>` + L.c.map((c, i) => { const st = i + 1; let cls = st === k ? 'cur' : st < k ? 'won' : ''; if (round && round.ended && !round.took && st === round.k) cls = 'dead'; if (st === N) cls += ' top'; return `<li class="${cls}"><span>${st}</span><span class="v">${c.toFixed(2)}× · ${fmt(c * stake)}</span><span class="r">${pct(L.hazard[i])}</span></li>`; }).join(''); }
-function renderStats() { const k = round ? round.k : 0, hold = k ? L.c[k - 1] * stake : 0; $('stHold').textContent = round && !round.ended ? fmt(hold) : '—'; if (round && !round.ended && k < N) { $('stNext').textContent = fmt(L.c[k] * stake); $('stFold').textContent = pct(L.hazard[k]); $('stEv').textContent = fmt(L.hazard[k] * L.c[k] * stake) + (k ? ' (= held)' : ' (= 0.95 × stake)'); } else { $('stNext').textContent = $('stFold').textContent = $('stEv').textContent = '—'; } $('stTake').textContent = round && !round.ended && k ? fmt(hold) : '—'; $('balance').textContent = fmt(balance); }
+function renderStats() { const k = round ? round.k : 0, hold = k ? L.c[k - 1] * stake : 0; $('stHold').textContent = round && !round.ended ? fmt(hold) : '—'; if (round && !round.ended && k < N) { $('stNext').textContent = fmt(L.c[k] * stake); $('stFold').textContent = pct(L.hazard[k]); $('stEv').textContent = fmt(L.hazard[k] * L.c[k] * stake) + (k ? ' (= held)' : ' (= 0.95 × stake)'); } else { $('stNext').textContent = $('stFold').textContent = $('stEv').textContent = '—'; } $('stTake').textContent = round && !round.ended && k ? fmt(hold) : '—'; $('balance').textContent = fmt(balance()); }
 function callout(cls, big, text) { $('callout').className = 'callout ' + cls; $('coBig').textContent = big; $('coText').textContent = text; }
 function log(msg, cls = '') { const d = document.createElement('div'); d.className = cls; d.textContent = msg; $('log').prepend(d); }
 function setTag(txt, cls = '') { const t = $('tag'); t.textContent = txt; t.className = 'tag display mono ' + cls; }
 function paddles(k) { const rs = [...$('rivals').children]; rs.forEach(r => r.classList.remove('up', 'win')); const n = Math.max(1, Math.min(5, 5 - Math.floor(k / 2))); rs.slice(0, n).forEach(r => r.classList.add('up')); return rs.slice(0, n); }
-async function start() {
-  if (busy) return; if (balance < stake) return callout('lose', 'NO CREDIT', 'Demo balance is empty. Reload the page.');
-  busy = true; const r = await sdk.auction.placeBet(stake); busy = false; balance = r.balance;
+function start() {
+  if (balance() < stake) return callout('lose', 'NO CREDIT', 'Demo balance is empty. Reload the page.');
+  const r = g.bet({ sessionId: s.sessionId, betAmount: stake * 100, betType: SIZES[M] });
   round = { id: r.roundId, seedHash: r.seedHash, k: 0, ended: false, took: false, view: r };
-  $('locker').className = 'locker'; $('lotNo').textContent = '#' + (r.seedHash ?? r.roundId).slice(0, 4).toUpperCase(); setTag('LOT · SEALED');
+  $('locker').className = 'locker'; $('lotNo').textContent = '#' + r.seedHash.slice(0, 4).toUpperCase(); setTag('LOT · SEALED');
   $('you').style.display = 'block'; [...$('rivals').children].forEach(x => x.className = 'rival'); [...$('boxTable').rows].forEach(x => x.classList.remove('hit'));
-  $('mU').textContent = r.seedHash ? 'committed ' + r.seedHash.slice(0, 16) + '…' : '—'; $('mV').textContent = 'hidden until the hammer';
+  $('mU').textContent = 'committed ' + r.seedHash.slice(0, 16) + '…'; $('mV').textContent = 'hidden until the hammer';
   $('btnStart').disabled = true; $('btnBid').disabled = false; $('btnTake').disabled = true; [...$('chips').children, ...$('sizes').children].forEach(b => b.disabled = true);
-  callout('', 'BIDDING IS OPEN', `Your first bid: the lot is worth ${fmt(L.c[0] * stake)} if the rivals fold (${pct(L.hazard[0])}). This is the only bid that carries the house edge.`); renderRungs(); renderStats();
+  callout('', 'BIDDING IS OPEN', `Your first bid: the lot is worth ${fmt(L.c[0] * stake)} if the rivals fold (${pct(L.hazard[0])}). This is the only bid that carries the house edge.`);
+  renderRungs(); renderStats();
 }
-async function bid() {
-  if (!round || round.ended || busy) return; const k = round.k + 1; const up = paddles(k); $('btnBid').disabled = $('btnTake').disabled = true; busy = true;
-  const r = await sdk.auction.step(round.id); busy = false; round.view = r; round.k = r.currentStep;
+function bid() {
+  if (!round || round.ended) return; const k = round.k + 1; const up = paddles(k); $('btnBid').disabled = $('btnTake').disabled = true;
   setTimeout(() => {
-    if (r.steps[k - 1].outcome === 'CRASH') { round.ended = true; balance = r.balance; const w = up[k % up.length]; w.classList.add('win'); $('locker').classList.add('lost'); setTag('SOLD · TO ' + w.textContent.toUpperCase(), 'red'); $('stage').classList.add('shake'); setTimeout(() => $('stage').classList.remove('shake'), 500);
-      if (r.seed) $('mU').textContent = 'seed ' + r.seed.slice(0, 12) + '…'; callout('lose', 'OUTBID', `${w.textContent} took the lot on bid ${k}. Your stake is gone. The locker's contents stay sealed.`); log(`${M}× lot · outbid on bid ${k} · −${fmt(stake)}`, 'l'); finish(); }
-    else { up.forEach(x => x.classList.remove('up')); setTag(fmt(r.currentPayout) + ' · ' + L.c[k - 1].toFixed(2) + '×', 'flash'); setTimeout(() => $('tag').classList.remove('flash'), 300);
+    const r = g.nextAction({ roundId: round.id, actionCode: 'CONTINUE' }); round.view = r; round.k = r.currentStep;
+    if (r.steps[k - 1].outcome === 'CRASH') { round.ended = true; g.collect({ roundId: round.id }); const w = up[k % up.length]; w.classList.add('win'); $('locker').classList.add('lost'); setTag('SOLD · TO ' + w.textContent.toUpperCase(), 'red'); $('stage').classList.add('shake'); setTimeout(() => $('stage').classList.remove('shake'), 500);
+      $('mU').textContent = 'seed ' + r.seed.slice(0, 12) + '…'; callout('lose', 'OUTBID', `${w.textContent} took the lot on bid ${k}. Your stake is gone. The locker's contents stay sealed.`); log(`${M}× lot · outbid on bid ${k} · −${fmt(stake)}`, 'l'); finish(); }
+    else { up.forEach(x => x.classList.remove('up')); setTag(fmt(r.currentPayout / 100) + ' · ' + L.c[k - 1].toFixed(2) + '×', 'flash'); setTimeout(() => $('tag').classList.remove('flash'), 300);
       if (r.roundEnded) { callout('win', 'TOP OF THE LADDER', 'No one bids against you at the top. The hammer falls.'); reveal(r, true); }
-      else { $('btnBid').disabled = false; $('btnTake').disabled = false; callout('', `YOURS AT ${fmt(r.currentPayout)}`, `Bid again: worth ${fmt(L.c[k] * stake)} if rivals fold (${pct(L.hazard[k])}); EV of bidding = ${fmt(L.hazard[k] * L.c[k] * stake)}, exactly what you hold. Or take the locker and open it.`); } }
+      else { $('btnBid').disabled = false; $('btnTake').disabled = false; callout('', `YOURS AT ${fmt(r.currentPayout / 100)}`, `Bid again: worth ${fmt(L.c[k] * stake)} if rivals fold (${pct(L.hazard[k])}); EV of bidding = ${fmt(L.hazard[k] * L.c[k] * stake)}, exactly what you hold. Or take the locker and open it.`); }
+    }
     renderRungs(); renderStats();
   }, 650);
 }
-async function take() { if (!round || round.ended || busy || !round.k) return; $('btnBid').disabled = $('btnTake').disabled = true; busy = true; const c = await sdk.auction.collect(round.id); busy = false; reveal({ ...round.view, ...c }, false); }
+function take() { if (!round || round.ended || !round.k) return; $('btnBid').disabled = $('btnTake').disabled = true; const r = g.nextAction({ roundId: round.id, actionCode: 'CASH_OUT' }); round.view = r; reveal(r, false); }
 function reveal(r, auto) {
-  round.ended = true; round.took = true; balance = r.balance; const value = r.currentPayout, win = r.totalWinAmount, X = r.locker.multiplier, band = r.locker.band, tier = TIERS[B.A[band]];
+  round.ended = true; round.took = true; const value = r.currentPayout / 100, win = r.totalWinAmount / 100, X = r.locker.multiplier, band = r.locker.band, tier = TIERS[B.A[band]];
   setTag('SOLD · ' + fmt(value), 'gold'); [...$('rivals').children].forEach(x => x.classList.add('fold'));
-  setTimeout(() => { $('inIcon').textContent = tier[0]; $('inTier').textContent = tier[1]; $('inDesc').textContent = tier[2]; $('inAmt').textContent = `${X.toFixed(3)}× → ${fmt(win)}`; $('locker').classList.add('open'); $('boxTable').rows[band + 1].classList.add('hit'); if (r.seed) $('mU').textContent = 'seed ' + r.seed.slice(0, 12) + '…'; $('mV').textContent = `band ${B.A[band]}× · X = ${X.toFixed(4)}`;
+  setTimeout(() => { $('inIcon').textContent = tier[0]; $('inTier').textContent = tier[1]; $('inDesc').textContent = tier[2]; $('inAmt').textContent = `${X.toFixed(3)}× → ${fmt(win)}`; $('locker').classList.add('open'); $('boxTable').rows[band + 1].classList.add('hit'); $('mU').textContent = 'seed ' + r.seed.slice(0, 12) + '…'; $('mV').textContent = `band ${B.A[band]}× · X = ${X.toFixed(4)}`;
+    g.collect({ roundId: round.id });
     const net = win - stake; callout(net >= 0 ? 'win' : 'lose', `${tier[1]} · ${fmt(win)}`, `Locker worth ${fmt(value)} after ${round.k} bid${round.k > 1 ? 's' : ''}, contents ${X.toFixed(3)}× of that. ${auto ? 'Top of the ladder.' : ''} Net ${net >= 0 ? '+' : ''}${fmt(net)}.`);
     log(`${M}× lot · took after ${round.k} · ${B.A[band]}× locker · ${net >= 0 ? '+' : ''}${fmt(net)}`, net >= 0 ? 'w' : 'l'); finish(); }, 700);
 }
 function finish() { setTimeout(() => { $('btnStart').disabled = false; [...$('chips').children, ...$('sizes').children].forEach(b => b.disabled = false); round = null; renderRungs(); renderStats(); }, 900); renderRungs(); renderStats(); }
 $('btnStart').onclick = start; $('btnBid').onclick = () => bid(); $('btnTake').onclick = () => take();
-await setup(true); renderRungs(); renderStats();
+setup(); renderRungs(); renderStats();
 </script>
 
 <section class="api-foot" style="max-width:1300px;margin:0 auto;padding:10px 22px 32px;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#a8adb8;font-size:13px;line-height:1.5">
