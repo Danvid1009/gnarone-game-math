@@ -113,59 +113,48 @@ input.pay{width:100%;margin-top:6px;padding:8px;border:1px solid var(--line);bor
 </div>
 
 <script type="module">
-// Sample game built on the published engine module: createGame({ preset, mode, racers?, rtp?, structure? }) → open → bet(RACER_i) → collect. This skin names the racers.
-import { createGame } from './api/rgs.js';
+// Sample game written against the Rollerz SDK: sdk.top3 (or sdk.top1 with ?mode=top1) openGame({ preset }) / getBetTypes / placeBet(amount, { betType: 'RACER_i' }) / collect.
+import { getSdk, fmtMoney as fmt } from '../sdk/loader.js';
 const TOP1 = new URLSearchParams(location.search).get('mode') === 'top1';
-const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(2) + '%';
-const CHIPS = [1, 5, 10, 25, 50, 100]; const NAMES = ['Ace', 'Bolt', 'Cinder', 'Dash', 'Ember', 'Flint', 'Gale', 'Hex', 'Iris', 'Jolt', 'Kite', 'Lux'];
-let elos = [1850, 1780, 1720, 1680, 1640, 1600, 1560, 1520, 1480, 1430, 1380, 1300], stake = 10, backed = 0, g = null, s = null, race = null, busy = false, last = null;
-const balance = () => g ? g.getSession(s.sessionId).balance / 100 : 1000;
-function build() {
-  const bal = g ? Math.round(balance() * 100) : 100000; const rtp = Number($('rtp').value), place = Number($('place').value), show = Number($('show').value);
-  g = createGame({ preset: 'field-12', mode: TOP1 ? 'top1' : 'top3', racers: elos.map(elo => ({ elo })), rtp, structure: TOP1 ? undefined : { kind: 'place-terms', place, show } });   // the engine throws on an infeasible field
-  s = g.open({ balance: bal }); const R = g.engine;
-  return { ids: s.racers.map(r => r.name), R: s.racers.map((r, i) => ({ name: NAMES[i], elo: r.elo, q1: r.q[0], top3: r.q[0] + r.q[1] + r.q[2], M: r.multipliers })), bound: TOP1 ? 1 : rtp, zones: R.zones ? R.zones() : null };
-}
+const $ = id => document.getElementById(id), pct = x => (100 * x).toFixed(2) + '%';
+const NAMES = ['Ace', 'Bolt', 'Cinder', 'Dash', 'Ember', 'Flint', 'Gale', 'Hex', 'Iris', 'Jolt', 'Kite', 'Lux'];   // the skin for RACER_1..12
+const PRESETS = ['field-12', 'field-8', 'field-6', 'field-12-tight'];
+const sdk = await getSdk(TOP1 ? 'gnarone-top1' : 'gnarone-top3'); const prov = TOP1 ? sdk.top1 : sdk.top3;
+let preset = 'field-12', stake = 1000, backed = 0, balance = 0, race = null, busy = false, last = null;
+// the config card becomes a preset picker
+const card = $('rtp').closest('.card'); card.innerHTML = `<h2 class="display">FIELD</h2><ul class="racers mono" id="racers"></ul><div class="seg" id="presetSeg" style="grid-template-columns:repeat(2,1fr)">${PRESETS.map(p => `<button data-p="${p}" class="${p === preset ? 'on' : ''}">${p}</button>`).join('')}</div><div class="err" id="err"></div><h2 class="display" style="margin-top:14px">STAKE</h2><div class="chips mono" id="chips"></div><button class="btn" id="btnRace">RACE</button>`;
+$('presetSeg').addEventListener('click', async e => { const b = e.target.closest('button'); if (!b || busy) return; preset = b.dataset.p; backed = 0; [...$('presetSeg').children].forEach(x => x.classList.toggle('on', x === b)); await setup(false); rebuild(); });
+async function setup(first) { const s = first ? await prov.openGame({ preset }) : (await prov.setPreset(preset), await prov.getSession()); balance = s.balance; const ids = prov.getBetTypes();
+  if (sdk.isLocal) { const lib = prov.getLibrary(); race = { ids, R: lib.racers.map((r, i) => ({ name: NAMES[i], elo: r.elo, q1: r.q[0], top3: r.q[0] + r.q[1] + r.q[2], M: r.multipliers })) }; }
+  else race = { ids, R: ids.map((_, i) => ({ name: NAMES[i], elo: null, q1: null, top3: null, M: null })), unknown: true }; }
 function rebuild() {
-  try { race = build(); $('err').textContent = ''; } catch (e) { $('err').textContent = e.message; if (!race) return; }
   const L = $('lanes'); L.innerHTML = '';
   race.R.forEach((r, i) => { const lane = document.createElement('div'); lane.className = 'lane' + (i === backed ? ' backed' : ''); lane.dataset.i = i;
-    lane.innerHTML = `<div class="tag"><b>${r.name}</b><span class="mono">${r.elo}</span></div><div class="runner" id="run${i}"><div class="medal"></div><div class="head"></div><div class="body" data-n="${String(456 - i).padStart(3, '0')}"></div></div><div class="odds mono">${TOP1 ? r.M[0].toFixed(2) + '×' : r.M.map(m => m.toFixed(2)).join(' / ')} · win ${pct(r.q1)}</div>`;
+    lane.innerHTML = `<div class="tag"><b>${r.name}</b><span class="mono">${r.elo ?? race.ids[i]}</span></div><div class="runner" id="run${i}"><div class="medal"></div><div class="head"></div><div class="body" data-n="${String(456 - i).padStart(3, '0')}"></div></div><div class="odds mono">${r.M ? (TOP1 ? r.M[0].toFixed(2) + '×' : r.M.map(m => m.toFixed(2)).join(' / ')) + ' · win ' + pct(r.q1) : race.ids[i]}</div>`;
     lane.addEventListener('click', () => { if (!busy) { backed = i; rebuild(); } }); L.appendChild(lane); });
-  $('racers').innerHTML = `<li class="head"><span></span><span>racer</span><span class="r">elo</span><span class="r">top-3</span><span class="r">M₁ / M₂ / M₃</span></li>` + race.R.map((r, i) => `<li data-i="${i}" class="${i === backed ? 'backed' : ''}"><span>${i === backed ? '▶' : ''}</span><span>${r.name} <span class="mono" style="color:var(--ink-3);font-size:10px">${race.ids[i]}</span></span><span class="r"><input type="number" step="10" value="${elos[i]}" data-i="${i}" aria-label="${r.name} Elo"></span><span class="r">${(100 * r.top3).toFixed(1)}%</span><span class="r m">${TOP1 ? r.M[0].toFixed(2) + '×' : r.M.map(m => m.toFixed(2)).join(' / ')}</span></li>`).join('');
-  $('racers').querySelectorAll('li[data-i]').forEach(li => li.addEventListener('click', e => { if (e.target.tagName === 'INPUT' || busy) return; backed = +li.dataset.i; rebuild(); }));
-  $('racers').querySelectorAll('input').forEach(inp => inp.addEventListener('change', () => { elos[+inp.dataset.i] = Number(inp.value); rebuild(); }));
-  if (race.zones) { const Z = race.zones.slice(0, 60); $('zones').innerHTML = Z.map(z => `<li data-top="${z.top.join('-')}"><span>${z.top.map(i => race.R[i].name).join(' › ')}</span><span class="r p">${pct(z.p)}</span></li>`).join(''); $('stZ').textContent = TOP1 ? `${race.zones.length} ordered podiums · winner takes all` : `${race.zones.length} ordered podiums · feasible while top-3 < ${pct(race.bound)}`; }
-  refresh();
+  $('racers').innerHTML = `<li class="head"><span></span><span>racer</span><span class="r">elo</span><span class="r">top-3</span><span class="r">M₁ / M₂ / M₃</span></li>` + race.R.map((r, i) => `<li data-i="${i}" class="${i === backed ? 'backed' : ''}"><span>${i === backed ? '▶' : ''}</span><span>${r.name} <span class="mono" style="color:var(--ink-3);font-size:10px">${race.ids[i]}</span></span><span class="r">${r.elo ?? '—'}</span><span class="r">${r.top3 !== null ? (100 * r.top3).toFixed(1) + '%' : '—'}</span><span class="r m">${r.M ? (TOP1 ? r.M[0].toFixed(2) + '×' : r.M.map(m => m.toFixed(2)).join(' / ')) : '—'}</span></li>`).join('');
+  $('racers').querySelectorAll('li[data-i]').forEach(li => li.addEventListener('click', () => { if (busy) return; backed = +li.dataset.i; rebuild(); }));
+  $('zones').innerHTML = ''; $('stZ').textContent = TOP1 ? 'winner takes all · odds = RTP ÷ P(win)' : 'first / second / third pay';
+  const lv = prov.getValidBets({ betType: race.ids[backed] }); $('chips').innerHTML = lv.map(c => `<button data-c="${c}" class="${c === stake ? 'on' : ''}">${fmt(c)}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (busy) return; stake = +b.dataset.c; rebuild(); })); $('btnRace').onclick = run; refresh();
 }
-['rtp', 'place', 'show'].forEach(id => $(id).addEventListener('change', rebuild));
-function buildChips() { $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === stake ? 'on' : ''}">${c}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (busy) return; stake = +b.dataset.c; buildChips(); })); }
 function say(big, text, mood) { $('coBig').textContent = big; $('coText').textContent = text; $('callout').className = 'callout' + (mood ? ' ' + mood : ''); }
 const ordinal = k => k + (['th', 'st', 'nd', 'rd'][(k % 100 > 10 && k % 100 < 14) ? 0 : (k % 10 < 4 ? k % 10 : 0)]);
-function run() {
-  if (busy || !race || $('err').textContent) return; if (stake > balance()) { say('NOT ENOUGH', 'Lower the stake or reload for a fresh demo balance.', 'lose'); return; } busy = true;
-  const r = g.bet({ sessionId: s.sessionId, betAmount: stake * 100, betType: race.ids[backed] }); refresh();
-  const order = r.math.order, top = order.slice(0, 3), mult = r.math.multiple, win = r.totalWinAmount / 100; last = { u: r.math.u, top, mult, win, stake, backed };
-  document.querySelectorAll('.zones li.hit').forEach(l => l.classList.remove('hit'));
+async function run() {
+  if (busy || !race) return; if (stake > balance) { say('NOT ENOUGH', 'Lower the stake or reload for a fresh demo balance.', 'lose'); return; } busy = true;
+  const r = await prov.placeBet(stake, { betType: race.ids[backed] }); balance = r.balance; refresh();
+  const order = r.order.map(id => race.ids.indexOf(id)), top = order.slice(0, 3), mult = r.multiplier, win = r.totalWinAmount; last = { top, mult, win, stake, backed, place: r.place };
   const laneW = $('lanes').getBoundingClientRect().width, finishX = laneW - 70 - 24 - 6, n = race.R.length;
   race.R.forEach((_, i) => { const el = $('run' + i); el.className = 'runner run'; el.style.setProperty('--dur', '0s'); el.style.left = '118px'; el.querySelector('.medal').className = 'medal'; });
-  say('GO', TOP1 ? `Backing ${race.R[backed].name} at ${race.R[backed].M[0].toFixed(2)}× to win. The whole order is already decided by one number (committed as ${r.seedHash.slice(0, 12)}…).` : `Backing ${race.R[backed].name}: pays ${race.R[backed].M.map(m => m.toFixed(2)).join(' / ')} for 1st / 2nd / 3rd. The whole order is already decided by one number.`);
+  say('GO', `Backing ${race.R[backed].name} (${race.ids[backed]}). The whole order is already decided by one number${r.seedHash ? ` (committed as ${r.seedHash.slice(0, 12)}…)` : ''}.`);
   setTimeout(() => {
     order.forEach((i, place) => { const el = $('run' + i), dur = 2.4 + place * 0.22 + (place ? Math.random() * 0.12 : 0); el.style.setProperty('--dur', dur + 's'); el.style.left = (finishX - place * 16) + 'px'; setTimeout(() => { el.classList.remove('run'); if (place < 3) { const m = el.querySelector('.medal'); m.textContent = place + 1; m.className = 'medal on ' + ['g', 's', 'b'][place]; } }, dur * 1000); });
-    setTimeout(() => { const zli = document.querySelector(`.zones li[data-top="${top.join('-')}"]`); if (zli) { zli.classList.add('hit'); zli.scrollIntoView({ block: 'nearest' }); }
-      g.collect({ roundId: r.roundId }); const place = top.indexOf(backed), pod = top.map(i => race.R[i].name).join(' › ');
-      if (mult > 0) say(`${mult.toFixed(3)}×`, `${race.R[backed].name} finished ${['1st', '2nd', '3rd'][place]}. Paid ${fmt(win)}. Podium: ${pod}.`, 'win');
-      else say('NO PLACE', `${race.R[backed].name} finished ${ordinal(order.indexOf(backed) + 1)} of ${n}. Podium: ${pod}. Stake of ${fmt(stake)} lost.`, 'lose');
+    setTimeout(async () => { const c = await prov.collect(r.roundId); balance = c.balance; const pod = top.map(i => race.R[i].name).join(' › ');
+      if (mult > 0) say(`${mult.toFixed(3)}×`, `${race.R[backed].name} finished ${ordinal(r.place)}. Paid ${fmt(win)}. Podium: ${pod}.`, 'win'); else say('NO PLACE', `${race.R[backed].name} finished ${ordinal(r.place)} of ${n}. Podium: ${pod}. Stake of ${fmt(stake)} lost.`, 'lose');
       busy = false; refresh(); }, (2.4 + (n - 1) * 0.22 + 0.25) * 1000);
   }, 400);
 }
-$('btnRace').addEventListener('click', run); document.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); run(); } });
-function refresh() {
-  $('balance').textContent = fmt(balance()); $('btnRace').disabled = busy || !!$('err').textContent;
-  $('stBack').textContent = race ? `${race.R[backed].name} · ${race.ids[backed]} (Elo ${race.R[backed].elo})` : '—';
-  $('stM').textContent = race ? (TOP1 ? race.R[backed].M[0].toFixed(3) + '× to win' : race.R[backed].M.map(m => m.toFixed(3) + '×').join(' / ')) : '—';
-  $('stU').textContent = last && !busy ? last.u.toFixed(6) : (busy ? '…' : '—'); $('stPod').textContent = last && !busy ? last.top.map(i => race.R[i].name).join(' › ') : (busy ? '…' : '—'); $('stPaid').textContent = last && !busy ? fmt(last.win) : (busy ? '…' : '—');
-}
-if (TOP1) { document.querySelector('header h1').innerHTML = 'RATED RACERS · <span>TOP 1</span>'; document.querySelector('.row2').hidden = true; document.querySelector('#coText').textContent = 'Click a lane to back that racer, pick a stake, press Race. One uniform number, recycled, produces the whole finishing order. Only the winner pays: odds are RTP ÷ P(win).'; document.querySelector('.disclose').innerHTML = '<b>How this is fair.</b> Strength is 10^(Elo/400), so pairwise odds are Elo\'s own formula. One uniform picks the winner from intervals sized by strength, and its leftover is recycled to fill the rest of the order (Plackett–Luce, exactly). Backing racer i pays RTP ÷ P(i wins) for a win and nothing otherwise, so every racer returns exactly the target RTP.'; }
-rebuild(); buildChips();
+document.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); run(); } });
+function refresh() { $('balance').textContent = fmt(balance); $('btnRace').disabled = busy; $('stBack').textContent = race ? `${race.R[backed].name} · ${race.ids[backed]}${race.R[backed].elo ? ` (Elo ${race.R[backed].elo})` : ''}` : '—'; $('stM').textContent = race && race.R[backed].M ? (TOP1 ? race.R[backed].M[0].toFixed(3) + '× to win' : race.R[backed].M.map(m => m.toFixed(3) + '×').join(' / ')) : '—'; $('stU').textContent = last && !busy ? ordinal(last.place) : (busy ? '…' : '—'); $('stPod').textContent = last && !busy ? last.top.map(i => race.R[i].name).join(' › ') : (busy ? '…' : '—'); $('stPaid').textContent = last && !busy ? fmt(last.win) : (busy ? '…' : '—'); }
+if (TOP1) { document.querySelector('header h1').innerHTML = 'RATED RACERS · <span>TOP 1</span>'; const r2 = document.querySelector('.row2'); if (r2) r2.hidden = true; document.querySelector('#coText').textContent = 'Click a lane to back that racer, pick a stake, press Race. One uniform number, recycled, produces the whole finishing order. Only the winner pays: odds are RTP ÷ P(win).'; document.querySelector('.disclose').innerHTML = '<b>How this is fair.</b> Strength is 10^(Elo/400), so pairwise odds are Elo\'s own formula. One uniform picks the winner from intervals sized by strength, and its leftover is recycled to fill the rest of the order (Plackett–Luce, exactly). Backing racer i pays RTP ÷ P(i wins) for a win and nothing otherwise, so every racer returns exactly the target RTP.'; }
+await setup(true); rebuild();
 </script>

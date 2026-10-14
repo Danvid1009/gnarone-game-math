@@ -248,6 +248,10 @@ ${FOOT}`;
   console.log(`docs/${e.slug}/  ← ${e.folder}  (${figs.length} figures${hasApi ? ', api' : ''}${e.aliases?.length ? ', alias ' + e.aliases.join(',') : ''})`);
 }
 
+// the SDK stand-in and loader used by the sample games
+mkdirSync(join(docs, 'sdk'), { recursive: true });
+for (const f of ['local-sdk.js', 'loader.js']) copyFileSync(join(root, 'site/sdk', f), join(docs, 'sdk', f));
+
 // the preset catalogue PDF, if built (python3 site/make-presets-pdf.py)
 if (existsSync(join(root, 'PRESETS.pdf'))) copyFileSync(join(root, 'PRESETS.pdf'), join(docs, 'presets.pdf'));
 

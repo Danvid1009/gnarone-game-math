@@ -44,40 +44,38 @@ label.small{display:block;margin-top:10px;font-size:11px;letter-spacing:.06em;te
   </aside>
 </div>
 <script type="module">
-// Sample game built on the published engine module: createGame({ preset } or { n | weights, rtp }) → open → bet → collect. Options are OPTION_i; this skin names them.
-import { createGame } from './api/rgs.js';
-const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(2) + '%';
-const CHIPS = [1, 5, 10, 25, 50, 100]; let chip = 10, n = 2, picked = 0, g = null, s = null, P = null, busy = false;
-const balance = () => g ? g.getSession(s.sessionId).balance / 100 : 1000;
-const skin = (names) => names.length === 2 ? ['HEADS', 'TAILS'] : names.map((_, i) => String.fromCharCode(65 + i));   // the game reskins OPTION_1..n
-function build() {
-  const rtp = Number($('rtp').value); const wtxt = $('weights').value.trim(); const bal = g ? Math.round(balance() * 100) : 100000;
-  const cfg = wtxt ? { weights: wtxt.split(',').map(x => Number(x.trim())) } : { n };
-  g = createGame({ preset: 'coin', ...cfg, rtp }); s = g.open({ balance: bal });
-  return { ids: s.options.map(o => o.name), names: skin(s.options), p: s.options.map(o => o.p), odds: s.options.map(o => o.odds), cum: [...s.options.map(o => o.rn_from), 1], rtp };
-}
+// Sample game written against the Rollerz SDK: sdk.pickOne.openGame({ preset }) / getBetTypes / placeBet(amount, { betType }) / collect.
+import { getSdk, fmtMoney as fmt } from '../sdk/loader.js';
+const $ = id => document.getElementById(id), pct = x => (100 * x).toFixed(2) + '%';
+const PRESETS = ['coin', 'three', 'five', 'weighted'];
+const sdk = await getSdk('gnarone-pick-one');
+let preset = 'coin', chip = 1000, balance = 0, picked = 0, P = null, busy = false;
+const skin = ids => ids.length === 2 ? ['HEADS', 'TAILS'] : ids.map((_, i) => String.fromCharCode(65 + i));   // the game reskins OPTION_1..n
+// the config card becomes a preset picker
+const card = $('weights').closest('.card'); card.innerHTML = `<h2 class="display">PRESET</h2><div class="seg" id="presetSeg" style="grid-template-columns:repeat(4,1fr)">${PRESETS.map(p => `<button data-p="${p}" class="${p === preset ? 'on' : ''}">${p}</button>`).join('')}</div><div class="err" id="err"></div><h2 class="display" style="margin-top:14px">STAKE</h2><div class="chips mono" id="chips"></div><button class="btn" id="btnGo">PICK</button>`;
+$('presetSeg').addEventListener('click', async e => { const b = e.target.closest('button'); if (!b || busy) return; preset = b.dataset.p; picked = 0; [...$('presetSeg').children].forEach(x => x.classList.toggle('on', x === b)); await setup(false); rebuild(); });
+async function setup(first) { const s = first ? await sdk.pickOne.openGame({ preset }) : (await sdk.pickOne.setPreset(preset), await sdk.pickOne.getSession()); balance = s.balance; const ids = sdk.pickOne.getBetTypes();
+  if (sdk.isLocal) { const lib = sdk.pickOne.getLibrary(); P = { ids, names: skin(ids), p: lib.options.map(o => o.p), odds: lib.options.map(o => o.odds), cum: [...lib.options.map(o => o.rn_from), 1] }; } else P = { ids, names: skin(ids), p: ids.map(() => 1 / ids.length), odds: ids.map(() => null), cum: ids.map((_, i) => i / ids.length).concat([1]), unknown: true }; }
 function rebuild() {
-  try { P = build(); $('err').textContent = ''; } catch (e) { $('err').textContent = e.message; P = null; return; } if (picked >= P.p.length) picked = 0;
-  $('doors').innerHTML = P.names.map((nm, i) => `<div class="door ${i === picked ? 'picked' : ''}" data-i="${i}" style="--w:${P.p[i]}"><div class="name display">${nm}</div><div class="odds mono">${P.odds[i].toFixed(3)}×</div><div class="p mono">${pct(P.p[i])}</div></div>`).join('');
+  $('doors').innerHTML = P.names.map((nm, i) => `<div class="door ${i === picked ? 'picked' : ''}" data-i="${i}" style="--w:${P.p[i]}"><div class="name display">${nm}</div><div class="odds mono">${P.odds[i] ? P.odds[i].toFixed(3) + '×' : P.ids[i]}</div><div class="p mono">${P.unknown ? '' : pct(P.p[i])}</div></div>`).join('');
   $('doors').querySelectorAll('.door').forEach(d => d.addEventListener('click', () => { if (!busy) { picked = +d.dataset.i; rebuild(); } }));
   $('rn').innerHTML = P.p.map((x, i) => `<div style="flex:${x} 0 0" class="${i === picked ? 'picked' : ''}" data-i="${i}"></div>`).join(''); $('marker').classList.remove('on');
-  $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === chip ? 'on' : ''}">${c}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (!busy) { chip = +b.dataset.c; rebuild(); } })); refresh();
+  const lv = sdk.pickOne.getValidBets({ betType: P.ids[picked] }); $('chips').innerHTML = lv.map(c => `<button data-c="${c}" class="${c === chip ? 'on' : ''}">${fmt(c)}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (!busy) { chip = +b.dataset.c; rebuild(); } })); $('btnGo').onclick = go; refresh();
 }
-function refresh() { $('balance').textContent = fmt(balance()); $('btnGo').disabled = busy || !P; $('stB').textContent = P ? `${P.names[picked]} (${P.ids[picked]})` : '—'; $('stO').textContent = P ? P.odds[picked].toFixed(4) + '×' : '—'; }
-$('nseg').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (busy) return; n = +b.dataset.n; $('weights').value = ''; $('nseg').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); rebuild(); }));
-['weights', 'rtp'].forEach(id => $(id).addEventListener('change', rebuild));
+function refresh() { $('balance').textContent = fmt(balance); $('btnGo').disabled = busy || !P; $('stB').textContent = P ? `${P.names[picked]} (${P.ids[picked]})` : '—'; $('stO').textContent = P && P.odds[picked] ? P.odds[picked].toFixed(4) + '×' : '—'; }
 function say(b, t, m) { $('coBig').textContent = b; $('coText').textContent = t; $('callout').className = 'callout' + (m ? ' ' + m : ''); }
-function go() {
-  if (busy || !P) return; if (chip > balance()) { say('NOT ENOUGH', 'Lower the stake or reload.', 'lose'); return; } busy = true;
-  const r = g.bet({ sessionId: s.sessionId, betAmount: chip * 100, betType: P.ids[picked] }); refresh();
-  const u = r.math.u, w = r.math.winner, hit = r.math.hit, win = r.totalWinAmount / 100;
-  const rn = $('rn').getBoundingClientRect(), st = $('stage').getBoundingClientRect(); const m = $('marker'); m.style.left = (rn.left - st.left) + 'px'; m.classList.add('on'); $('mtag').textContent = 'u = ' + u.toFixed(6);
-  say('DRAWING', `One uniform number (committed as ${r.seedHash.slice(0, 12)}…), sliding to where it landed.`);
+async function go() {
+  if (busy || !P) return; if (chip > balance) { say('NOT ENOUGH', 'Lower the stake or reload.', 'lose'); return; } busy = true;
+  const r = await sdk.pickOne.placeBet(chip, { betType: P.ids[picked] }); balance = r.balance; refresh();
+  const w = P.ids.indexOf(r.winner), hit = r.winner === P.ids[picked], win = r.totalWinAmount; const u = (P.cum[w] + P.cum[w + 1]) / 2;
+  const rn = $('rn').getBoundingClientRect(), st = $('stage').getBoundingClientRect(); const m = $('marker'); m.style.left = (rn.left - st.left) + 'px'; m.classList.add('on'); $('mtag').textContent = r.winner;
+  say('DRAWING', `One uniform number${r.seedHash ? ` (committed as ${r.seedHash.slice(0, 12)}…)` : ''}, sliding to the winning zone.`);
   setTimeout(() => { m.style.left = (rn.left - st.left + u * rn.width) + 'px'; }, 50);
-  setTimeout(() => { $('doors').querySelectorAll('.door').forEach(d => d.classList.add(+d.dataset.i === w ? 'win' : 'dead')); $('rn').querySelector(`[data-i="${w}"]`).classList.add('win'); g.collect({ roundId: r.roundId });
-    $('stU').textContent = u.toFixed(6); $('stW').textContent = `${P.names[w]} (${P.ids[w]})`; $('stP').textContent = fmt(win); say(hit ? `${P.odds[picked].toFixed(3)}×` : 'MISS', hit ? `${P.names[w]} came up. Paid ${fmt(win)} on ${fmt(chip)}.` : `${P.names[w]} came up, you had ${P.names[picked]}. Stake of ${fmt(chip)} lost.`, hit ? 'win' : 'lose'); busy = false; refresh(); }, 1100);
+  setTimeout(async () => { $('doors').querySelectorAll('.door').forEach(d => d.classList.add(+d.dataset.i === w ? 'win' : 'dead')); $('rn').querySelector(`[data-i="${w}"]`).classList.add('win'); const c = await sdk.pickOne.collect(r.roundId); balance = c.balance;
+    $('stU').textContent = r.winner; $('stW').textContent = `${P.names[w]} (${r.winner})`; $('stP').textContent = fmt(win); say(hit ? `${r.multiplier.toFixed(3)}×` : 'MISS', hit ? `${P.names[w]} came up. Paid ${fmt(win)} on ${fmt(chip)}.` : `${P.names[w]} came up, you had ${P.names[picked]}. Stake of ${fmt(chip)} lost.`, hit ? 'win' : 'lose'); busy = false; refresh(); }, 1100);
 }
-$('btnGo').addEventListener('click', go); document.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); go(); } }); rebuild();
+document.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); go(); } });
+await setup(true); rebuild();
 </script>
 
 <section class="api-foot" style="max-width:1300px;margin:0 auto;padding:10px 22px 32px;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#a8adb8;font-size:13px;line-height:1.5">

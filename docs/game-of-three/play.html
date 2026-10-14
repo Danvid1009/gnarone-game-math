@@ -45,30 +45,31 @@ table.t{width:100%;border-collapse:collapse;font-size:11.5px}.t td,.t th{padding
   </aside>
 </div>
 <script type="module">
-// Sample game built on the published engine module: open → bet (BASE | BOOSTED) → collect.
-import { createGame } from './api/rgs.js';
-const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(2) + '%';
-const CHIPS = [1, 5, 10, 25, 50, 100]; let chip = 10, mode = 'BASE', busy = false;
-const g = createGame({ preset: 'sheet' }), s = g.open(); const balance = () => g.getSession(s.sessionId).balance / 100;
-const T = () => s.modes[mode];
+// Sample game written against the Rollerz SDK: sdk.go3.openGame({ preset }) / placeBet(amount, { betType }) / collect.
+import { getSdk, fmtMoney as fmt } from '../sdk/loader.js';
+const $ = id => document.getElementById(id), pct = x => (100 * x).toFixed(2) + '%';
+const sdk = await getSdk('gnarone-smash');
+let chip = 1000, mode = 'BASE', balance = 0, busy = false, lib = null;
+const s = await sdk.go3.openGame({ preset: 'sheet' }); balance = s.balance; if (sdk.isLocal) lib = sdk.go3.getLibrary();
 function rebuild() { $('rocks').innerHTML = [0, 1, 2].map(i => `<div class="rock" id="rock${i}"><div class="body"></div><div class="gem" id="gem${i}"></div><div class="lbl display" id="lbl${i}">ROCK ${i + 1}</div></div>`).join('');
-  $('chips').innerHTML = CHIPS.map(c => `<button data-c="${c}" class="${c === chip ? 'on' : ''}">${c}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (!busy) { chip = +b.dataset.c; rebuild(); } }));
-  const byCount = {}; for (const z of T().zones) { const r = (byCount[z.count] ??= { p: 0, gemP: 0, win: 0, ret: 0 }); r.p += z.p; if (z.gem) r.gemP += z.p; else r.win = z.multiple; r.ret += z.p * z.multiple; }
-  $('tbl').innerHTML = `<tr><th>rocks</th><th>P</th><th>P(gem)</th><th>win</th><th>return</th></tr>` + [3, 2, 1, 0].map(c => { const r = byCount[c]; return `<tr data-c="${c}"><td>${c}</td><td>${pct(r.p)}</td><td>${r.p ? pct(r.gemP / r.p) : '—'}</td><td>${r.win.toFixed(2)}×${r.gemP ? ' (×gem)' : ''}</td><td>${r.ret.toFixed(4)}</td></tr>`; }).join('');
-  $('stRtp').textContent = T().rtp.toFixed(6); refresh(); }
-function refresh() { $('balance').textContent = fmt(balance()); $('btnSmash').disabled = busy; }
+  const lv = sdk.go3.getValidBets({ betType: mode }); $('chips').innerHTML = lv.map(c => `<button data-c="${c}" class="${c === chip ? 'on' : ''}">${fmt(c)}</button>`).join(''); $('chips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (!busy) { chip = +b.dataset.c; rebuild(); } }));
+  if (lib) { const T = lib.modes[mode]; const byCount = {}; for (const z of T.zones) { const r = (byCount[z.count] ??= { p: 0, gemP: 0, win: 0, ret: 0 }); r.p += z.p; if (z.gem) r.gemP += z.p; else r.win = z.multiple; r.ret += z.p * z.multiple; }
+    $('tbl').innerHTML = `<tr><th>rocks</th><th>P</th><th>P(gem)</th><th>win</th><th>return</th></tr>` + [3, 2, 1, 0].map(c => { const r = byCount[c]; return `<tr data-c="${c}"><td>${c}</td><td>${pct(r.p)}</td><td>${r.p ? pct(r.gemP / r.p) : '—'}</td><td>${r.win.toFixed(2)}×${r.gemP ? ' (×gem)' : ''}</td><td>${r.ret.toFixed(4)}</td></tr>`; }).join(''); $('stRtp').textContent = T.rtp.toFixed(6); }
+  else { $('tbl').innerHTML = `<tr><th>rocks</th><th>win</th></tr>` + [3, 2, 1, 0].map(c => `<tr data-c="${c}"><td>${c}</td><td>${[0, 0.5, 1, 5][c]}×${c >= 2 ? ' (×gem)' : ''}</td></tr>`).join(''); $('stRtp').textContent = 'see catalogue'; }
+  refresh(); }
+function refresh() { $('balance').textContent = fmt(balance); $('btnSmash').disabled = busy; }
 $('mode').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { if (busy) return; mode = b.dataset.m; $('mode').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); rebuild(); }));
 function say(b, t, m) { $('coBig').textContent = b; $('coText').textContent = t; $('callout').className = 'callout' + (m ? ' ' + m : ''); }
 function shatter(el) { const r = el.getBoundingClientRect(), st = $('stage').getBoundingClientRect(); for (let i = 0; i < 14; i++) { const d = document.createElement('div'); d.className = 'shard'; d.style.left = (r.left - st.left + r.width / 2) + 'px'; d.style.top = (r.top - st.top + r.height / 2) + 'px'; d.style.setProperty('--dx', (Math.random() * 160 - 80) + 'px'); d.style.setProperty('--dy', (Math.random() * 120 - 20) + 'px'); d.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg'); $('stage').appendChild(d); setTimeout(() => d.remove(), 900); } }
-function smash() {
-  if (busy) return; const stake = chip; if (stake > balance()) { say('NOT ENOUGH', 'Lower the stake or reload.', 'lose'); return; } busy = true; rebuild(); busy = true; refresh();
-  const r = g.bet({ sessionId: s.sessionId, betAmount: stake * 100, betType: mode }); refresh();
-  const u = r.math.u, z = r.math.zone, count = r.count, gem = r.math.gem, mult = r.multiplier, win = r.totalWinAmount / 100;
+async function smash() {
+  if (busy) return; if (chip > balance) { say('NOT ENOUGH', 'Lower the stake or reload.', 'lose'); return; } busy = true; rebuild(); busy = true; refresh();
+  const r = await sdk.go3.placeBet(chip, { betType: mode }); balance = r.balance; refresh();
+  const count = r.count, gem = r.hasBonus ? Math.round(r.multiplier / [0, 0.5, 1, 5][count] * (mode === 'BOOSTED' ? 2 : 1)) : null, mult = r.multiplier, win = r.totalWinAmount;
   $('tbl').querySelectorAll('tr[data-c]').forEach(tr => tr.classList.toggle('hit', +tr.dataset.c === count));
-  const order = [0, 1, 2].sort(() => Math.random() - .5); say('SMASHING', `u = ${u.toFixed(6)} landed in zone ${z}. Watch the rocks.`);
+  const order = [0, 1, 2].sort(() => Math.random() - .5); say('SMASHING', `Result drawn${r.seedHash ? ` (committed as ${r.seedHash.slice(0, 12)}…)` : ''}. Watch the rocks.`);
   order.forEach((i, k) => setTimeout(() => { const R = $('rock' + i); R.classList.add('shake'); setTimeout(() => { R.classList.remove('shake'); if (k < count) { R.classList.add('crushed'); shatter(R); $('lbl' + i).textContent = 'CRUSHED'; if (gem && k === count - 1) { const gg = $('gem' + i); gg.textContent = gem + '×'; gg.classList.add('on'); } } else $('lbl' + i).textContent = 'SOLID'; }, 350); }, 300 + k * 650));
-  setTimeout(() => { g.collect({ roundId: r.roundId }); $('stU').textContent = u.toFixed(6); $('stC').textContent = count; $('stG').textContent = gem ? gem + '×' : 'none'; $('stM').textContent = mult.toFixed(2) + '×'; $('stP').textContent = fmt(win);
-    say(win > 0 ? `${mult.toFixed(2)}×` : 'NOTHING', win > 0 ? `${count} rock${count > 1 ? 's' : ''} crushed${gem ? `, gem ${gem}×` : ''}. Paid ${fmt(win)} on ${fmt(stake)}.` : `No rocks crushed. Stake of ${fmt(stake)} lost.`, win > 0 ? 'win' : 'lose'); busy = false; refresh(); }, 300 + 3 * 650 + 500);
+  setTimeout(async () => { const c = await sdk.go3.collect(r.roundId); balance = c.balance; $('stU').textContent = r.seedHash ? r.seedHash.slice(0, 10) + '…' : '—'; $('stC').textContent = count; $('stG').textContent = gem ? gem + '×' : 'none'; $('stM').textContent = mult.toFixed(2) + '×'; $('stP').textContent = fmt(win);
+    say(win > 0 ? `${mult.toFixed(2)}×` : 'NOTHING', win > 0 ? `${count} rock${count > 1 ? 's' : ''} crushed${gem ? `, gem ${gem}×` : ''}. Paid ${fmt(win)} on ${fmt(chip)}.` : `No rocks crushed. Stake of ${fmt(chip)} lost.`, win > 0 ? 'win' : 'lose'); busy = false; refresh(); }, 300 + 3 * 650 + 500);
 }
 $('btnSmash').addEventListener('click', smash); document.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); smash(); } }); rebuild();
 </script>
