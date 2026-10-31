@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Storage Auction</title>
+<title>Locker Wars</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <style>
@@ -54,56 +54,54 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
 </style>
 </head>
 <body><div class="wrap">
-<nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>Storage Auction</div><div><a href="play.html">full-screen demo</a> · <a href="https://github.com/Danvid1009/gnarone-game-math/tree/main/auction-engine">source</a></div></nav>
-<h1>STORAGE <span>AUCTION</span></h1>
-<p class="lead">The stepper with a locker on top. Bid against rivals; every won bid raises what the locker is worth (c_k = round(M^(k/10), 2)), survival is RTP ÷ c_k so the first bid carries the whole edge and every later bid is fair. Take the locker at any rung and open it: the contents are a Single Shot draw with mean exactly 1 around that value, drawn from the recycled residual of the same uniform. Every take rule returns exactly the RTP.</p>
-<div class="tags"><span>same math as the stepper</span><span>one uniform, recycled</span><span>small 5× · medium 10× · large 25× · xl 100×</span></div>
+<nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>Locker Wars</div><div><a href="play.html">full-screen demo</a> · <a href="https://github.com/Danvid1009/gnarone-game-math/tree/main/auction-engine">source</a></div></nav>
+<h1>LOCKER <span>WARS</span></h1>
+<p class="lead">An ascending locker auction played as raises. Each raise is its own bet: if the rivals outbid you the bid comes back and you may raise to the next level or walk; if they fold you win the locker and open it, a Single Shot draw whose mean is (RTP − H) ÷ (1 − H) of the bid. Being outbid costs nothing, the edge lives only in won lockers, and every raise returns exactly the RTP, so any raise-or-walk policy does too.</p>
+<div class="tags"><span>raises are independent bets</span><span>outbid = money back</span><span>edge only in won lockers</span></div>
 
-<div class="demo"><iframe src="play.html" title="Storage Auction demo" loading="eager"></iframe><a class="full" href="play.html">open full screen ↗</a></div>
+<div class="demo"><iframe src="play.html" title="Locker Wars demo" loading="eager"></iframe><a class="full" href="play.html">open full screen ↗</a></div>
 
 <h2>The math</h2>
 <div class="md" id="md"><p>Loading ALGORITHM.md…</p></div>
 
 <h2>Live API (browser module)</h2>
-<p class="lead">The engine is published as an ES module that implements the RGS provider contract and rolls locally with <code>crypto.getRandomValues</code>: open, valid-bets, bet, next-action, collect, with the observed balance semantics (bet debits the stake, collect credits the win, integer minor units). No server, every round live, and any round replays from its seed. Bet types: <code>SMALL</code>.</p>
+<p class="lead">The engine is published as an ES module that implements the RGS provider contract and rolls locally with <code>crypto.getRandomValues</code>: open, valid-bets, bet, collect, with the observed balance semantics (bet debits the stake, collect credits the win, integer minor units). No server, every round live, and any round replays from its seed. Bet types: <code>BID_1</code>, <code>BID_2</code>, <code>BID_3</code>, <code>BID_4</code>, <code>BID_5</code>, <code>BID_6</code>.</p>
 <pre><code>import { createGame } from 'https://danvid1009.github.io/gnarone-game-math/auction/api/rgs.js';
 
-const g = createGame({ preset: 'SMALL' });                   // presets: SMALL, MEDIUM, LARGE, XL
-                                                       // bet types: SMALL
-const s = g.open();                                    // session, balance 100000, chipLevels [100,200,500,1000,2500,5000,10000]
-let r = g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'SMALL' });   // fresh crypto seed → nextAction ['CONTINUE']
-r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' });          // step: ['CONTINUE','CASH_OUT'] or the round ends
-r = g.nextAction({ roundId: r.roundId, actionCode: 'CASH_OUT' });          // → totalWinAmount, nextAction ['COLLECT']
-g.collect({ roundId: r.roundId });                                          // credits the win → { balance }
+const g = createGame({ preset: 'storage' });                 // presets: street, storage, vault
+                                                       // bet types: BID_1, BID_2, BID_3, BID_4, BID_5, BID_6
+const s = g.open();                                    // session, balance 100000, chipLevels [150,300,750,1500,3750,7500,15000]
+const r = g.bet({ sessionId: s.sessionId, betAmount: 750, betType: 'BID_2' });   // fresh crypto seed; win in r.totalWinAmount
+g.collect({ roundId: r.roundId });                                           // credits the win → { balance }
 
 // Replay any fixture: same seed, same code path, same answer as rounds/007.json
-g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'SMALL', seed: 'fixture-007' });</code></pre>
+g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'BID_2', seed: 'fixture-007' });</code></pre>
 <h2>Presets and static fixtures</h2>
-<p class="lead">Presets: <code>SMALL</code>, <code>MEDIUM</code>, <code>LARGE</code>, <code>XL</code> (default <code>SMALL</code>). Each preset is a frozen configuration and its own folder: the config, derived tables and settlement rule in <code>field.json</code>, plus one hundred pre-drawn rounds from seeds <code>fixture-000</code> … <code>fixture-099</code> settled for every bet type. The same seed drives every preset, so round 007 uses the same u everywhere, and the live module reproduces any of them when given the seed.</p>
+<p class="lead">Presets: <code>street</code>, <code>storage</code>, <code>vault</code> (default <code>storage</code>). Each preset is a frozen configuration and its own folder: the config, derived tables and settlement rule in <code>field.json</code>, plus one hundred pre-drawn rounds from seeds <code>fixture-000</code> … <code>fixture-099</code> settled for every bet type. The same seed drives every preset, so round 007 uses the same u everywhere, and the live module reproduces any of them when given the seed.</p>
 <pre><code># presets, their parameters, bet types and realised RTP over the 100 rounds
 curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/index.json
 
 # one preset: parameters, tables (bands / odds / ladder / decks), RN intervals, how to settle
-curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/SMALL/field.json
+curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/street/field.json
 
 # one round (000–099): seed, full outcome, settlement for every bet type
-curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/SMALL/rounds/007.json
+curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/street/rounds/007.json
 
 # all 100 rounds of a preset (stake and win per bet type)
-curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/SMALL/rounds.json
+curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/street/rounds.json
 
 # round 007 played through the real calls: request bodies and every response
-curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/SMALL/sample-request.json
-curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/SMALL/sample-response.json</code></pre>
+curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/street/sample-request.json
+curl -s https://danvid1009.github.io/gnarone-game-math/auction/api/street/sample-response.json</code></pre>
 <p class="lead">Settlement rule is spelled out in each preset's <code>field.json</code> under <code>how_to_settle</code>.</p>
 
-<h2>Figures</h2><div class="imgs"><figure><img src="img/ladders.png" alt="Locker value per rung and survival for the four sizes: identical to the stepper ladder."><figcaption>Locker value per rung and survival for the four sizes: identical to the stepper ladder.</figcaption></figure><figure><img src="img/locker.png" alt="The locker multiplier over the recycled residual (mean 1), and the outcome distribution of 'take after 5' against simulation."><figcaption>The locker multiplier over the recycled residual (mean 1), and the outcome distribution of 'take after 5' against simulation.</figcaption></figure><figure><img src="img/strategies.png" alt="Monte Carlo under six hammer rules: every one returns the RTP, locker included."><figcaption>Monte Carlo under six hammer rules: every one returns the RTP, locker included.</figcaption></figure></div>
+<h2>Figures</h2><div class="imgs"><figure><img src="img/stages.png" alt="Per raise: the outbid probability falls as rivals thin out and the locker mean rises to meet the RTP; simulated return per raise sits on 95%."><figcaption>Per raise: the outbid probability falls as rivals thin out and the locker mean rises to meet the RTP; simulated return per raise sits on 95%.</figcaption></figure><figure><img src="img/won-at.png" alt="Where auctions end when the player always raises, per preset."><figcaption>Where auctions end when the player always raises, per preset.</figcaption></figure></div>
 
 <h2>Build it yourself</h2>
 <pre><code>git clone https://github.com/Danvid1009/gnarone-game-math.git
 cd gnarone-game-math/auction-engine
 npm test
-node bin/build-auction.js --rtp 0.95 --max 25 --steps 10 --js</code></pre>
+node bin/build-auction.js --preset storage</code></pre>
 <ul class="links">
   <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/auction-engine/ALGORITHM.md">ALGORITHM.md on GitHub</a></li>
   <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/auction-engine/src/engine.js">src/engine.js</a> — the engine</li>

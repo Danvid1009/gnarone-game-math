@@ -1,0 +1,153 @@
+{
+  "round": 74,
+  "seed": "fixture-074",
+  "results": {
+    "BID_1": {
+      "stake": 1000,
+      "win": 2019,
+      "totalBetAmount": 1000,
+      "outcome": "WON",
+      "stage": 1,
+      "stages": 6,
+      "bid": 1000,
+      "pOutbid": 0.6,
+      "refund": 0,
+      "locker": {
+        "multiplier": 2.0194955175240583,
+        "band": 3,
+        "multiple": 2,
+        "contents": 2019
+      },
+      "next": {
+        "betType": "BID_2",
+        "bid": 1500
+      },
+      "math": {
+        "u": 0.9638329478652884,
+        "v": 0.909582369663221
+      }
+    },
+    "BID_2": {
+      "stake": 150,
+      "win": 305,
+      "totalBetAmount": 150,
+      "outcome": "WON",
+      "stage": 2,
+      "stages": 6,
+      "bid": 150,
+      "pOutbid": 0.5,
+      "refund": 0,
+      "locker": {
+        "multiplier": 2.0345996974059606,
+        "band": 3,
+        "multiple": 2,
+        "contents": 305
+      },
+      "next": {
+        "betType": "BID_3",
+        "bid": 225
+      },
+      "math": {
+        "u": 0.9638329478652884,
+        "v": 0.9276658957305768
+      }
+    },
+    "BID_3": {
+      "stake": 225,
+      "win": 460,
+      "totalBetAmount": 225,
+      "outcome": "WON",
+      "stage": 3,
+      "stages": 6,
+      "bid": 225,
+      "pOutbid": 0.4,
+      "refund": 0,
+      "locker": {
+        "multiplier": 2.0443405779902872,
+        "band": 3,
+        "multiple": 2,
+        "contents": 460
+      },
+      "next": {
+        "betType": "BID_4",
+        "bid": 338
+      },
+      "math": {
+        "u": 0.9638329478652884,
+        "v": 0.9397215797754807
+      }
+    },
+    "BID_4": {
+      "stake": 338,
+      "win": 1674,
+      "totalBetAmount": 338,
+      "outcome": "WON",
+      "stage": 4,
+      "stages": 6,
+      "bid": 338,
+      "pOutbid": 0.3,
+      "refund": 0,
+      "locker": {
+        "multiplier": 4.953333521651858,
+        "band": 4,
+        "multiple": 5,
+        "contents": 1674
+      },
+      "next": {
+        "betType": "BID_5",
+        "bid": 507
+      },
+      "math": {
+        "u": 0.9638329478652884,
+        "v": 0.9483327826646979
+      }
+    },
+    "BID_5": {
+      "stake": 506,
+      "win": 2514,
+      "totalBetAmount": 506,
+      "outcome": "WON",
+      "stage": 5,
+      "stages": 6,
+      "bid": 506,
+      "pOutbid": 0.2,
+      "refund": 0,
+      "locker": {
+        "multiplier": 4.967574459592571,
+        "band": 4,
+        "multiple": 5,
+        "contents": 2514
+      },
+      "next": {
+        "betType": "BID_6",
+        "bid": 759
+      },
+      "math": {
+        "u": 0.9638329478652884,
+        "v": 0.9547911848316104
+      }
+    },
+    "BID_6": {
+      "stake": 759,
+      "win": 3785,
+      "totalBetAmount": 759,
+      "outcome": "WON",
+      "stage": 6,
+      "stages": 6,
+      "bid": 759,
+      "pOutbid": 0,
+      "refund": 0,
+      "locker": {
+        "multiplier": 4.986404395474033,
+        "band": 4,
+        "multiple": 5,
+        "contents": 3785
+      },
+      "next": null,
+      "math": {
+        "u": 0.9638329478652884,
+        "v": 0.9638329478652884
+      }
+    }
+  }
+}

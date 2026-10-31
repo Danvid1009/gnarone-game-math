@@ -1,0 +1,3406 @@
+{
+ "preset": "vault",
+ "count": 100,
+ "rounds": [
+  {
+   "round": 0,
+   "seed": "fixture-000",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 1,
+   "seed": "fixture-001",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 375
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 633
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1054
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1777
+    }
+   }
+  },
+  {
+   "round": 2,
+   "seed": "fixture-002",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 0
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 384
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 645
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1071
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1799
+    }
+   }
+  },
+  {
+   "round": 3,
+   "seed": "fixture-003",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 598
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1006
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1715
+    }
+   }
+  },
+  {
+   "round": 4,
+   "seed": "fixture-004",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 5,
+   "seed": "fixture-005",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 974
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1674
+    }
+   }
+  },
+  {
+   "round": 6,
+   "seed": "fixture-006",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 911
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 271
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 449
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1265
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2057
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3360
+    }
+   }
+  },
+  {
+   "round": 7,
+   "seed": "fixture-007",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 369
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 625
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1043
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1763
+    }
+   }
+  },
+  {
+   "round": 8,
+   "seed": "fixture-008",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 9,
+   "seed": "fixture-009",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1606
+    }
+   }
+  },
+  {
+   "round": 10,
+   "seed": "fixture-010",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 992
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 170
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 489
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 801
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1300
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2106
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3422
+    }
+   }
+  },
+  {
+   "round": 11,
+   "seed": "fixture-011",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1574
+    }
+   }
+  },
+  {
+   "round": 12,
+   "seed": "fixture-012",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 0
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 244
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 413
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 685
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1127
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3225
+    }
+   }
+  },
+  {
+   "round": 13,
+   "seed": "fixture-013",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1547
+    }
+   }
+  },
+  {
+   "round": 14,
+   "seed": "fixture-014",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 15,
+   "seed": "fixture-015",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1618
+    }
+   }
+  },
+  {
+   "round": 16,
+   "seed": "fixture-016",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 912
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 161
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 271
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 449
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1266
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2058
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3361
+    }
+   }
+  },
+  {
+   "round": 17,
+   "seed": "fixture-017",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1064
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 308
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 506
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 824
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1331
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2150
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3477
+    }
+   }
+  },
+  {
+   "round": 18,
+   "seed": "fixture-018",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 376
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 634
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1056
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1779
+    }
+   }
+  },
+  {
+   "round": 19,
+   "seed": "fixture-019",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 20,
+   "seed": "fixture-020",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 21,
+   "seed": "fixture-021",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1533
+    }
+   }
+  },
+  {
+   "round": 22,
+   "seed": "fixture-022",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 23,
+   "seed": "fixture-023",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1631
+    }
+   }
+  },
+  {
+   "round": 24,
+   "seed": "fixture-024",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 25,
+   "seed": "fixture-025",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 598
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1005
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1715
+    }
+   }
+  },
+  {
+   "round": 26,
+   "seed": "fixture-026",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 27,
+   "seed": "fixture-027",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 28,
+   "seed": "fixture-028",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 29,
+   "seed": "fixture-029",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1087
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 313
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 512
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 831
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1341
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2163
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3495
+    }
+   }
+  },
+  {
+   "round": 30,
+   "seed": "fixture-030",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 31,
+   "seed": "fixture-031",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 370
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 626
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1044
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1765
+    }
+   }
+  },
+  {
+   "round": 32,
+   "seed": "fixture-032",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1532
+    }
+   }
+  },
+  {
+   "round": 33,
+   "seed": "fixture-033",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1523
+    }
+   }
+  },
+  {
+   "round": 34,
+   "seed": "fixture-034",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1546
+    }
+   }
+  },
+  {
+   "round": 35,
+   "seed": "fixture-035",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 36,
+   "seed": "fixture-036",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 37,
+   "seed": "fixture-037",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 38,
+   "seed": "fixture-038",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 39,
+   "seed": "fixture-039",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 40,
+   "seed": "fixture-040",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1562
+    }
+   }
+  },
+  {
+   "round": 41,
+   "seed": "fixture-041",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1588
+    }
+   }
+  },
+  {
+   "round": 42,
+   "seed": "fixture-042",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1533
+    }
+   }
+  },
+  {
+   "round": 43,
+   "seed": "fixture-043",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 44,
+   "seed": "fixture-044",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 45,
+   "seed": "fixture-045",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 974
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 168
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 280
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 795
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1292
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2095
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3408
+    }
+   }
+  },
+  {
+   "round": 46,
+   "seed": "fixture-046",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 47,
+   "seed": "fixture-047",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 2022
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 330
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 533
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 859
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 3221
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 5187
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 8357
+    }
+   }
+  },
+  {
+   "round": 48,
+   "seed": "fixture-048",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1529
+    }
+   }
+  },
+  {
+   "round": 49,
+   "seed": "fixture-049",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 0
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 379
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 638
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1061
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1786
+    }
+   }
+  },
+  {
+   "round": 50,
+   "seed": "fixture-050",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 371
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 628
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1047
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1768
+    }
+   }
+  },
+  {
+   "round": 51,
+   "seed": "fixture-051",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 0
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 146
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 252
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 424
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 700
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1148
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3267
+    }
+   }
+  },
+  {
+   "round": 52,
+   "seed": "fixture-052",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 4922
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 797
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 1284
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 2063
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 3303
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 5299
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 8495
+    }
+   }
+  },
+  {
+   "round": 53,
+   "seed": "fixture-053",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 968
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1667
+    }
+   }
+  },
+  {
+   "round": 54,
+   "seed": "fixture-054",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 55,
+   "seed": "fixture-055",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 56,
+   "seed": "fixture-056",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 972
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1672
+    }
+   }
+  },
+  {
+   "round": 57,
+   "seed": "fixture-057",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 58,
+   "seed": "fixture-058",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 5035
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 809
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 1298
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 2081
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 3327
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 5332
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 8535
+    }
+   }
+  },
+  {
+   "round": 59,
+   "seed": "fixture-059",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 60,
+   "seed": "fixture-060",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 61,
+   "seed": "fixture-061",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 62,
+   "seed": "fixture-062",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 624
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1041
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1760
+    }
+   }
+  },
+  {
+   "round": 63,
+   "seed": "fixture-063",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1066
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 309
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 507
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 825
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1332
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2151
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3479
+    }
+   }
+  },
+  {
+   "round": 64,
+   "seed": "fixture-064",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 65,
+   "seed": "fixture-065",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 902
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 159
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 269
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 447
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1261
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2052
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3353
+    }
+   }
+  },
+  {
+   "round": 66,
+   "seed": "fixture-066",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1526
+    }
+   }
+  },
+  {
+   "round": 67,
+   "seed": "fixture-067",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 68,
+   "seed": "fixture-068",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1595
+    }
+   }
+  },
+  {
+   "round": 69,
+   "seed": "fixture-069",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 70,
+   "seed": "fixture-070",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 597
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1004
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1713
+    }
+   }
+  },
+  {
+   "round": 71,
+   "seed": "fixture-071",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 72,
+   "seed": "fixture-072",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 915
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 161
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 271
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 449
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1267
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2059
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3363
+    }
+   }
+  },
+  {
+   "round": 73,
+   "seed": "fixture-073",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 74,
+   "seed": "fixture-074",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 2005
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 328
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 530
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 856
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1374
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 5165
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 8330
+    }
+   }
+  },
+  {
+   "round": 75,
+   "seed": "fixture-075",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 76,
+   "seed": "fixture-076",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 378
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 637
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1060
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1784
+    }
+   }
+  },
+  {
+   "round": 77,
+   "seed": "fixture-077",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 78,
+   "seed": "fixture-078",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1005
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 172
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 492
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 805
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1306
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2114
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3432
+    }
+   }
+  },
+  {
+   "round": 79,
+   "seed": "fixture-079",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 0
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 158
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 268
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 445
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1257
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2046
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3346
+    }
+   }
+  },
+  {
+   "round": 80,
+   "seed": "fixture-080",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 81,
+   "seed": "fixture-081",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1632
+    }
+   }
+  },
+  {
+   "round": 82,
+   "seed": "fixture-082",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 0
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 144
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 250
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 421
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 696
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1143
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3256
+    }
+   }
+  },
+  {
+   "round": 83,
+   "seed": "fixture-083",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1925
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 318
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 519
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 841
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1354
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2181
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3516
+    }
+   }
+  },
+  {
+   "round": 84,
+   "seed": "fixture-084",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 85,
+   "seed": "fixture-085",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 86,
+   "seed": "fixture-086",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 5030
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 809
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 1297
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 2080
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 3326
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 5330
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 8533
+    }
+   }
+  },
+  {
+   "round": 87,
+   "seed": "fixture-087",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1552
+    }
+   }
+  },
+  {
+   "round": 88,
+   "seed": "fixture-088",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1980
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 325
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 527
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 851
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1368
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2201
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 8288
+    }
+   }
+  },
+  {
+   "round": 89,
+   "seed": "fixture-089",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 968
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1666
+    }
+   }
+  },
+  {
+   "round": 90,
+   "seed": "fixture-090",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 0
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 0
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1592
+    }
+   }
+  },
+  {
+   "round": 91,
+   "seed": "fixture-091",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 92,
+   "seed": "fixture-092",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 0
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 0
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 379
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 639
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1062
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 1787
+    }
+   }
+  },
+  {
+   "round": 93,
+   "seed": "fixture-093",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 94,
+   "seed": "fixture-094",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 0
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 95,
+   "seed": "fixture-095",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 960
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 166
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 278
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 791
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1286
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2087
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3398
+    }
+   }
+  },
+  {
+   "round": 96,
+   "seed": "fixture-096",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 1000
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 160
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 256
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 410
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 655
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1049
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 0
+    }
+   }
+  },
+  {
+   "round": 97,
+   "seed": "fixture-097",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 931
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 163
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 274
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 782
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 1274
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 2069
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3375
+    }
+   }
+  },
+  {
+   "round": 98,
+   "seed": "fixture-098",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 0
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 0
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 249
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 419
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 694
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 1139
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 3250
+    }
+   }
+  },
+  {
+   "round": 99,
+   "seed": "fixture-099",
+   "results": {
+    "BID_1": {
+     "stake": 1000,
+     "win": 2047
+    },
+    "BID_2": {
+     "stake": 160,
+     "win": 332
+    },
+    "BID_3": {
+     "stake": 256,
+     "win": 536
+    },
+    "BID_4": {
+     "stake": 410,
+     "win": 2020
+    },
+    "BID_5": {
+     "stake": 655,
+     "win": 3246
+    },
+    "BID_6": {
+     "stake": 1049,
+     "win": 5221
+    },
+    "BID_7": {
+     "stake": 1678,
+     "win": 8398
+    }
+   }
+  }
+ ]
+}

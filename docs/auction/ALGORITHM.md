@@ -1,149 +1,85 @@
-# Storage-auction ladder
+# Locker Wars
 
-A stepper with a locker on top. The player bids for a storage locker against rival bidders; each
-successful bid raises what the locker is worth; at any point the player can let the hammer fall
-and take the locker at its current value; if a rival outbids first, the round is lost. The one
-thing that is not a stepper: when the hammer falls the player does not receive the rung value
-flat. They open the locker, and its contents are a one-shot draw around that value. Because the
-draw has mean exactly 1, every stopping rule still returns the RTP, and one uniform still
-decides the whole round.
+An ascending auction for a storage locker, played as a sequence of raises. Each raise is its own
+bet. If the rivals outbid you, your bid comes back and you may raise again at the next level, or walk.
+If the rivals fold, you win the locker and open it: its contents are a one-shot draw whose mean is set
+so that every raise returns exactly the RTP. Being outbid costs nothing; the house edge lives only in
+won lockers.
 
 ## 1. Inputs
 
 $$
-R \in (0,1), \qquad M > 1, \qquad N \in \mathbb{N}, \qquad
-\{a_1 < \dots < a_n\} \subset [0,\infty), \qquad \phi \in (0, \tfrac12)
+R \in (0,1), \qquad \rho \in [0,1], \qquad H_1, \dots, H_N \in [0,1), \qquad \gamma \ge 1, \qquad
+\{a_1 < \dots < a_m\} \subset [0,\infty), \qquad \phi \in (0, \tfrac12).
 $$
 
-- $R$: return to player (0.95 here).
-- $M$: value of the locker at the top of the ladder, as a multiple of the stake. Four sizes: SMALL 5, MEDIUM 10, LARGE 25, XL 100.
-- $N$: number of bids to the top (10).
-- $a_1,\dots,a_n$: the listed locker multiples (default $0.25, 0.5, 1, 2, 5$; a $0$ is allowed and means an empty locker).
-- $\phi$: band half-width as a fraction of the smallest gap between positive multiples (0.1).
+- $R$: return to player (0.95).
+- $\rho$: fraction of the bid returned when outbid (1: the bid comes back in full).
+- $H_k$: probability that the rivals outbid raise $k$. The last stage has $H_N = 0$: the rivals are gone.
+- $\gamma$: bid growth per raise (1.5), so raise $k$ is $b_k = b_1\,\gamma^{k-1}$.
+- $a_1 .. a_m$: the locker's listed multiples (e.g. $0, 0.5, 1, 2, 5, 20$; a $0$ is an empty locker).
+- $\phi$: band half-width as a fraction of the smallest positive gap (0.1), as in Single Shot.
 
-## 2. The ladder (identical to the stepper)
+## 2. One raise
 
-$$
-m = M^{1/N}, \qquad c_k = \operatorname{round}_2\!\left(m^{k}\right), \quad k = 1,\dots,N ,
-$$
-
-is what the locker is worth after $k$ successful bids. Survival to at least rung $k$:
+Raise $k$ stakes $b_k$ and draws $U_k \sim \mathrm{Uniform}[0,1)$.
 
 $$
-\boxed{\; G_0 = 1, \qquad G_k = \frac{R}{c_k} \;}
-\qquad\Longrightarrow\qquad G_k\, c_k = R \ \text{ for every } k .
+U_k < H_k \ \Rightarrow\ \text{OUTBID: paid } \rho\, b_k, \qquad
+U_k \ge H_k \ \Rightarrow\ \text{WON: paid } X_k\, b_k, \quad X_k = \text{locker}_k\!\left(\frac{U_k - H_k}{1 - H_k}\right).
 $$
 
-The chance that the rivals fold on bid $k$, given the player got there:
+The residual $(U_k - H_k)/(1 - H_k)$ is uniform on $[0,1)$ conditional on winning, so one uniform
+decides both the outcome and the locker.
+
+## 3. The locker at stage $k$
+
+$\text{locker}_k$ is a Single Shot table on the listed multiples: probabilities $p_{k,j}$ solved
+(maximum entropy) so that
 
 $$
-h_k = \frac{G_k}{G_{k-1}} = \begin{cases} R / c_1, & k = 1 \quad (\text{the only bid that carries the edge}),\\[4pt] c_{k-1} / c_k, & k \ge 2 \quad (\text{every later bid is a fair bet}). \end{cases}
+\sum_j p_{k,j} = 1, \qquad \sum_j p_{k,j}\, a_j = \mu_k, \qquad
+\boxed{\;\mu_k = \frac{R - H_k\,\rho}{1 - H_k}\;}
 $$
 
-With $K$ the number of successful bids before a rival wins the locker ($K = N$ means the auction
-runs to the top and hammers automatically):
+with the sloped-band ramp $a_j + r\,(2t - 1)$ inside band $j$, $r = \phi \cdot \min(a_{j+1} - a_j)$,
+so $\mathbb{E}[X_k \mid \text{band } j] = a_j$ exactly and $\mathbb{E}[X_k] = \mu_k$ exactly.
+
+With $\rho = 1$ the locker mean rises as the rivals thin out: for $H = 0.6, 0.5, 0.4, 0.3, 0.2, 0$
+it is $0.875, 0.90, 0.917, 0.929, 0.9375, 0.95$. A raise that is rarely outbid pays a richer locker,
+because less of its return is coming back as refunds.
+
+## 4. Every raise returns $R$
 
 $$
-\Pr(K = 0) = 1 - G_1, \qquad \Pr(K = k) = G_k - G_{k+1} \ (1 \le k < N), \qquad \Pr(K = N) = G_N ,
+\mathbb{E}[\text{return of raise } k] = H_k\,\rho + (1 - H_k)\,\mu_k = R .
 $$
 
-which telescope to 1. Cumulative sums $e_0 = 0,\ e_{k+1} = e_k + \Pr(K = k)$ tile $[0,1)$ and
+Raises are independent bets, so any policy (raise once, raise to the end, walk after any outbid)
+returns exactly $R$ per unit staked. There is no survival schedule to tune and nothing to game by
+timing. The probability of winning the locker at stage $k$ is $(1 - H_k)\prod_{j<k} H_j$, and the
+last stage wins with certainty.
 
-$$
-K(u) = k \iff u \in [\,e_k,\ e_{k+1}) .
-$$
+## 5. Money
 
-## 3. The locker (a Single Shot table with mean 1)
+Opening bid $b_1$ is a chip level $S$. Raise $k$ is $\operatorname{round}(S\,\gamma^{k-1})$ and is the bet
+type's own level list (BID\_k offers $\operatorname{round}(c\,\gamma^{k-1})$ for every chip $c$). An outbid
+pays $\operatorname{round}(\rho\,b_k)$; a won locker pays $\operatorname{round}(X_k\,b_k)$.
 
-Probabilities $p_1,\dots,p_n$ for the listed multiples solve
+## 6. Wire shape
 
-$$
-\sum_j p_j = 1, \qquad \sum_j p_j\, a_j = 1 ,
-$$
+Single-call. `bet` with `betType: BID_k` returns `outcome` (OUTBID or WON), `totalWinAmount` (the
+refund or the locker contents), `locker { multiplier, band, multiple, contents }` on a win, and
+`next { betType, bid }`, the raise the client offers next. Each raise is collected on its own. The
+client chains raises with the `next` field; the engine needs no state between them.
 
-by maximum entropy, $p_j \propto e^{-\lambda a_j}$ with $\lambda$ found by bisection (or
-$p_j \propto q^{\,j}$, or supplied directly). Cumulative sums $b_0 = 0,\ b_{j} = b_{j-1} + p_j$
-tile $[0,1)$ once more. Let
+## 7. Reference instances (RTP 0.95, full refund)
 
-$$
-r = \phi \cdot \min_{j}\,(a_{j+1} - a_j) \quad \text{over adjacent positive multiples}, \qquad a_1 - r > 0 \ \text{required when } a_1 > 0 .
-$$
-
-The locker multiplier for a residual $v \in [0,1)$ landing in band $j$ is the straight ramp
-
-$$
-\boxed{\; X(v) = \begin{cases} a_j + r\,(2t - 1), & a_j > 0,\\ 0, & a_j = 0, \end{cases} \qquad t = \frac{v - b_{j-1}}{b_j - b_{j-1}} \;}
-$$
-
-so $\mathbb{E}[X \mid \text{band } j] = a_j$ exactly and
-
-$$
-\mathbb{E}[X] = \sum_j p_j\, a_j = 1 .
-$$
-
-With the default multiples, $r = 0.1 \times 0.25 = 0.025$ and the maxent probabilities are
-$29.76\%,\ 27.12\%,\ 22.52\%,\ 15.52\%,\ 5.09\%$ for $0.25\times,\ 0.5\times,\ 1\times,\ 2\times,\ 5\times$.
-
-## 4. One uniform, recycled
-
-The locker needs its own draw $v$, but the round still uses a single $U \sim \mathrm{Uniform}[0,1)$.
-$K$ is read off the interval $U$ falls in, and the leftover position inside that interval is
-rescaled:
-
-$$
-v = \frac{U - e_K}{e_{K+1} - e_K} .
-$$
-
-Conditional on $K$, $v$ is $\mathrm{Uniform}[0,1)$ and independent of $K$, so the locker draw
-carries no information about where the rivals would have won, and vice versa. The hammer can
-fall at any rung $s \le K$ and the same $v$ is used, which is legitimate because the player's
-choice of $s$ depends only on having survived, never on $v$.
-
-## 5. Payout
-
-If the hammer falls after $s \ge 1$ successful bids (or the auction reaches $s = N$):
-
-$$
-\boxed{\; B(K, v, s) = \begin{cases} c_s \, X(v), & s \le K,\\ 0, & s > K \quad (\text{outbid first}). \end{cases} \;}
-$$
-
-## 6. Strategy-proofness
-
-For the fixed rule "take the locker after $s$ bids", using independence of $K$ and $v$:
-
-$$
-\mathbb{E}[B] = \Pr(K \ge s)\; c_s\; \mathbb{E}[X] = G_s\, c_s \cdot 1 = R .
-$$
-
-Bidding once more from rung $s$ is worth $h_{s+1}\, c_{s+1}\, \mathbb{E}[X] = c_s$, exactly the
-value already held, so every decision is EV-neutral and every stopping rule, fixed or adaptive,
-returns $R$. Setting $X \equiv 1$ (a flat locker) recovers the stepper exactly. The locker adds
-variance only:
-
-$$
-\operatorname{Var}[B] = G_s\, c_s^{2}\, \mathbb{E}[X^2] - R^2, \qquad
-\mathbb{E}[X^2] = \sum_j p_j \left(a_j^2 + \tfrac{r^2}{3}\right) .
-$$
-
-## 7. Money
-
-Stake $S$ in minor units. The ladder shown to the client is $\operatorname{round}(S\, c_k)$ per
-rung (the "locker value"); on the hammer the win is $\operatorname{round}\big(\operatorname{round}(S\, c_s)\, X\big)$.
-Being outbid pays 0. The round speaks the RGS stepper shape unchanged: BID is `CONTINUE`, the
-hammer is `CASH_OUT`, then `COLLECT`; the reveal adds a `locker { multiplier, band, contents }`
-field to the final state.
-
-## 8. Reference instances (RTP 0.95, N = 10, default locker)
-
-| | SMALL ($M=5$) | MEDIUM ($M=10$) | LARGE ($M=25$) | XL ($M=100$) |
+| preset | stages $H_k$ | growth | locker multiples | locker means $\mu_k$ |
 |---|---|---|---|---|
-| step multiple $m$ | 1.1746 | 1.2589 | 1.3797 | 1.5849 |
-| $c_1$ | 1.17 | 1.26 | 1.38 | 1.58 |
-| $c_5$ | 2.24 | 3.16 | 5 | 10 |
-| $c_{10}$ | 5 | 10 | 25 | 100 |
-| $\Pr(K=0)$ outbid on the first bid | 0.1880 | 0.2460 | 0.3116 | 0.3987 |
-| $\Pr(K=10)$ hammer at the top | 0.1900 | 0.0950 | 0.0380 | 0.0095 |
-| largest single win, $c_{10}(a_n + r)$ | 25.1× | 50.3× | 125.6× | 502.5× |
+| street | 0.5, 0.35, 0.2, 0 | 1.5 | 0, 0.5, 1, 2, 5 | 0.90, 0.923, 0.9375, 0.95 |
+| storage | 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1.5 | 0, 0.5, 1, 2, 5, 20 | 0.875 … 0.95 |
+| vault | 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1.6 | 0, 1, 2, 5, 20, 100 | 0.833 … 0.95 |
 
-Every column satisfies $G_k c_k = 0.95$ at all ten rungs, $\sum_k \Pr(K=k) = 1$, and
-$\mathbb{E}[X] = 1$, so every hammer rule returns 0.95 exactly.
+In every preset each stage satisfies $H_k\rho + (1 - H_k)\mu_k = 0.95$ to machine precision, and
+the last raise can only be won.
