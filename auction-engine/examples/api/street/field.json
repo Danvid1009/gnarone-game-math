@@ -1,0 +1,280 @@
+{
+  "preset": "street",
+  "engine": "auction-engine",
+  "parameters": {
+    "outbid": [
+      0.5,
+      0.35,
+      0.2,
+      0
+    ],
+    "growth": 1.5,
+    "locker": {
+      "payouts": [
+        0,
+        0.5,
+        1,
+        2,
+        5
+      ]
+    },
+    "refund": 1,
+    "rtp": 0.95
+  },
+  "betTypes": [
+    "BID_1",
+    "BID_2",
+    "BID_3",
+    "BID_4"
+  ],
+  "levels": {
+    "BID_1": [
+      100,
+      200,
+      500,
+      1000,
+      2500,
+      5000,
+      10000
+    ],
+    "BID_2": [
+      150,
+      300,
+      750,
+      1500,
+      3750,
+      7500,
+      15000
+    ],
+    "BID_3": [
+      225,
+      450,
+      1125,
+      2250,
+      5625,
+      11250,
+      22500
+    ],
+    "BID_4": [
+      338,
+      675,
+      1688,
+      3375,
+      8438,
+      16875,
+      33750
+    ]
+  },
+  "stake_units": "minor units",
+  "multiStep": false,
+  "how_to_settle": "raise k (betType BID_k, amount = opening level × growth^(k−1), rounded): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band. The last stage has outbid 0: the rivals are gone and the locker always opens.",
+  "rtp": 0.95,
+  "refund": 1,
+  "growth": 1.5,
+  "stages": [
+    {
+      "stage": 1,
+      "betType": "BID_1",
+      "bidMultiple": 1,
+      "outbid": 0.5,
+      "refund": 1,
+      "lockerMean": 0.8999999999999999,
+      "locker": [
+        {
+          "multiple": 0,
+          "p": 0.3172583669374393,
+          "residual_from": 0,
+          "residual_to": 0.3172583669374393,
+          "pays_from": 0,
+          "pays_to": 0
+        },
+        {
+          "multiple": 0.5,
+          "p": 0.2634807244330656,
+          "residual_from": 0.3172583669374393,
+          "residual_to": 0.5807390913705048,
+          "pays_from": 0.45,
+          "pays_to": 0.55
+        },
+        {
+          "multiple": 1,
+          "p": 0.21881879055836684,
+          "residual_from": 0.5807390913705048,
+          "residual_to": 0.7995578819288717,
+          "pays_from": 0.95,
+          "pays_to": 1.05
+        },
+        {
+          "multiple": 2,
+          "p": 0.15092324771018023,
+          "residual_from": 0.7995578819288717,
+          "residual_to": 0.9504811296390518,
+          "pays_from": 1.95,
+          "pays_to": 2.05
+        },
+        {
+          "multiple": 5,
+          "p": 0.04951887036094796,
+          "residual_from": 0.9504811296390518,
+          "residual_to": 1,
+          "pays_from": 4.95,
+          "pays_to": 5.05
+        }
+      ],
+      "locker_r": 0.05
+    },
+    {
+      "stage": 2,
+      "betType": "BID_2",
+      "bidMultiple": 1.5,
+      "outbid": 0.35,
+      "refund": 1,
+      "lockerMean": 0.923076923076923,
+      "locker": [
+        {
+          "multiple": 0,
+          "p": 0.31233799771156096,
+          "residual_from": 0,
+          "residual_to": 0.31233799771156096,
+          "pays_from": 0,
+          "pays_to": 0
+        },
+        {
+          "multiple": 0.5,
+          "p": 0.2616281382732236,
+          "residual_from": 0.31233799771156096,
+          "residual_to": 0.5739661359847845,
+          "pays_from": 0.45,
+          "pays_to": 0.55
+        },
+        {
+          "multiple": 1,
+          "p": 0.21915131440243402,
+          "residual_from": 0.5739661359847845,
+          "residual_to": 0.7931174503872185,
+          "pays_from": 0.95,
+          "pays_to": 1.05
+        },
+        {
+          "multiple": 2,
+          "p": 0.15376706950867666,
+          "residual_from": 0.7931174503872185,
+          "residual_to": 0.9468845198958952,
+          "pays_from": 1.95,
+          "pays_to": 2.05
+        },
+        {
+          "multiple": 5,
+          "p": 0.0531154801041048,
+          "residual_from": 0.9468845198958952,
+          "residual_to": 1,
+          "pays_from": 4.95,
+          "pays_to": 5.05
+        }
+      ],
+      "locker_r": 0.05
+    },
+    {
+      "stage": 3,
+      "betType": "BID_3",
+      "bidMultiple": 2.25,
+      "outbid": 0.2,
+      "refund": 1,
+      "lockerMean": 0.9375,
+      "locker": [
+        {
+          "multiple": 0,
+          "p": 0.3093458742194779,
+          "residual_from": 0,
+          "residual_to": 0.3093458742194779,
+          "pays_from": 0,
+          "pays_to": 0
+        },
+        {
+          "multiple": 0.5,
+          "p": 0.2604659243758123,
+          "residual_from": 0.3093458742194779,
+          "residual_to": 0.5698117985952902,
+          "pays_from": 0.45,
+          "pays_to": 0.55
+        },
+        {
+          "multiple": 1,
+          "p": 0.2193095283139699,
+          "residual_from": 0.5698117985952902,
+          "residual_to": 0.7891213269092601,
+          "pays_from": 0.95,
+          "pays_to": 1.05
+        },
+        {
+          "multiple": 2,
+          "p": 0.1554786186518584,
+          "residual_from": 0.7891213269092601,
+          "residual_to": 0.9445999455611185,
+          "pays_from": 1.95,
+          "pays_to": 2.05
+        },
+        {
+          "multiple": 5,
+          "p": 0.05540005443888141,
+          "residual_from": 0.9445999455611185,
+          "residual_to": 1,
+          "pays_from": 4.95,
+          "pays_to": 5.05
+        }
+      ],
+      "locker_r": 0.05
+    },
+    {
+      "stage": 4,
+      "betType": "BID_4",
+      "bidMultiple": 3.375,
+      "outbid": 0,
+      "refund": 1,
+      "lockerMean": 0.95,
+      "locker": [
+        {
+          "multiple": 0,
+          "p": 0.3068016588554799,
+          "residual_from": 0,
+          "residual_to": 0.3068016588554799,
+          "pays_from": 0,
+          "pays_to": 0
+        },
+        {
+          "multiple": 0.5,
+          "p": 0.2594564881446531,
+          "residual_from": 0.3068016588554799,
+          "residual_to": 0.566258147000133,
+          "pays_from": 0.45,
+          "pays_to": 0.55
+        },
+        {
+          "multiple": 1,
+          "p": 0.21941755299330626,
+          "residual_from": 0.566258147000133,
+          "residual_to": 0.7856756999934392,
+          "pays_from": 0.95,
+          "pays_to": 1.05
+        },
+        {
+          "multiple": 2,
+          "p": 0.15692243236614575,
+          "residual_from": 0.7856756999934392,
+          "residual_to": 0.942598132359585,
+          "pays_from": 1.95,
+          "pays_to": 2.05
+        },
+        {
+          "multiple": 5,
+          "p": 0.05740186764041511,
+          "residual_from": 0.942598132359585,
+          "residual_to": 1,
+          "pays_from": 4.95,
+          "pays_to": 5.05
+        }
+      ],
+      "locker_r": 0.05
+    }
+  ]
+}

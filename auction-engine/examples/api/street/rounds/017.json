@@ -1,0 +1,103 @@
+{
+  "round": 17,
+  "seed": "fixture-017",
+  "results": {
+    "BID_1": {
+      "stake": 1000,
+      "win": 1977,
+      "totalBetAmount": 1000,
+      "outcome": "WON",
+      "stage": 1,
+      "stages": 4,
+      "bid": 1000,
+      "pOutbid": 0.5,
+      "refund": 0,
+      "locker": {
+        "multiplier": 1.9767282465061375,
+        "band": 3,
+        "multiple": 2,
+        "contents": 1977
+      },
+      "next": {
+        "betType": "BID_2",
+        "bid": 1500
+      },
+      "math": {
+        "u": 0.9199485098059585,
+        "v": 0.8398970196119171
+      }
+    },
+    "BID_2": {
+      "stake": 150,
+      "win": 301,
+      "totalBetAmount": 150,
+      "outcome": "WON",
+      "stage": 2,
+      "stages": 4,
+      "bid": 150,
+      "pOutbid": 0.35,
+      "refund": 0,
+      "locker": {
+        "multiplier": 2.004450157059144,
+        "band": 3,
+        "multiple": 2,
+        "contents": 301
+      },
+      "next": {
+        "betType": "BID_3",
+        "bid": 225
+      },
+      "math": {
+        "u": 0.9199485098059585,
+        "v": 0.8768438612399362
+      }
+    },
+    "BID_3": {
+      "stake": 225,
+      "win": 455,
+      "totalBetAmount": 225,
+      "outcome": "WON",
+      "stage": 3,
+      "stages": 4,
+      "bid": 225,
+      "pOutbid": 0.2,
+      "refund": 0,
+      "locker": {
+        "multiplier": 2.021273022174399,
+        "band": 3,
+        "multiple": 2,
+        "contents": 455
+      },
+      "next": {
+        "betType": "BID_4",
+        "bid": 338
+      },
+      "math": {
+        "u": 0.9199485098059585,
+        "v": 0.8999356372574482
+      }
+    },
+    "BID_4": {
+      "stake": 338,
+      "win": 688,
+      "totalBetAmount": 338,
+      "outcome": "WON",
+      "stage": 4,
+      "stages": 4,
+      "bid": 338,
+      "pOutbid": 0,
+      "refund": 0,
+      "locker": {
+        "multiplier": 2.035566357714378,
+        "band": 3,
+        "multiple": 2,
+        "contents": 688
+      },
+      "next": null,
+      "math": {
+        "u": 0.9199485098059585,
+        "v": 0.9199485098059585
+      }
+    }
+  }
+}

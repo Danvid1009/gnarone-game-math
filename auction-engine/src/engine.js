@@ -1,176 +1,81 @@
-// Storage-auction ladder.  See ALGORITHM.md for the math.
+// Locker Wars engine.  See ALGORITHM.md for the math.
 //
-//   const A = buildAuction({ rtp: 0.95, maxWin: 25, steps: 10 });
-//   A.bids                 // c_1..c_N: what the locker is worth (× stake) after k successful bids
-//   A.draw(u)              // u ~ U[0,1) -> { K, v, X }: bids survived, recycled residual, locker multiplier
-//   A.settle(u, s)         // payout multiple if the player takes the locker after s bids
-//   A.start(u)             // round state machine: BID / TAKE (RGS stepper shape: CONTINUE / CASH_OUT / COLLECT)
+//   const A = buildLockerWars({ rtp: 0.95, refund: 1, outbid: [0.6, 0.5, 0.4, 0.3, 0.2, 0], growth: 1.5, locker: { payouts: [0, 0.5, 1, 2, 5, 20] } });
+//   A.stages                 // per raise k: bid multiple g_k, P(outbid) H_k, refund, locker mean
+//   A.settle(u, k)           // payout multiple of the bid at stage k for one uniform u
+//   A.play({ bet, betType: 'BID_3', rng })   // one raise: OUTBID (bid back less the fee) or WON (the locker opens)
 //
-// Same math as the stepper: survival to at least rung k is G_k = R / c_k (the edge is taken on
-// the first bid, every later bid is a fair bet). The one change: when the hammer falls at rung s
-// the player does not receive c_s flat — they open the locker, whose contents are a one-shot
-// draw X with E[X] = 1 exactly, and receive c_s · X. Because E[c_s X] = c_s, every stopping rule
-// still returns R. The locker draw v is the residual of the single uniform u inside its crash
-// interval, so one uniform still decides the whole round.
+// Model. An auction is a sequence of raises. Raise k is its own bet of b_k = b_1 · g^(k−1). With probability
+// H_k the rivals outbid you and the bid comes back in full (ρ = 1: being outbid costs nothing). Otherwise the rivals
+// fold, you win the locker and open it: a Single Shot draw X (sloped bands) times the bid, with mean
+// E[X] = (R − H_k ρ)/(1 − H_k) so that the raise returns H_k ρ + (1 − H_k) E[X] = R exactly. The house edge therefore
+// lives only in won lockers, and any sequence of raise / walk decisions returns exactly R per unit staked.
+// One uniform per raise: u < H_k is the outbid; the residual (u − H_k)/(1 − H_k) is the locker draw.
 
 import { Rng } from './rng.js';
-import { buildBox } from './box.js';
+import { buildPayout } from '../../payout-engine/src/engine.js';
 
-export { buildBox };
-
-/**
- * { rtp, maxWin, steps, decimals = 2 }  or  { rtp, returns: [c_1..c_N] }, plus
- * box: buildBox() options ({ payouts, mean = 1, method, probabilities, fraction }) or false for a flat locker (X ≡ 1).
- */
-export function buildAuction({ rtp, maxWin, steps, returns, decimals = 2, name, box = {} } = {}) {
+export function buildLockerWars({ rtp = 0.95, refund = 1, outbid = [0.6, 0.5, 0.4, 0.3, 0.2, 0], growth = 1.5, locker = {}, name } = {}) {
   if (!(rtp > 0 && rtp < 1)) throw new Error(`rtp must be in (0,1), got ${rtp}`);
-  let c, m = null;
-  if (Array.isArray(returns)) c = returns.map(Number);
-  else {
-    if (!(maxWin > 1) || !Number.isInteger(steps) || steps < 1) throw new Error('need maxWin > 1 and integer steps ≥ 1 (or explicit returns)');
-    m = Math.pow(maxWin, 1 / steps);
-    const f = 10 ** decimals;
-    c = Array.from({ length: steps }, (_, i) => Math.round(Math.pow(m, i + 1) * f) / f);
-  }
-  const N = c.length;
-  if (N < 1 || c.some(x => !Number.isFinite(x) || x <= 0)) throw new Error('returns must be positive numbers');
-  for (let k = 1; k < N; k++) if (!(c[k] > c[k - 1])) throw new Error(`returns must strictly increase (rung ${k + 1})`);
-  if (!(c[0] > rtp)) throw new Error(`first return ${c[0]} must exceed rtp ${rtp}, otherwise P(instant outbid) < 0`);
-
-  const B = box === false ? null : buildBox({ ...box, mean: box?.mean ?? 1 });
-  if (B && Math.abs(B.mean - 1) > 1e-9) throw new Error(`the locker must have mean 1 to keep the ladder fair (got ${B.mean}); scale the rungs instead`);
-
-  const G = [1, ...c.map(ck => rtp / ck)];                                   // survival to at least rung k
-  const p = Array.from({ length: N + 1 }, (_, k) => (k < N ? G[k] - G[k + 1] : G[N]));   // P(K = k)
-  const cum = [0]; for (const x of p) cum.push(cum[cum.length - 1] + x); cum[cum.length - 1] = 1;
-  const hazard = c.map((ck, i) => G[i + 1] / G[i]);                         // P(rival folds | reached rung k)
-
-  const table = p.map((pk, k) => ({
-    step: k,
-    event: k === 0 ? 'Outbid on the first bid' : k < N ? `Outbid after ${c[k - 1]}` : `Hammer at the top ${c[N - 1]}`,
-    return: k === 0 ? 0 : c[k - 1], p: pk, rnMin: cum[k], rnMax: cum[k + 1],
-    survivalToHere: k === 0 ? null : G[k], survivalTimesReturn: k === 0 ? null : G[k] * c[k - 1],
-  }));
-
-  const X = v => (B ? B.multiplier(v) : 1);
+  if (!(refund >= 0 && refund <= 1)) throw new Error('refund must be in [0,1]');
+  if (!Array.isArray(outbid) || outbid.length < 1 || outbid.some(h => !(h >= 0 && h < 1))) throw new Error('outbid must be a list of probabilities in [0,1), one per raise');
+  if (!(growth >= 1)) throw new Error('growth must be ≥ 1');
+  const N = outbid.length;
+  const payouts = locker.payouts ?? [0, 0.5, 1, 2, 5, 20];
+  // a locker per stage: mean solved so the raise returns exactly rtp
+  const stages = outbid.map((H, i) => {
+    const mean = (rtp - H * refund) / (1 - H);
+    if (!(mean > 0)) throw new Error(`stage ${i + 1}: outbid ${H} with refund ${refund} leaves no value for the locker (mean ${mean.toFixed(3)})`);
+    const box = buildPayout({ payouts, rtp: mean, method: locker.method ?? 'maxent', weights: locker.weights, fraction: locker.fraction ?? 0.1 });
+    return { stage: i + 1, g: Math.pow(growth, i), outbid: H, refund, lockerMean: mean, box, rtp: H * refund + (1 - H) * box.rtp };
+  });
+  const bidMultiple = (k) => stages[k - 1].g;
 
   const A = {
-    name: name ?? (m ? `rtp${rtp}-max${maxWin}-n${N}` : `rtp${rtp}-custom${N}`),
-    rtp, maxWin: c[N - 1], steps: N, stepMultiple: m, bids: c, returns: c, survival: G, hazard, p, cum, table, box: B,
+    name: name ?? `locker-wars-${N}`, rtp, refund, growth, N, outbid, payouts, stages,
+    betTypes: stages.map(s => `BID_${s.stage}`),
+    stageOf(betType) { const m = /^BID_(\d+)$/.exec(betType); const k = m ? Number(m[1]) : NaN; if (!(k >= 1 && k <= N)) throw new Error(`betType must be BID_1 … BID_${N}, got ${betType}`); return k; },
+    bidMultiple,
 
-    /** K = successful bids before being outbid (0..N; N = the auction runs to the top). One uniform. */
-    crashStep(u) { if (u >= 1) u = 1 - 1e-12; let k = 0; while (cum[k + 1] <= u) k++; return k; },
+    /** One uniform decides the raise: outbid, or the locker's band and ramp. */
+    draw(u, k) { const S = stages[k - 1]; if (u >= 1) u = 1 - 1e-12; if (u < S.outbid) return { outcome: 'OUTBID', multiple: S.refund, v: null, band: null }; const v = S.outbid < 1 ? (u - S.outbid) / (1 - S.outbid) : u; const X = S.box.payout(v); return { outcome: 'WON', multiple: X, v, band: S.box.bandOf(v) }; },
+    settle(u, k) { return A.draw(u, k).multiple; },
+    /** Exact return of raise k: H ρ + (1 − H) E[X]. */
+    rtpOfStage(k) { return stages[k - 1].rtp; },
 
-    /** The residual of u inside its interval: v = (u − e_K)/(e_{K+1} − e_K), uniform and independent of K. */
-    residual(u, K = A.crashStep(u)) { if (u >= 1) u = 1 - 1e-12; const v = (u - cum[K]) / (cum[K + 1] - cum[K]); return v < 0 ? 0 : v >= 1 ? 1 - 1e-12 : v; },
-
-    /** Everything the round needs from one uniform. */
-    draw(u) { const K = A.crashStep(u), v = A.residual(u, K); return { K, v, X: X(v), band: B ? B.bandOf(v) : 0 }; },
-
-    /** Payout multiple if the player takes the locker after `stopAt` bids, given (K, v). */
-    payoutFor(K, v, stopAt) { if (stopAt <= 0) return 0; if (stopAt > N) stopAt = N; return K >= stopAt ? c[stopAt - 1] * X(v) : 0; },
-    settle(u, stopAt) { const { K, v } = A.draw(u); return A.payoutFor(K, v, stopAt); },
-
-    /** Exact RTP of "take after k bids" — G_k · c_k · E[X] = rtp for every k. */
-    rtpOfStrategy(k) { return k <= 0 ? 0 : G[k] * c[k - 1] * (B ? B.mean : 1); },
-
-    /** Exact variance of the payout under "take after k bids". */
-    varianceOfStrategy(k) { if (k <= 0) return 0; const m2 = B ? B.secondMoment : 1; const e2 = G[k] * c[k - 1] ** 2 * m2; return e2 - A.rtpOfStrategy(k) ** 2; },
-
-    /**
-     * Round state machine in the RGS stepper shape. start(u) predetermines (K, X); bid() / take()
-     * reveal it. Aliases: continue_ = bid, cashOut = take.
-     */
-    start(u, { bet = 1 } = {}) {
-      const { K, v, X: mult, band } = A.draw(u);
-      const st = { bet, currentStep: 0, currentPayout: 0, totalWinAmount: 0, roundEnded: false, locker: null,
-        steps: c.map((ck, i) => ({ step: i + 1, payout: Math.round(bet * ck), outcome: 'UNDECIDED' })), nextAction: ['CONTINUE'] };
-      const view = () => ({ currentStep: st.currentStep, currentPayout: st.currentPayout, totalWinAmount: st.totalWinAmount, roundEnded: st.roundEnded,
-        steps: st.steps.map(s => ({ ...s })), nextAction: [...st.nextAction], locker: st.locker ? { ...st.locker } : null });
-      const hammer = () => { st.locker = { multiplier: mult, band, contents: Math.round(st.currentPayout * mult) }; st.totalWinAmount = st.locker.contents; st.roundEnded = true; st.nextAction = ['COLLECT']; };
-      const round = {
-        view,
-        bid() {
-          if (st.roundEnded) throw new Error('round has ended');
-          const k = st.currentStep + 1;
-          if (k > K) { st.steps[k - 1].outcome = 'CRASH'; st.currentStep = k; st.currentPayout = 0; st.totalWinAmount = 0; st.roundEnded = true; st.nextAction = ['COLLECT']; }
-          else { st.steps[k - 1].outcome = 'SAFE'; st.currentStep = k; st.currentPayout = st.steps[k - 1].payout; if (k === N) hammer(); else st.nextAction = ['CONTINUE', 'CASH_OUT']; }
-          return view();
-        },
-        take() {
-          if (st.roundEnded) throw new Error('round has ended');
-          if (st.currentStep === 0) throw new Error('nothing to take before the first bid');
-          hammer(); return view();
-        },
-        _crashStep: K, _locker: { v, multiplier: mult, band },
-      };
-      round.continue_ = round.bid; round.cashOut = round.take;
-      return round;
+    play({ bet, betType = 'BID_1', rng }) {
+      const k = A.stageOf(betType); const S = stages[k - 1]; const u = rng.next(); const d = A.draw(u, k);
+      const win = Math.round(bet * d.multiple);
+      return { totalWinAmount: win, outcome: d.outcome, stage: k, stages: N, bid: bet, pOutbid: S.outbid, refund: d.outcome === 'OUTBID' ? win : 0,
+        locker: d.outcome === 'WON' ? { multiplier: d.multiple, band: d.band, multiple: S.box.payouts[d.band], contents: win } : null,
+        next: k < N ? { betType: `BID_${k + 1}`, bid: Math.round(bet * growth) } : null, math: { u, v: d.v } };
     },
 
-    /** Seeded Monte Carlo under a stopping rule: policy(k) -> true to take the locker after k bids. */
-    simulate({ rounds = 100000, seed = 'sim', policy = () => false } = {}) {
-      const rng = new Rng(seed, 'payout');
-      let tot = 0, sq = 0;
-      const crashHist = new Array(N + 1).fill(0), bandHist = new Array(B ? B.payouts.length : 1).fill(0);
-      let outbid = 0;
-      for (let i = 0; i < rounds; i++) {
-        const { K, X: mult, band } = A.draw(rng.next());
-        crashHist[K]++;
-        let k = 0, win = 0, took = false;
-        while (true) {
-          if (k >= N) { win = c[N - 1] * mult; took = true; break; }
-          if (policy(k) && k > 0) { win = c[k - 1] * mult; took = true; break; }
-          k++;
-          if (k > K) { win = 0; break; }
-        }
-        if (took) bandHist[band]++; else outbid++;
-        tot += win; sq += win * win;
+    /** Seeded Monte Carlo of a raise-until-won policy up to stage `maxStage`: return per unit staked, by stage and overall. */
+    simulate({ rounds = 100000, seed = 'sim', maxStage = N } = {}) {
+      const rng = new Rng(seed, 'payout'); let staked = 0, returned = 0, wonAt = new Array(N + 1).fill(0); const perStage = stages.map(() => ({ staked: 0, returned: 0 }));
+      for (let n = 0; n < rounds; n++) {
+        let bid = 1; for (let k = 1; k <= maxStage; k++) { const d = A.draw(rng.next(), k); staked += bid; returned += bid * d.multiple; perStage[k - 1].staked += bid; perStage[k - 1].returned += bid * d.multiple; if (d.outcome === 'WON') { wonAt[k]++; break; } if (k === maxStage) wonAt[0]++; bid *= growth; }
       }
-      const mean = tot / rounds, sd = Math.sqrt(Math.max(sq / rounds - mean * mean, 0));
-      return { rounds, seed, rtp: mean, stdev: sd, se: sd / Math.sqrt(rounds), crashFreq: crashHist.map(n => n / rounds), outbidFreq: outbid / rounds, bandFreq: bandHist.map(n => n / rounds) };
+      // and every stage on its own with the full sample, since raise-until-won reaches late stages rarely
+      const independent = stages.map((S, i) => { const r2 = new Rng(seed + ':s' + (i + 1), 'payout'); let tot = 0; for (let n = 0; n < rounds; n++) tot += A.draw(r2.next(), i + 1).multiple; return { stage: i + 1, rtp: tot / rounds, exact: S.rtp }; });
+      return { rounds, seed, rtp: returned / staked, perStage: perStage.map((s, i) => ({ stage: i + 1, rtp: s.returned / s.staked, exact: stages[i].rtp })), perStageIndependent: independent, wonAtStage: wonAt.map(c => c / rounds) };
     },
 
-    /** Dependency-free JS: settle(u, s) -> payout multiple for taking the locker after s bids. */
     standalone(fn = 'settle') {
-      return [
-        `// Storage-auction ladder: bids ${JSON.stringify(c)}, RTP ${rtp}. Survival to rung k = RTP / c_k; the locker multiplier has mean 1,`,
-        `// so taking the locker after any number of bids returns ${rtp}. u: one uniform in [0,1). s: bids made before the hammer (1..${N}).`,
-        `function ${fn}(u, s) {`,
-        `  const cum = ${JSON.stringify(cum)}, bids = ${JSON.stringify(c)};`,
-        `  if (u >= 1) u = 1 - 1e-12;`,
-        `  let K = 0; while (cum[K + 1] <= u) K++;                 // successful bids before the rival wins`,
-        `  if (s < 1 || s > K) return 0;                             // outbid before the hammer`,
-        `  if (s > ${N}) s = ${N};`,
-        B ? `  const v = (u - cum[K]) / (cum[K + 1] - cum[K]);         // recycled residual: the locker draw` : `  return bids[s - 1];`,
-        ...(B ? [
-          `  const breaks = ${JSON.stringify(B.breaks)}, mult = ${JSON.stringify(B.payouts)}, r = ${B.r};`,
-          `  let i = 0; while (breaks[i + 1] <= v) i++;`,
-          `  const X = mult[i] <= 0 ? 0 : mult[i] + r * (2 * (v - breaks[i]) / (breaks[i + 1] - breaks[i]) - 1);`,
-          `  return bids[s - 1] * X;`,
-        ] : []),
-        `}`,
-      ].join('\n');
+      return [`// Locker Wars: raise k is a bet; u < H_k → outbid, pays refund ρ; else the locker: Single Shot bands on the residual. RTP ${rtp} at every stage.`,
+        `function ${fn}(u, k) {`, `  const H = ${JSON.stringify(outbid)}, rho = ${refund};`, `  const breaks = ${JSON.stringify(stages.map(s => s.box.breaks))}, pay = ${JSON.stringify(stages.map(s => s.box.payouts))}, r = ${JSON.stringify(stages.map(s => s.box.r))};`,
+        `  if (u >= 1) u = 1 - 1e-12; const h = H[k - 1]; if (u < h) return rho;`, `  const v = h < 1 ? (u - h) / (1 - h) : u; const B = breaks[k - 1], P = pay[k - 1]; let i = 0; while (B[i + 1] <= v) i++;`,
+        `  if (P[i] <= 0) return 0; const t = (v - B[i]) / (B[i + 1] - B[i]); return P[i] + r[k - 1] * (2 * t - 1);`, `}`].join('\n');
     },
-
-    toJSON() { return { name: A.name, rtp, maxWin: c[N - 1], steps: N, stepMultiple: m, bids: c, survival: G, hazard, probabilities: p, cum, table, box: B ? B.toJSON() : null }; },
+    toJSON() { return { name: A.name, rtp, refund, growth, outbid, payouts, stages: stages.map(s => ({ stage: s.stage, bidMultiple: s.g, outbid: s.outbid, refund: s.refund, lockerMean: s.lockerMean, rtp: s.rtp, bands: s.box.bands.map(b => ({ payout: b.payout, p: b.p, from: b.from, to: b.to, range: b.range })) })) }; },
   };
   return A;
 }
 
 export function format(A) {
-  const pct = x => `${(100 * x).toFixed(4)}%`;
-  const lines = [
-    `${A.name}   RTP ${A.rtp}   top locker ${A.maxWin}x   bids ${A.steps}` + (A.stepMultiple ? `   step multiple ${A.stepMultiple.toFixed(6)}` : ''),
-    '',
-    'step  event                        value   P(event)      RN [min, max)             survival≥   survival×value',
-  ];
-  for (const r of A.table) lines.push(`${String(r.step).padStart(4)}  ${r.event.padEnd(28)} ${String(r.return).padStart(6)}   ${pct(r.p).padStart(10)}   [${r.rnMin.toFixed(6)}, ${r.rnMax.toFixed(6)})   ${r.survivalToHere === null ? '        -' : r.survivalToHere.toFixed(6).padStart(9)}   ${r.survivalTimesReturn === null ? '' : r.survivalTimesReturn.toFixed(6)}`);
-  lines.push(`${'total'.padStart(4)}  ${''.padEnd(28)} ${''.padStart(6)}   ${pct(A.p.reduce((s, x) => s + x, 0)).padStart(10)}`);
-  if (A.box) {
-    const B = A.box;
-    lines.push('', `locker: mean ${B.mean.toFixed(6)}   stdev ${B.stdev.toFixed(4)}   r = ${B.r} (${B.fraction} × smallest gap ${B.gap})   method ${B.method}`, 'probability (decreasing)   residual [from, to)      multiple   pays (left → right edge)');
-    for (const b of [...B.bands].sort((x, y) => y.p - x.p)) lines.push(`  ${(100 * b.p).toFixed(2).padStart(7)}%                [${b.from.toFixed(4)}, ${b.to.toFixed(4)})   ${(b.multiple + 'x').padStart(7)}    ${b.multiple > 0 ? `${b.range[0].toFixed(4)} → ${b.range[1].toFixed(4)}` : 'empty'}`);
-  } else lines.push('', 'locker: flat (X ≡ 1) — identical to the stepper');
-  return lines.join('\n');
+  const pct = x => `${(100 * x).toFixed(2)}%`;
+  return [`${A.name}   RTP ${A.rtp}   refund on outbid ${A.refund}   bid growth ×${A.growth}   locker payouts ${A.payouts.join('/')}`, '',
+    'stage  bid×    P(outbid)   locker mean   P(locker ≥ 1×)   exact return',
+    ...A.stages.map(s => `${String(s.stage).padStart(5)}  ${s.g.toFixed(3).padStart(6)}   ${pct(s.outbid).padStart(8)}   ${s.lockerMean.toFixed(4).padStart(10)}   ${pct(s.box.bands.filter(b => b.payout >= 1).reduce((t, b) => t + b.p, 0)).padStart(13)}   ${s.rtp.toFixed(6)}`)].join('\n');
 }

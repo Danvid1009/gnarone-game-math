@@ -1,0 +1,103 @@
+{
+  "round": 5,
+  "seed": "fixture-005",
+  "results": {
+    "BID_1": {
+      "stake": 1000,
+      "win": 0,
+      "totalBetAmount": 1000,
+      "outcome": "WON",
+      "stage": 1,
+      "stages": 4,
+      "bid": 1000,
+      "pOutbid": 0.5,
+      "refund": 0,
+      "locker": {
+        "multiplier": 0,
+        "band": 0,
+        "multiple": 0,
+        "contents": 0
+      },
+      "next": {
+        "betType": "BID_2",
+        "bid": 1500
+      },
+      "math": {
+        "u": 0.6016395999859653,
+        "v": 0.20327919997193056
+      }
+    },
+    "BID_2": {
+      "stake": 150,
+      "win": 72,
+      "totalBetAmount": 150,
+      "outcome": "WON",
+      "stage": 2,
+      "stages": 4,
+      "bid": 150,
+      "pOutbid": 0.35,
+      "refund": 0,
+      "locker": {
+        "multiplier": 0.4785901390096574,
+        "band": 1,
+        "multiple": 0.5,
+        "contents": 72
+      },
+      "next": {
+        "betType": "BID_3",
+        "bid": 225
+      },
+      "math": {
+        "u": 0.6016395999859653,
+        "v": 0.38713784613225427
+      }
+    },
+    "BID_3": {
+      "stake": 225,
+      "win": 118,
+      "totalBetAmount": 225,
+      "outcome": "WON",
+      "stage": 3,
+      "stages": 4,
+      "bid": 225,
+      "pOutbid": 0.2,
+      "refund": 0,
+      "locker": {
+        "multiplier": 0.5239841982112551,
+        "band": 1,
+        "multiple": 0.5,
+        "contents": 118
+      },
+      "next": {
+        "betType": "BID_4",
+        "bid": 338
+      },
+      "math": {
+        "u": 0.6016395999859653,
+        "v": 0.5020494999824565
+      }
+    },
+    "BID_4": {
+      "stake": 338,
+      "win": 327,
+      "totalBetAmount": 338,
+      "outcome": "WON",
+      "stage": 4,
+      "stages": 4,
+      "bid": 338,
+      "pOutbid": 0,
+      "refund": 0,
+      "locker": {
+        "multiplier": 0.9661251697975648,
+        "band": 2,
+        "multiple": 1,
+        "contents": 327
+      },
+      "next": null,
+      "math": {
+        "u": 0.6016395999859653,
+        "v": 0.6016395999859653
+      }
+    }
+  }
+}
