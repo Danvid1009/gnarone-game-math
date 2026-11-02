@@ -8,11 +8,18 @@
       0.2,
       0
     ],
-    "bids": [
-      1,
-      2,
-      3,
-      4
+    "steps": [
+      [
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        2
+      ]
     ],
     "locker": {
       "payouts": [
@@ -53,21 +60,42 @@
     ],
     "BID_3": [
       300,
+      400,
       600,
+      800,
       1500,
+      2000,
       3000,
+      4000,
       7500,
+      10000,
       15000,
-      30000
+      20000,
+      30000,
+      40000
     ],
     "BID_4": [
       400,
+      500,
+      600,
       800,
+      1000,
+      1200,
       2000,
+      2500,
+      3000,
       4000,
+      5000,
+      6000,
       10000,
+      12500,
+      15000,
       20000,
-      40000
+      25000,
+      30000,
+      40000,
+      50000,
+      60000
     ]
   },
   "stake_units": "minor units",
@@ -76,24 +104,54 @@
   "rtp": 0.95,
   "edge": "hammer",
   "refund": 1,
-  "bids": [
-    1,
-    2,
-    3,
-    4
+  "steps": [
+    [
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      2
+    ]
+  ],
+  "reach": [
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      5,
+      6
+    ]
   ],
   "alwaysRaise": {
     "upTo": 4,
-    "expectedStake": 2.665,
-    "expectedWinningBid": 1.7099999999999997,
-    "rtp": 0.9679174484052533,
-    "lossPerAuction": 0.08550000000000013
+    "expectedStake": 2.7874999999999996,
+    "expectedWinningBid": 1.815,
+    "rtp": 0.9674439461883408,
+    "lossPerAuction": 0.09074999999999989
   },
   "stages": [
     {
       "stage": 1,
       "betType": "BID_1",
-      "bidMultiple": 1,
+      "multiples": [
+        1
+      ],
+      "increments": [
+        1
+      ],
+      "expectedMultiple": 1,
       "outbid": 0.5,
       "refund": 1,
       "lockerMean": 0.95,
@@ -144,7 +202,14 @@
     {
       "stage": 2,
       "betType": "BID_2",
-      "bidMultiple": 2,
+      "multiples": [
+        2
+      ],
+      "increments": [
+        1,
+        2
+      ],
+      "expectedMultiple": 2,
       "outbid": 0.35,
       "refund": 1,
       "lockerMean": 0.95,
@@ -195,7 +260,15 @@
     {
       "stage": 3,
       "betType": "BID_3",
-      "bidMultiple": 3,
+      "multiples": [
+        3,
+        4
+      ],
+      "increments": [
+        1,
+        2
+      ],
+      "expectedMultiple": 3.5,
       "outbid": 0.2,
       "refund": 1,
       "lockerMean": 0.95,
@@ -246,7 +319,13 @@
     {
       "stage": 4,
       "betType": "BID_4",
-      "bidMultiple": 4,
+      "multiples": [
+        4,
+        5,
+        6
+      ],
+      "increments": [],
+      "expectedMultiple": 5,
       "outbid": 0,
       "refund": 1,
       "lockerMean": 0.95,

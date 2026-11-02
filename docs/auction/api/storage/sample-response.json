@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "07dda10b-c547-4665-af15-c2c701d0067f",
+    "sessionId": "7b915971-83fa-42db-a0fd-da869fc70f0c",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -32,26 +32,76 @@
     "rtp": 0.95,
     "edge": "hammer",
     "refund": 1,
-    "bids": [
-      1,
-      2,
-      3,
-      4,
-      6,
-      8
+    "steps": [
+      [
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        4
+      ]
+    ],
+    "reach": [
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5,
+        6
+      ],
+      [
+        6,
+        7,
+        8,
+        9
+      ],
+      [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
     ],
     "alwaysRaise": {
       "upTo": 6,
-      "expectedStake": 3.8535999999999997,
-      "expectedWinningBid": 2.1064,
-      "rtp": 0.9726697114386548,
-      "lossPerAuction": 0.10531999999999986
+      "expectedStake": 4.1956,
+      "expectedWinningBid": 2.3416,
+      "rtp": 0.9720945752693296,
+      "lossPerAuction": 0.11708000000000052
     },
     "stages": [
       {
         "stage": 1,
         "betType": "BID_1",
-        "bidMultiple": 1,
+        "multiples": [
+          1
+        ],
+        "increments": [
+          1
+        ],
+        "expectedMultiple": 1,
         "outbid": 0.6,
         "refund": 1,
         "lockerMean": 0.95,
@@ -110,7 +160,14 @@
       {
         "stage": 2,
         "betType": "BID_2",
-        "bidMultiple": 2,
+        "multiples": [
+          2
+        ],
+        "increments": [
+          1,
+          2
+        ],
+        "expectedMultiple": 2,
         "outbid": 0.5,
         "refund": 1,
         "lockerMean": 0.95,
@@ -169,7 +226,15 @@
       {
         "stage": 3,
         "betType": "BID_3",
-        "bidMultiple": 3,
+        "multiples": [
+          3,
+          4
+        ],
+        "increments": [
+          1,
+          2
+        ],
+        "expectedMultiple": 3.5,
         "outbid": 0.4,
         "refund": 1,
         "lockerMean": 0.95,
@@ -228,7 +293,16 @@
       {
         "stage": 4,
         "betType": "BID_4",
-        "bidMultiple": 4,
+        "multiples": [
+          4,
+          5,
+          6
+        ],
+        "increments": [
+          2,
+          3
+        ],
+        "expectedMultiple": 5,
         "outbid": 0.3,
         "refund": 1,
         "lockerMean": 0.95,
@@ -287,7 +361,17 @@
       {
         "stage": 5,
         "betType": "BID_5",
-        "bidMultiple": 6,
+        "multiples": [
+          6,
+          7,
+          8,
+          9
+        ],
+        "increments": [
+          2,
+          4
+        ],
+        "expectedMultiple": 7.5,
         "outbid": 0.2,
         "refund": 1,
         "lockerMean": 0.95,
@@ -346,7 +430,16 @@
       {
         "stage": 6,
         "betType": "BID_6",
-        "bidMultiple": 8,
+        "multiples": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "increments": [],
+        "expectedMultiple": 10.5,
         "outbid": 0,
         "refund": 1,
         "lockerMean": 0.95,
@@ -408,7 +501,7 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "6bc8c3be-a0ed-4b89-94e2-4474d167282c",
+        "roundId": "d607b7d4-5214-4765-b6c5-1dfb37087ecd",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "balance": 99000,
@@ -418,6 +511,7 @@
         "stage": 1,
         "stages": 6,
         "bid": 1000,
+        "multiple": 1,
         "pOutbid": 0.6,
         "refund": 0,
         "locker": {
@@ -428,7 +522,9 @@
         },
         "next": {
           "betType": "BID_2",
-          "bid": 2000
+          "bid": 2000,
+          "increment": 1000,
+          "multiple": 2
         },
         "math": {
           "u": 0.6806586483395238,

@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "fb214e48-69cf-4171-b87b-b843ab924b35",
+    "sessionId": "0fb8f10c-1cf8-4caf-a481-b3ca1c7b8d88",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -32,27 +32,100 @@
     "rtp": 0.95,
     "edge": "hammer",
     "refund": 1,
-    "bids": [
-      1,
-      2,
-      3,
-      5,
-      8,
-      12,
-      20
+    "steps": [
+      [
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        3,
+        5
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        6,
+        8
+      ]
+    ],
+    "reach": [
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        5,
+        6,
+        7
+      ],
+      [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
     ],
     "alwaysRaise": {
       "upTo": 7,
-      "expectedStake": 5.7852,
-      "expectedWinningBid": 2.93312,
-      "rtp": 0.9746497960312521,
-      "lossPerAuction": 0.14665600000000012
+      "expectedStake": 6.347440000000001,
+      "expectedWinningBid": 3.2660400000000003,
+      "rtp": 0.9742727776867524,
+      "lossPerAuction": 0.16330200000000072
     },
     "stages": [
       {
         "stage": 1,
         "betType": "BID_1",
-        "bidMultiple": 1,
+        "multiples": [
+          1
+        ],
+        "increments": [
+          1
+        ],
+        "expectedMultiple": 1,
         "outbid": 0.7,
         "refund": 1,
         "lockerMean": 0.95,
@@ -111,7 +184,14 @@
       {
         "stage": 2,
         "betType": "BID_2",
-        "bidMultiple": 2,
+        "multiples": [
+          2
+        ],
+        "increments": [
+          1,
+          2
+        ],
+        "expectedMultiple": 2,
         "outbid": 0.6,
         "refund": 1,
         "lockerMean": 0.95,
@@ -170,7 +250,15 @@
       {
         "stage": 3,
         "betType": "BID_3",
-        "bidMultiple": 3,
+        "multiples": [
+          3,
+          4
+        ],
+        "increments": [
+          2,
+          3
+        ],
+        "expectedMultiple": 3.5,
         "outbid": 0.5,
         "refund": 1,
         "lockerMean": 0.95,
@@ -229,7 +317,17 @@
       {
         "stage": 4,
         "betType": "BID_4",
-        "bidMultiple": 5,
+        "multiples": [
+          5,
+          6,
+          7
+        ],
+        "increments": [
+          2,
+          3,
+          5
+        ],
+        "expectedMultiple": 6,
         "outbid": 0.4,
         "refund": 1,
         "lockerMean": 0.95,
@@ -288,7 +386,19 @@
       {
         "stage": 5,
         "betType": "BID_5",
-        "bidMultiple": 8,
+        "multiples": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "increments": [
+          3,
+          5
+        ],
+        "expectedMultiple": 9.333333333333334,
         "outbid": 0.3,
         "refund": 1,
         "lockerMean": 0.95,
@@ -347,7 +457,22 @@
       {
         "stage": 6,
         "betType": "BID_6",
-        "bidMultiple": 12,
+        "multiples": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "increments": [
+          4,
+          6,
+          8
+        ],
+        "expectedMultiple": 13.333333333333334,
         "outbid": 0.2,
         "refund": 1,
         "lockerMean": 0.95,
@@ -406,7 +531,22 @@
       {
         "stage": 7,
         "betType": "BID_7",
-        "bidMultiple": 20,
+        "multiples": [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "increments": [],
+        "expectedMultiple": 19.333333333333336,
         "outbid": 0,
         "refund": 1,
         "lockerMean": 0.95,
@@ -468,7 +608,7 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "01cf1e85-4f4d-4068-8428-a27f9dd6b88c",
+        "roundId": "f116a8d5-d269-4884-8229-8759faf5ffe8",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "balance": 99000,
@@ -478,12 +618,15 @@
         "stage": 1,
         "stages": 7,
         "bid": 1000,
+        "multiple": 1,
         "pOutbid": 0.7,
         "refund": 1000,
         "locker": null,
         "next": {
           "betType": "BID_2",
-          "bid": 2000
+          "bid": 2000,
+          "increment": 1000,
+          "multiple": 2
         },
         "math": {
           "u": 0.6806586483395238,

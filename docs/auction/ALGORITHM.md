@@ -9,14 +9,14 @@ premium: being outbid is free.
 ## 1. Inputs
 
 $$
-R \in (0,1), \qquad \rho \in [0,1], \qquad H_1, \dots, H_N \in [0,1), \qquad 1 = m_1 < m_2 < \dots < m_N, \qquad
+R \in (0,1), \qquad \rho \in [0,1], \qquad H_1, \dots, H_N \in [0,1), \qquad D_1, \dots, D_{N-1} \subset \mathbb{N}_{>0}, \qquad
 \{a_1 < \dots < a_m\} \subset [0,\infty), \qquad \phi \in (0, \tfrac12).
 $$
 
 - $R$: return to player (0.95).
 - $\rho$: fraction of the bid returned when outbid (1: the bid comes back in full).
 - $H_k$: probability that the rivals outbid raise $k$. The last stage has $H_N = 0$: the rivals are gone.
-- $m_k$: the auctioneer's ladder, round multiples of the opening bid (storage: $1, 2, 3, 4, 6, 8$), so raise $k$ is $b_k = b_1\, m_k$.
+- $D_k$: the auctioneer's increments between raise $k$ and $k+1$, in units of the opening bid (storage: $\{1\}, \{1,2\}, \{1,2\}, \{2,3\}, \{2,4\}$). The multiple $m_1 = 1$ and $m_{k+1} = m_k + d_k$ with $d_k$ drawn uniformly from $D_k$, so raise $k$ is $b_k = b_1\, m_k$ and the ladder varies from auction to auction while every bid stays a round number.
 - $a_1 .. a_m$: the locker's listed multiples (e.g. $0, 0.5, 1, 2, 5, 20$; a $0$ is an empty locker).
 - $\phi$: band half-width as a fraction of the smallest positive gap (0.1), as in Single Shot.
 
@@ -72,8 +72,11 @@ The engine reports these exactly (`policy(m)`), for raising up to any stage $m$.
 
 ## 5. Money
 
-Opening bid $b_1$ is a chip level $S$. Raise $k$ is $S\, m_k$, and BID\_k's own level list is $c\, m_k$ for every
-chip $c$, so every bid on the ladder is a round number: 5, 10, 15, 20, 30, 40 from a 5.00 opener. An outbid
+Opening bid $b_1$ is a chip level $S$. Raise $k$ is $S\, m_k$. BID\_k's level list is $c\, m$ for every chip $c$ and
+every multiple $m$ the stage can reach, and the shipped presets are chosen so each amount factors into exactly
+one (chip, multiple) pair, which is how a stateless engine knows the opener. The increment $d_k$ is drawn from a
+derived stream of raise $k$'s own seed, so it is committed with the raise and replayable, and the response names
+the next bid. From a 5.00 opener a storage auction might run 5, 10, 15, 25, 35, 45 or 5, 10, 20, 25, 40, 50. An outbid
 pays $\operatorname{round}(\rho\,b_k)$; a won locker pays $\operatorname{round}(X_k\,b_k)$.
 
 ## 6. Wire shape
@@ -85,11 +88,14 @@ client chains raises with the `next` field; the engine needs no state between th
 
 ## 7. Reference instances ($R = 0.95$ on the hammer price, full refund)
 
-| preset | stages $H_k$ | bid ladder $m_k$ | locker multiples | E[hammer] | always-raise RTP | loss per auction |
-|---|---|---|---|---|---|---|
-| street | 0.5, 0.35, 0.2, 0 | 1, 2, 3, 4 | 0, 0.5, 1, 2, 5 | 1.71 | 96.8% | 0.086 |
-| storage | 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1, 2, 3, 4, 6, 8 | 0, 0.5, 1, 2, 5, 20 | 2.11 | 97.3% | 0.105 |
-| vault | 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1, 2, 3, 5, 8, 12, 20 | 0, 1, 2, 5, 20, 100 | 2.93 | 97.5% | 0.147 |
+| preset | stages $H_k$ | increments $D_k$ | reachable multiples at the top | locker multiples |
+|---|---|---|---|---|
+| street | 0.5, 0.35, 0.2, 0 | 1 · 1,2 · 1,2 | 4 to 6 | 0, 0.5, 1, 2, 5 |
+| storage | 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1 · 1,2 · 1,2 · 2,3 · 2,4 | 8 to 13 | 0, 0.5, 1, 2, 5, 20 |
+| vault | 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1 · 1,2 · 2,3 · 2,3,5 · 3,5 · 4,6,8 | 14 to 25 | 0, 1, 2, 5, 20, 100 |
 
-Hammer price and loss in units of the opening bid. Every won locker has mean $0.95$ times its bid;
-the loss per auction is exactly 5% of the expected hammer price; the last raise can only be won.
+Expected hammer price, always-raise RTP and loss per auction are reported exactly by the engine for each
+preset (`policy()`), using the expected multiple at each stage, since the ladder is independent of outcomes.
+
+Every won locker has mean $0.95$ times its bid; the loss per auction is exactly 5% of the expected hammer
+price; the last raise can only be won.

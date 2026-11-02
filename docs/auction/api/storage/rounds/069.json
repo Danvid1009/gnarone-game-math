@@ -10,12 +10,15 @@
       "stage": 1,
       "stages": 6,
       "bid": 1000,
+      "multiple": 1,
       "pOutbid": 0.6,
       "refund": 1000,
       "locker": null,
       "next": {
         "betType": "BID_2",
-        "bid": 2000
+        "bid": 2000,
+        "increment": 1000,
+        "multiple": 2
       },
       "math": {
         "u": 0.0015704392933308942,
@@ -30,12 +33,15 @@
       "stage": 2,
       "stages": 6,
       "bid": 1000,
+      "multiple": 2,
       "pOutbid": 0.5,
       "refund": 1000,
       "locker": null,
       "next": {
         "betType": "BID_3",
-        "bid": 1500
+        "bid": 1500,
+        "increment": 500,
+        "multiple": 3
       },
       "math": {
         "u": 0.0015704392933308942,
@@ -50,12 +56,15 @@
       "stage": 3,
       "stages": 6,
       "bid": 300,
+      "multiple": 3,
       "pOutbid": 0.4,
       "refund": 300,
       "locker": null,
       "next": {
         "betType": "BID_4",
-        "bid": 400
+        "bid": 400,
+        "increment": 100,
+        "multiple": 4
       },
       "math": {
         "u": 0.0015704392933308942,
@@ -63,19 +72,22 @@
       }
     },
     "BID_4": {
-      "stake": 400,
-      "win": 400,
-      "totalBetAmount": 400,
+      "stake": 1000,
+      "win": 1000,
+      "totalBetAmount": 1000,
       "outcome": "OUTBID",
       "stage": 4,
       "stages": 6,
-      "bid": 400,
+      "bid": 1000,
+      "multiple": 5,
       "pOutbid": 0.3,
-      "refund": 400,
+      "refund": 1000,
       "locker": null,
       "next": {
         "betType": "BID_5",
-        "bid": 600
+        "bid": 1400,
+        "increment": 400,
+        "multiple": 7
       },
       "math": {
         "u": 0.0015704392933308942,
@@ -90,12 +102,15 @@
       "stage": 5,
       "stages": 6,
       "bid": 600,
+      "multiple": 6,
       "pOutbid": 0.2,
       "refund": 600,
       "locker": null,
       "next": {
         "betType": "BID_6",
-        "bid": 800
+        "bid": 800,
+        "increment": 200,
+        "multiple": 8
       },
       "math": {
         "u": 0.0015704392933308942,
@@ -103,13 +118,14 @@
       }
     },
     "BID_6": {
-      "stake": 800,
+      "stake": 1000,
       "win": 0,
-      "totalBetAmount": 800,
+      "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 6,
       "stages": 6,
-      "bid": 800,
+      "bid": 1000,
+      "multiple": 10,
       "pOutbid": 0,
       "refund": 0,
       "locker": {
