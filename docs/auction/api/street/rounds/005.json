@@ -4,7 +4,7 @@
   "results": {
     "BID_1": {
       "stake": 1000,
-      "win": 0,
+      "win": 470,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 1,
@@ -14,10 +14,10 @@
       "pOutbid": 0.5,
       "refund": 0,
       "locker": {
-        "multiplier": 0,
-        "band": 0,
-        "multiple": 0,
-        "contents": 0
+        "multiplier": 0.4703345477266653,
+        "band": 1,
+        "multiple": 0.5,
+        "contents": 470
       },
       "next": null,
       "math": {
@@ -27,7 +27,7 @@
     },
     "BID_2": {
       "stake": 1000,
-      "win": 479,
+      "win": 518,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 2,
@@ -37,10 +37,10 @@
       "pOutbid": 0.35,
       "refund": 0,
       "locker": {
-        "multiplier": 0.4785901390096574,
+        "multiplier": 0.5176509107949989,
         "band": 1,
         "multiple": 0.5,
-        "contents": 479
+        "contents": 518
       },
       "next": null,
       "math": {
@@ -50,7 +50,7 @@
     },
     "BID_3": {
       "stake": 300,
-      "win": 157,
+      "win": 237,
       "totalBetAmount": 300,
       "outcome": "WON",
       "stage": 3,
@@ -60,10 +60,10 @@
       "pOutbid": 0.2,
       "refund": 0,
       "locker": {
-        "multiplier": 0.5239841982112551,
-        "band": 1,
-        "multiple": 0.5,
-        "contents": 157
+        "multiplier": 0.790050910794999,
+        "band": 2,
+        "multiple": 0.8,
+        "contents": 237
       },
       "next": null,
       "math": {
@@ -73,7 +73,7 @@
     },
     "BID_4": {
       "stake": 1000,
-      "win": 966,
+      "win": 820,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 4,
@@ -83,10 +83,10 @@
       "pOutbid": 0,
       "refund": 0,
       "locker": {
-        "multiplier": 0.9661251697975648,
+        "multiplier": 0.8199349295749992,
         "band": 2,
-        "multiple": 1,
-        "contents": 966
+        "multiple": 0.8,
+        "contents": 820
       },
       "next": null,
       "math": {

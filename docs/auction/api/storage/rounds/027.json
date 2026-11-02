@@ -119,7 +119,7 @@
     },
     "BID_6": {
       "stake": 1000,
-      "win": 0,
+      "win": 500,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 6,
@@ -129,10 +129,10 @@
       "pOutbid": 0,
       "refund": 0,
       "locker": {
-        "multiplier": 0,
-        "band": 0,
-        "multiple": 0,
-        "contents": 0
+        "multiplier": 0.4999504384510244,
+        "band": 1,
+        "multiple": 0.5,
+        "contents": 500
       },
       "next": null,
       "math": {

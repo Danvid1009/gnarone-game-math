@@ -4,7 +4,7 @@
   "results": {
     "BID_1": {
       "stake": 1000,
-      "win": 483,
+      "win": 518,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 1,
@@ -14,10 +14,10 @@
       "pOutbid": 0.5,
       "refund": 0,
       "locker": {
-        "multiplier": 0.4830627010686495,
+        "multiplier": 0.5181053097344763,
         "band": 1,
         "multiple": 0.5,
-        "contents": 483
+        "contents": 518
       },
       "next": null,
       "math": {
@@ -27,7 +27,7 @@
     },
     "BID_2": {
       "stake": 1000,
-      "win": 538,
+      "win": 799,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 2,
@@ -37,10 +37,10 @@
       "pOutbid": 0.35,
       "refund": 0,
       "locker": {
-        "multiplier": 0.5377148695367808,
-        "band": 1,
-        "multiple": 0.5,
-        "contents": 538
+        "multiplier": 0.7993487278760716,
+        "band": 2,
+        "multiple": 0.8,
+        "contents": 799
       },
       "next": null,
       "math": {
@@ -50,7 +50,7 @@
     },
     "BID_3": {
       "stake": 300,
-      "win": 293,
+      "win": 248,
       "totalBetAmount": 300,
       "outcome": "WON",
       "stage": 3,
@@ -60,10 +60,10 @@
       "pOutbid": 0.2,
       "refund": 0,
       "locker": {
-        "multiplier": 0.9764105412422841,
+        "multiplier": 0.8258789823008573,
         "band": 2,
-        "multiple": 1,
-        "contents": 293
+        "multiple": 0.8,
+        "contents": 248
       },
       "next": null,
       "math": {
@@ -73,7 +73,7 @@
     },
     "BID_4": {
       "stake": 1000,
-      "win": 1012,
+      "win": 1197,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 4,
@@ -83,10 +83,10 @@
       "pOutbid": 0,
       "refund": 0,
       "locker": {
-        "multiplier": 1.0119494460496248,
-        "band": 2,
-        "multiple": 1,
-        "contents": 1012
+        "multiplier": 1.1973303737773309,
+        "band": 3,
+        "multiple": 1.2,
+        "contents": 1197
       },
       "next": null,
       "math": {

@@ -27,7 +27,7 @@
     },
     "BID_2": {
       "stake": 1000,
-      "win": 0,
+      "win": 479,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 2,
@@ -37,10 +37,10 @@
       "pOutbid": 0.35,
       "refund": 0,
       "locker": {
-        "multiplier": 0,
-        "band": 0,
-        "multiple": 0,
-        "contents": 0
+        "multiplier": 0.4792821906338823,
+        "band": 1,
+        "multiple": 0.5,
+        "contents": 479
       },
       "next": null,
       "math": {
@@ -50,7 +50,7 @@
     },
     "BID_3": {
       "stake": 300,
-      "win": 142,
+      "win": 155,
       "totalBetAmount": 300,
       "outcome": "WON",
       "stage": 3,
@@ -60,10 +60,10 @@
       "pOutbid": 0.2,
       "refund": 0,
       "locker": {
-        "multiplier": 0.47230926059499245,
+        "multiplier": 0.5153457525071058,
         "band": 1,
         "multiple": 0.5,
-        "contents": 142
+        "contents": 155
       },
       "next": null,
       "math": {
@@ -73,7 +73,7 @@
     },
     "BID_4": {
       "stake": 1000,
-      "win": 522,
+      "win": 790,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 4,
@@ -83,10 +83,10 @@
       "pOutbid": 0,
       "refund": 0,
       "locker": {
-        "multiplier": 0.5221359713617492,
-        "band": 1,
-        "multiple": 0.5,
-        "contents": 522
+        "multiplier": 0.7896438347109598,
+        "band": 2,
+        "multiple": 0.8,
+        "contents": 790
       },
       "next": null,
       "math": {

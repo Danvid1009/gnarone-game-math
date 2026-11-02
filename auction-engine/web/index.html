@@ -50,7 +50,7 @@ table.box{width:100%;border-collapse:collapse;font-size:12.5px}table.box td,tabl
 </div>
 <script type="module">
 import { createGame, PRESETS } from './api/rgs.js';
-const TIERS = { 0: ['🕳️', 'EMPTY', 'Dust and a broken shelf.'], 0.5: ['🔧', 'ODDS AND ENDS', 'Tools, a bicycle, some kitchenware.'], 1: ['📺', 'SOLID HAUL', 'Appliances, boxed electronics.'], 2: ['🎸', "COLLECTOR'S FIND", 'Vintage guitars, coins, a signed jersey.'], 5: ['🚗', 'JACKPOT', 'A classic car under the tarp.'], 20: ['💎', 'LEGENDARY', 'A safe full of jewellery.'], 100: ['🏛️', 'MYTHIC', 'Deeds to a building.'] };
+const TIERS = { 0: ['🕳️', 'EMPTY', 'Dust and a broken shelf.'], 0.5: ['🔧', 'ODDS AND ENDS', 'Tools, a bicycle, some kitchenware.'], 0.8: ['🪑', 'HOUSEHOLD', 'Furniture and a working fridge.'], 1.2: ['📺', 'SOLID HAUL', 'Appliances, boxed electronics.'], 1.5: ['🎮', 'GOOD FIND', 'Consoles, a camera kit, power tools.'], 2: ['🎸', "COLLECTOR'S FIND", 'Vintage guitars, coins, a signed jersey.'], 3: ['🏍️', 'BIG SCORE', 'A motorbike and a crate of watches.'], 5: ['🚗', 'JACKPOT', 'A classic car under the tarp.'], 7: ['💎', 'LEGENDARY', 'A safe full of jewellery.'], 10: ['🏛️', 'MYTHIC', 'Deeds to a building.'] };
 const $ = id => document.getElementById(id), fmt = x => (x / 100).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(0) + '%';
 const RIVALS = ['Dave', 'Brandi', 'Barry', 'Darrell', 'Ivy'];
 let preset = 'storage', chip = 500, g = null, s = null, A = null, auction = null, busy = false;

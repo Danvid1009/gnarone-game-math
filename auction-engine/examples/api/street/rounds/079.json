@@ -4,7 +4,7 @@
   "results": {
     "BID_1": {
       "stake": 1000,
-      "win": 1000,
+      "win": 1185,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 1,
@@ -14,10 +14,10 @@
       "pOutbid": 0.5,
       "refund": 0,
       "locker": {
-        "multiplier": 0.9996547404981154,
-        "band": 2,
-        "multiple": 1,
-        "contents": 1000
+        "multiplier": 1.1846504627367622,
+        "band": 3,
+        "multiple": 1.2,
+        "contents": 1185
       },
       "next": null,
       "math": {
@@ -27,7 +27,7 @@
     },
     "BID_2": {
       "stake": 1000,
-      "win": 1035,
+      "win": 1219,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 2,
@@ -37,10 +37,10 @@
       "pOutbid": 0.35,
       "refund": 0,
       "locker": {
-        "multiplier": 1.0353772647263229,
-        "band": 2,
-        "multiple": 1,
-        "contents": 1035
+        "multiplier": 1.2192378470525718,
+        "band": 3,
+        "multiple": 1.2,
+        "contents": 1219
       },
       "next": null,
       "math": {
@@ -50,7 +50,7 @@
     },
     "BID_3": {
       "stake": 300,
-      "win": 588,
+      "win": 445,
       "totalBetAmount": 300,
       "outcome": "WON",
       "stage": 3,
@@ -60,10 +60,10 @@
       "pOutbid": 0.2,
       "refund": 0,
       "locker": {
-        "multiplier": 1.9607727316306138,
-        "band": 3,
-        "multiple": 2,
-        "contents": 588
+        "multiplier": 1.4845313129339015,
+        "band": 4,
+        "multiple": 1.5,
+        "contents": 445
       },
       "next": null,
       "math": {
@@ -73,7 +73,7 @@
     },
     "BID_4": {
       "stake": 1000,
-      "win": 1988,
+      "win": 1510,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 4,
@@ -83,10 +83,10 @@
       "pOutbid": 0,
       "refund": 0,
       "locker": {
-        "multiplier": 1.9876114466926795,
-        "band": 3,
-        "multiple": 2,
-        "contents": 1988
+        "multiplier": 1.509950558057865,
+        "band": 4,
+        "multiple": 1.5,
+        "contents": 1510
       },
       "next": null,
       "math": {

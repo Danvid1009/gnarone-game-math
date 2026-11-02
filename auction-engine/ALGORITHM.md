@@ -17,7 +17,9 @@ $$
 - $\rho$: fraction of the bid returned when outbid (1: the bid comes back in full).
 - $H_k$: probability that the rivals outbid raise $k$. The last stage has $H_N = 0$: the rivals are gone.
 - $D_k$: the auctioneer's increments between raise $k$ and $k+1$, in units of the opening bid (storage: $\{1\}, \{1,2\}, \{1,2\}, \{2,3\}, \{2,4\}$). The multiple $m_1 = 1$ and $m_{k+1} = m_k + d_k$ with $d_k$ drawn uniformly from $D_k$, so raise $k$ is $b_k = b_1\, m_k$ and the ladder varies from auction to auction while every bid stays a round number.
-- $a_1 .. a_m$: the locker's listed multiples (e.g. $0, 0.5, 1, 2, 5, 20$; a $0$ is an empty locker).
+- $a_1 .. a_m$: the locker's listed multiples (storage: $0, 0.5, 0.8, 1.2, 1.5, 2, 3, 5, 7$; a $0$ is an empty locker). The shipped presets fix the shape
+  of the positive part with weights (a smooth hump through $0.5$ to $3$, thinning to the top) and solve only
+  the empty-locker probability for the mean, so only the empty-locker probability moves between stages (storage: 24% empty at the first raise, 18% at the last).
 - $\phi$: band half-width as a fraction of the smallest positive gap (0.1), as in Single Shot.
 
 ## 2. One raise
@@ -91,9 +93,9 @@ client chains raises with the `next` field; the engine needs no state between th
 
 | preset | stages $H_k$ | increments $D_k$ | reachable multiples at the top | locker multiples |
 |---|---|---|---|---|
-| street | 0.5, 0.35, 0.2, 0 | 1 · 1,2 · 1,2 | 4 to 6 | 0, 0.5, 1, 2, 5 |
-| storage | 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1 · 1,2 · 1,2 · 2,3 · 2,4 | 8 to 13 | 0, 0.5, 1, 2, 5, 20 |
-| vault | 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1 · 1,2 · 2,3 · 2,3,5 · 3,5 · 4,6,8 | 14 to 25 | 0, 1, 2, 5, 20, 100 |
+| street | 0.5, 0.35, 0.2, 0 | 1 · 1,2 · 1,2 | 4 to 6 | 0, 0.5, 0.8, 1.2, 1.5, 2, 3, 5 |
+| storage | 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1 · 1,2 · 1,2 · 2,3 · 2,4 | 8 to 13 | … 3, 5, 7 |
+| vault | 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1 · 1,2 · 2,3 · 2,3,5 · 3,5 · 4,6,8 | 14 to 25 | … 3, 5, 7, 10 |
 
 Locker means per stage: street 0.900, 0.923, 0.938, 0.95; storage 0.875, 0.90, 0.917, 0.929, 0.9375, 0.95;
 vault 0.833, 0.875, 0.90, 0.917, 0.929, 0.9375, 0.95. Expected stake, expected hammer price and loss per
