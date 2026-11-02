@@ -80,8 +80,8 @@ export function buildLockerWars({ rtp = 0.95, refund = 1, edge = 'per-raise', ou
     play({ bet, betType = 'BID_1', rng, chips }) {
       const k = A.stageOf(betType); const S = stages[k - 1]; const u = rng.next(); const d = A.draw(u, k);
       const win = Math.round(bet * d.multiple); const { multiple, opener } = A.resolve(bet, k, chips);
-      let next = null;
-      if (k < N) { const inc = stepSets[k - 1]; const t = (rng.derive ? rng.derive('ladder') : rng).next(); const step = inc[Math.min(inc.length - 1, Math.floor(t * inc.length))]; const nm = +(multiple + step).toFixed(6); next = { betType: `BID_${k + 1}`, bid: Math.round(opener * nm), increment: Math.round(opener * step), multiple: nm }; }
+      let next = null;   // the next raise exists only when outbid below the last stage: a won locker ends the auction
+      if (d.outcome === 'OUTBID' && k < N) { const inc = stepSets[k - 1]; const t = (rng.derive ? rng.derive('ladder') : rng).next(); const step = inc[Math.min(inc.length - 1, Math.floor(t * inc.length))]; const nm = +(multiple + step).toFixed(6); next = { betType: `BID_${k + 1}`, bid: Math.round(opener * nm), increment: Math.round(opener * step), multiple: nm }; }
       return { totalWinAmount: win, outcome: d.outcome, stage: k, stages: N, bid: bet, multiple, pOutbid: S.outbid, refund: d.outcome === 'OUTBID' ? win : 0,
         locker: d.outcome === 'WON' ? { multiplier: d.multiple, band: d.band, multiple: S.box.payouts[d.band], contents: win } : null,
         next, math: { u, v: d.v } };

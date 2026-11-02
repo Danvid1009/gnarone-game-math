@@ -41,12 +41,13 @@ test('simulate: raise-until-won matches the exact policy figures; per-stage retu
 test('play: outcomes, refund and locker fields, next raise drawn from the stage increments, bet types; validation', () => {
   const A = buildLockerWars(); let outbid = 0, won = 0; const nexts = new Set();
   for (let i = 0; i < 2000; i++) { const rng = new Rng(`play-${i}`); const r = A.play({ bet: 1000, betType: 'BID_2', rng, chips: [100, 200, 500, 1000] });   // one seed per raise, as in the contract
-    assert.equal(r.stage, 2); assert.equal(r.multiple, 2); assert.equal(r.next.betType, 'BID_3'); assert.ok([1500, 2000].includes(r.next.bid), 'opener 500 at ×2 → ×3 or ×4'); assert.equal(r.next.increment, r.next.bid - 1000); nexts.add(r.next.bid);
+    assert.equal(r.stage, 2); assert.equal(r.multiple, 2);
+    if (r.outcome === 'OUTBID') { assert.equal(r.next.betType, 'BID_3'); assert.ok([1500, 2000].includes(r.next.bid), 'opener 500 at ×2 → ×3 or ×4'); assert.equal(r.next.increment, r.next.bid - 1000); nexts.add(r.next.bid); } else assert.equal(r.next, null, 'a won locker ends the auction');
     if (r.outcome === 'OUTBID') { outbid++; assert.equal(r.totalWinAmount, 1000); assert.equal(r.refund, 1000); assert.equal(r.locker, null); }
     else { won++; assert.equal(r.refund, 0); assert.ok(r.locker); assert.equal(r.locker.contents, r.totalWinAmount); assert.equal(r.totalWinAmount, Math.round(1000 * r.locker.multiplier)); assert.ok([0, 0.5, 1, 2, 5, 20].includes(r.locker.multiple)); } }
   assert.ok(Math.abs(outbid / 2000 - 0.5) < 0.05); assert.deepEqual([...nexts].sort(), [1500, 2000], 'both increments occur');
   const rng = new Rng('play'); const last = A.play({ bet: 1000, betType: 'BID_6', rng, chips: [100] }); assert.equal(last.outcome, 'WON'); assert.equal(last.next, null);
   // the ladder draw is reproducible from the seed and separate from the outcome draw
-  const a = A.play({ bet: 500, betType: 'BID_1', rng: new Rng('lad', 'payout'), chips: [500] }), b = A.play({ bet: 500, betType: 'BID_1', rng: new Rng('lad', 'payout'), chips: [500] }); assert.deepEqual(a, b); assert.equal(a.next.bid, 1000);
+  const a = A.play({ bet: 500, betType: 'BID_1', rng: new Rng('lad', 'payout'), chips: [500] }), b = A.play({ bet: 500, betType: 'BID_1', rng: new Rng('lad', 'payout'), chips: [500] }); assert.deepEqual(a, b); if (a.outcome === 'OUTBID') assert.equal(a.next.bid, 1000);
   assert.throws(() => A.play({ bet: 1000, betType: 'BID_7', rng }), /BID_1/); assert.throws(() => buildLockerWars({ outbid: [0.96], bids: [1] }), /no value for the locker/); assert.throws(() => buildLockerWars({ edge: 'tax' }), /edge must be/); assert.throws(() => buildLockerWars({ steps: null, bids: null, growth: 0.5 }), /growth/);
 });

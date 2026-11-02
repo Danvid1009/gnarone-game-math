@@ -84,7 +84,7 @@ pays $\operatorname{round}(\rho\,b_k)$; a won locker pays $\operatorname{round}(
 
 Single-call. `bet` with `betType: BID_k` returns `outcome` (OUTBID or WON), `totalWinAmount` (the
 refund or the locker contents), `locker { multiplier, band, multiple, contents }` on a win, and
-`next { betType, bid }`, the raise the client offers next. Each raise is collected on its own. The
+`next { betType, bid, increment, multiple }`, the raise the client offers next (null on a win, and after the last raise). Each raise is collected on its own. The
 client chains raises with the `next` field; the engine needs no state between them.
 
 ## 7. Reference instances ($R = 0.95$ per raise, full refund)

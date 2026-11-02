@@ -100,7 +100,7 @@
   },
   "stake_units": "minor units",
   "multiStep": false,
-  "how_to_settle": "every raise returns exactly R per unit staked: outbid raises are refunded in full and the won locker has mean (R − outbid) ÷ (1 − outbid) × bid, solved per stage around the fixed RTP. Raise k (betType BID_k, amount = opening level × bids[k−1]): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band. The last stage has outbid 0: the rivals are gone and the locker always opens.",
+  "how_to_settle": "each raise is its own single-call bet. Raise k (betType BID_k, amount = opening chip × a multiple the stage can reach; every amount factors into exactly one chip × multiple, which recovers the opener): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back in full) and next names the following raise, whose increment is drawn from the derived stream SHA-256(seed|ladder|0) uniformly over steps[k−1] (in opener units): next.bid = round(opener × (multiple + step)); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band, with next = null since the auction is over. With edge \"hammer\" (default) every won locker has mean R × the hammer price, so the house takes 1 − R of what is bought and nothing else; raise k returns outbid + (1 − outbid) × R per unit staked. The last stage has outbid 0: the rivals are gone and the locker always opens.",
   "rtp": 0.95,
   "edge": "per-raise",
   "refund": 1,
