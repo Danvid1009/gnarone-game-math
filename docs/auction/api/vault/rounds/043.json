@@ -15,7 +15,7 @@
       "locker": null,
       "next": {
         "betType": "BID_2",
-        "bid": 1600
+        "bid": 2000
       },
       "math": {
         "u": 0.1611944422630862,
@@ -23,19 +23,19 @@
       }
     },
     "BID_2": {
-      "stake": 160,
-      "win": 160,
-      "totalBetAmount": 160,
+      "stake": 1000,
+      "win": 1000,
+      "totalBetAmount": 1000,
       "outcome": "OUTBID",
       "stage": 2,
       "stages": 7,
-      "bid": 160,
+      "bid": 1000,
       "pOutbid": 0.6,
-      "refund": 160,
+      "refund": 1000,
       "locker": null,
       "next": {
         "betType": "BID_3",
-        "bid": 256
+        "bid": 1500
       },
       "math": {
         "u": 0.1611944422630862,
@@ -43,19 +43,19 @@
       }
     },
     "BID_3": {
-      "stake": 256,
-      "win": 256,
-      "totalBetAmount": 256,
+      "stake": 300,
+      "win": 300,
+      "totalBetAmount": 300,
       "outcome": "OUTBID",
       "stage": 3,
       "stages": 7,
-      "bid": 256,
+      "bid": 300,
       "pOutbid": 0.5,
-      "refund": 256,
+      "refund": 300,
       "locker": null,
       "next": {
         "betType": "BID_4",
-        "bid": 410
+        "bid": 500
       },
       "math": {
         "u": 0.1611944422630862,
@@ -63,19 +63,19 @@
       }
     },
     "BID_4": {
-      "stake": 410,
-      "win": 410,
-      "totalBetAmount": 410,
+      "stake": 1000,
+      "win": 1000,
+      "totalBetAmount": 1000,
       "outcome": "OUTBID",
       "stage": 4,
       "stages": 7,
-      "bid": 410,
+      "bid": 1000,
       "pOutbid": 0.4,
-      "refund": 410,
+      "refund": 1000,
       "locker": null,
       "next": {
         "betType": "BID_5",
-        "bid": 656
+        "bid": 1600
       },
       "math": {
         "u": 0.1611944422630862,
@@ -83,19 +83,19 @@
       }
     },
     "BID_5": {
-      "stake": 655,
-      "win": 655,
-      "totalBetAmount": 655,
+      "stake": 800,
+      "win": 800,
+      "totalBetAmount": 800,
       "outcome": "OUTBID",
       "stage": 5,
       "stages": 7,
-      "bid": 655,
+      "bid": 800,
       "pOutbid": 0.3,
-      "refund": 655,
+      "refund": 800,
       "locker": null,
       "next": {
         "betType": "BID_6",
-        "bid": 1048
+        "bid": 1200
       },
       "math": {
         "u": 0.1611944422630862,
@@ -103,19 +103,19 @@
       }
     },
     "BID_6": {
-      "stake": 1049,
-      "win": 1049,
-      "totalBetAmount": 1049,
+      "stake": 1200,
+      "win": 1200,
+      "totalBetAmount": 1200,
       "outcome": "OUTBID",
       "stage": 6,
       "stages": 7,
-      "bid": 1049,
+      "bid": 1200,
       "pOutbid": 0.2,
-      "refund": 1049,
+      "refund": 1200,
       "locker": null,
       "next": {
         "betType": "BID_7",
-        "bid": 1678
+        "bid": 2000
       },
       "math": {
         "u": 0.1611944422630862,
@@ -123,13 +123,13 @@
       }
     },
     "BID_7": {
-      "stake": 1678,
+      "stake": 2000,
       "win": 0,
-      "totalBetAmount": 1678,
+      "totalBetAmount": 2000,
       "outcome": "WON",
       "stage": 7,
       "stages": 7,
-      "bid": 1678,
+      "bid": 2000,
       "pOutbid": 0,
       "refund": 0,
       "locker": {

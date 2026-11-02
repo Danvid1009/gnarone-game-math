@@ -9,14 +9,14 @@ won lockers.
 ## 1. Inputs
 
 $$
-R \in (0,1), \qquad \rho \in [0,1], \qquad H_1, \dots, H_N \in [0,1), \qquad \gamma \ge 1, \qquad
+R \in (0,1), \qquad \rho \in [0,1], \qquad H_1, \dots, H_N \in [0,1), \qquad 1 = m_1 < m_2 < \dots < m_N, \qquad
 \{a_1 < \dots < a_m\} \subset [0,\infty), \qquad \phi \in (0, \tfrac12).
 $$
 
 - $R$: return to player (0.95).
 - $\rho$: fraction of the bid returned when outbid (1: the bid comes back in full).
 - $H_k$: probability that the rivals outbid raise $k$. The last stage has $H_N = 0$: the rivals are gone.
-- $\gamma$: bid growth per raise (1.5), so raise $k$ is $b_k = b_1\,\gamma^{k-1}$.
+- $m_k$: the auctioneer's ladder, round multiples of the opening bid (storage: $1, 2, 3, 4, 6, 8$), so raise $k$ is $b_k = b_1\, m_k$.
 - $a_1 .. a_m$: the locker's listed multiples (e.g. $0, 0.5, 1, 2, 5, 20$; a $0$ is an empty locker).
 - $\phi$: band half-width as a fraction of the smallest positive gap (0.1), as in Single Shot.
 
@@ -62,8 +62,8 @@ last stage wins with certainty.
 
 ## 5. Money
 
-Opening bid $b_1$ is a chip level $S$. Raise $k$ is $\operatorname{round}(S\,\gamma^{k-1})$ and is the bet
-type's own level list (BID\_k offers $\operatorname{round}(c\,\gamma^{k-1})$ for every chip $c$). An outbid
+Opening bid $b_1$ is a chip level $S$. Raise $k$ is $S\, m_k$, and BID\_k's own level list is $c\, m_k$ for every
+chip $c$, so every bid on the ladder is a round number: 5, 10, 15, 20, 30, 40 from a 5.00 opener. An outbid
 pays $\operatorname{round}(\rho\,b_k)$; a won locker pays $\operatorname{round}(X_k\,b_k)$.
 
 ## 6. Wire shape
@@ -75,11 +75,11 @@ client chains raises with the `next` field; the engine needs no state between th
 
 ## 7. Reference instances (RTP 0.95, full refund)
 
-| preset | stages $H_k$ | growth | locker multiples | locker means $\mu_k$ |
+| preset | stages $H_k$ | bid ladder $m_k$ | locker multiples | locker means $\mu_k$ |
 |---|---|---|---|---|
-| street | 0.5, 0.35, 0.2, 0 | 1.5 | 0, 0.5, 1, 2, 5 | 0.90, 0.923, 0.9375, 0.95 |
-| storage | 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1.5 | 0, 0.5, 1, 2, 5, 20 | 0.875 … 0.95 |
-| vault | 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1.6 | 0, 1, 2, 5, 20, 100 | 0.833 … 0.95 |
+| street | 0.5, 0.35, 0.2, 0 | 1, 2, 3, 4 | 0, 0.5, 1, 2, 5 | 0.90, 0.923, 0.9375, 0.95 |
+| storage | 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1, 2, 3, 4, 6, 8 | 0, 0.5, 1, 2, 5, 20 | 0.875 … 0.95 |
+| vault | 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1, 2, 3, 5, 8, 12, 20 | 0, 1, 2, 5, 20, 100 | 0.833 … 0.95 |
 
 In every preset each stage satisfies $H_k\rho + (1 - H_k)\mu_k = 0.95$ to machine precision, and
 the last raise can only be won.

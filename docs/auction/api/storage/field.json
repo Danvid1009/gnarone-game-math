@@ -10,7 +10,14 @@
       0.2,
       0
     ],
-    "growth": 1.5,
+    "bids": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      8
+    ],
     "locker": {
       "payouts": [
         0,
@@ -43,57 +50,64 @@
       10000
     ],
     "BID_2": [
-      150,
-      300,
-      750,
-      1500,
-      3750,
-      7500,
-      15000
+      200,
+      400,
+      1000,
+      2000,
+      5000,
+      10000,
+      20000
     ],
     "BID_3": [
-      225,
-      450,
-      1125,
-      2250,
-      5625,
-      11250,
-      22500
+      300,
+      600,
+      1500,
+      3000,
+      7500,
+      15000,
+      30000
     ],
     "BID_4": [
-      338,
-      675,
-      1688,
-      3375,
-      8438,
-      16875,
-      33750
+      400,
+      800,
+      2000,
+      4000,
+      10000,
+      20000,
+      40000
     ],
     "BID_5": [
-      506,
-      1013,
-      2531,
-      5063,
-      12656,
-      25313,
-      50625
+      600,
+      1200,
+      3000,
+      6000,
+      15000,
+      30000,
+      60000
     ],
     "BID_6": [
-      759,
-      1519,
-      3797,
-      7594,
-      18984,
-      37969,
-      75938
+      800,
+      1600,
+      4000,
+      8000,
+      20000,
+      40000,
+      80000
     ]
   },
   "stake_units": "minor units",
   "multiStep": false,
-  "how_to_settle": "raise k (betType BID_k, amount = opening level × growth^(k−1), rounded): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band. The last stage has outbid 0: the rivals are gone and the locker always opens.",
+  "how_to_settle": "raise k (betType BID_k, amount = opening level × bids[k−1]): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band. The last stage has outbid 0: the rivals are gone and the locker always opens.",
   "rtp": 0.95,
   "refund": 1,
-  "growth": 1.5,
+  "bids": [
+    1,
+    2,
+    3,
+    4,
+    6,
+    8
+  ],
   "stages": [
     {
       "stage": 1,
@@ -157,7 +171,7 @@
     {
       "stage": 2,
       "betType": "BID_2",
-      "bidMultiple": 1.5,
+      "bidMultiple": 2,
       "outbid": 0.5,
       "refund": 1,
       "lockerMean": 0.8999999999999999,
@@ -216,7 +230,7 @@
     {
       "stage": 3,
       "betType": "BID_3",
-      "bidMultiple": 2.25,
+      "bidMultiple": 3,
       "outbid": 0.4,
       "refund": 1,
       "lockerMean": 0.9166666666666666,
@@ -275,7 +289,7 @@
     {
       "stage": 4,
       "betType": "BID_4",
-      "bidMultiple": 3.375,
+      "bidMultiple": 4,
       "outbid": 0.3,
       "refund": 1,
       "lockerMean": 0.9285714285714285,
@@ -334,7 +348,7 @@
     {
       "stage": 5,
       "betType": "BID_5",
-      "bidMultiple": 5.0625,
+      "bidMultiple": 6,
       "outbid": 0.2,
       "refund": 1,
       "lockerMean": 0.9375,
@@ -393,7 +407,7 @@
     {
       "stage": 6,
       "betType": "BID_6",
-      "bidMultiple": 7.59375,
+      "bidMultiple": 8,
       "outbid": 0,
       "refund": 1,
       "lockerMean": 0.95,

@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "b7a75e56-bdce-4266-8221-ee7578d51b6a",
+    "sessionId": "5ffb058e-1faa-46c2-9b11-77836bef4121",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -31,7 +31,15 @@
     "preset": "vault",
     "rtp": 0.95,
     "refund": 1,
-    "growth": 1.6,
+    "bids": [
+      1,
+      2,
+      3,
+      5,
+      8,
+      12,
+      20
+    ],
     "stages": [
       {
         "stage": 1,
@@ -95,7 +103,7 @@
       {
         "stage": 2,
         "betType": "BID_2",
-        "bidMultiple": 1.6,
+        "bidMultiple": 2,
         "outbid": 0.6,
         "refund": 1,
         "lockerMean": 0.8749999999999999,
@@ -154,7 +162,7 @@
       {
         "stage": 3,
         "betType": "BID_3",
-        "bidMultiple": 2.5600000000000005,
+        "bidMultiple": 3,
         "outbid": 0.5,
         "refund": 1,
         "lockerMean": 0.8999999999999999,
@@ -213,7 +221,7 @@
       {
         "stage": 4,
         "betType": "BID_4",
-        "bidMultiple": 4.096000000000001,
+        "bidMultiple": 5,
         "outbid": 0.4,
         "refund": 1,
         "lockerMean": 0.9166666666666666,
@@ -272,7 +280,7 @@
       {
         "stage": 5,
         "betType": "BID_5",
-        "bidMultiple": 6.553600000000001,
+        "bidMultiple": 8,
         "outbid": 0.3,
         "refund": 1,
         "lockerMean": 0.9285714285714285,
@@ -331,7 +339,7 @@
       {
         "stage": 6,
         "betType": "BID_6",
-        "bidMultiple": 10.485760000000003,
+        "bidMultiple": 12,
         "outbid": 0.2,
         "refund": 1,
         "lockerMean": 0.9375,
@@ -390,7 +398,7 @@
       {
         "stage": 7,
         "betType": "BID_7",
-        "bidMultiple": 16.777216000000006,
+        "bidMultiple": 20,
         "outbid": 0,
         "refund": 1,
         "lockerMean": 0.95,
@@ -452,7 +460,7 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "970a47f2-d871-481e-b94a-72a184138854",
+        "roundId": "d1cbc1d4-ab8b-4827-a519-8b47603ea74b",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "balance": 99000,
@@ -467,7 +475,7 @@
         "locker": null,
         "next": {
           "betType": "BID_2",
-          "bid": 1600
+          "bid": 2000
         },
         "math": {
           "u": 0.6806586483395238,

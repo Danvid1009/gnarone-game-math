@@ -8,7 +8,12 @@
       0.2,
       0
     ],
-    "growth": 1.5,
+    "bids": [
+      1,
+      2,
+      3,
+      4
+    ],
     "locker": {
       "payouts": [
         0,
@@ -38,39 +43,44 @@
       10000
     ],
     "BID_2": [
-      150,
-      300,
-      750,
-      1500,
-      3750,
-      7500,
-      15000
+      200,
+      400,
+      1000,
+      2000,
+      5000,
+      10000,
+      20000
     ],
     "BID_3": [
-      225,
-      450,
-      1125,
-      2250,
-      5625,
-      11250,
-      22500
+      300,
+      600,
+      1500,
+      3000,
+      7500,
+      15000,
+      30000
     ],
     "BID_4": [
-      338,
-      675,
-      1688,
-      3375,
-      8438,
-      16875,
-      33750
+      400,
+      800,
+      2000,
+      4000,
+      10000,
+      20000,
+      40000
     ]
   },
   "stake_units": "minor units",
   "multiStep": false,
-  "how_to_settle": "raise k (betType BID_k, amount = opening level × growth^(k−1), rounded): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band. The last stage has outbid 0: the rivals are gone and the locker always opens.",
+  "how_to_settle": "raise k (betType BID_k, amount = opening level × bids[k−1]): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band. The last stage has outbid 0: the rivals are gone and the locker always opens.",
   "rtp": 0.95,
   "refund": 1,
-  "growth": 1.5,
+  "bids": [
+    1,
+    2,
+    3,
+    4
+  ],
   "stages": [
     {
       "stage": 1,
@@ -126,7 +136,7 @@
     {
       "stage": 2,
       "betType": "BID_2",
-      "bidMultiple": 1.5,
+      "bidMultiple": 2,
       "outbid": 0.35,
       "refund": 1,
       "lockerMean": 0.923076923076923,
@@ -177,7 +187,7 @@
     {
       "stage": 3,
       "betType": "BID_3",
-      "bidMultiple": 2.25,
+      "bidMultiple": 3,
       "outbid": 0.2,
       "refund": 1,
       "lockerMean": 0.9375,
@@ -228,7 +238,7 @@
     {
       "stage": 4,
       "betType": "BID_4",
-      "bidMultiple": 3.375,
+      "bidMultiple": 4,
       "outbid": 0,
       "refund": 1,
       "lockerMean": 0.95,

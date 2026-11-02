@@ -12,5 +12,5 @@ npm run fixtures      # examples/api/<preset>/ through the RGS module
 ```
 
 RGS module: `src/rgs.js` → `createGame({ preset })`; bet types `BID_1 … BID_N`, each with its own
-escalating level list; the bet response's `next` field names the next raise. Published at
+round-number level list (opening chip × the ladder 1, 2, 3, 4, 6, 8); the bet response's `next` field names the next raise. Published at
 `https://danvid1009.github.io/gnarone-game-math/auction/api/rgs.js`.

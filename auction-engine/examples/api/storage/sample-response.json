@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "d81bc45a-1b4c-4363-a267-53d4fbc8acea",
+    "sessionId": "457d580b-adbc-446f-8f57-14fc6061c1d0",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -31,7 +31,14 @@
     "preset": "storage",
     "rtp": 0.95,
     "refund": 1,
-    "growth": 1.5,
+    "bids": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      8
+    ],
     "stages": [
       {
         "stage": 1,
@@ -95,7 +102,7 @@
       {
         "stage": 2,
         "betType": "BID_2",
-        "bidMultiple": 1.5,
+        "bidMultiple": 2,
         "outbid": 0.5,
         "refund": 1,
         "lockerMean": 0.8999999999999999,
@@ -154,7 +161,7 @@
       {
         "stage": 3,
         "betType": "BID_3",
-        "bidMultiple": 2.25,
+        "bidMultiple": 3,
         "outbid": 0.4,
         "refund": 1,
         "lockerMean": 0.9166666666666666,
@@ -213,7 +220,7 @@
       {
         "stage": 4,
         "betType": "BID_4",
-        "bidMultiple": 3.375,
+        "bidMultiple": 4,
         "outbid": 0.3,
         "refund": 1,
         "lockerMean": 0.9285714285714285,
@@ -272,7 +279,7 @@
       {
         "stage": 5,
         "betType": "BID_5",
-        "bidMultiple": 5.0625,
+        "bidMultiple": 6,
         "outbid": 0.2,
         "refund": 1,
         "lockerMean": 0.9375,
@@ -331,7 +338,7 @@
       {
         "stage": 6,
         "betType": "BID_6",
-        "bidMultiple": 7.59375,
+        "bidMultiple": 8,
         "outbid": 0,
         "refund": 1,
         "lockerMean": 0.95,
@@ -393,7 +400,7 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "ed0eeaef-a9ea-4f0e-bc31-98df3e8ced4d",
+        "roundId": "f0f1b5a1-8f98-47f5-b980-6761dae9e2e0",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "balance": 99000,
@@ -413,7 +420,7 @@
         },
         "next": {
           "betType": "BID_2",
-          "bid": 1500
+          "bid": 2000
         },
         "math": {
           "u": 0.6806586483395238,
