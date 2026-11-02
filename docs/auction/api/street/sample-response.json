@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "bd75965f-7d9e-4219-86cd-3995cf51c374",
+    "sessionId": "aae2bd31-1684-4588-8e1c-0dab291a1d9b",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -30,6 +30,7 @@
     "winLoss": 0,
     "preset": "street",
     "rtp": 0.95,
+    "edge": "hammer",
     "refund": 1,
     "bids": [
       1,
@@ -37,6 +38,13 @@
       3,
       4
     ],
+    "alwaysRaise": {
+      "upTo": 4,
+      "expectedStake": 2.665,
+      "expectedWinningBid": 1.7099999999999997,
+      "rtp": 0.9679174484052533,
+      "lossPerAuction": 0.08550000000000013
+    },
     "stages": [
       {
         "stage": 1,
@@ -44,44 +52,44 @@
         "bidMultiple": 1,
         "outbid": 0.5,
         "refund": 1,
-        "lockerMean": 0.8999999999999999,
+        "lockerMean": 0.95,
         "locker": [
           {
             "multiple": 0,
-            "p": 0.3172583669374393,
+            "p": 0.3068016588554799,
             "residual_from": 0,
-            "residual_to": 0.3172583669374393,
+            "residual_to": 0.3068016588554799,
             "pays_from": 0,
             "pays_to": 0
           },
           {
             "multiple": 0.5,
-            "p": 0.2634807244330656,
-            "residual_from": 0.3172583669374393,
-            "residual_to": 0.5807390913705048,
+            "p": 0.2594564881446531,
+            "residual_from": 0.3068016588554799,
+            "residual_to": 0.566258147000133,
             "pays_from": 0.45,
             "pays_to": 0.55
           },
           {
             "multiple": 1,
-            "p": 0.21881879055836684,
-            "residual_from": 0.5807390913705048,
-            "residual_to": 0.7995578819288717,
+            "p": 0.21941755299330626,
+            "residual_from": 0.566258147000133,
+            "residual_to": 0.7856756999934392,
             "pays_from": 0.95,
             "pays_to": 1.05
           },
           {
             "multiple": 2,
-            "p": 0.15092324771018023,
-            "residual_from": 0.7995578819288717,
-            "residual_to": 0.9504811296390518,
+            "p": 0.15692243236614575,
+            "residual_from": 0.7856756999934392,
+            "residual_to": 0.942598132359585,
             "pays_from": 1.95,
             "pays_to": 2.05
           },
           {
             "multiple": 5,
-            "p": 0.04951887036094796,
-            "residual_from": 0.9504811296390518,
+            "p": 0.05740186764041511,
+            "residual_from": 0.942598132359585,
             "residual_to": 1,
             "pays_from": 4.95,
             "pays_to": 5.05
@@ -95,44 +103,44 @@
         "bidMultiple": 2,
         "outbid": 0.35,
         "refund": 1,
-        "lockerMean": 0.923076923076923,
+        "lockerMean": 0.95,
         "locker": [
           {
             "multiple": 0,
-            "p": 0.31233799771156096,
+            "p": 0.3068016588554799,
             "residual_from": 0,
-            "residual_to": 0.31233799771156096,
+            "residual_to": 0.3068016588554799,
             "pays_from": 0,
             "pays_to": 0
           },
           {
             "multiple": 0.5,
-            "p": 0.2616281382732236,
-            "residual_from": 0.31233799771156096,
-            "residual_to": 0.5739661359847845,
+            "p": 0.2594564881446531,
+            "residual_from": 0.3068016588554799,
+            "residual_to": 0.566258147000133,
             "pays_from": 0.45,
             "pays_to": 0.55
           },
           {
             "multiple": 1,
-            "p": 0.21915131440243402,
-            "residual_from": 0.5739661359847845,
-            "residual_to": 0.7931174503872185,
+            "p": 0.21941755299330626,
+            "residual_from": 0.566258147000133,
+            "residual_to": 0.7856756999934392,
             "pays_from": 0.95,
             "pays_to": 1.05
           },
           {
             "multiple": 2,
-            "p": 0.15376706950867666,
-            "residual_from": 0.7931174503872185,
-            "residual_to": 0.9468845198958952,
+            "p": 0.15692243236614575,
+            "residual_from": 0.7856756999934392,
+            "residual_to": 0.942598132359585,
             "pays_from": 1.95,
             "pays_to": 2.05
           },
           {
             "multiple": 5,
-            "p": 0.0531154801041048,
-            "residual_from": 0.9468845198958952,
+            "p": 0.05740186764041511,
+            "residual_from": 0.942598132359585,
             "residual_to": 1,
             "pays_from": 4.95,
             "pays_to": 5.05
@@ -146,44 +154,44 @@
         "bidMultiple": 3,
         "outbid": 0.2,
         "refund": 1,
-        "lockerMean": 0.9375,
+        "lockerMean": 0.95,
         "locker": [
           {
             "multiple": 0,
-            "p": 0.3093458742194779,
+            "p": 0.3068016588554799,
             "residual_from": 0,
-            "residual_to": 0.3093458742194779,
+            "residual_to": 0.3068016588554799,
             "pays_from": 0,
             "pays_to": 0
           },
           {
             "multiple": 0.5,
-            "p": 0.2604659243758123,
-            "residual_from": 0.3093458742194779,
-            "residual_to": 0.5698117985952902,
+            "p": 0.2594564881446531,
+            "residual_from": 0.3068016588554799,
+            "residual_to": 0.566258147000133,
             "pays_from": 0.45,
             "pays_to": 0.55
           },
           {
             "multiple": 1,
-            "p": 0.2193095283139699,
-            "residual_from": 0.5698117985952902,
-            "residual_to": 0.7891213269092601,
+            "p": 0.21941755299330626,
+            "residual_from": 0.566258147000133,
+            "residual_to": 0.7856756999934392,
             "pays_from": 0.95,
             "pays_to": 1.05
           },
           {
             "multiple": 2,
-            "p": 0.1554786186518584,
-            "residual_from": 0.7891213269092601,
-            "residual_to": 0.9445999455611185,
+            "p": 0.15692243236614575,
+            "residual_from": 0.7856756999934392,
+            "residual_to": 0.942598132359585,
             "pays_from": 1.95,
             "pays_to": 2.05
           },
           {
             "multiple": 5,
-            "p": 0.05540005443888141,
-            "residual_from": 0.9445999455611185,
+            "p": 0.05740186764041511,
+            "residual_from": 0.942598132359585,
             "residual_to": 1,
             "pays_from": 4.95,
             "pays_to": 5.05
@@ -248,12 +256,12 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "476df622-2038-4acc-9db7-273fe4df3a4e",
+        "roundId": "0a527357-b542-4e37-acf0-6e2ab7cd353d",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "balance": 99000,
         "totalBetAmount": 1000,
-        "totalWinAmount": 467,
+        "totalWinAmount": 471,
         "outcome": "WON",
         "stage": 1,
         "stages": 4,
@@ -261,10 +269,10 @@
         "pOutbid": 0.5,
         "refund": 0,
         "locker": {
-          "multiplier": 0.4667218796883189,
+          "multiplier": 0.4710114760333818,
           "band": 1,
           "multiple": 0.5,
-          "contents": 467
+          "contents": 471
         },
         "next": {
           "betType": "BID_2",
@@ -282,7 +290,7 @@
     {
       "call": "collect",
       "response": {
-        "balance": 99467
+        "balance": 99471
       }
     }
   ]

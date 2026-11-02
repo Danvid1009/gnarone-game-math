@@ -13,7 +13,7 @@ export const PRESETS = {
   vault:   { outbid: [0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0],   bids: [1, 2, 3, 5, 8, 12, 20],   locker: { payouts: [0, 1, 2, 5, 20, 100] },    refund: 1, rtp: RTP },
 };
 export const DEFAULT_PRESET = 'storage';
-export const HOW_TO_SETTLE = 'raise k (betType BID_k, amount = opening level × bids[k−1]): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band. The last stage has outbid 0: the rivals are gone and the locker always opens.';
+export const HOW_TO_SETTLE = 'the house takes (1 − R) of the hammer price only: outbid raises are refunded in full, won lockers have mean R × bid. Raise k (betType BID_k, amount = opening level × bids[k−1]): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band. The last stage has outbid 0: the rivals are gone and the locker always opens.';
 
 export function createGame({ preset = DEFAULT_PRESET, levels = LEVELS, ...overrides } = {}) {
   if (!PRESETS[preset]) throw new Error(`unknown preset "${preset}"; presets: ${Object.keys(PRESETS).join(', ')}`);
@@ -21,7 +21,7 @@ export function createGame({ preset = DEFAULT_PRESET, levels = LEVELS, ...overri
   const A = buildLockerWars({ ...params, name: preset });
   const lv = t => levels.map(c => Math.round(c * A.bidMultiple(A.stageOf(t))));
   const g = defineGame({ id: 'auction', betTypes: A.betTypes, levels: lv, play: ({ bet, betType, rng }) => A.play({ bet, betType, rng }),
-    sessionExtras: { preset, rtp: A.rtp, refund: A.refund, bids: A.bids, stages: A.stages.map(s => ({ stage: s.stage, betType: `BID_${s.stage}`, bidMultiple: s.g, outbid: s.outbid, refund: s.refund, lockerMean: s.lockerMean, locker: s.box.bands.map(b => ({ multiple: b.payout, p: b.p, residual_from: b.from, residual_to: b.to, pays_from: b.range[0], pays_to: b.range[1] })), locker_r: s.box.r })) } });
+    sessionExtras: { preset, rtp: A.rtp, edge: A.edge, refund: A.refund, bids: A.bids, alwaysRaise: A.policy(), stages: A.stages.map(s => ({ stage: s.stage, betType: `BID_${s.stage}`, bidMultiple: s.g, outbid: s.outbid, refund: s.refund, lockerMean: s.lockerMean, locker: s.box.bands.map(b => ({ multiple: b.payout, p: b.p, residual_from: b.from, residual_to: b.to, pays_from: b.range[0], pays_to: b.range[1] })), locker_r: s.box.r })) } });
   g.engine = A; g.preset = preset; g.params = params; g.howToSettle = HOW_TO_SETTLE;
   return g;
 }

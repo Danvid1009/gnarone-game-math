@@ -1,10 +1,10 @@
 # Locker Wars
 
 An ascending auction for a storage locker, played as a sequence of raises. Each raise is its own
-bet. If the rivals outbid you, your bid comes back and you may raise again at the next level, or walk.
-If the rivals fold, you win the locker and open it: its contents are a one-shot draw whose mean is set
-so that every raise returns exactly the RTP. Being outbid costs nothing; the house edge lives only in
-won lockers.
+bet. If the rivals outbid you, your bid comes back in full and you may raise again at the next level,
+or walk. If the rivals fold, you win the locker and open it: its contents are a one-shot draw with mean
+$R$ times the hammer price. The house takes $1 - R$ of the hammer price and nothing else, a buyer's
+premium: being outbid is free.
 
 ## 1. Inputs
 
@@ -45,20 +45,30 @@ $$
 with the sloped-band ramp $a_j + r\,(2t - 1)$ inside band $j$, $r = \phi \cdot \min(a_{j+1} - a_j)$,
 so $\mathbb{E}[X_k \mid \text{band } j] = a_j$ exactly and $\mathbb{E}[X_k] = \mu_k$ exactly.
 
-With $\rho = 1$ the locker mean rises as the rivals thin out: for $H = 0.6, 0.5, 0.4, 0.3, 0.2, 0$
-it is $0.875, 0.90, 0.917, 0.929, 0.9375, 0.95$. A raise that is rarely outbid pays a richer locker,
-because less of its return is coming back as refunds.
+Under the default every won locker has mean exactly $R$ times the bid, at every stage. The
+per-raise alternative instead lowers the locker mean where outbids are frequent so that each raise,
+refunds included, returns $R$.
 
-## 4. Every raise returns $R$
+## 4. What a raise returns, and what the auction costs
 
 $$
-\mathbb{E}[\text{return of raise } k] = H_k\,\rho + (1 - H_k)\,\mu_k = R .
+\mathbb{E}[\text{return of raise } k] = H_k\,\rho + (1 - H_k)\,\mu_k =
+\begin{cases} R + H_k\,(\rho - R) & \text{edge on the hammer}\\ R & \text{per-raise.} \end{cases}
 $$
 
-Raises are independent bets, so any policy (raise once, raise to the end, walk after any outbid)
-returns exactly $R$ per unit staked. There is no survival schedule to tune and nothing to game by
-timing. The probability of winning the locker at stage $k$ is $(1 - H_k)\prod_{j<k} H_j$, and the
-last stage wins with certainty.
+With the edge on the hammer and $\rho = 1$, raise $k$ returns $R + H_k(1 - R)$: above $R$ whenever
+rivals can still outbid you, exactly $R$ at the last stage. Every raise has non-positive expectation
+($-(1-H_k)(1-R)$ per unit) and walking is zero, so no policy is profitable. The expected loss of an
+auction is $(1 - R)$ times the expected hammer price, whatever the policy; the return *per unit staked*
+is not one number, because refunded stakes count as staked. For the policy "raise until won":
+
+$$
+\text{RTP} = \frac{\mathbb{E}[\text{returned}]}{\mathbb{E}[\text{staked}]}, \qquad
+\mathbb{E}[\text{loss}] = (1 - R)\,\mathbb{E}[b_{\text{win}}], \qquad
+\Pr(\text{win at } k) = (1 - H_k)\prod_{j<k} H_j .
+$$
+
+The engine reports these exactly (`policy(m)`), for raising up to any stage $m$.
 
 ## 5. Money
 
@@ -73,13 +83,13 @@ refund or the locker contents), `locker { multiplier, band, multiple, contents }
 `next { betType, bid }`, the raise the client offers next. Each raise is collected on its own. The
 client chains raises with the `next` field; the engine needs no state between them.
 
-## 7. Reference instances (RTP 0.95, full refund)
+## 7. Reference instances ($R = 0.95$ on the hammer price, full refund)
 
-| preset | stages $H_k$ | bid ladder $m_k$ | locker multiples | locker means $\mu_k$ |
-|---|---|---|---|---|
-| street | 0.5, 0.35, 0.2, 0 | 1, 2, 3, 4 | 0, 0.5, 1, 2, 5 | 0.90, 0.923, 0.9375, 0.95 |
-| storage | 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1, 2, 3, 4, 6, 8 | 0, 0.5, 1, 2, 5, 20 | 0.875 … 0.95 |
-| vault | 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1, 2, 3, 5, 8, 12, 20 | 0, 1, 2, 5, 20, 100 | 0.833 … 0.95 |
+| preset | stages $H_k$ | bid ladder $m_k$ | locker multiples | E[hammer] | always-raise RTP | loss per auction |
+|---|---|---|---|---|---|---|
+| street | 0.5, 0.35, 0.2, 0 | 1, 2, 3, 4 | 0, 0.5, 1, 2, 5 | 1.71 | 96.8% | 0.086 |
+| storage | 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1, 2, 3, 4, 6, 8 | 0, 0.5, 1, 2, 5, 20 | 2.11 | 97.3% | 0.105 |
+| vault | 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0 | 1, 2, 3, 5, 8, 12, 20 | 0, 1, 2, 5, 20, 100 | 2.93 | 97.5% | 0.147 |
 
-In every preset each stage satisfies $H_k\rho + (1 - H_k)\mu_k = 0.95$ to machine precision, and
-the last raise can only be won.
+Hammer price and loss in units of the opening bid. Every won locker has mean $0.95$ times its bid;
+the loss per auction is exactly 5% of the expected hammer price; the last raise can only be won.
