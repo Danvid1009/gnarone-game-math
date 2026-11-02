@@ -1,8 +1,8 @@
 # auction-engine · Locker Wars
 
 An ascending locker auction as a sequence of raises. Every raise is its own bet: outbid and the bid
-comes back in full, rivals fold and the locker opens (a Single Shot draw with mean R × the hammer
-price). The house takes 1 − R of the hammer price and nothing else; being outbid is free. See
+comes back in full, rivals fold and the locker opens (a Single Shot draw whose mean is solved so the raise,
+refund included, returns exactly R). RTP is fixed at R for every raise and every raise-or-walk policy. See
 [ALGORITHM.md](ALGORITHM.md).
 
 ```bash

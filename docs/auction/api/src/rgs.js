@@ -13,7 +13,7 @@ export const PRESETS = {
   vault:   { outbid: [0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0],   steps: [[1], [1, 2], [2, 3], [2, 3, 5], [3, 5], [4, 6, 8]], locker: { payouts: [0, 1, 2, 5, 20, 100] }, refund: 1, rtp: RTP },
 };
 export const DEFAULT_PRESET = 'storage';
-export const HOW_TO_SETTLE = 'the house takes (1 − R) of the hammer price only: outbid raises are refunded in full, won lockers have mean R × bid. Raise k (betType BID_k, amount = opening level × bids[k−1]): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band. The last stage has outbid 0: the rivals are gone and the locker always opens.';
+export const HOW_TO_SETTLE = 'every raise returns exactly R per unit staked: outbid raises are refunded in full and the won locker has mean (R − outbid) ÷ (1 − outbid) × bid, solved per stage around the fixed RTP. Raise k (betType BID_k, amount = opening level × bids[k−1]): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band. The last stage has outbid 0: the rivals are gone and the locker always opens.';
 
 export function createGame({ preset = DEFAULT_PRESET, levels = LEVELS, ...overrides } = {}) {
   if (!PRESETS[preset]) throw new Error(`unknown preset "${preset}"; presets: ${Object.keys(PRESETS).join(', ')}`);

@@ -2,11 +2,12 @@ import { test } from 'node:test'; import assert from 'node:assert/strict';
 import { buildLockerWars } from '../src/engine.js'; import { Rng } from '../src/rng.js';
 const close = (a, b, tol = 1e-9) => Math.abs(a - b) < tol;
 
-test('edge on the hammer (default): every won locker has mean R; raise k returns H·ρ + (1 − H)·R; per-raise mode returns R at every stage', () => {
-  const D = buildLockerWars(); for (const s of D.stages) { assert.ok(close(s.lockerMean, 0.95)); assert.ok(close(s.rtp, s.outbid * 1 + (1 - s.outbid) * 0.95)); }
-  assert.ok(close(D.rtpOfStage(1), 0.98)); assert.ok(close(D.rtpOfStage(6), 0.95));
-  const P = D.policy(); assert.ok(Math.abs(P.rtp - 0.9721) < 5e-4, `always-raise rtp ${P.rtp}`); assert.ok(close(P.lossPerAuction, 0.05 * P.expectedWinningBid), 'loss = 5% of the expected hammer price'); assert.ok(Math.abs(P.expectedWinningBid - 2.34) < 0.01);
-  assert.ok(D.policy(1).rtp > P.rtp, 'walking early returns more per unit staked');
+test('per-raise (default): every raise returns R with the refund included, so any policy returns R; hammer mode gives every won locker mean R', () => {
+  const D = buildLockerWars(); for (const s of D.stages) { assert.ok(close(s.rtp, 0.95), `stage ${s.stage}`); assert.ok(close(s.lockerMean, (0.95 - s.outbid) / (1 - s.outbid))); }
+  assert.ok(close(D.rtpOfStage(1), 0.95)); assert.ok(close(D.rtpOfStage(6), 0.95)); assert.ok(close(D.stages[0].lockerMean, 0.875)); assert.ok(close(D.stages[5].lockerMean, 0.95));
+  const P = D.policy(); assert.ok(close(P.rtp, 0.95), `always-raise rtp ${P.rtp}`); assert.ok(close(P.lossPerAuction, 0.05 * P.expectedStake), 'loss = 5% of the expected stake'); assert.ok(close(D.policy(1).rtp, 0.95)); assert.ok(close(D.policy(3).rtp, 0.95));
+  const Hm = buildLockerWars({ edge: 'hammer' }); for (const s of Hm.stages) { assert.ok(close(s.lockerMean, 0.95)); assert.ok(close(s.rtp, s.outbid * 1 + (1 - s.outbid) * 0.95)); }
+  const Q = Hm.policy(); assert.ok(Math.abs(Q.rtp - 0.9721) < 5e-4); assert.ok(close(Q.lossPerAuction, 0.05 * Q.expectedWinningBid), 'hammer: loss = 5% of the expected hammer price'); assert.ok(Hm.policy(1).rtp > Q.rtp);
   const A = buildLockerWars({ refund: 0.95, edge: 'per-raise' });
   assert.equal(A.N, 6); assert.deepEqual(A.betTypes, ['BID_1', 'BID_2', 'BID_3', 'BID_4', 'BID_5', 'BID_6']);
   for (const s of A.stages) { assert.ok(close(s.rtp, 0.95), `stage ${s.stage}`); assert.ok(close(s.lockerMean, 0.95)); assert.ok(close(s.box.rtp, 0.95)); assert.ok(close(s.box.p.reduce((t, x) => t + x, 0), 1)); }
@@ -47,5 +48,5 @@ test('play: outcomes, refund and locker fields, next raise drawn from the stage 
   const rng = new Rng('play'); const last = A.play({ bet: 1000, betType: 'BID_6', rng, chips: [100] }); assert.equal(last.outcome, 'WON'); assert.equal(last.next, null);
   // the ladder draw is reproducible from the seed and separate from the outcome draw
   const a = A.play({ bet: 500, betType: 'BID_1', rng: new Rng('lad', 'payout'), chips: [500] }), b = A.play({ bet: 500, betType: 'BID_1', rng: new Rng('lad', 'payout'), chips: [500] }); assert.deepEqual(a, b); assert.equal(a.next.bid, 1000);
-  assert.throws(() => A.play({ bet: 1000, betType: 'BID_7', rng }), /BID_1/); assert.throws(() => buildLockerWars({ edge: 'per-raise', outbid: [0.96], bids: [1] }), /no value for the locker/); assert.throws(() => buildLockerWars({ edge: 'tax' }), /edge must be/); assert.throws(() => buildLockerWars({ steps: null, bids: null, growth: 0.5 }), /growth/);
+  assert.throws(() => A.play({ bet: 1000, betType: 'BID_7', rng }), /BID_1/); assert.throws(() => buildLockerWars({ outbid: [0.96], bids: [1] }), /no value for the locker/); assert.throws(() => buildLockerWars({ edge: 'tax' }), /edge must be/); assert.throws(() => buildLockerWars({ steps: null, bids: null, growth: 0.5 }), /growth/);
 });
