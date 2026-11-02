@@ -56,8 +56,8 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
 <body><div class="wrap">
 <nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>Locker Wars</div><div><a href="play.html">full-screen demo</a> · <a href="https://github.com/Danvid1009/gnarone-game-math/tree/main/auction-engine">source</a></div></nav>
 <h1>LOCKER <span>WARS</span></h1>
-<p class="lead">An ascending locker auction played as raises. Each raise is its own bet: if the rivals outbid you the bid comes back and you may raise to the next level or walk; if they fold you win the locker and open it, a Single Shot draw whose mean is (RTP − H) ÷ (1 − H) of the bid. Being outbid costs nothing, the edge lives only in won lockers, and every raise returns exactly the RTP, so any raise-or-walk policy does too.</p>
-<div class="tags"><span>raises are independent bets</span><span>outbid = money back</span><span>every raise returns exactly the RTP</span></div>
+<p class="lead">An ascending locker auction played as raises. Each raise is its own bet: if the rivals outbid you the bid comes back and you may raise to the next level or walk; if they fold you win the locker and open it, a Single Shot draw with mean 0.95 × the hammer price. Walks and outbids return exactly what you staked; the house takes 5% of what you buy and nothing else, so the edge lives only in won lockers.</p>
+<div class="tags"><span>raises are independent bets</span><span>outbid = money back</span><span>edge only in won lockers</span></div>
 
 <div class="demo"><iframe src="play.html" title="Locker Wars demo" loading="eager"></iframe><a class="full" href="play.html">open full screen ↗</a></div>
 

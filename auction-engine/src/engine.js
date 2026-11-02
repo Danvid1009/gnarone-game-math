@@ -10,17 +10,17 @@
 // H_k the rivals outbid you and the bid comes back in full (ρ = 1: being outbid costs nothing). Otherwise the rivals
 // fold, you win the locker and open it: a Single Shot draw X (sloped bands) times the bid.
 // Two ways to place the house edge (`edge`):
-//   'per-raise' (default) E[X] = (R − H_k ρ)/(1 − H_k): the locker payouts are solved around the fixed RTP so that every
-//               raise returns exactly R, refunds included. Any raise-or-walk policy therefore returns R per unit staked.
-//   'hammer'    E[X] = R at every stage: the house takes (1 − R) of the hammer price and nothing else, a buyer's premium.
-//               Raise k then returns H_k ρ + (1 − H_k) R, above R whenever H_k > 0, so the RTP per unit staked depends
-//               on the outbid schedule and on when the player walks; the loss per auction is (1 − R) × E[winning bid].
+//   'hammer'    (default) E[X] = R at every stage: the house takes (1 − R) of the hammer price and nothing else, a
+//               buyer's premium. Raise k returns H_k ρ + (1 − H_k) R, which is above R whenever H_k > 0, so the RTP per
+//               unit staked depends on the outbid schedule and on when the player walks; the loss per auction is
+//               (1 − R) × E[winning bid]. Every raise has negative expectation and walking is zero, so nothing is exploitable.
+//   'per-raise' E[X] = (R − H_k ρ)/(1 − H_k): every raise returns exactly R, so any policy returns R per unit staked.
 // One uniform per raise: u < H_k is the outbid; the residual (u − H_k)/(1 − H_k) is the locker draw.
 
 import { Rng } from './rng.js';
 import { buildPayout } from '../../payout-engine/src/engine.js';
 
-export function buildLockerWars({ rtp = 0.95, refund = 1, edge = 'per-raise', outbid = [0.6, 0.5, 0.4, 0.3, 0.2, 0], steps = [[1], [1, 2], [1, 2], [2, 3], [2, 4]], bids = null, growth = 1.5, locker = {}, name } = {}) {
+export function buildLockerWars({ rtp = 0.95, refund = 1, edge = 'hammer', outbid = [0.6, 0.5, 0.4, 0.3, 0.2, 0], steps = [[1], [1, 2], [1, 2], [2, 3], [2, 4]], bids = null, growth = 1.5, locker = {}, name } = {}) {
   if (!['hammer', 'per-raise'].includes(edge)) throw new Error(`edge must be 'hammer' or 'per-raise', got ${edge}`);
   if (!(rtp > 0 && rtp < 1)) throw new Error(`rtp must be in (0,1), got ${rtp}`);
   if (!(refund >= 0 && refund <= 1)) throw new Error('refund must be in [0,1]');
@@ -111,7 +111,7 @@ export function buildLockerWars({ rtp = 0.95, refund = 1, edge = 'per-raise', ou
 
 export function format(A) {
   const pct = x => `${(100 * x).toFixed(2)}%`;
-  const P = A.policy(); return [`${A.name}   R ${A.rtp} on ${A.edge === 'hammer' ? 'the hammer price (won lockers only)' : 'every raise'}   refund on outbid ${A.refund}   increments ${A.steps.map(x => '+' + x.join('|')).join(' ')}   locker payouts ${A.payouts.join('/')}`, `always-raise: RTP ${P.rtp.toFixed(4)} per unit staked, expected loss ${P.lossPerAuction.toFixed(4)} × opener (expected hammer price ${P.expectedWinningBid.toFixed(2)}, expected stake ${P.expectedStake.toFixed(2)})`, '',
+  const P = A.policy(); return [`${A.name}   R ${A.rtp} on ${A.edge === 'hammer' ? 'the hammer price (won lockers only)' : 'every raise'}   refund on outbid ${A.refund}   increments ${A.steps.map(x => '+' + x.join('|')).join(' ')}   locker payouts ${A.payouts.join('/')}`, `always-raise: RTP ${P.rtp.toFixed(4)} per unit staked, expected loss ${P.lossPerAuction.toFixed(4)} × opener (= ${(100 * (1 - A.rtp)).toFixed(0)}% of the expected hammer price ${P.expectedWinningBid.toFixed(2)})`, '',
     'stage  bid× (possible)        P(outbid)   locker mean   P(locker ≥ 1×)   exact return',
     ...A.stages.map(s => `${String(s.stage).padStart(5)}  ${s.multiples.join('/').padEnd(22)} ${pct(s.outbid).padStart(8)}   ${s.lockerMean.toFixed(4).padStart(10)}   ${pct(s.box.bands.filter(b => b.payout >= 1).reduce((t, b) => t + b.p, 0)).padStart(13)}   ${s.rtp.toFixed(6)}`)].join('\n');
 }

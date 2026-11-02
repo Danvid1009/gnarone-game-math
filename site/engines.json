@@ -171,11 +171,11 @@
     "folder": "auction-engine",
     "title": "Locker Wars",
     "accent": "WARS",
-    "lead": "An ascending locker auction played as raises. Each raise is its own bet: if the rivals outbid you the bid comes back and you may raise to the next level or walk; if they fold you win the locker and open it, a Single Shot draw whose mean is (RTP − H) ÷ (1 − H) of the bid. Being outbid costs nothing, the edge lives only in won lockers, and every raise returns exactly the RTP, so any raise-or-walk policy does too.",
+    "lead": "An ascending locker auction played as raises. Each raise is its own bet: if the rivals outbid you the bid comes back and you may raise to the next level or walk; if they fold you win the locker and open it, a Single Shot draw with mean 0.95 × the hammer price. Walks and outbids return exactly what you staked; the house takes 5% of what you buy and nothing else, so the edge lives only in won lockers.",
     "tags": [
       "raises are independent bets",
       "outbid = money back",
-      "every raise returns exactly the RTP"
+      "edge only in won lockers"
     ],
     "figures": [
       [

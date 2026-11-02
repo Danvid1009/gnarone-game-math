@@ -122,9 +122,9 @@
       "multiStep": false,
       "linkedBets": false,
       "sideBets": false,
-      "how_to_settle": "each raise is its own single-call bet. Raise k (betType BID_k, amount = opening chip × a multiple the stage can reach; every amount factors into exactly one chip × multiple, which recovers the opener): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back in full) and next names the following raise, whose increment is drawn from the derived stream SHA-256(seed|ladder|0) uniformly over steps[k−1] (in opener units): next.bid = round(opener × (multiple + step)); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band, with next = null since the auction is over. With edge \"per-raise\" (default) the locker payouts are solved per stage so the won locker has mean (R − outbid) ÷ (1 − outbid) × bid and every raise returns exactly R per unit staked, refunds included; edge \"hammer\" instead gives every won locker mean R × the hammer price (a buyer's premium), so raise k returns outbid + (1 − outbid) × R. The last stage has outbid 0: the rivals are gone and the locker always opens.",
+      "how_to_settle": "each raise is its own single-call bet. Raise k (betType BID_k, amount = opening chip × a multiple the stage can reach; every amount factors into exactly one chip × multiple, which recovers the opener): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back in full) and next names the following raise, whose increment is drawn from the derived stream SHA-256(seed|ladder|0) uniformly over steps[k−1] (in opener units): next.bid = round(opener × (multiple + step)); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band, with next = null since the auction is over. With edge \"hammer\" (default) every won locker has mean R × the hammer price and walks or outbids return exactly the stake, so the house takes 1 − R of what is bought and nothing else; raise k returns outbid + (1 − outbid) × R per unit staked. Edge \"per-raise\" instead solves the locker mean as (R − outbid) ÷ (1 − outbid) so every raise returns exactly R. The last stage has outbid 0: the rivals are gone and the locker always opens.",
       "tables": {
-        "edge": "per-raise",
+        "edge": "hammer",
         "refund": 1,
         "steps": [
           [
@@ -160,8 +160,8 @@
           "upTo": 4,
           "expectedStake": 2.7874999999999996,
           "expectedWinningBid": 1.815,
-          "rtp": 0.9500000000000001,
-          "lossPerAuction": 0.1393749999999998
+          "rtp": 0.9674439461883408,
+          "lossPerAuction": 0.09074999999999989
         },
         "stages": [
           {
@@ -176,68 +176,68 @@
             "expectedMultiple": 1,
             "outbid": 0.5,
             "refund": 1,
-            "lockerMean": 0.8999999999999999,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.20187090739008418,
+                "p": 0.15753040224508885,
                 "residual_from": 0,
-                "residual_to": 0.20187090739008418,
+                "residual_to": 0.15753040224508885,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.2525724976613658,
-                "residual_from": 0.20187090739008418,
-                "residual_to": 0.45444340505145,
+                "p": 0.2666043030869972,
+                "residual_from": 0.15753040224508885,
+                "residual_to": 0.424134705332086,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.20205799812909264,
-                "residual_from": 0.45444340505145,
-                "residual_to": 0.6565014031805426,
+                "p": 0.21328344246959777,
+                "residual_from": 0.424134705332086,
+                "residual_to": 0.6374181478016838,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.13470533208606175,
-                "residual_from": 0.6565014031805426,
-                "residual_to": 0.7912067352666043,
+                "p": 0.14218896164639852,
+                "residual_from": 0.6374181478016838,
+                "residual_to": 0.7796071094480823,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.09260991580916744,
-                "residual_from": 0.7912067352666043,
-                "residual_to": 0.8838166510757718,
+                "p": 0.09775491113189898,
+                "residual_from": 0.7796071094480823,
+                "residual_to": 0.8773620205799812,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.06735266604303088,
-                "residual_from": 0.8838166510757718,
-                "residual_to": 0.9511693171188027,
+                "p": 0.07109448082319926,
+                "residual_from": 0.8773620205799812,
+                "residual_to": 0.9484565014031805,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.03367633302151544,
-                "residual_from": 0.9511693171188027,
-                "residual_to": 0.9848456501403181,
+                "p": 0.03554724041159963,
+                "residual_from": 0.9484565014031805,
+                "residual_to": 0.9840037418147801,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.015154349859681946,
-                "residual_from": 0.9848456501403181,
+                "p": 0.015996258185219832,
+                "residual_from": 0.9840037418147801,
                 "residual_to": 1,
                 "pays_from": 4.97,
                 "pays_to": 5.03
@@ -258,68 +258,68 @@
             "expectedMultiple": 2,
             "outbid": 0.35,
             "refund": 1,
-            "lockerMean": 0.923076923076923,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.18140605886162486,
+                "p": 0.15753040224508885,
                 "residual_from": 0,
-                "residual_to": 0.18140605886162486,
+                "residual_to": 0.15753040224508885,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.2590487155501187,
-                "residual_from": 0.18140605886162486,
-                "residual_to": 0.4404547744117436,
+                "p": 0.2666043030869972,
+                "residual_from": 0.15753040224508885,
+                "residual_to": 0.424134705332086,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.20723897244009498,
-                "residual_from": 0.4404547744117436,
-                "residual_to": 0.6476937468518386,
+                "p": 0.21328344246959777,
+                "residual_from": 0.424134705332086,
+                "residual_to": 0.6374181478016838,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.1381593149600633,
-                "residual_from": 0.6476937468518386,
-                "residual_to": 0.7858530618119018,
+                "p": 0.14218896164639852,
+                "residual_from": 0.6374181478016838,
+                "residual_to": 0.7796071094480823,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.09498452903504354,
-                "residual_from": 0.7858530618119018,
-                "residual_to": 0.8808375908469454,
+                "p": 0.09775491113189898,
+                "residual_from": 0.7796071094480823,
+                "residual_to": 0.8773620205799812,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.06907965748003166,
-                "residual_from": 0.8808375908469454,
-                "residual_to": 0.949917248326977,
+                "p": 0.07109448082319926,
+                "residual_from": 0.8773620205799812,
+                "residual_to": 0.9484565014031805,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.03453982874001583,
-                "residual_from": 0.949917248326977,
-                "residual_to": 0.9844570770669928,
+                "p": 0.03554724041159963,
+                "residual_from": 0.9484565014031805,
+                "residual_to": 0.9840037418147801,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.015542922933007124,
-                "residual_from": 0.9844570770669928,
+                "p": 0.015996258185219832,
+                "residual_from": 0.9840037418147801,
                 "residual_to": 1,
                 "pays_from": 4.97,
                 "pays_to": 5.03
@@ -341,68 +341,68 @@
             "expectedMultiple": 3.5,
             "outbid": 0.2,
             "refund": 1,
-            "lockerMean": 0.9375,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.16861552853133766,
+                "p": 0.15753040224508885,
                 "residual_from": 0,
-                "residual_to": 0.16861552853133766,
+                "residual_to": 0.15753040224508885,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.2630963517305893,
-                "residual_from": 0.16861552853133766,
-                "residual_to": 0.431711880261927,
+                "p": 0.2666043030869972,
+                "residual_from": 0.15753040224508885,
+                "residual_to": 0.424134705332086,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.2104770813844715,
-                "residual_from": 0.431711880261927,
-                "residual_to": 0.6421889616463985,
+                "p": 0.21328344246959777,
+                "residual_from": 0.424134705332086,
+                "residual_to": 0.6374181478016838,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.14031805425631433,
-                "residual_from": 0.6421889616463985,
-                "residual_to": 0.7825070159027128,
+                "p": 0.14218896164639852,
+                "residual_from": 0.6374181478016838,
+                "residual_to": 0.7796071094480823,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.09646866230121609,
-                "residual_from": 0.7825070159027128,
-                "residual_to": 0.8789756782039289,
+                "p": 0.09775491113189898,
+                "residual_from": 0.7796071094480823,
+                "residual_to": 0.8773620205799812,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.07015902712815716,
-                "residual_from": 0.8789756782039289,
-                "residual_to": 0.949134705332086,
+                "p": 0.07109448082319926,
+                "residual_from": 0.8773620205799812,
+                "residual_to": 0.9484565014031805,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.03507951356407858,
-                "residual_from": 0.949134705332086,
-                "residual_to": 0.9842142188961646,
+                "p": 0.03554724041159963,
+                "residual_from": 0.9484565014031805,
+                "residual_to": 0.9840037418147801,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.015785781103835363,
-                "residual_from": 0.9842142188961646,
+                "p": 0.015996258185219832,
+                "residual_from": 0.9840037418147801,
                 "residual_to": 1,
                 "pays_from": 4.97,
                 "pays_to": 5.03
@@ -494,9 +494,9 @@
         ]
       },
       "realisedRtp": {
-        "BID_1": 0.9889,
-        "BID_2": 1.0635,
-        "BID_3": 0.9664,
+        "BID_1": 1.0198,
+        "BID_2": 1.0796,
+        "BID_3": 0.9826,
         "BID_4": 1.0486
       },
       "files": [
@@ -712,9 +712,9 @@
       "multiStep": false,
       "linkedBets": false,
       "sideBets": false,
-      "how_to_settle": "each raise is its own single-call bet. Raise k (betType BID_k, amount = opening chip × a multiple the stage can reach; every amount factors into exactly one chip × multiple, which recovers the opener): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back in full) and next names the following raise, whose increment is drawn from the derived stream SHA-256(seed|ladder|0) uniformly over steps[k−1] (in opener units): next.bid = round(opener × (multiple + step)); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band, with next = null since the auction is over. With edge \"per-raise\" (default) the locker payouts are solved per stage so the won locker has mean (R − outbid) ÷ (1 − outbid) × bid and every raise returns exactly R per unit staked, refunds included; edge \"hammer\" instead gives every won locker mean R × the hammer price (a buyer's premium), so raise k returns outbid + (1 − outbid) × R. The last stage has outbid 0: the rivals are gone and the locker always opens.",
+      "how_to_settle": "each raise is its own single-call bet. Raise k (betType BID_k, amount = opening chip × a multiple the stage can reach; every amount factors into exactly one chip × multiple, which recovers the opener): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back in full) and next names the following raise, whose increment is drawn from the derived stream SHA-256(seed|ladder|0) uniformly over steps[k−1] (in opener units): next.bid = round(opener × (multiple + step)); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band, with next = null since the auction is over. With edge \"hammer\" (default) every won locker has mean R × the hammer price and walks or outbids return exactly the stake, so the house takes 1 − R of what is bought and nothing else; raise k returns outbid + (1 − outbid) × R per unit staked. Edge \"per-raise\" instead solves the locker mean as (R − outbid) ÷ (1 − outbid) so every raise returns exactly R. The last stage has outbid 0: the rivals are gone and the locker always opens.",
       "tables": {
-        "edge": "per-raise",
+        "edge": "hammer",
         "refund": 1,
         "steps": [
           [
@@ -772,8 +772,8 @@
           "upTo": 6,
           "expectedStake": 4.1956,
           "expectedWinningBid": 2.3416,
-          "rtp": 0.9500000000000001,
-          "lossPerAuction": 0.20977999999999986
+          "rtp": 0.9720945752693296,
+          "lossPerAuction": 0.11708000000000052
         },
         "stages": [
           {
@@ -788,76 +788,76 @@
             "expectedMultiple": 1,
             "outbid": 0.6,
             "refund": 1,
-            "lockerMean": 0.8749999999999999,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.24076186131386879,
+                "p": 0.1756843065693432,
                 "residual_from": 0,
-                "residual_to": 0.24076186131386879,
+                "residual_to": 0.1756843065693432,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.23950729927007297,
-                "residual_from": 0.24076186131386879,
-                "residual_to": 0.48026916058394176,
+                "p": 0.2600364963503649,
+                "residual_from": 0.1756843065693432,
+                "residual_to": 0.4357208029197081,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.19160583941605835,
-                "residual_from": 0.48026916058394176,
-                "residual_to": 0.6718750000000001,
+                "p": 0.20802919708029194,
+                "residual_from": 0.4357208029197081,
+                "residual_to": 0.64375,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.12773722627737225,
-                "residual_from": 0.6718750000000001,
-                "residual_to": 0.7996122262773724,
+                "p": 0.1386861313868613,
+                "residual_from": 0.64375,
+                "residual_to": 0.7824361313868613,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.08781934306569342,
-                "residual_from": 0.7996122262773724,
-                "residual_to": 0.8874315693430658,
+                "p": 0.09534671532846714,
+                "residual_from": 0.7824361313868613,
+                "residual_to": 0.8777828467153285,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.06386861313868612,
-                "residual_from": 0.8874315693430658,
-                "residual_to": 0.9513001824817519,
+                "p": 0.06934306569343066,
+                "residual_from": 0.8777828467153285,
+                "residual_to": 0.9471259124087591,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.03193430656934306,
-                "residual_from": 0.9513001824817519,
-                "residual_to": 0.9832344890510949,
+                "p": 0.03467153284671533,
+                "residual_from": 0.9471259124087591,
+                "residual_to": 0.9817974452554744,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.011975364963503647,
-                "residual_from": 0.9832344890510949,
-                "residual_to": 0.9952098540145985,
+                "p": 0.013001824817518246,
+                "residual_from": 0.9817974452554744,
+                "residual_to": 0.9947992700729926,
                 "pays_from": 4.97,
                 "pays_to": 5.03
               },
               {
                 "multiple": 7,
-                "p": 0.004790145985401458,
-                "residual_from": 0.9952098540145985,
+                "p": 0.0052007299270072985,
+                "residual_from": 0.9947992700729926,
                 "residual_to": 1,
                 "pays_from": 6.97,
                 "pays_to": 7.03
@@ -878,76 +878,76 @@
             "expectedMultiple": 2,
             "outbid": 0.5,
             "refund": 1,
-            "lockerMean": 0.8999999999999999,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.2190693430656936,
+                "p": 0.1756843065693432,
                 "residual_from": 0,
-                "residual_to": 0.2190693430656936,
+                "residual_to": 0.1756843065693432,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.24635036496350363,
-                "residual_from": 0.2190693430656936,
-                "residual_to": 0.4654197080291972,
+                "p": 0.2600364963503649,
+                "residual_from": 0.1756843065693432,
+                "residual_to": 0.4357208029197081,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.19708029197080287,
-                "residual_from": 0.4654197080291972,
-                "residual_to": 0.6625000000000001,
+                "p": 0.20802919708029194,
+                "residual_from": 0.4357208029197081,
+                "residual_to": 0.64375,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.1313868613138686,
-                "residual_from": 0.6625000000000001,
-                "residual_to": 0.7938868613138687,
+                "p": 0.1386861313868613,
+                "residual_from": 0.64375,
+                "residual_to": 0.7824361313868613,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.09032846715328466,
-                "residual_from": 0.7938868613138687,
-                "residual_to": 0.8842153284671533,
+                "p": 0.09534671532846714,
+                "residual_from": 0.7824361313868613,
+                "residual_to": 0.8777828467153285,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.0656934306569343,
-                "residual_from": 0.8842153284671533,
-                "residual_to": 0.9499087591240877,
+                "p": 0.06934306569343066,
+                "residual_from": 0.8777828467153285,
+                "residual_to": 0.9471259124087591,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.03284671532846715,
-                "residual_from": 0.9499087591240877,
-                "residual_to": 0.9827554744525548,
+                "p": 0.03467153284671533,
+                "residual_from": 0.9471259124087591,
+                "residual_to": 0.9817974452554744,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.01231751824817518,
-                "residual_from": 0.9827554744525548,
-                "residual_to": 0.99507299270073,
+                "p": 0.013001824817518246,
+                "residual_from": 0.9817974452554744,
+                "residual_to": 0.9947992700729926,
                 "pays_from": 4.97,
                 "pays_to": 5.03
               },
               {
                 "multiple": 7,
-                "p": 0.004927007299270072,
-                "residual_from": 0.99507299270073,
+                "p": 0.0052007299270072985,
+                "residual_from": 0.9947992700729926,
                 "residual_to": 1,
                 "pays_from": 6.97,
                 "pays_to": 7.03
@@ -969,76 +969,76 @@
             "expectedMultiple": 3.5,
             "outbid": 0.4,
             "refund": 1,
-            "lockerMean": 0.9166666666666666,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.2046076642335768,
+                "p": 0.1756843065693432,
                 "residual_from": 0,
-                "residual_to": 0.2046076642335768,
+                "residual_to": 0.1756843065693432,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.2509124087591241,
-                "residual_from": 0.2046076642335768,
-                "residual_to": 0.45552007299270086,
+                "p": 0.2600364963503649,
+                "residual_from": 0.1756843065693432,
+                "residual_to": 0.4357208029197081,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.20072992700729925,
-                "residual_from": 0.45552007299270086,
-                "residual_to": 0.6562500000000001,
+                "p": 0.20802919708029194,
+                "residual_from": 0.4357208029197081,
+                "residual_to": 0.64375,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.1338199513381995,
-                "residual_from": 0.6562500000000001,
-                "residual_to": 0.7900699513381996,
+                "p": 0.1386861313868613,
+                "residual_from": 0.64375,
+                "residual_to": 0.7824361313868613,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.09200121654501216,
-                "residual_from": 0.7900699513381996,
-                "residual_to": 0.8820711678832117,
+                "p": 0.09534671532846714,
+                "residual_from": 0.7824361313868613,
+                "residual_to": 0.8777828467153285,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.06690997566909974,
-                "residual_from": 0.8820711678832117,
-                "residual_to": 0.9489811435523114,
+                "p": 0.06934306569343066,
+                "residual_from": 0.8777828467153285,
+                "residual_to": 0.9471259124087591,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.03345498783454987,
-                "residual_from": 0.9489811435523114,
-                "residual_to": 0.9824361313868614,
+                "p": 0.03467153284671533,
+                "residual_from": 0.9471259124087591,
+                "residual_to": 0.9817974452554744,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.012545620437956203,
-                "residual_from": 0.9824361313868614,
-                "residual_to": 0.9949817518248175,
+                "p": 0.013001824817518246,
+                "residual_from": 0.9817974452554744,
+                "residual_to": 0.9947992700729926,
                 "pays_from": 4.97,
                 "pays_to": 5.03
               },
               {
                 "multiple": 7,
-                "p": 0.005018248175182481,
-                "residual_from": 0.9949817518248175,
+                "p": 0.0052007299270072985,
+                "residual_from": 0.9947992700729926,
                 "residual_to": 1,
                 "pays_from": 6.97,
                 "pays_to": 7.03
@@ -1061,76 +1061,76 @@
             "expectedMultiple": 5,
             "outbid": 0.3,
             "refund": 1,
-            "lockerMean": 0.9285714285714285,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.19427789363920767,
+                "p": 0.1756843065693432,
                 "residual_from": 0,
-                "residual_to": 0.19427789363920767,
+                "residual_to": 0.1756843065693432,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.25417101147028154,
-                "residual_from": 0.19427789363920767,
-                "residual_to": 0.4484489051094892,
+                "p": 0.2600364963503649,
+                "residual_from": 0.1756843065693432,
+                "residual_to": 0.4357208029197081,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.2033368091762252,
-                "residual_from": 0.4484489051094892,
-                "residual_to": 0.6517857142857144,
+                "p": 0.20802919708029194,
+                "residual_from": 0.4357208029197081,
+                "residual_to": 0.64375,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.13555787278415013,
-                "residual_from": 0.6517857142857144,
-                "residual_to": 0.7873435870698645,
+                "p": 0.1386861313868613,
+                "residual_from": 0.64375,
+                "residual_to": 0.7824361313868613,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.09319603753910323,
-                "residual_from": 0.7873435870698645,
-                "residual_to": 0.8805396246089677,
+                "p": 0.09534671532846714,
+                "residual_from": 0.7824361313868613,
+                "residual_to": 0.8777828467153285,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.06777893639207506,
-                "residual_from": 0.8805396246089677,
-                "residual_to": 0.9483185610010428,
+                "p": 0.06934306569343066,
+                "residual_from": 0.8777828467153285,
+                "residual_to": 0.9471259124087591,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.03388946819603753,
-                "residual_from": 0.9483185610010428,
-                "residual_to": 0.9822080291970804,
+                "p": 0.03467153284671533,
+                "residual_from": 0.9471259124087591,
+                "residual_to": 0.9817974452554744,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.012708550573514076,
-                "residual_from": 0.9822080291970804,
-                "residual_to": 0.9949165797705944,
+                "p": 0.013001824817518246,
+                "residual_from": 0.9817974452554744,
+                "residual_to": 0.9947992700729926,
                 "pays_from": 4.97,
                 "pays_to": 5.03
               },
               {
                 "multiple": 7,
-                "p": 0.00508342022940563,
-                "residual_from": 0.9949165797705944,
+                "p": 0.0052007299270072985,
+                "residual_from": 0.9947992700729926,
                 "residual_to": 1,
                 "pays_from": 6.97,
                 "pays_to": 7.03
@@ -1154,76 +1154,76 @@
             "expectedMultiple": 7.5,
             "outbid": 0.2,
             "refund": 1,
-            "lockerMean": 0.9375,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.18653056569343074,
+                "p": 0.1756843065693432,
                 "residual_from": 0,
-                "residual_to": 0.18653056569343074,
+                "residual_to": 0.1756843065693432,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.25661496350364965,
-                "residual_from": 0.18653056569343074,
-                "residual_to": 0.4431455291970804,
+                "p": 0.2600364963503649,
+                "residual_from": 0.1756843065693432,
+                "residual_to": 0.4357208029197081,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.2052919708029197,
-                "residual_from": 0.4431455291970804,
-                "residual_to": 0.6484375000000001,
+                "p": 0.20802919708029194,
+                "residual_from": 0.4357208029197081,
+                "residual_to": 0.64375,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.13686131386861314,
-                "residual_from": 0.6484375000000001,
-                "residual_to": 0.7852988138686132,
+                "p": 0.1386861313868613,
+                "residual_from": 0.64375,
+                "residual_to": 0.7824361313868613,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.09409215328467153,
-                "residual_from": 0.7852988138686132,
-                "residual_to": 0.8793909671532848,
+                "p": 0.09534671532846714,
+                "residual_from": 0.7824361313868613,
+                "residual_to": 0.8777828467153285,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.06843065693430657,
-                "residual_from": 0.8793909671532848,
-                "residual_to": 0.9478216240875914,
+                "p": 0.06934306569343066,
+                "residual_from": 0.8777828467153285,
+                "residual_to": 0.9471259124087591,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.034215328467153285,
-                "residual_from": 0.9478216240875914,
-                "residual_to": 0.9820369525547447,
+                "p": 0.03467153284671533,
+                "residual_from": 0.9471259124087591,
+                "residual_to": 0.9817974452554744,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.01283074817518248,
-                "residual_from": 0.9820369525547447,
-                "residual_to": 0.9948677007299271,
+                "p": 0.013001824817518246,
+                "residual_from": 0.9817974452554744,
+                "residual_to": 0.9947992700729926,
                 "pays_from": 4.97,
                 "pays_to": 5.03
               },
               {
                 "multiple": 7,
-                "p": 0.0051322992700729925,
-                "residual_from": 0.9948677007299271,
+                "p": 0.0052007299270072985,
+                "residual_from": 0.9947992700729926,
                 "residual_to": 1,
                 "pays_from": 6.97,
                 "pays_to": 7.03
@@ -1326,11 +1326,11 @@
         ]
       },
       "realisedRtp": {
-        "BID_1": 1.011,
-        "BID_2": 0.9839,
-        "BID_3": 0.9962,
-        "BID_4": 1.0339,
-        "BID_5": 0.9974,
+        "BID_1": 1.0508,
+        "BID_2": 1.017,
+        "BID_3": 1.0099,
+        "BID_4": 1.0381,
+        "BID_5": 1.0009,
         "BID_6": 1.0655
       },
       "files": [
@@ -1670,9 +1670,9 @@
       "multiStep": false,
       "linkedBets": false,
       "sideBets": false,
-      "how_to_settle": "each raise is its own single-call bet. Raise k (betType BID_k, amount = opening chip × a multiple the stage can reach; every amount factors into exactly one chip × multiple, which recovers the opener): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back in full) and next names the following raise, whose increment is drawn from the derived stream SHA-256(seed|ladder|0) uniformly over steps[k−1] (in opener units): next.bid = round(opener × (multiple + step)); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band, with next = null since the auction is over. With edge \"per-raise\" (default) the locker payouts are solved per stage so the won locker has mean (R − outbid) ÷ (1 − outbid) × bid and every raise returns exactly R per unit staked, refunds included; edge \"hammer\" instead gives every won locker mean R × the hammer price (a buyer's premium), so raise k returns outbid + (1 − outbid) × R. The last stage has outbid 0: the rivals are gone and the locker always opens.",
+      "how_to_settle": "each raise is its own single-call bet. Raise k (betType BID_k, amount = opening chip × a multiple the stage can reach; every amount factors into exactly one chip × multiple, which recovers the opener): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back in full) and next names the following raise, whose increment is drawn from the derived stream SHA-256(seed|ladder|0) uniformly over steps[k−1] (in opener units): next.bid = round(opener × (multiple + step)); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band, with next = null since the auction is over. With edge \"hammer\" (default) every won locker has mean R × the hammer price and walks or outbids return exactly the stake, so the house takes 1 − R of what is bought and nothing else; raise k returns outbid + (1 − outbid) × R per unit staked. Edge \"per-raise\" instead solves the locker mean as (R − outbid) ÷ (1 − outbid) so every raise returns exactly R. The last stage has outbid 0: the rivals are gone and the locker always opens.",
       "tables": {
-        "edge": "per-raise",
+        "edge": "hammer",
         "refund": 1,
         "steps": [
           [
@@ -1754,8 +1754,8 @@
           "upTo": 7,
           "expectedStake": 6.347440000000001,
           "expectedWinningBid": 3.2660400000000003,
-          "rtp": 0.95,
-          "lossPerAuction": 0.31737200000000065
+          "rtp": 0.9742727776867524,
+          "lossPerAuction": 0.16330200000000072
         },
         "stages": [
           {
@@ -1770,84 +1770,84 @@
             "expectedMultiple": 1,
             "outbid": 0.7,
             "refund": 1,
-            "lockerMean": 0.8333333333333333,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.29396092362344606,
+                "p": 0.1951154529307284,
                 "residual_from": 0,
-                "residual_to": 0.29396092362344606,
+                "residual_to": 0.1951154529307284,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.22202486678507988,
-                "residual_from": 0.29396092362344606,
-                "residual_to": 0.5159857904085259,
+                "p": 0.2531083481349911,
+                "residual_from": 0.1951154529307284,
+                "residual_to": 0.4482238010657195,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.1776198934280639,
-                "residual_from": 0.5159857904085259,
-                "residual_to": 0.6936056838365898,
+                "p": 0.20248667850799287,
+                "residual_from": 0.4482238010657195,
+                "residual_to": 0.6507104795737124,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.11841326228537594,
-                "residual_from": 0.6936056838365898,
-                "residual_to": 0.8120189461219658,
+                "p": 0.1349911190053286,
+                "residual_from": 0.6507104795737124,
+                "residual_to": 0.785701598579041,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.08140911782119595,
-                "residual_from": 0.8120189461219658,
-                "residual_to": 0.8934280639431618,
+                "p": 0.0928063943161634,
+                "residual_from": 0.785701598579041,
+                "residual_to": 0.8785079928952044,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.05920663114268797,
-                "residual_from": 0.8934280639431618,
-                "residual_to": 0.9526346950858497,
+                "p": 0.0674955595026643,
+                "residual_from": 0.8785079928952044,
+                "residual_to": 0.9460035523978687,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.029603315571343984,
-                "residual_from": 0.9526346950858497,
-                "residual_to": 0.9822380106571937,
+                "p": 0.03374777975133215,
+                "residual_from": 0.9460035523978687,
+                "residual_to": 0.9797513321492008,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.011101243339253993,
-                "residual_from": 0.9822380106571937,
-                "residual_to": 0.9933392539964477,
+                "p": 0.012655417406749555,
+                "residual_from": 0.9797513321492008,
+                "residual_to": 0.9924067495559504,
                 "pays_from": 4.97,
                 "pays_to": 5.03
               },
               {
                 "multiple": 7,
-                "p": 0.0044404973357015974,
-                "residual_from": 0.9933392539964477,
-                "residual_to": 0.9977797513321494,
+                "p": 0.005062166962699822,
+                "residual_from": 0.9924067495559504,
+                "residual_to": 0.9974689165186502,
                 "pays_from": 6.97,
                 "pays_to": 7.03
               },
               {
                 "multiple": 10,
-                "p": 0.0022202486678507987,
-                "residual_from": 0.9977797513321494,
+                "p": 0.002531083481349911,
+                "residual_from": 0.9974689165186502,
                 "residual_to": 1,
                 "pays_from": 9.97,
                 "pays_to": 10.03
@@ -1868,84 +1868,84 @@
             "expectedMultiple": 2,
             "outbid": 0.6,
             "refund": 1,
-            "lockerMean": 0.8749999999999999,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.25865896980461833,
+                "p": 0.1951154529307284,
                 "residual_from": 0,
-                "residual_to": 0.25865896980461833,
+                "residual_to": 0.1951154529307284,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.23312611012433387,
-                "residual_from": 0.25865896980461833,
-                "residual_to": 0.4917850799289522,
+                "p": 0.2531083481349911,
+                "residual_from": 0.1951154529307284,
+                "residual_to": 0.4482238010657195,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.1865008880994671,
-                "residual_from": 0.4917850799289522,
-                "residual_to": 0.6782859680284193,
+                "p": 0.20248667850799287,
+                "residual_from": 0.4482238010657195,
+                "residual_to": 0.6507104795737124,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.12433392539964473,
-                "residual_from": 0.6782859680284193,
-                "residual_to": 0.8026198934280641,
+                "p": 0.1349911190053286,
+                "residual_from": 0.6507104795737124,
+                "residual_to": 0.785701598579041,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.08547957371225576,
-                "residual_from": 0.8026198934280641,
-                "residual_to": 0.8880994671403198,
+                "p": 0.0928063943161634,
+                "residual_from": 0.785701598579041,
+                "residual_to": 0.8785079928952044,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.062166962699822366,
-                "residual_from": 0.8880994671403198,
-                "residual_to": 0.9502664298401422,
+                "p": 0.0674955595026643,
+                "residual_from": 0.8785079928952044,
+                "residual_to": 0.9460035523978687,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.031083481349911183,
-                "residual_from": 0.9502664298401422,
-                "residual_to": 0.9813499111900534,
+                "p": 0.03374777975133215,
+                "residual_from": 0.9460035523978687,
+                "residual_to": 0.9797513321492008,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.011656305506216694,
-                "residual_from": 0.9813499111900534,
-                "residual_to": 0.9930062166962701,
+                "p": 0.012655417406749555,
+                "residual_from": 0.9797513321492008,
+                "residual_to": 0.9924067495559504,
                 "pays_from": 4.97,
                 "pays_to": 5.03
               },
               {
                 "multiple": 7,
-                "p": 0.004662522202486677,
-                "residual_from": 0.9930062166962701,
-                "residual_to": 0.9976687388987567,
+                "p": 0.005062166962699822,
+                "residual_from": 0.9924067495559504,
+                "residual_to": 0.9974689165186502,
                 "pays_from": 6.97,
                 "pays_to": 7.03
               },
               {
                 "multiple": 10,
-                "p": 0.0023312611012433386,
-                "residual_from": 0.9976687388987567,
+                "p": 0.002531083481349911,
+                "residual_from": 0.9974689165186502,
                 "residual_to": 1,
                 "pays_from": 9.97,
                 "pays_to": 10.03
@@ -1967,84 +1967,84 @@
             "expectedMultiple": 3.5,
             "outbid": 0.5,
             "refund": 1,
-            "lockerMean": 0.8999999999999999,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.23747779751332176,
+                "p": 0.1951154529307284,
                 "residual_from": 0,
-                "residual_to": 0.23747779751332176,
+                "residual_to": 0.1951154529307284,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.23978685612788625,
-                "residual_from": 0.23747779751332176,
-                "residual_to": 0.477264653641208,
+                "p": 0.2531083481349911,
+                "residual_from": 0.1951154529307284,
+                "residual_to": 0.4482238010657195,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.191829484902309,
-                "residual_from": 0.477264653641208,
-                "residual_to": 0.669094138543517,
+                "p": 0.20248667850799287,
+                "residual_from": 0.4482238010657195,
+                "residual_to": 0.6507104795737124,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.127886323268206,
-                "residual_from": 0.669094138543517,
-                "residual_to": 0.796980461811723,
+                "p": 0.1349911190053286,
+                "residual_from": 0.6507104795737124,
+                "residual_to": 0.785701598579041,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.08792184724689163,
-                "residual_from": 0.796980461811723,
-                "residual_to": 0.8849023090586147,
+                "p": 0.0928063943161634,
+                "residual_from": 0.785701598579041,
+                "residual_to": 0.8785079928952044,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.063943161634103,
-                "residual_from": 0.8849023090586147,
-                "residual_to": 0.9488454706927176,
+                "p": 0.0674955595026643,
+                "residual_from": 0.8785079928952044,
+                "residual_to": 0.9460035523978687,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.0319715808170515,
-                "residual_from": 0.9488454706927176,
-                "residual_to": 0.9808170515097692,
+                "p": 0.03374777975133215,
+                "residual_from": 0.9460035523978687,
+                "residual_to": 0.9797513321492008,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.011989342806394312,
-                "residual_from": 0.9808170515097692,
-                "residual_to": 0.9928063943161635,
+                "p": 0.012655417406749555,
+                "residual_from": 0.9797513321492008,
+                "residual_to": 0.9924067495559504,
                 "pays_from": 4.97,
                 "pays_to": 5.03
               },
               {
                 "multiple": 7,
-                "p": 0.004795737122557725,
-                "residual_from": 0.9928063943161635,
-                "residual_to": 0.9976021314387212,
+                "p": 0.005062166962699822,
+                "residual_from": 0.9924067495559504,
+                "residual_to": 0.9974689165186502,
                 "pays_from": 6.97,
                 "pays_to": 7.03
               },
               {
                 "multiple": 10,
-                "p": 0.0023978685612788624,
-                "residual_from": 0.9976021314387212,
+                "p": 0.002531083481349911,
+                "residual_from": 0.9974689165186502,
                 "residual_to": 1,
                 "pays_from": 9.97,
                 "pays_to": 10.03
@@ -2068,84 +2068,84 @@
             "expectedMultiple": 6,
             "outbid": 0.4,
             "refund": 1,
-            "lockerMean": 0.9166666666666666,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.2233570159857906,
+                "p": 0.1951154529307284,
                 "residual_from": 0,
-                "residual_to": 0.2233570159857906,
+                "residual_to": 0.1951154529307284,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.24422735346358787,
-                "residual_from": 0.2233570159857906,
-                "residual_to": 0.4675843694493785,
+                "p": 0.2531083481349911,
+                "residual_from": 0.1951154529307284,
+                "residual_to": 0.4482238010657195,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.1953818827708703,
-                "residual_from": 0.4675843694493785,
-                "residual_to": 0.6629662522202487,
+                "p": 0.20248667850799287,
+                "residual_from": 0.4482238010657195,
+                "residual_to": 0.6507104795737124,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.13025458851391353,
-                "residual_from": 0.6629662522202487,
-                "residual_to": 0.7932208407341623,
+                "p": 0.1349911190053286,
+                "residual_from": 0.6507104795737124,
+                "residual_to": 0.785701598579041,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.08955002960331555,
-                "residual_from": 0.7932208407341623,
-                "residual_to": 0.8827708703374779,
+                "p": 0.0928063943161634,
+                "residual_from": 0.785701598579041,
+                "residual_to": 0.8785079928952044,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.06512729425695676,
-                "residual_from": 0.8827708703374779,
-                "residual_to": 0.9478981645944347,
+                "p": 0.0674955595026643,
+                "residual_from": 0.8785079928952044,
+                "residual_to": 0.9460035523978687,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.03256364712847838,
-                "residual_from": 0.9478981645944347,
-                "residual_to": 0.980461811722913,
+                "p": 0.03374777975133215,
+                "residual_from": 0.9460035523978687,
+                "residual_to": 0.9797513321492008,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.012211367673179393,
-                "residual_from": 0.980461811722913,
-                "residual_to": 0.9926731793960925,
+                "p": 0.012655417406749555,
+                "residual_from": 0.9797513321492008,
+                "residual_to": 0.9924067495559504,
                 "pays_from": 4.97,
                 "pays_to": 5.03
               },
               {
                 "multiple": 7,
-                "p": 0.004884547069271757,
-                "residual_from": 0.9926731793960925,
-                "residual_to": 0.9975577264653642,
+                "p": 0.005062166962699822,
+                "residual_from": 0.9924067495559504,
+                "residual_to": 0.9974689165186502,
                 "pays_from": 6.97,
                 "pays_to": 7.03
               },
               {
                 "multiple": 10,
-                "p": 0.0024422735346358786,
-                "residual_from": 0.9975577264653642,
+                "p": 0.002531083481349911,
+                "residual_from": 0.9974689165186502,
                 "residual_to": 1,
                 "pays_from": 9.97,
                 "pays_to": 10.03
@@ -2171,84 +2171,84 @@
             "expectedMultiple": 9.333333333333334,
             "outbid": 0.3,
             "refund": 1,
-            "lockerMean": 0.9285714285714285,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.21327074346612562,
+                "p": 0.1951154529307284,
                 "residual_from": 0,
-                "residual_to": 0.21327074346612562,
+                "residual_to": 0.1951154529307284,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.24739913727480328,
-                "residual_from": 0.21327074346612562,
-                "residual_to": 0.4606698807409289,
+                "p": 0.2531083481349911,
+                "residual_from": 0.1951154529307284,
+                "residual_to": 0.4482238010657195,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.19791930981984263,
-                "residual_from": 0.4606698807409289,
-                "residual_to": 0.6585891905607715,
+                "p": 0.20248667850799287,
+                "residual_from": 0.4482238010657195,
+                "residual_to": 0.6507104795737124,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.13194620654656175,
-                "residual_from": 0.6585891905607715,
-                "residual_to": 0.7905353971073332,
+                "p": 0.1349911190053286,
+                "residual_from": 0.6507104795737124,
+                "residual_to": 0.785701598579041,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.0907130170007612,
-                "residual_from": 0.7905353971073332,
-                "residual_to": 0.8812484141080944,
+                "p": 0.0928063943161634,
+                "residual_from": 0.785701598579041,
+                "residual_to": 0.8785079928952044,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.06597310327328088,
-                "residual_from": 0.8812484141080944,
-                "residual_to": 0.9472215173813753,
+                "p": 0.0674955595026643,
+                "residual_from": 0.8785079928952044,
+                "residual_to": 0.9460035523978687,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.03298655163664044,
-                "residual_from": 0.9472215173813753,
-                "residual_to": 0.9802080690180157,
+                "p": 0.03374777975133215,
+                "residual_from": 0.9460035523978687,
+                "residual_to": 0.9797513321492008,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.012369956863740164,
-                "residual_from": 0.9802080690180157,
-                "residual_to": 0.9925780258817559,
+                "p": 0.012655417406749555,
+                "residual_from": 0.9797513321492008,
+                "residual_to": 0.9924067495559504,
                 "pays_from": 4.97,
                 "pays_to": 5.03
               },
               {
                 "multiple": 7,
-                "p": 0.004947982745496065,
-                "residual_from": 0.9925780258817559,
-                "residual_to": 0.9975260086272519,
+                "p": 0.005062166962699822,
+                "residual_from": 0.9924067495559504,
+                "residual_to": 0.9974689165186502,
                 "pays_from": 6.97,
                 "pays_to": 7.03
               },
               {
                 "multiple": 10,
-                "p": 0.0024739913727480326,
-                "residual_from": 0.9975260086272519,
+                "p": 0.002531083481349911,
+                "residual_from": 0.9974689165186502,
                 "residual_to": 1,
                 "pays_from": 9.97,
                 "pays_to": 10.03
@@ -2277,84 +2277,84 @@
             "expectedMultiple": 13.333333333333334,
             "outbid": 0.2,
             "refund": 1,
-            "lockerMean": 0.9375,
+            "lockerMean": 0.95,
             "locker": [
               {
                 "multiple": 0,
-                "p": 0.20570603907637675,
+                "p": 0.1951154529307284,
                 "residual_from": 0,
-                "residual_to": 0.20570603907637675,
+                "residual_to": 0.1951154529307284,
                 "pays_from": 0,
                 "pays_to": 0
               },
               {
                 "multiple": 0.5,
-                "p": 0.2497779751332149,
-                "residual_from": 0.20570603907637675,
-                "residual_to": 0.4554840142095916,
+                "p": 0.2531083481349911,
+                "residual_from": 0.1951154529307284,
+                "residual_to": 0.4482238010657195,
                 "pays_from": 0.47,
                 "pays_to": 0.53
               },
               {
                 "multiple": 0.8,
-                "p": 0.1998223801065719,
-                "residual_from": 0.4554840142095916,
-                "residual_to": 0.6553063943161636,
+                "p": 0.20248667850799287,
+                "residual_from": 0.4482238010657195,
+                "residual_to": 0.6507104795737124,
                 "pays_from": 0.77,
                 "pays_to": 0.8300000000000001
               },
               {
                 "multiple": 1.2,
-                "p": 0.13321492007104793,
-                "residual_from": 0.6553063943161636,
-                "residual_to": 0.7885213143872115,
+                "p": 0.1349911190053286,
+                "residual_from": 0.6507104795737124,
+                "residual_to": 0.785701598579041,
                 "pays_from": 1.17,
                 "pays_to": 1.23
               },
               {
                 "multiple": 1.5,
-                "p": 0.09158525754884544,
-                "residual_from": 0.7885213143872115,
-                "residual_to": 0.880106571936057,
+                "p": 0.0928063943161634,
+                "residual_from": 0.785701598579041,
+                "residual_to": 0.8785079928952044,
                 "pays_from": 1.47,
                 "pays_to": 1.53
               },
               {
                 "multiple": 2,
-                "p": 0.06660746003552397,
-                "residual_from": 0.880106571936057,
-                "residual_to": 0.946714031971581,
+                "p": 0.0674955595026643,
+                "residual_from": 0.8785079928952044,
+                "residual_to": 0.9460035523978687,
                 "pays_from": 1.97,
                 "pays_to": 2.03
               },
               {
                 "multiple": 3,
-                "p": 0.03330373001776198,
-                "residual_from": 0.946714031971581,
-                "residual_to": 0.980017761989343,
+                "p": 0.03374777975133215,
+                "residual_from": 0.9460035523978687,
+                "residual_to": 0.9797513321492008,
                 "pays_from": 2.97,
                 "pays_to": 3.03
               },
               {
                 "multiple": 5,
-                "p": 0.012488898756660744,
-                "residual_from": 0.980017761989343,
-                "residual_to": 0.9925066607460037,
+                "p": 0.012655417406749555,
+                "residual_from": 0.9797513321492008,
+                "residual_to": 0.9924067495559504,
                 "pays_from": 4.97,
                 "pays_to": 5.03
               },
               {
                 "multiple": 7,
-                "p": 0.0049955595026642974,
-                "residual_from": 0.9925066607460037,
-                "residual_to": 0.997502220248668,
+                "p": 0.005062166962699822,
+                "residual_from": 0.9924067495559504,
+                "residual_to": 0.9974689165186502,
                 "pays_from": 6.97,
                 "pays_to": 7.03
               },
               {
                 "multiple": 10,
-                "p": 0.0024977797513321487,
-                "residual_from": 0.997502220248668,
+                "p": 0.002531083481349911,
+                "residual_from": 0.9974689165186502,
                 "residual_to": 1,
                 "pays_from": 9.97,
                 "pays_to": 10.03
@@ -2471,12 +2471,12 @@
         ]
       },
       "realisedRtp": {
-        "BID_1": 1.0484,
-        "BID_2": 0.9894,
-        "BID_3": 0.9926,
-        "BID_4": 1.0155,
-        "BID_5": 1.067,
-        "BID_6": 0.9896,
+        "BID_1": 1.0759,
+        "BID_2": 1.0477,
+        "BID_3": 1.0458,
+        "BID_4": 1.0495,
+        "BID_5": 1.0737,
+        "BID_6": 1.0071,
         "BID_7": 1.0548
       },
       "files": [

@@ -4,7 +4,7 @@
   "results": {
     "BID_1": {
       "stake": 1000,
-      "win": 1200,
+      "win": 1210,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 1,
@@ -14,10 +14,10 @@
       "pOutbid": 0.6,
       "refund": 0,
       "locker": {
-        "multiplier": 1.1998044297169075,
+        "multiplier": 1.2096192115813622,
         "band": 3,
         "multiple": 1.2,
-        "contents": 1200
+        "contents": 1210
       },
       "next": null,
       "math": {
@@ -27,7 +27,7 @@
     },
     "BID_2": {
       "stake": 1000,
-      "win": 1227,
+      "win": 1474,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 2,
@@ -37,10 +37,10 @@
       "pOutbid": 0.5,
       "refund": 0,
       "locker": {
-        "multiplier": 1.2274312231131503,
-        "band": 3,
-        "multiple": 1.2,
-        "contents": 1227
+        "multiplier": 1.4736659916583124,
+        "band": 4,
+        "multiple": 1.5,
+        "contents": 1474
       },
       "next": null,
       "math": {
@@ -50,7 +50,7 @@
     },
     "BID_3": {
       "stake": 300,
-      "win": 448,
+      "win": 449,
       "totalBetAmount": 300,
       "outcome": "WON",
       "stage": 3,
@@ -60,10 +60,10 @@
       "pOutbid": 0.4,
       "refund": 0,
       "locker": {
-        "multiplier": 1.4918355051925094,
+        "multiplier": 1.4958731748667755,
         "band": 4,
         "multiple": 1.5,
-        "contents": 448
+        "contents": 449
       },
       "next": null,
       "math": {
@@ -73,7 +73,7 @@
     },
     "BID_4": {
       "stake": 1000,
-      "win": 1510,
+      "win": 1512,
       "totalBetAmount": 1000,
       "outcome": "WON",
       "stage": 4,
@@ -83,10 +83,10 @@
       "pOutbid": 0.3,
       "refund": 0,
       "locker": {
-        "multiplier": 1.5095391337642912,
+        "multiplier": 1.5117354485871062,
         "band": 4,
         "multiple": 1.5,
-        "contents": 1510
+        "contents": 1512
       },
       "next": null,
       "math": {
@@ -106,7 +106,7 @@
       "pOutbid": 0.2,
       "refund": 0,
       "locker": {
-        "multiplier": 1.5225217947169312,
+        "multiplier": 1.5236321538773543,
         "band": 4,
         "multiple": 1.5,
         "contents": 914
