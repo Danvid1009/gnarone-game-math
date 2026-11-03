@@ -199,16 +199,17 @@
     "folder": "fight-engine",
     "title": "Live Fight",
     "accent": "FIGHT",
-    "lead": "Two fighters, a biased damage walk, a health bar each. Each tick one of them lands a hit (probability from the power gap) for a continuous amount of damage; first to zero loses, and if both stand at the bell a biased coin decides on the health share. The win probability at every state is exact by backward induction on the health grid, so the opening bet is priced at RTP ÷ P and every live bet during the fight is a fair bet at 1 ÷ P.",
+    "lead": "Two fighters rated by Elo. A fighter is power + hp attribute points: the sum is its Elo and prices the fight by the Elo formula; the split shapes it, health from hp and damage from power, with the landing rate solved on the exact grid so the fight agrees with the price. A biased damage walk, a health bar each, first to zero loses, a health-share coin at the bell. The win probability at every state is exact by backward induction, so the opening bet is priced at RTP ÷ P and every live bet during the fight is a fair bet at 1 ÷ P.",
     "tags": [
-      "exact win-probability grid",
+      "Elo prices the fight, the split shapes it",
+      "exact win-probability grid, calibrated to the Elo price",
       "opening bet at RTP, live bets fair",
       "linked bets on a running round"
     ],
     "figures": [
       [
         "examples/rating.png",
-        "P(A wins) at the bell against the power gap and the HP gap: the single rating that folds both together."
+        "Left: the Elo formula and the calibrated grid agree at every gap. Right: same Elo, different power share: the price stays at 50% while landing rate, KO rate and fight length move."
       ],
       [
         "examples/paths.png",
@@ -219,7 +220,7 @@
         "Exact grid against 100,000 simulated fights per preset, and the return of live bets placed at a fixed tick."
       ]
     ],
-    "cli": "node bin/build-fight.js --a 1700,100 --b 1550,100",
+    "cli": "node bin/build-fight.js --a 850,850 --b 775,775",
     "api": "examples/api"
   },
   {
@@ -231,7 +232,7 @@
       "fight-engine/src",
       "payout-engine/src"
     ],
-    "lead": "One bet on the winner, decided by a single biased coin whose probability is the Live Fight rating of the pairing (power and HP in one number), then a predetermined cutscene that plays it out. During the cutscene the developer can call any number of side bets from a library: biased coins, n-way picks at RTP ÷ p, Single Shot tables. Each side bet is its own independent draw at its own RTP.",
+    "lead": "One bet on the winner, decided by a single biased coin at the Elo price of the pairing (a fighter is power + hp attribute points, the sum is its Elo, the split only shapes the cutscene), then a predetermined cutscene that plays it out. During the cutscene the developer can call any number of side bets from a library: biased coins, n-way picks at RTP ÷ p, Single Shot tables. Each side bet is its own independent draw at its own RTP.",
     "tags": [
       "one coin, exact RTP",
       "cosmetic cutscene",
@@ -243,7 +244,7 @@
         "Main-bet probability per preset and the side-bet library's odds, against simulation."
       ]
     ],
-    "cli": "node bin/build-cutscene.js --a 1700,100 --b 1550,100",
+    "cli": "node bin/build-cutscene.js --a 850,850 --b 775,775",
     "api": "examples/api"
   },
   {

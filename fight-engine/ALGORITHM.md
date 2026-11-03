@@ -8,31 +8,43 @@ tick by tick.
 
 ## 1. Inputs
 
-$$
-\text{fighter } X \in \{A, B\}: \quad P_X \ (\text{power, Elo scale}), \quad H_X > 0 \ (\text{health}), \qquad
-N \ (\text{ticks}), \quad \rho \ (\text{grid resolution}), \quad D \ (\text{base damage}), \quad \gamma, \ s, \quad R \in (0,1).
-$$
-
-Defaults: $N = 16$, $\rho = 0.5$, $D = 16$, $\gamma = 0.25$, $s = 1200$, $R = 0.95$.
-
-## 2. Who lands, and how hard
-
-Relative strength and the chance that a tick's hit belongs to $A$:
+A fighter is a pair of attribute points; its Elo is their sum:
 
 $$
-w = 10^{(P_A - P_B)/s}, \qquad p_A = \frac{w}{1 + w}, \qquad p_B = 1 - p_A .
+X \in \{A, B\}: \quad \text{power}_X > 0, \quad \text{hp}_X > 0, \qquad E_X = \text{power}_X + \text{hp}_X, \qquad
+N \ (\text{ticks}), \quad \rho \ (\text{grid resolution}), \quad D \ (\text{base damage}), \quad H_0 \ (\text{base health}), \quad r \ (\text{reference points}), \quad s \ (\text{Elo scale}), \quad R \in (0,1).
 $$
 
-With $s = 1200$ a 100-point power gap gives $p_A = 54.8\%$; the gap compounds over many hits, which is
-what makes the fight, not the tick, decisive.
+Defaults: $N = 16$, $\rho = 1$, $D = 16$, $H_0 = 100$, $r = 800$, $s = 400$, $R = 0.95$. An $800/800$ fighter
+(Elo 1600) has 100 health and hits for 16 on average. `{ elo, split }` is accepted as sugar, split being
+the power share.
 
-Damage is half-normal with a mean that also leans on power:
+## 2. Elo decides who wins; the split decides how
+
+The price of the fight is the Elo formula on the totals, and nothing else:
 
 $$
-\mu_A = D\, w^{\gamma}, \qquad \mu_B = D\, w^{-\gamma}, \qquad |Z|\,\sigma_X \ \text{with}\ \sigma_X = \mu_X \sqrt{\pi/2}.
+p^{\ast} = \frac{1}{1 + 10^{(E_B - E_A)/s}} .
 $$
 
-It is discretised to the health grid: damage $k\rho$ for $k = 1, \dots, K$ with
+A 150-point gap is $70.3\%$, whatever the splits. The split shapes the fight through the two physical
+quantities,
+
+$$
+H_X = H_0\, \frac{\text{hp}_X}{r} \ (\text{health}), \qquad \mu_X = D\, \frac{\text{power}_X}{r} \ (\text{mean damage}),
+$$
+
+and one free number, the chance $p_A$ that a tick's hit belongs to $A$, is solved so that the fight agrees
+with the price (section 4). A $1000/600$ puncher against a $600/1000$ tank, both Elo 1600, is a coin flip at
+the bell, but the puncher has 75 health and hits for 20 while the tank has 125 and hits for 12.
+
+Damage is half-normal with mean $\mu_X$:
+
+$$
+|Z|\,\sigma_X \ \text{with}\ \sigma_X = \mu_X \sqrt{\pi/2},
+$$
+
+discretised to the health grid: damage $k\rho$ for $k = 1, \dots, K$ with
 
 $$
 f_X(k) \propto \Pr\big( (k - \tfrac12)\rho \le |Z|\sigma_X < (k + \tfrac12)\rho \big), \qquad f_X(1) \text{ also absorbs } [0, \tfrac12 \rho),
@@ -61,15 +73,22 @@ V_t(a, b) = p_A \sum_{k} f_A(k)\, \big[\, b - k \le 0 \ ?\ 1 \ :\ V_{t+1}(a, b -
 \;}
 $$
 
-for $t = N-1, \dots, 0$. $V_t(a, b)$ is exactly $\Pr(A \text{ wins} \mid t, a, b)$ by summation. The
-opening rating is
+for $t = N-1, \dots, 0$. $V_t(a, b)$ is exactly $\Pr(A \text{ wins} \mid t, a, b)$ by summation, for a
+given landing probability $p_A$.
+
+**Calibration.** $V_0(a_0, b_0)$ is continuous and increasing in $p_A$, from $0$ (A never lands) to
+nearly $1$. The engine solves
 
 $$
-p^{\ast} = V_0(a_0, b_0),
+V_0(a_0, b_0;\, p_A) = p^{\ast}
 $$
 
-one number that folds power and health together (a 1700-power fighter with 70 HP against a
-1550 with 120 HP rates 45%).
+by the Illinois method on $[0, 1]$, rebuilding the grid at each trial (three to ten passes, well under a
+second at $\rho = 1$), and keeps the grid of the solution. From then on the opening rating *is* the Elo
+probability to $10^{-10}$, the grid is the fight's true law, and both are reported in `calibration`
+(target, achieved, the solved $p_A$, passes). If a target is unreachable, which needs an Elo gap far
+outside anything a preset would ship, $p_A$ sits at the bound and the price is the grid's own $V_0$, so
+the RTP stays exact in every case.
 
 ## 5. One uniform per tick
 
@@ -127,9 +146,9 @@ The browser sandbox on the site has none of this protection by construction: the
 
 ## 10. Reference ratings (RTP 0.95, defaults)
 
-| pairing | $p_A$ | $p^{\ast}$ | opening odds A / B |
-|---|---|---|---|
-| 1600 / 100 HP vs 1600 / 100 HP | 50.0% | 50.0% | 1.90 / 1.90 |
-| 1700 / 100 vs 1550 / 100 | 57.1% | 73.5% | 1.29 / 3.59 |
-| 1700 / 70 vs 1550 / 120 | 57.1% | 45.1% | 2.11 / 1.73 |
-| 1600 / 130 vs 1600 / 100 | 50.0% | 65.2% | 1.46 / 2.73 |
+| pairing (power / hp = Elo) | health A / B | damage A / B | solved $p_A$ | $p^{\ast}$ | opening odds A / B |
+|---|---|---|---|---|---|
+| 800 / 800 = 1600 vs 800 / 800 = 1600 | 100 / 100 | 16 / 16 | 50.0% | 50.0% | 1.90 / 1.90 |
+| 850 / 850 = 1700 vs 775 / 775 = 1550 | 106 / 97 | 17 / 15.5 | 54.9% | 70.3% | 1.35 / 3.20 |
+| 1000 / 600 = 1600 vs 600 / 1000 = 1600 | 75 / 125 | 20 / 12 | 50.2% | 50.0% | 1.90 / 1.90 |
+| 1000 / 600 = 1600 vs 775 / 775 = 1550 | 75 / 97 | 20 / 15.5 | 53.6% | 57.1% | 1.66 / 2.22 |

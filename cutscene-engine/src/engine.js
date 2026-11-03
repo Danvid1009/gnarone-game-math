@@ -1,7 +1,7 @@
 // Cutscene Fight engine.  See ALGORITHM.md for the math.
 //
-//   const C = buildCutscene({ A: { power: 1700, hp: 100 }, B: { power: 1550, hp: 100 }, rtp: 0.95 });
-//   C.pA                    // P(A wins): the Live Fight rating of this pairing (power + HP folded into one number)
+//   const C = buildCutscene({ A: { power: 850, hp: 850 }, B: { power: 775, hp: 775 }, rtp: 0.95 });
+//   C.pA                    // P(A wins): the Elo formula on power + hp (the Live Fight grid is calibrated to it, so the cutscene agrees)
 //   C.odds                  // { A: rtp / pA, B: rtp / (1 − pA) }
 //   C.play({ bet, betType, rng })   // winner by one biased coin, cutscene script, win
 //   C.sideBet({ bet, params, rng }) // a draw from the side-bet library, independent of the fight
@@ -43,7 +43,7 @@ export function buildCutscene({ A, B, rtp = 0.95, fight = {}, maxRedraws = 64, n
   const F = buildFight({ A, B, rtp, ...fight });
   const pA = F.pA0, odds = { A: rtp / pA, B: rtp / (1 - pA) };
   const C = {
-    name: name ?? `cutscene-${A.power}v${B.power}`, rtp, fighters: { A, B }, pA, odds, fight: F,
+    name: name ?? `cutscene-${Math.round(F.elo.A)}v${Math.round(F.elo.B)}`, rtp, fighters: F.fighters, elo: F.elo, hp: F.hp, pA, odds, fight: F,
 
     /** Winner by one biased coin; then a cosmetic script with that winner. */
     play({ bet, betType, rng }) {
@@ -72,7 +72,7 @@ export function buildCutscene({ A, B, rtp = 0.95, fight = {}, maxRedraws = 64, n
       const side = {}; for (const [k, params] of Object.entries({ coin: { kind: 'coin', p: 0.5 }, pick3: { kind: 'pick', n: 3 }, shot: { kind: 'single-shot', payouts: [0, 0.5, 1, 2, 5, 20] } })) { const r2 = new Rng(seed + k, 'side'); let tot = 0; for (let i = 0; i < rounds; i++) tot += C.sideBet({ bet: 1000, params, rng: r2 }).totalWinAmount; side[k] = tot / rounds / 1000; }
       return { rounds, seed, pA, freqA: a / rounds, se: Math.sqrt(pA * (1 - pA) / rounds), rtpA: retA / rounds, rtpB: retB / rounds, sideRtp: side };
     },
-    toJSON() { return { name: C.name, rtp, fighters: { A, B }, pA, odds, fight: F.toJSON(), sideKinds: SIDE_KINDS }; },
+    toJSON() { return { name: C.name, rtp, fighters: F.fighters, elo: F.elo, hp: F.hp, pA, odds, fight: F.toJSON(), sideKinds: SIDE_KINDS }; },
   };
   return C;
 }

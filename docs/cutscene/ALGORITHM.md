@@ -5,8 +5,9 @@ result out; and a library of independent side bets the developer may call at any
 
 ## 1. The main bet
 
-The fight is rated with the Live Fight grid: $p^{\ast} = V_0(a_0, b_0)$, the exact probability
-that $A$ beats $B$ given both fighters' power and health (see the Live Fight write-up). The
+A fighter is power + hp attribute points and its Elo is the sum. The fight is priced by the Elo
+formula, $p^{\ast} = 1 / (1 + 10^{(E_B - E_A)/400})$; the Live Fight grid that draws the cutscene is
+calibrated to that same number (see the Live Fight write-up), so the script agrees with the price. The
 outcome is one uniform:
 
 $$
@@ -17,8 +18,8 @@ $$
 
 ## 2. The cutscene is cosmetic
 
-A Live Fight trajectory is drawn from a *derived* stream of the same seed and redrawn until its
-winner matches the coin (the first match is used; on average $1 / \max(p^{\ast}, 1 - p^{\ast})$
+A Live Fight trajectory (health from hp, damage from power, landing rate solved to the Elo price) is
+drawn from a *derived* stream of the same seed and redrawn until its winner matches the coin (the first match is used; on average $1 / \max(p^{\ast}, 1 - p^{\ast})$
 draws). The script carries every hit, the health after each, and whether it ended by knockout or
 decision. It never changes the payout: the coin already did. Because the derived stream is
 deterministic, the same seed gives the same cutscene.

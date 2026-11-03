@@ -8,12 +8,12 @@
     "even": {
       "parameters": {
         "A": {
-          "power": 1600,
-          "hp": 100
+          "power": 800,
+          "hp": 800
         },
         "B": {
-          "power": 1600,
-          "hp": 100
+          "power": 800,
+          "hp": 800
         },
         "rtp": 0.95
       },
@@ -46,22 +46,42 @@
       "multiStep": false,
       "linkedBets": false,
       "sideBets": true,
-      "how_to_settle": "main bet: u < pA → A wins; win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side). The cutscene is cosmetic. Side bets: coin / pick pay round(stake × RTP / p[pick]) on a hit; single-shot pays round(stake × multiple) from the sloped-band table.",
+      "how_to_settle": "main bet: pA = 1 / (1 + 10^((eloB − eloA) / 400)) with elo = power + hp (attribute points); u < pA → A wins; win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side). The cutscene is cosmetic. Side bets: coin / pick pay round(stake × RTP / p[pick]) on a hit; single-shot pays round(stake × multiple) from the sloped-band table.",
       "tables": {
         "fighters": {
           "A": {
-            "power": 1600,
-            "hp": 100
+            "power": 800,
+            "hp": 800,
+            "elo": 1600,
+            "split": 0.5
           },
           "B": {
-            "power": 1600,
-            "hp": 100
+            "power": 800,
+            "hp": 800,
+            "elo": 1600,
+            "split": 0.5
           }
         },
-        "pA": 0.4999999999999999,
+        "elo": {
+          "A": 1600,
+          "B": 1600
+        },
+        "hp": {
+          "A": 100,
+          "B": 100
+        },
+        "calibration": {
+          "target": 0.5,
+          "achieved": 0.5000000000000002,
+          "pLand": 0.5000000000000001,
+          "iterations": 3,
+          "calibrated": true,
+          "solved": true
+        },
+        "pA": 0.5000000000000002,
         "odds": {
-          "A": 1.9000000000000004,
-          "B": 1.8999999999999995
+          "A": 1.899999999999999,
+          "B": 1.9000000000000008
         },
         "sideLibrary": {
           "coin": {
@@ -166,12 +186,12 @@
     "favourite": {
       "parameters": {
         "A": {
-          "power": 1700,
-          "hp": 100
+          "power": 850,
+          "hp": 850
         },
         "B": {
-          "power": 1550,
-          "hp": 100
+          "power": 775,
+          "hp": 775
         },
         "rtp": 0.95
       },
@@ -204,22 +224,42 @@
       "multiStep": false,
       "linkedBets": false,
       "sideBets": true,
-      "how_to_settle": "main bet: u < pA → A wins; win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side). The cutscene is cosmetic. Side bets: coin / pick pay round(stake × RTP / p[pick]) on a hit; single-shot pays round(stake × multiple) from the sloped-band table.",
+      "how_to_settle": "main bet: pA = 1 / (1 + 10^((eloB − eloA) / 400)) with elo = power + hp (attribute points); u < pA → A wins; win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side). The cutscene is cosmetic. Side bets: coin / pick pay round(stake × RTP / p[pick]) on a hit; single-shot pays round(stake × multiple) from the sloped-band table.",
       "tables": {
         "fighters": {
           "A": {
-            "power": 1700,
-            "hp": 100
+            "power": 850,
+            "hp": 850,
+            "elo": 1700,
+            "split": 0.5
           },
           "B": {
-            "power": 1550,
-            "hp": 100
+            "power": 775,
+            "hp": 775,
+            "elo": 1550,
+            "split": 0.5
           }
         },
-        "pA": 0.7289486576995687,
+        "elo": {
+          "A": 1700,
+          "B": 1550
+        },
+        "hp": {
+          "A": 106.25,
+          "B": 96.875
+        },
+        "calibration": {
+          "target": 0.7033850034718286,
+          "achieved": 0.7033850034793414,
+          "pLand": 0.5494797784098413,
+          "iterations": 9,
+          "calibrated": true,
+          "solved": true
+        },
+        "pA": 0.7033850034793414,
         "odds": {
-          "A": 1.3032467924394424,
-          "B": 3.5048710400667455
+          "A": 1.3506116782427273,
+          "B": 3.2028050204596936
         },
         "sideLibrary": {
           "coin": {
@@ -310,8 +350,8 @@
         ]
       },
       "realisedRtp": {
-        "A": 0.9772,
-        "B": 0.8762
+        "A": 0.9997,
+        "B": 0.8328
       },
       "files": [
         "favourite/field.json",
@@ -324,12 +364,12 @@
     "glass-cannon": {
       "parameters": {
         "A": {
-          "power": 1700,
-          "hp": 70
+          "power": 1000,
+          "hp": 600
         },
         "B": {
-          "power": 1550,
-          "hp": 120
+          "power": 600,
+          "hp": 1000
         },
         "rtp": 0.95
       },
@@ -362,22 +402,42 @@
       "multiStep": false,
       "linkedBets": false,
       "sideBets": true,
-      "how_to_settle": "main bet: u < pA → A wins; win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side). The cutscene is cosmetic. Side bets: coin / pick pay round(stake × RTP / p[pick]) on a hit; single-shot pays round(stake × multiple) from the sloped-band table.",
+      "how_to_settle": "main bet: pA = 1 / (1 + 10^((eloB − eloA) / 400)) with elo = power + hp (attribute points); u < pA → A wins; win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side). The cutscene is cosmetic. Side bets: coin / pick pay round(stake × RTP / p[pick]) on a hit; single-shot pays round(stake × multiple) from the sloped-band table.",
       "tables": {
         "fighters": {
           "A": {
-            "power": 1700,
-            "hp": 70
+            "power": 1000,
+            "hp": 600,
+            "elo": 1600,
+            "split": 0.625
           },
           "B": {
-            "power": 1550,
-            "hp": 120
+            "power": 600,
+            "hp": 1000,
+            "elo": 1600,
+            "split": 0.375
           }
         },
-        "pA": 0.4507116878645354,
+        "elo": {
+          "A": 1600,
+          "B": 1600
+        },
+        "hp": {
+          "A": 75,
+          "B": 125
+        },
+        "calibration": {
+          "target": 0.5,
+          "achieved": 0.5000000000006428,
+          "pLand": 0.5020779824353531,
+          "iterations": 6,
+          "calibrated": true,
+          "solved": true
+        },
+        "pA": 0.5000000000006428,
         "odds": {
-          "A": 2.107777600578952,
-          "B": 1.7295106759266208
+          "A": 1.8999999999975572,
+          "B": 1.9000000000024426
         },
         "sideLibrary": {
           "coin": {
@@ -468,8 +528,8 @@
         ]
       },
       "realisedRtp": {
-        "A": 0.801,
-        "B": 1.0726
+        "A": 0.931,
+        "B": 0.969
       },
       "files": [
         "glass-cannon/field.json",

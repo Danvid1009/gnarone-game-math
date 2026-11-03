@@ -472,13 +472,13 @@
    "results": {
     "A": {
      "stake": 1000,
-     "win": 1900,
-     "winner": "A"
+     "win": 0,
+     "winner": "B"
     },
     "B": {
      "stake": 1000,
-     "win": 0,
-     "winner": "A"
+     "win": 1900,
+     "winner": "B"
     }
    }
   },

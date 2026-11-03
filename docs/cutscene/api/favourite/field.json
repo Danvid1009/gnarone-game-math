@@ -3,12 +3,12 @@
   "engine": "cutscene-engine",
   "parameters": {
     "A": {
-      "power": 1700,
-      "hp": 100
+      "power": 850,
+      "hp": 850
     },
     "B": {
-      "power": 1550,
-      "hp": 100
+      "power": 775,
+      "hp": 775
     },
     "rtp": 0.95
   },
@@ -38,22 +38,42 @@
   },
   "stake_units": "minor units",
   "multiStep": false,
-  "how_to_settle": "main bet: u < pA → A wins; win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side). The cutscene is cosmetic. Side bets: coin / pick pay round(stake × RTP / p[pick]) on a hit; single-shot pays round(stake × multiple) from the sloped-band table.",
+  "how_to_settle": "main bet: pA = 1 / (1 + 10^((eloB − eloA) / 400)) with elo = power + hp (attribute points); u < pA → A wins; win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side). The cutscene is cosmetic. Side bets: coin / pick pay round(stake × RTP / p[pick]) on a hit; single-shot pays round(stake × multiple) from the sloped-band table.",
   "rtp": 0.95,
   "fighters": {
     "A": {
-      "power": 1700,
-      "hp": 100
+      "power": 850,
+      "hp": 850,
+      "elo": 1700,
+      "split": 0.5
     },
     "B": {
-      "power": 1550,
-      "hp": 100
+      "power": 775,
+      "hp": 775,
+      "elo": 1550,
+      "split": 0.5
     }
   },
-  "pA": 0.7289486576995687,
+  "elo": {
+    "A": 1700,
+    "B": 1550
+  },
+  "hp": {
+    "A": 106.25,
+    "B": 96.875
+  },
+  "calibration": {
+    "target": 0.7033850034718286,
+    "achieved": 0.7033850034793414,
+    "pLand": 0.5494797784098413,
+    "iterations": 9,
+    "calibrated": true,
+    "solved": true
+  },
+  "pA": 0.7033850034793414,
   "odds": {
-    "A": 1.3032467924394424,
-    "B": 3.5048710400667455
+    "A": 1.3506116782427273,
+    "B": 3.2028050204596936
   },
   "sideLibrary": {
     "coin": {

@@ -4,122 +4,108 @@
   "results": {
     "A": {
       "stake": 1000,
-      "win": 2108,
+      "win": 1900,
       "totalBetAmount": 1000,
       "winner": "A",
-      "odds": 2.107777600578952,
+      "odds": 1.8999999999975572,
       "cutscene": {
         "how": "KO",
-        "ticks": 14,
+        "ticks": 12,
         "hits": [
           {
             "tick": 1,
             "hitter": "A",
-            "damage": 11,
-            "hpA": 70,
-            "hpB": 109
+            "damage": 14,
+            "hpA": 75,
+            "hpB": 111
           },
           {
             "tick": 2,
             "hitter": "B",
-            "damage": 2,
-            "hpA": 68,
-            "hpB": 109
+            "damage": 4,
+            "hpA": 71,
+            "hpB": 111
           },
           {
             "tick": 3,
             "hitter": "A",
-            "damage": 16,
-            "hpA": 68,
-            "hpB": 93
+            "damage": 22,
+            "hpA": 71,
+            "hpB": 89
           },
           {
             "tick": 4,
             "hitter": "B",
-            "damage": 6.5,
-            "hpA": 61.5,
-            "hpB": 93
+            "damage": 7,
+            "hpA": 64,
+            "hpB": 89
           },
           {
             "tick": 5,
             "hitter": "B",
-            "damage": 18.5,
-            "hpA": 43,
-            "hpB": 93
+            "damage": 16,
+            "hpA": 48,
+            "hpB": 89
           },
           {
             "tick": 6,
             "hitter": "B",
-            "damage": 29,
-            "hpA": 14,
-            "hpB": 93
+            "damage": 25,
+            "hpA": 23,
+            "hpB": 89
           },
           {
             "tick": 7,
             "hitter": "A",
-            "damage": 17,
-            "hpA": 14,
-            "hpB": 76
+            "damage": 24,
+            "hpA": 23,
+            "hpB": 65
           },
           {
             "tick": 8,
             "hitter": "B",
-            "damage": 8.5,
-            "hpA": 5.5,
-            "hpB": 76
+            "damage": 9,
+            "hpA": 14,
+            "hpB": 65
           },
           {
             "tick": 9,
             "hitter": "A",
-            "damage": 7,
-            "hpA": 5.5,
-            "hpB": 69
+            "damage": 9,
+            "hpA": 14,
+            "hpB": 56
           },
           {
             "tick": 10,
             "hitter": "A",
-            "damage": 11.5,
-            "hpA": 5.5,
-            "hpB": 57.5
+            "damage": 15,
+            "hpA": 14,
+            "hpB": 41
           },
           {
             "tick": 11,
             "hitter": "B",
-            "damage": 0.5,
-            "hpA": 5,
-            "hpB": 57.5
+            "damage": 3,
+            "hpA": 11,
+            "hpB": 41
           },
           {
             "tick": 12,
             "hitter": "A",
-            "damage": 27,
-            "hpA": 5,
-            "hpB": 30.5
-          },
-          {
-            "tick": 13,
-            "hitter": "A",
-            "damage": 21,
-            "hpA": 5,
-            "hpB": 9.5
-          },
-          {
-            "tick": 14,
-            "hitter": "A",
-            "damage": 21,
-            "hpA": 5,
+            "damage": 41,
+            "hpA": 11,
             "hpB": 0
           }
         ],
         "final": {
-          "hpA": 5,
+          "hpA": 11,
           "hpB": 0
         },
         "redraws": 0
       },
       "math": {
         "u": 0.026751010707321665,
-        "pA": 0.4507116878645354
+        "pA": 0.5000000000006428
       }
     },
     "B": {
@@ -127,119 +113,105 @@
       "win": 0,
       "totalBetAmount": 1000,
       "winner": "A",
-      "odds": 1.7295106759266208,
+      "odds": 1.9000000000024426,
       "cutscene": {
         "how": "KO",
-        "ticks": 14,
+        "ticks": 12,
         "hits": [
           {
             "tick": 1,
             "hitter": "A",
-            "damage": 11,
-            "hpA": 70,
-            "hpB": 109
+            "damage": 14,
+            "hpA": 75,
+            "hpB": 111
           },
           {
             "tick": 2,
             "hitter": "B",
-            "damage": 2,
-            "hpA": 68,
-            "hpB": 109
+            "damage": 4,
+            "hpA": 71,
+            "hpB": 111
           },
           {
             "tick": 3,
             "hitter": "A",
-            "damage": 16,
-            "hpA": 68,
-            "hpB": 93
+            "damage": 22,
+            "hpA": 71,
+            "hpB": 89
           },
           {
             "tick": 4,
             "hitter": "B",
-            "damage": 6.5,
-            "hpA": 61.5,
-            "hpB": 93
+            "damage": 7,
+            "hpA": 64,
+            "hpB": 89
           },
           {
             "tick": 5,
             "hitter": "B",
-            "damage": 18.5,
-            "hpA": 43,
-            "hpB": 93
+            "damage": 16,
+            "hpA": 48,
+            "hpB": 89
           },
           {
             "tick": 6,
             "hitter": "B",
-            "damage": 29,
-            "hpA": 14,
-            "hpB": 93
+            "damage": 25,
+            "hpA": 23,
+            "hpB": 89
           },
           {
             "tick": 7,
             "hitter": "A",
-            "damage": 17,
-            "hpA": 14,
-            "hpB": 76
+            "damage": 24,
+            "hpA": 23,
+            "hpB": 65
           },
           {
             "tick": 8,
             "hitter": "B",
-            "damage": 8.5,
-            "hpA": 5.5,
-            "hpB": 76
+            "damage": 9,
+            "hpA": 14,
+            "hpB": 65
           },
           {
             "tick": 9,
             "hitter": "A",
-            "damage": 7,
-            "hpA": 5.5,
-            "hpB": 69
+            "damage": 9,
+            "hpA": 14,
+            "hpB": 56
           },
           {
             "tick": 10,
             "hitter": "A",
-            "damage": 11.5,
-            "hpA": 5.5,
-            "hpB": 57.5
+            "damage": 15,
+            "hpA": 14,
+            "hpB": 41
           },
           {
             "tick": 11,
             "hitter": "B",
-            "damage": 0.5,
-            "hpA": 5,
-            "hpB": 57.5
+            "damage": 3,
+            "hpA": 11,
+            "hpB": 41
           },
           {
             "tick": 12,
             "hitter": "A",
-            "damage": 27,
-            "hpA": 5,
-            "hpB": 30.5
-          },
-          {
-            "tick": 13,
-            "hitter": "A",
-            "damage": 21,
-            "hpA": 5,
-            "hpB": 9.5
-          },
-          {
-            "tick": 14,
-            "hitter": "A",
-            "damage": 21,
-            "hpA": 5,
+            "damage": 41,
+            "hpA": 11,
             "hpB": 0
           }
         ],
         "final": {
-          "hpA": 5,
+          "hpA": 11,
           "hpB": 0
         },
         "redraws": 0
       },
       "math": {
         "u": 0.026751010707321665,
-        "pA": 0.4507116878645354
+        "pA": 0.5000000000006428
       }
     }
   }

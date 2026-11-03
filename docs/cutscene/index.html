@@ -56,7 +56,7 @@ footer{margin-top:48px;color:var(--ink-3);font-size:12.5px}
 <body><div class="wrap">
 <nav class="top"><div class="crumbs"><a href="../">GnarOne Game Math</a><span>/</span>Cutscene Fight</div><div><a href="play.html">full-screen demo</a> · <a href="https://github.com/Danvid1009/gnarone-game-math/tree/main/cutscene-engine">source</a></div></nav>
 <h1>FIGHT <span>CUTSCENE</span></h1>
-<p class="lead">One bet on the winner, decided by a single biased coin whose probability is the Live Fight rating of the pairing (power and HP in one number), then a predetermined cutscene that plays it out. During the cutscene the developer can call any number of side bets from a library: biased coins, n-way picks at RTP ÷ p, Single Shot tables. Each side bet is its own independent draw at its own RTP.</p>
+<p class="lead">One bet on the winner, decided by a single biased coin at the Elo price of the pairing (a fighter is power + hp attribute points, the sum is its Elo, the split only shapes the cutscene), then a predetermined cutscene that plays it out. During the cutscene the developer can call any number of side bets from a library: biased coins, n-way picks at RTP ÷ p, Single Shot tables. Each side bet is its own independent draw at its own RTP.</p>
 <div class="tags"><span>one coin, exact RTP</span><span>cosmetic cutscene</span><span>side-bet library: coin · pick · single shot</span></div>
 
 <div class="demo"><iframe src="play.html" title="Cutscene Fight demo" loading="eager"></iframe><a class="full" href="play.html">open full screen ↗</a></div>
@@ -101,7 +101,7 @@ curl -s https://danvid1009.github.io/gnarone-game-math/cutscene/api/even/sample-
 <pre><code>git clone https://github.com/Danvid1009/gnarone-game-math.git
 cd gnarone-game-math/cutscene-engine
 npm test
-node bin/build-cutscene.js --a 1700,100 --b 1550,100</code></pre>
+node bin/build-cutscene.js --a 850,850 --b 775,775</code></pre>
 <ul class="links">
   <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/cutscene-engine/ALGORITHM.md">ALGORITHM.md on GitHub</a></li>
   <li><a href="https://github.com/Danvid1009/gnarone-game-math/blob/main/cutscene-engine/src/engine.js">src/engine.js</a> — the engine</li>

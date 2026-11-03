@@ -1,10 +1,10 @@
 # fight-engine
 
-Live Fight: a biased damage walk between two fighters with an exact win-probability grid. Opening bet at RTP ÷ P(win); live bets during the fight are linked bets at fair odds 1 ÷ P. See [ALGORITHM.md](ALGORITHM.md).
+Live Fight: two fighters rated by Elo (attribute points power + hp; the sum prices the fight, the split shapes it), a biased damage walk with an exact win-probability grid calibrated to the Elo price. Opening bet at RTP ÷ P(win); live bets during the fight are linked bets at fair odds 1 ÷ P. See [ALGORITHM.md](ALGORITHM.md).
 
 ```bash
 npm test
-node bin/build-fight.js --a 1700,100 --b 1550,100
+node bin/build-fight.js --a 850,850 --b 775,775      # power,hp attribute points; or --a 1600:0.625 (elo:split)
 npm run fixtures      # examples/api/<preset>/ through the RGS module
 ```
 
