@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "52d100e6-2ddc-416e-9d35-463ca59b296b",
+    "sessionId": "96729763-a72e-4a55-a6bf-ca4a96c24bdf",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -90,6 +90,86 @@
       "expectedWinningBid": 2.3416,
       "rtp": 0.9720945752693296,
       "lossPerAuction": 0.11708000000000052
+    },
+    "buyNow": {
+      "betType": "BUY_NOW",
+      "multiple": 10,
+      "lockerMean": 0.9499999999999998,
+      "locker": [
+        {
+          "multiple": 0,
+          "p": 0.1756843065693432,
+          "residual_from": 0,
+          "residual_to": 0.1756843065693432,
+          "pays_from": 0,
+          "pays_to": 0
+        },
+        {
+          "multiple": 0.5,
+          "p": 0.2600364963503649,
+          "residual_from": 0.1756843065693432,
+          "residual_to": 0.4357208029197081,
+          "pays_from": 0.47,
+          "pays_to": 0.53
+        },
+        {
+          "multiple": 0.8,
+          "p": 0.20802919708029194,
+          "residual_from": 0.4357208029197081,
+          "residual_to": 0.64375,
+          "pays_from": 0.77,
+          "pays_to": 0.8300000000000001
+        },
+        {
+          "multiple": 1.2,
+          "p": 0.1386861313868613,
+          "residual_from": 0.64375,
+          "residual_to": 0.7824361313868613,
+          "pays_from": 1.17,
+          "pays_to": 1.23
+        },
+        {
+          "multiple": 1.5,
+          "p": 0.09534671532846714,
+          "residual_from": 0.7824361313868613,
+          "residual_to": 0.8777828467153285,
+          "pays_from": 1.47,
+          "pays_to": 1.53
+        },
+        {
+          "multiple": 2,
+          "p": 0.06934306569343066,
+          "residual_from": 0.8777828467153285,
+          "residual_to": 0.9471259124087591,
+          "pays_from": 1.97,
+          "pays_to": 2.03
+        },
+        {
+          "multiple": 3,
+          "p": 0.03467153284671533,
+          "residual_from": 0.9471259124087591,
+          "residual_to": 0.9817974452554744,
+          "pays_from": 2.97,
+          "pays_to": 3.03
+        },
+        {
+          "multiple": 5,
+          "p": 0.013001824817518246,
+          "residual_from": 0.9817974452554744,
+          "residual_to": 0.9947992700729926,
+          "pays_from": 4.97,
+          "pays_to": 5.03
+        },
+        {
+          "multiple": 7,
+          "p": 0.0052007299270072985,
+          "residual_from": 0.9947992700729926,
+          "residual_to": 1,
+          "pays_from": 6.97,
+          "pays_to": 7.03
+        }
+      ],
+      "locker_r": 0.030000000000000006
     },
     "stages": [
       {
@@ -645,7 +725,7 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "aed3b7d9-50b8-47dc-b320-c98d9feea063",
+        "roundId": "ecaaa693-d755-4537-aced-29c70620f7d9",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "balance": 99000,

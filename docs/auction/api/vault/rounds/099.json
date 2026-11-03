@@ -162,6 +162,29 @@
         "u": 0.9747123954892748,
         "v": 0.9747123954892748
       }
+    },
+    "BUY_NOW": {
+      "stake": 2000,
+      "win": 6042,
+      "totalBetAmount": 2000,
+      "outcome": "BOUGHT",
+      "stage": null,
+      "stages": 7,
+      "bid": 2000,
+      "multiple": 20,
+      "pOutbid": 0,
+      "refund": 0,
+      "locker": {
+        "multiplier": 3.0210413010330366,
+        "band": 6,
+        "multiple": 3,
+        "contents": 6042
+      },
+      "next": null,
+      "math": {
+        "u": 0.9747123954892748,
+        "v": 0.9747123954892748
+      }
     }
   }
 }

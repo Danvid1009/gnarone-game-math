@@ -3,7 +3,7 @@ import * as mod from '../src/rgs.js'; import { assertBrowserSafe, assertPresetFi
 test('rgs module is browser-safe', () => { assertBrowserSafe(new URL('../src/rgs.js', import.meta.url)); });
 test('every preset builds, replays fixture round 007 through the live calls, and follows the balance semantics', () => { assertPresetFixtures(mod, {}, new URL('../examples/api/', import.meta.url)); });
 test('bid levels cover every reachable amount and every amount factors into one (chip, multiple); a raise chain follows next.bid', () => {
-  const g = mod.createGame({ preset: 'storage' }); assert.deepEqual(g.betTypes, ['BID_1', 'BID_2', 'BID_3', 'BID_4', 'BID_5', 'BID_6']);
+  const g = mod.createGame({ preset: 'storage' }); assert.deepEqual(g.betTypes, ['BID_1', 'BID_2', 'BID_3', 'BID_4', 'BID_5', 'BID_6', 'BUY_NOW']); assert.deepEqual(g.levels('BUY_NOW'), mod.LEVELS.map(c => c * 10)); assert.equal(g.open().buyNow.multiple, 10);
   assert.deepEqual(g.levels('BID_1').slice(0, 3), [100, 200, 500]); assert.deepEqual(g.levels('BID_2').slice(0, 3), [200, 400, 1000]); assert.deepEqual(g.levels('BID_3').slice(0, 4), [300, 400, 600, 800]);
   for (const preset of Object.keys(mod.PRESETS)) { const h = mod.createGame({ preset }); for (let k = 1; k <= h.engine.N; k++) for (const amt of h.levels(`BID_${k}`)) { const hits = h.engine.reach[k - 1].filter(m => mod.LEVELS.some(c => Math.round(c * m) === amt)); assert.equal(hits.length, 1, `${preset} BID_${k} ${amt} → ${hits}`); } }
   const s = g.open(); let bal = s.balance, bet = 1000, k = 1;

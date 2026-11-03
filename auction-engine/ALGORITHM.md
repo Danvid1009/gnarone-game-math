@@ -88,6 +88,17 @@ refund or the locker contents), `locker { multiplier, band, multiple, contents }
 `next { betType, bid, increment, multiple }`, the raise the client offers next (null on a win, and after the last raise). Each raise is collected on its own. The
 client chains raises with the `next` field; the engine needs no state between them.
 
+## 6b. Buy now: the max bet
+
+Alongside the raises the auction offers the locker outright at a fixed price $\beta\, b_1$ ($\beta$ = `buyNow`;
+storage 10, street 5, vault 20, about the expected top of each ladder). BUY\_NOW is a single-call bet with
+level list $c\,\beta$ for every chip $c$. There are no rivals, so it is the $H = 0$ case: one uniform opens the
+same locker shape with mean $R$ times the price in both edge modes, outcome BOUGHT, `next` null. Its expected
+loss is $(1 - R)\,\beta\, b_1$, the largest of any single call, and its largest payout is $\beta\, b_1$ times the
+top locker band, which is why it defines the auction's max bet and max exposure. Bidding is cheaper in
+expectation (storage: expected hammer price $2.34\, b_1$ against a $10\, b_1$ price) but takes up to six calls and
+ends at $8$ to $13\, b_1$ if the rivals never fold; buy now is the impatient player's line.
+
 ## 7. Reference instances ($R = 0.95$ on the hammer price, full refund)
 
 | preset | stages $H_k$ | increments $D_k$ | reachable multiples at the top | locker multiples |

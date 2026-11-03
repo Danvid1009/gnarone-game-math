@@ -175,12 +175,13 @@
     "tags": [
       "raises are independent bets",
       "outbid = money back",
-      "edge only in won lockers"
+      "edge only in won lockers",
+      "BUY NOW takes the locker outright at a fixed multiple: the max bet"
     ],
     "figures": [
       [
         "examples/stages.png",
-        "Per raise: the outbid probability falls as rivals thin out and the locker mean rises to meet the RTP; simulated return per raise sits on 95%."
+        "Per raise: the outbid probability falls as rivals thin out while every won locker keeps mean 0.95 × its bid; simulated return per raise sits on 95%."
       ],
       [
         "examples/won-at.png",

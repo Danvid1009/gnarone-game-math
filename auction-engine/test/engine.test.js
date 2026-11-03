@@ -8,7 +8,7 @@ test('edge on the hammer (default): every won locker has mean R; raise k returns
   const P = D.policy(); assert.ok(Math.abs(P.rtp - 0.9721) < 5e-4, `always-raise rtp ${P.rtp}`); assert.ok(close(P.lossPerAuction, 0.05 * P.expectedWinningBid), 'loss = 5% of the expected hammer price'); assert.ok(Math.abs(P.expectedWinningBid - 2.34) < 0.01);
   assert.ok(D.policy(1).rtp > P.rtp, 'walking early returns more per unit staked');
   const A = buildLockerWars({ refund: 0.95, edge: 'per-raise' });
-  assert.equal(A.N, 6); assert.deepEqual(A.betTypes, ['BID_1', 'BID_2', 'BID_3', 'BID_4', 'BID_5', 'BID_6']);
+  assert.equal(A.N, 6); assert.deepEqual(A.betTypes, ['BID_1', 'BID_2', 'BID_3', 'BID_4', 'BID_5', 'BID_6', 'BUY_NOW']);
   for (const s of A.stages) { assert.ok(close(s.rtp, 0.95), `stage ${s.stage}`); assert.ok(close(s.lockerMean, 0.95)); assert.ok(close(s.box.rtp, 0.95)); assert.ok(close(s.box.p.reduce((t, x) => t + x, 0), 1)); }
   // per-raise with a full refund: the locker mean rises as rivals thin out
   const F = buildLockerWars({ edge: 'per-raise' }); for (const s of F.stages) { assert.ok(close(s.rtp, 0.95)); assert.ok(close(s.lockerMean, (0.95 - s.outbid) / (1 - s.outbid))); }
@@ -46,6 +46,11 @@ test('play: outcomes, refund and locker fields, next raise drawn from the stage 
     else { won++; assert.equal(r.refund, 0); assert.ok(r.locker); assert.equal(r.locker.contents, r.totalWinAmount); assert.equal(r.totalWinAmount, Math.round(1000 * r.locker.multiplier)); assert.ok(A.payouts.includes(r.locker.multiple)); } }
   assert.ok(Math.abs(outbid / 2000 - 0.5) < 0.05); assert.deepEqual([...nexts].sort(), [1500, 2000], 'both increments occur');
   const rng = new Rng('play'); const last = A.play({ bet: 1000, betType: 'BID_6', rng, chips: [100] }); assert.equal(last.outcome, 'WON'); assert.equal(last.next, null);
+  // buy now: the locker outright at buyNow × the opener, mean R, no rivals, no next
+  assert.deepEqual(A.betTypes.at(-1), 'BUY_NOW'); assert.equal(A.buyNow.multiple, 10); assert.ok(close(A.buyNow.box.rtp, 0.95)); let tot = 0;
+  for (let i = 0; i < 4000; i++) { const b = A.play({ bet: 10000, betType: 'BUY_NOW', rng: new Rng(`buy-${i}`), chips: [1000] }); assert.equal(b.outcome, 'BOUGHT'); assert.equal(b.pOutbid, 0); assert.equal(b.refund, 0); assert.equal(b.next, null); assert.equal(b.multiple, 10); assert.ok(b.locker && A.payouts.includes(b.locker.multiple)); assert.equal(b.locker.contents, b.totalWinAmount); tot += b.totalWinAmount; }
+  assert.ok(Math.abs(tot / 4000 / 10000 - 0.95) < 0.05, 'buy-now return near R');
+  const NB = buildLockerWars({ buyNow: null }); assert.ok(!NB.betTypes.includes('BUY_NOW')); assert.throws(() => NB.play({ bet: 1000, betType: 'BUY_NOW', rng }), /BID_1/); assert.throws(() => buildLockerWars({ buyNow: 0 }), /buyNow/);
   // the ladder draw is reproducible from the seed and separate from the outcome draw
   const a = A.play({ bet: 500, betType: 'BID_1', rng: new Rng('lad', 'payout'), chips: [500] }), b = A.play({ bet: 500, betType: 'BID_1', rng: new Rng('lad', 'payout'), chips: [500] }); assert.deepEqual(a, b); if (a.outcome === 'OUTBID') assert.equal(a.next.bid, 1000);
   assert.throws(() => A.play({ bet: 1000, betType: 'BID_7', rng }), /BID_1/); assert.throws(() => buildLockerWars({ edge: 'per-raise', outbid: [0.96], bids: [1] }), /no value for the locker/); assert.throws(() => buildLockerWars({ edge: 'tax' }), /edge must be/); assert.throws(() => buildLockerWars({ steps: null, bids: null, growth: 0.5 }), /growth/);

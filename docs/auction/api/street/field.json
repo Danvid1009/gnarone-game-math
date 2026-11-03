@@ -44,6 +44,7 @@
         1.8
       ]
     },
+    "buyNow": 5,
     "refund": 1,
     "rtp": 0.95
   },
@@ -51,7 +52,8 @@
     "BID_1",
     "BID_2",
     "BID_3",
-    "BID_4"
+    "BID_4",
+    "BUY_NOW"
   ],
   "levels": {
     "BID_1": [
@@ -110,11 +112,20 @@
       40000,
       50000,
       60000
+    ],
+    "BUY_NOW": [
+      500,
+      1000,
+      2500,
+      5000,
+      12500,
+      25000,
+      50000
     ]
   },
   "stake_units": "minor units",
   "multiStep": false,
-  "how_to_settle": "each raise is its own single-call bet. Raise k (betType BID_k, amount = opening chip × a multiple the stage can reach; every amount factors into exactly one chip × multiple, which recovers the opener): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back in full) and next names the following raise, whose increment is drawn from the derived stream SHA-256(seed|ladder|0) uniformly over steps[k−1] (in opener units): next.bid = round(opener × (multiple + step)); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band, with next = null since the auction is over. With edge \"hammer\" (default) every won locker has mean R × the hammer price and walks or outbids return exactly the stake, so the house takes 1 − R of what is bought and nothing else; raise k returns outbid + (1 − outbid) × R per unit staked. Edge \"per-raise\" instead solves the locker mean as (R − outbid) ÷ (1 − outbid) so every raise returns exactly R. The last stage has outbid 0: the rivals are gone and the locker always opens.",
+  "how_to_settle": "each raise is its own single-call bet. Raise k (betType BID_k, amount = opening chip × a multiple the stage can reach; every amount factors into exactly one chip × multiple, which recovers the opener): u < outbid[k−1] → OUTBID, win = round(bet × refund) (refund 1: the bid comes back in full) and next names the following raise, whose increment is drawn from the derived stream SHA-256(seed|ladder|0) uniformly over steps[k−1] (in opener units): next.bid = round(opener × (multiple + step)); else v = (u − outbid[k−1]) / (1 − outbid[k−1]) and the locker pays the sloped band of v: win = round(bet × (payout + r·(2t − 1))), 0 in the empty band, with next = null since the auction is over. With edge \"hammer\" (default) every won locker has mean R × the hammer price and walks or outbids return exactly the stake, so the house takes 1 − R of what is bought and nothing else; raise k returns outbid + (1 − outbid) × R per unit staked. Edge \"per-raise\" instead solves the locker mean as (R − outbid) ÷ (1 − outbid) so every raise returns exactly R. The last stage has outbid 0: the rivals are gone and the locker always opens. BUY_NOW (amount = opening chip × buyNow, the max bet) skips the rivals: one uniform opens the same locker shape with mean R × the price, outcome BOUGHT, next null.",
   "rtp": 0.95,
   "edge": "hammer",
   "refund": 1,
@@ -154,6 +165,78 @@
     "expectedWinningBid": 1.815,
     "rtp": 0.9674439461883408,
     "lossPerAuction": 0.09074999999999989
+  },
+  "buyNow": {
+    "betType": "BUY_NOW",
+    "multiple": 5,
+    "lockerMean": 0.9500000000000001,
+    "locker": [
+      {
+        "multiple": 0,
+        "p": 0.15753040224508885,
+        "residual_from": 0,
+        "residual_to": 0.15753040224508885,
+        "pays_from": 0,
+        "pays_to": 0
+      },
+      {
+        "multiple": 0.5,
+        "p": 0.2666043030869972,
+        "residual_from": 0.15753040224508885,
+        "residual_to": 0.424134705332086,
+        "pays_from": 0.47,
+        "pays_to": 0.53
+      },
+      {
+        "multiple": 0.8,
+        "p": 0.21328344246959777,
+        "residual_from": 0.424134705332086,
+        "residual_to": 0.6374181478016838,
+        "pays_from": 0.77,
+        "pays_to": 0.8300000000000001
+      },
+      {
+        "multiple": 1.2,
+        "p": 0.14218896164639852,
+        "residual_from": 0.6374181478016838,
+        "residual_to": 0.7796071094480823,
+        "pays_from": 1.17,
+        "pays_to": 1.23
+      },
+      {
+        "multiple": 1.5,
+        "p": 0.09775491113189898,
+        "residual_from": 0.7796071094480823,
+        "residual_to": 0.8773620205799812,
+        "pays_from": 1.47,
+        "pays_to": 1.53
+      },
+      {
+        "multiple": 2,
+        "p": 0.07109448082319926,
+        "residual_from": 0.8773620205799812,
+        "residual_to": 0.9484565014031805,
+        "pays_from": 1.97,
+        "pays_to": 2.03
+      },
+      {
+        "multiple": 3,
+        "p": 0.03554724041159963,
+        "residual_from": 0.9484565014031805,
+        "residual_to": 0.9840037418147801,
+        "pays_from": 2.97,
+        "pays_to": 3.03
+      },
+      {
+        "multiple": 5,
+        "p": 0.015996258185219832,
+        "residual_from": 0.9840037418147801,
+        "residual_to": 1,
+        "pays_from": 4.97,
+        "pays_to": 5.03
+      }
+    ],
+    "locker_r": 0.030000000000000006
   },
   "stages": [
     {

@@ -20,7 +20,7 @@
 import { Rng } from './rng.js';
 import { buildPayout } from '../../payout-engine/src/engine.js';
 
-export function buildLockerWars({ rtp = 0.95, refund = 1, edge = 'hammer', outbid = [0.6, 0.5, 0.4, 0.3, 0.2, 0], steps = [[1], [1, 2], [1, 2], [2, 3], [2, 4]], bids = null, growth = 1.5, locker = {}, name } = {}) {
+export function buildLockerWars({ rtp = 0.95, refund = 1, edge = 'hammer', outbid = [0.6, 0.5, 0.4, 0.3, 0.2, 0], steps = [[1], [1, 2], [1, 2], [2, 3], [2, 4]], bids = null, growth = 1.5, locker = {}, buyNow = 10, name } = {}) {
   if (!['hammer', 'per-raise'].includes(edge)) throw new Error(`edge must be 'hammer' or 'per-raise', got ${edge}`);
   if (!(rtp > 0 && rtp < 1)) throw new Error(`rtp must be in (0,1), got ${rtp}`);
   if (!(refund >= 0 && refund <= 1)) throw new Error('refund must be in [0,1]');
@@ -48,11 +48,16 @@ export function buildLockerWars({ rtp = 0.95, refund = 1, edge = 'hammer', outbi
     return { stage: i + 1, g: expMult[i], multiples: reach[i], increments: i < N - 1 ? stepSets[i] : [], outbid: H, refund, lockerMean: mean, box, rtp: H * refund + (1 - H) * box.rtp };
   });
   const bidMultiple = (k) => expMult[k - 1];
+  // Buy now: take the locker outright at a fixed multiple of the opening bid, no rivals. The locker has mean R × the
+  // price in both edge modes (it is a won locker with H = 0), so it is the auction's max bet and its max exposure.
+  if (buyNow !== null && !(buyNow > 0)) throw new Error(`buyNow must be a positive multiple of the opening bid or null, got ${buyNow}`);
+  const buy = buyNow === null ? null : { betType: 'BUY_NOW', multiple: buyNow, box: buildPayout({ payouts, rtp, method: locker.method ?? 'maxent', weights: locker.weights, fraction: locker.fraction ?? 0.1 }) };
   const fixedLadder = reach.every(r => r.length === 1);
 
   const A = {
     name: name ?? `locker-wars-${N}`, rtp, refund, edge, steps: stepSets, reach, expectedMultiples: expMult, fixedLadder, N, outbid, payouts, stages,
-    betTypes: stages.map(s => `BID_${s.stage}`),
+    buyNow: buy, betTypes: [...stages.map(s => `BID_${s.stage}`), ...(buy ? ['BUY_NOW'] : [])],
+    isBuyNow(betType) { return !!buy && betType === 'BUY_NOW'; },
     stageOf(betType) { const m = /^BID_(\d+)$/.exec(betType); const k = m ? Number(m[1]) : NaN; if (!(k >= 1 && k <= N)) throw new Error(`betType must be BID_1 … BID_${N}, got ${betType}`); return k; },
     bidMultiple,
 
@@ -78,6 +83,11 @@ export function buildLockerWars({ rtp = 0.95, refund = 1, edge = 'hammer', outbi
       return { multiple: m, opener: bet / m };
     },
     play({ bet, betType = 'BID_1', rng, chips }) {
+      if (A.isBuyNow(betType)) {   // no rivals: one uniform opens the locker at the buy-now price
+        const u = rng.next(); const X = buy.box.payout(u), band = buy.box.bandOf(u); const win = Math.round(bet * X);
+        return { totalWinAmount: win, outcome: 'BOUGHT', stage: null, stages: N, bid: bet, multiple: buy.multiple, pOutbid: 0, refund: 0,
+          locker: { multiplier: X, band, multiple: buy.box.payouts[band], contents: win }, next: null, math: { u, v: u } };
+      }
       const k = A.stageOf(betType); const S = stages[k - 1]; const u = rng.next(); const d = A.draw(u, k);
       const win = Math.round(bet * d.multiple); const { multiple, opener } = A.resolve(bet, k, chips);
       let next = null;   // the next raise exists only when outbid below the last stage: a won locker ends the auction
@@ -104,7 +114,7 @@ export function buildLockerWars({ rtp = 0.95, refund = 1, edge = 'hammer', outbi
         `  if (u >= 1) u = 1 - 1e-12; const h = H[k - 1]; if (u < h) return rho;`, `  const v = h < 1 ? (u - h) / (1 - h) : u; const B = breaks[k - 1], P = pay[k - 1]; let i = 0; while (B[i + 1] <= v) i++;`,
         `  if (P[i] <= 0) return 0; const t = (v - B[i]) / (B[i + 1] - B[i]); return P[i] + r[k - 1] * (2 * t - 1);`, `}`].join('\n');
     },
-    toJSON() { return { name: A.name, rtp, refund, edge, steps: stepSets, reach, expectedMultiples: expMult, fixedLadder, outbid, payouts, alwaysRaise: A.policy(), stages: stages.map(s => ({ stage: s.stage, bidMultiple: s.g, outbid: s.outbid, refund: s.refund, lockerMean: s.lockerMean, rtp: s.rtp, bands: s.box.bands.map(b => ({ payout: b.payout, p: b.p, from: b.from, to: b.to, range: b.range })) })) }; },
+    toJSON() { return { name: A.name, rtp, refund, edge, steps: stepSets, reach, expectedMultiples: expMult, fixedLadder, outbid, payouts, buyNow: buy ? { betType: 'BUY_NOW', multiple: buy.multiple, lockerMean: buy.box.rtp, bands: buy.box.bands.map(b => ({ payout: b.payout, p: b.p, from: b.from, to: b.to, range: b.range })) } : null, alwaysRaise: A.policy(), stages: stages.map(s => ({ stage: s.stage, bidMultiple: s.g, outbid: s.outbid, refund: s.refund, lockerMean: s.lockerMean, rtp: s.rtp, bands: s.box.bands.map(b => ({ payout: b.payout, p: b.p, from: b.from, to: b.to, range: b.range })) })) }; },
   };
   return A;
 }
@@ -113,5 +123,6 @@ export function format(A) {
   const pct = x => `${(100 * x).toFixed(2)}%`;
   const P = A.policy(); return [`${A.name}   R ${A.rtp} on ${A.edge === 'hammer' ? 'the hammer price (won lockers only)' : 'every raise'}   refund on outbid ${A.refund}   increments ${A.steps.map(x => '+' + x.join('|')).join(' ')}   locker payouts ${A.payouts.join('/')}`, `always-raise: RTP ${P.rtp.toFixed(4)} per unit staked, expected loss ${P.lossPerAuction.toFixed(4)} × opener (= ${(100 * (1 - A.rtp)).toFixed(0)}% of the expected hammer price ${P.expectedWinningBid.toFixed(2)})`, '',
     'stage  bid× (possible)        P(outbid)   locker mean   P(locker ≥ 1×)   exact return',
-    ...A.stages.map(s => `${String(s.stage).padStart(5)}  ${s.multiples.join('/').padEnd(22)} ${pct(s.outbid).padStart(8)}   ${s.lockerMean.toFixed(4).padStart(10)}   ${pct(s.box.bands.filter(b => b.payout >= 1).reduce((t, b) => t + b.p, 0)).padStart(13)}   ${s.rtp.toFixed(6)}`)].join('\n');
+    ...A.stages.map(s => `${String(s.stage).padStart(5)}  ${s.multiples.join('/').padEnd(22)} ${pct(s.outbid).padStart(8)}   ${s.lockerMean.toFixed(4).padStart(10)}   ${pct(s.box.bands.filter(b => b.payout >= 1).reduce((t, b) => t + b.p, 0)).padStart(13)}   ${s.rtp.toFixed(6)}`),
+    ...(A.buyNow ? [`  buy  ${String(A.buyNow.multiple).padEnd(22)} ${pct(0).padStart(8)}   ${A.buyNow.box.rtp.toFixed(4).padStart(10)}   ${pct(A.buyNow.box.bands.filter(b => b.payout >= 1).reduce((t, b) => t + b.p, 0)).padStart(13)}   ${A.buyNow.box.rtp.toFixed(6)}   (BUY_NOW: the locker outright at ${A.buyNow.multiple}× the opener, no rivals)`] : [])].join('\n');
 }
