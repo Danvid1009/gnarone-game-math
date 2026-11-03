@@ -38,8 +38,9 @@
   },
   "stake_units": "minor units",
   "multiStep": true,
-  "how_to_settle": "a fighter is { power, hp } in attribute points and its Elo is the sum; P(A wins at the bell) = 1 / (1 + 10^((eloB − eloA) / 400)) exactly. Health = 100 × hp / 800, mean damage = 16 × power / 800, and the chance that a tick's hit is A's (pLand) is solved on the exact grid so the fight's V_0 equals that Elo probability (session.calibration). Opening bet: win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side wins at the bell). Live (linked) bet placed after t ticks: win = round(stake × 1 / P(side wins | state after t ticks)) if the side wins, else 0. Each tick: u < pLand.A → A lands and u / pLand.A picks the damage cell from damage.A.cum; else B lands and (u − pLand.A) / (1 − pLand.A) picks from damage.B.cum. Health only falls; 0 is a KO. If both stand after the last tick one more uniform decides against P = hpA / (hpA + hpB).",
+  "how_to_settle": "a fighter is { power, hp } in attribute points and its Elo is the sum; P(A wins at the bell) = 1 / (1 + 10^((eloB − eloA) / 400)) exactly. Health = 100 × hp / 800, mean damage = 16 × power / 800, and the chance that a tick's hit is A's (pLand) is solved on the exact grid so the fight's V_0 equals that Elo probability (session.calibration). Opening bet: win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side wins at the bell). Live (linked) bet placed after t ticks: win = round(stake × 1 / P(side wins | state after t ticks)) if the side wins, else 0; the live stakes placed at any one tick may total at most liveCap × the opening stake (default 3×), enforced by linkedBet and reported by quote().cap. Each tick: u < pLand.A → A lands and u / pLand.A picks the damage cell from damage.A.cum; else B lands and (u − pLand.A) / (1 − pLand.A) picks from damage.B.cum. Health only falls; 0 is a KO. If both stand after the last tick one more uniform decides against P = hpA / (hpA + hpB).",
   "rtp": 0.95,
+  "liveCap": 3,
   "fighters": {
     "A": {
       "power": 850,

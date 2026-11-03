@@ -2,8 +2,8 @@
 //   const g = createGame({ preset: 'favourite' });
 //   let r = g.bet({ sessionId, betAmount: 1000, betType: 'A' });            // opening bet at RTP ÷ P(A wins); nextAction ['CONTINUE']
 //   r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' });        // reveals one tick: who landed, damage, healths, pA
-//   g.quote({ roundId: r.roundId });                                          // fair live prices { odds: { A, B }, pA, tick, hp }
-//   const live = g.linkedBet({ sessionId, roundId: r.roundId, betAmount: 500, betType: 'B' });   // new money, settles when the fight ends
+//   g.quote({ roundId: r.roundId });                                          // fair live prices { odds: { A, B }, pA, tick, hp, cap: { maxBet, placed, remaining } }
+//   const live = g.linkedBet({ sessionId, roundId: r.roundId, betAmount: 500, betType: 'B' });   // new money, settles when the fight ends; per tick at most 3× the opening stake
 //   ... CONTINUE until roundEnded ...; g.collect({ roundId: r.roundId }); g.collect({ roundId: live.roundId });
 import { defineGame } from '../../rgs-math/src/contract.js';
 import { buildFight } from './engine.js';
@@ -17,11 +17,13 @@ export const PRESETS = {
   slugfest:      { A: { power: 800, hp: 800 },  B: { power: 800, hp: 800 },  ticks: 10, baseDamage: 24, rtp: RTP },   // even, short and heavy
 };
 export const DEFAULT_PRESET = 'even';
-export const HOW_TO_SETTLE = 'a fighter is { power, hp } in attribute points and its Elo is the sum; P(A wins at the bell) = 1 / (1 + 10^((eloB − eloA) / 400)) exactly. Health = 100 × hp / 800, mean damage = 16 × power / 800, and the chance that a tick\'s hit is A\'s (pLand) is solved on the exact grid so the fight\'s V_0 equals that Elo probability (session.calibration). Opening bet: win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side wins at the bell). Live (linked) bet placed after t ticks: win = round(stake × 1 / P(side wins | state after t ticks)) if the side wins, else 0. Each tick: u < pLand.A → A lands and u / pLand.A picks the damage cell from damage.A.cum; else B lands and (u − pLand.A) / (1 − pLand.A) picks from damage.B.cum. Health only falls; 0 is a KO. If both stand after the last tick one more uniform decides against P = hpA / (hpA + hpB).';
+export const HOW_TO_SETTLE = 'a fighter is { power, hp } in attribute points and its Elo is the sum; P(A wins at the bell) = 1 / (1 + 10^((eloB − eloA) / 400)) exactly. Health = 100 × hp / 800, mean damage = 16 × power / 800, and the chance that a tick\'s hit is A\'s (pLand) is solved on the exact grid so the fight\'s V_0 equals that Elo probability (session.calibration). Opening bet: win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side wins at the bell). Live (linked) bet placed after t ticks: win = round(stake × 1 / P(side wins | state after t ticks)) if the side wins, else 0; the live stakes placed at any one tick may total at most liveCap × the opening stake (default 3×), enforced by linkedBet and reported by quote().cap. Each tick: u < pLand.A → A lands and u / pLand.A picks the damage cell from damage.A.cum; else B lands and (u − pLand.A) / (1 − pLand.A) picks from damage.B.cum. Health only falls; 0 is a KO. If both stand after the last tick one more uniform decides against P = hpA / (hpA + hpB).';
 
 const pub = v => ({ tick: v.tick, ticksMax: v.ticksMax, hp: v.hp, pA: v.pA, odds: v.odds, last: v.last, winner: v.winner, how: v.how, decision: v.decision });
 
-export function createGame({ preset = DEFAULT_PRESET, levels = LEVELS, ...overrides } = {}) {
+export const LIVE_CAP = 3;   // live bets at any one tick may total at most 3× the opening stake
+
+export function createGame({ preset = DEFAULT_PRESET, levels = LEVELS, liveCap = LIVE_CAP, ...overrides } = {}) {
   if (!PRESETS[preset]) throw new Error(`unknown preset "${preset}"; presets: ${Object.keys(PRESETS).join(', ')}`);
   const params = { ...PRESETS[preset], ...overrides };
   const F = buildFight({ ...params, name: preset });
@@ -32,8 +34,9 @@ export function createGame({ preset = DEFAULT_PRESET, levels = LEVELS, ...overri
     linked: {
       price({ round }) { const v = round.state.view(); return { odds: { A: 1 / v.pA, B: 1 / (1 - v.pA) }, pA: v.pA, tick: v.tick, hp: v.hp }; },
       settle({ round, child }) { const v = round.state.view(); return v.winner === child.betType ? Math.round(child.totalBetAmount * child.odds) : 0; },
+      maxMultiple: liveCap,   // live money per tick is capped at liveCap × the opening stake (quote() reports the room left)
     },
-    sessionExtras: { preset, rtp: F.rtp, fighters: F.fighters, elo: F.elo, hp: F.hp, calibration: F.calibration, ticks: F.ticks, res: F.res, pLand: F.pLand, damage: { A: { damage: F.damage.A.damage, p: F.damage.A.p, cum: F.damage.A.cum, mean: F.damage.A.mean }, B: { damage: F.damage.B.damage, p: F.damage.B.p, cum: F.damage.B.cum, mean: F.damage.B.mean } }, pA0: F.pA0, openingOdds: F.odds, endRule: F.endRule },
+    sessionExtras: { preset, rtp: F.rtp, liveCap, fighters: F.fighters, elo: F.elo, hp: F.hp, calibration: F.calibration, ticks: F.ticks, res: F.res, pLand: F.pLand, damage: { A: { damage: F.damage.A.damage, p: F.damage.A.p, cum: F.damage.A.cum, mean: F.damage.A.mean }, B: { damage: F.damage.B.damage, p: F.damage.B.p, cum: F.damage.B.cum, mean: F.damage.B.mean } }, pA0: F.pA0, openingOdds: F.odds, endRule: F.endRule },
   });
   g.engine = F; g.preset = preset; g.params = params; g.howToSettle = HOW_TO_SETTLE; g.hasCashOut = false;
   return g;

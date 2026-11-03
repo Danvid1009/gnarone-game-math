@@ -5,7 +5,7 @@
     {
       "call": "bet",
       "body": {
-        "sessionId": "d8367e2a-3a08-48eb-bafe-473366457a2f",
+        "sessionId": "a5a12ff1-4bfe-4ae7-b997-1472441ea7b8",
         "betAmount": 1000,
         "betType": "A",
         "seed": "fixture-007"
@@ -14,28 +14,28 @@
     {
       "call": "next-action",
       "body": {
-        "roundId": "6e66d423-10ba-4ec9-a34f-d0899d5dd052",
+        "roundId": "edc3f373-3c39-4af7-b0d6-d554cd47f1fb",
         "actionCode": "CONTINUE"
       }
     },
     {
       "call": "next-action",
       "body": {
-        "roundId": "6e66d423-10ba-4ec9-a34f-d0899d5dd052",
+        "roundId": "edc3f373-3c39-4af7-b0d6-d554cd47f1fb",
         "actionCode": "CONTINUE"
       }
     },
     {
       "call": "quote",
       "body": {
-        "roundId": "6e66d423-10ba-4ec9-a34f-d0899d5dd052"
+        "roundId": "edc3f373-3c39-4af7-b0d6-d554cd47f1fb"
       }
     },
     {
       "call": "linked-bet",
       "body": {
-        "sessionId": "d8367e2a-3a08-48eb-bafe-473366457a2f",
-        "roundId": "6e66d423-10ba-4ec9-a34f-d0899d5dd052",
+        "sessionId": "a5a12ff1-4bfe-4ae7-b997-1472441ea7b8",
+        "roundId": "edc3f373-3c39-4af7-b0d6-d554cd47f1fb",
         "betAmount": 1000,
         "betType": "B"
       }
@@ -43,20 +43,20 @@
     {
       "call": "next-action (last)",
       "body": {
-        "roundId": "6e66d423-10ba-4ec9-a34f-d0899d5dd052",
+        "roundId": "edc3f373-3c39-4af7-b0d6-d554cd47f1fb",
         "actionCode": "CONTINUE"
       }
     },
     {
       "call": "collect",
       "body": {
-        "roundId": "6e66d423-10ba-4ec9-a34f-d0899d5dd052"
+        "roundId": "edc3f373-3c39-4af7-b0d6-d554cd47f1fb"
       }
     },
     {
       "call": "collect (live bet)",
       "body": {
-        "roundId": "6cb8beaa-e9f9-4172-a15f-4c6b11747866"
+        "roundId": "66556205-6058-44e4-a314-44972311a1b8"
       }
     }
   ],

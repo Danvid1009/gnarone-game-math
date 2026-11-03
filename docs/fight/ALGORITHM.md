@@ -130,6 +130,10 @@ The fight is a multi-step round: `bet` on `A` or `B` opens it, each `CONTINUE` r
 `winner` and `how`. Live bets are *linked bets*: a separate `bet` with its own `roundId` that
 references the running fight, priced from the public state by `quote`, settled when the fight
 ends, collected on its own. Money is integer minor units; wins are `round(stake × odds)`.
+Live money is capped per tick: the linked stakes placed at any one tick may total at most
+$3\times$ the opening stake (`liveCap`, default 3); `quote` reports the room left at the current
+tick and `linkedBet` refuses a stake beyond it. Each new tick opens a fresh window. The cap bounds
+the book's exposure to one fight without touching the prices, which stay fair at $1/V_t$.
 
 ## 9. Where the security lives
 

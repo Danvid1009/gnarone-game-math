@@ -1,6 +1,6 @@
 # fight-engine
 
-Live Fight: two fighters rated by Elo (attribute points power + hp; the sum prices the fight, the split shapes it), a biased damage walk with an exact win-probability grid calibrated to the Elo price. Opening bet at RTP ÷ P(win); live bets during the fight are linked bets at fair odds 1 ÷ P. See [ALGORITHM.md](ALGORITHM.md).
+Live Fight: two fighters rated by Elo (attribute points power + hp; the sum prices the fight, the split shapes it), a biased damage walk with an exact win-probability grid calibrated to the Elo price. Opening bet at RTP ÷ P(win); live bets during the fight are linked bets at fair odds 1 ÷ P, capped per tick at 3× the opening stake. See [ALGORITHM.md](ALGORITHM.md).
 
 ```bash
 npm test

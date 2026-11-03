@@ -21,3 +21,24 @@ test('linked live bets: quoted fair from the current state, settle with the figh
   assert.ok(found >= 1);
   playOnce(g, { betType: 'B' });
 });
+test('live bets at one tick are capped at 3× the opening stake; the cap resets each tick and quote() reports the room', () => {
+  const g = mod.createGame({ preset: 'even' }); assert.equal(g.linkedMaxMultiple, 3);
+  let done = false;
+  for (let n = 0; n < 40 && !done; n++) {
+    const s = g.open({ balance: 1000000 }); let r = g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'A', seed: `cap${n}` });
+    r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' }); if (r.roundEnded) continue;
+    let q = g.quote({ roundId: r.roundId }); assert.deepEqual(q.cap, { multiple: 3, maxBet: 3000, placed: 0, remaining: 3000 });
+    g.linkedBet({ sessionId: s.sessionId, roundId: r.roundId, betAmount: 2500, betType: 'B' });
+    q = g.quote({ roundId: r.roundId }); assert.equal(q.cap.placed, 2500); assert.equal(q.cap.remaining, 500);
+    assert.throws(() => g.linkedBet({ sessionId: s.sessionId, roundId: r.roundId, betAmount: 1000, betType: 'A' }), /exceeds the per-step cap at step 1: 3000 \(3× the opening stake 1000\), 2500 already placed, 500 remaining/);
+    g.linkedBet({ sessionId: s.sessionId, roundId: r.roundId, betAmount: 500, betType: 'A' });
+    assert.throws(() => g.linkedBet({ sessionId: s.sessionId, roundId: r.roundId, betAmount: 100, betType: 'A' }), /0 remaining/);
+    r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' }); if (r.roundEnded) continue;
+    q = g.quote({ roundId: r.roundId }); assert.equal(q.step, 2); assert.deepEqual(q.cap, { multiple: 3, maxBet: 3000, placed: 0, remaining: 3000 }, 'a new tick opens a fresh 3× window');
+    g.linkedBet({ sessionId: s.sessionId, roundId: r.roundId, betAmount: 2500, betType: 'B' });
+    assert.equal(g.getSession(s.sessionId).balance, 1000000 - 1000 - 2500 - 500 - 2500);
+    done = true;
+  }
+  assert.ok(done);
+  const u = mod.createGame({ preset: 'even', liveCap: null }); assert.equal(u.linkedMaxMultiple, null);
+});

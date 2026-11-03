@@ -53,7 +53,9 @@ function assertMinor(n, what) {
  *                    }
  *   step?:           ({round, actionCode, rng}) => same shape as play(); only for multi-step games
  *   linked?:         { price: ({round}) => ({ odds: { [betType]: multiple, ... }, ...public }),
- *                      settle: ({round, child}) => integer win }
+ *                      settle: ({round, child}) => integer win,
+ *                      maxMultiple?: number }   cap on linked money per step: the linked stakes placed at one
+ *                                               step of a round may total at most maxMultiple × the opening stake
  *                    enables linkedBet(): extra money placed on a running multi-step round (live bets),
  *                    priced from the round's current state and settled when the round ends
  *   side?:           ({bet, params, rng, seed, session}) => { totalWinAmount, ...public }
@@ -133,6 +135,7 @@ export function defineGame(spec) {
     id, betTypes, defaultBetType, boostedBetType, currency, spec,
     isMultiStep: typeof step === 'function',
     hasLinkedBets: !!linked,
+    linkedMaxMultiple: linked?.maxMultiple ?? null,
     hasSideBets: !!side,
     hasDraws: !!draw,
 
@@ -244,6 +247,14 @@ export function defineGame(spec) {
       return { roundId: round.roundId, seedHash: round.seedHash, seed, balance: s.balance, totalBetAmount: betAmount, totalWinAmount, side: params, ...pub, nextAction: COLLECT };
     },
 
+    /** Per-step cap on linked money: { multiple, maxBet, placed, remaining } for the parent's current step, or null when uncapped. */
+    linkedCap(parent) {
+      const m = linked?.maxMultiple; if (!(m > 0)) return null;
+      const maxBet = Math.round(m * parent.totalBetAmount);
+      const placed = (parent.children ?? []).reduce((t, cid) => { const c = rounds.get(cid); return c && c.placedAtStep === parent.steps ? t + c.totalBetAmount : t; }, 0);
+      return { multiple: m, maxBet, placed, remaining: Math.max(0, maxBet - placed) };
+    },
+
     /** Current prices for extra money on a running round (live bets). Public, no side effects. */
     quote({ roundId }) {
       if (!linked) throw new Error(`${id}: linked bets not supported`);
@@ -251,7 +262,8 @@ export function defineGame(spec) {
       if (round.linked) throw new Error('quote the parent round, not a linked bet');
       if (round.ended) throw new Error(`round ${roundId} has ended`);
       const q = linked.price({ round });
-      return { roundId, step: round.steps, ...q };
+      const cap = game.linkedCap(round);
+      return { roundId, step: round.steps, ...q, ...(cap ? { cap } : {}) };
     },
 
     /**
@@ -271,6 +283,8 @@ export function defineGame(spec) {
       if (s.balance < betAmount) throw new Error('insufficient balance');
       const q = linked.price({ round: parent });
       if (!q.odds || !(betType in q.odds)) throw new Error(`invalid linked betType "${betType}". Allowed: [${Object.keys(q.odds ?? {}).join(', ')}]`);
+      const cap = game.linkedCap(parent);
+      if (cap && betAmount > cap.remaining) throw new Error(`linked bet ${betAmount} exceeds the per-step cap at step ${parent.steps}: ${cap.maxBet} (${cap.multiple}× the opening stake ${parent.totalBetAmount}), ${cap.placed} already placed, ${cap.remaining} remaining`);
       s.balance -= betAmount; s.requestCounter += 1; s.rounds += 1;
       const child = { roundId: randomUUID(), parentRoundId: roundId, parentSeedHash: parent.seedHash, sessionId, betType, odds: q.odds[betType], placedAtStep: parent.steps,
         totalBetAmount: betAmount, totalWinAmount: 0, ended: false, nextAction: [], settled: false, linked: true };
