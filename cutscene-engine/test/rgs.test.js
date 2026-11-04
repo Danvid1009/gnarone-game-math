@@ -17,3 +17,9 @@ test('side bets: library names and raw params, own round and collect, balance se
   assert.throws(() => g.sideBet({ sessionId: s.sessionId, betAmount: 500, params: { kind: 'nope' } }), /unknown side bet kind/);
   playOnce(g, { betType: 'B' });
 });
+test('roster pairings price by the Elo formula and share the fight roster', () => {
+  const g = mod.createGame({ A: 'slugger', B: 'wall' }); assert.equal(g.preset, 'slugger-v-wall'); assert.ok(Math.abs(g.engine.pA - 0.5) < 1e-8);
+  const h = mod.createGame({ A: 'champion', B: 'rookie' }); assert.ok(Math.abs(h.engine.pA - 1 / (1 + 10 ** ((1400 - 1900) / 400))) < 1e-8);
+  assert.deepEqual(Object.keys(mod.ROSTER), mod.matchupMatrix().names); assert.ok(g.open().roster.includes('tank'));
+  const s = h.open(); const r = h.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'A', seed: 'roster' }); assert.ok(['A', 'B'].includes(r.winner)); h.collect({ roundId: r.roundId });
+});

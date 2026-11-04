@@ -34,7 +34,7 @@ export function fighter(spec, k = 'X') {
   let { power, hp } = spec;
   if (spec.elo !== undefined && (power === undefined || hp === undefined)) { const split = spec.split ?? 0.5; if (!(spec.elo > 0) || !(split > 0 && split < 1)) throw new Error(`fighter ${k}: elo must be > 0 and split in (0,1)`); power = spec.elo * split; hp = spec.elo - power; }
   if (!(power > 0) || !(hp > 0)) throw new Error(`fighter ${k} needs power > 0 and hp > 0 (attribute points)`);
-  return { power, hp, elo: power + hp, split: power / (power + hp) };
+  return { ...(spec.name ? { name: spec.name } : {}), power, hp, elo: power + hp, split: power / (power + hp) };
 }
 
 /** Half-normal damage with the given mean, discretised to multiples of `res` (no zero-damage hits). */

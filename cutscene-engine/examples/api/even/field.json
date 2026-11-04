@@ -39,6 +39,16 @@
   "stake_units": "minor units",
   "multiStep": false,
   "how_to_settle": "main bet: pA = 1 / (1 + 10^((eloB − eloA) / 400)) with elo = power + hp (attribute points); u < pA → A wins; win = round(stake × odds[betType]) if betType === winner else 0, odds = RTP / P(side). The cutscene is cosmetic. Side bets: coin / pick pay round(stake × RTP / p[pick]) on a hit; single-shot pays round(stake × multiple) from the sloped-band table.",
+  "roster": [
+    "rookie",
+    "brawler",
+    "cannon",
+    "tank",
+    "contender",
+    "slugger",
+    "wall",
+    "champion"
+  ],
   "rtp": 0.95,
   "fighters": {
     "A": {

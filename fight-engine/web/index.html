@@ -50,6 +50,7 @@ header{display:flex;align-items:baseline;justify-content:space-between;padding:1
   </section>
   <aside class="side">
     <div class="card"><h2 class="display">MATCHUP</h2>
+<div class="seg" id="roster" style="grid-template-columns:1fr 1fr;margin-bottom:6px"><label style="font-size:12px;color:var(--ink-3)">A <select id="selA" style="width:100%;padding:7px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink);border-radius:4px;font:inherit"></select></label><label style="font-size:12px;color:var(--ink-3)">B <select id="selB" style="width:100%;padding:7px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink);border-radius:4px;font:inherit"></select></label></div>
       <div class="seg" id="presets"></div>
       <h2 class="display" style="margin-top:14px">STAKE</h2><div class="chips mono" id="chips"></div>
       <div class="actions"><button class="btn a" id="btnA">BACK A</button><button class="btn b" id="btnB">BACK B</button><button class="btn step" id="btnStep" disabled>NEXT TICK</button><button class="btn auto" id="btnAuto" disabled>PLAY OUT</button></div></div>
@@ -64,16 +65,22 @@ header{display:flex;align-items:baseline;justify-content:space-between;padding:1
   </aside>
 </div>
 <script type="module">
-import { createGame, PRESETS } from './api/rgs.js';
+import { createGame, PRESETS, ROSTER } from './api/rgs.js';
 const $ = id => document.getElementById(id), fmt = x => x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), pct = x => (100 * x).toFixed(1) + '%';
 let preset = 'even', stake = 5, g = null, s = null, round = null, liveBets = [], auto = null;
 const names = Object.keys(PRESETS);
 $('presets').innerHTML = names.map(n => `<button data-p="${n}" class="${n === preset ? 'on' : ''}">${n}<small>${PRESETS[n].A.power + PRESETS[n].A.hp} (${PRESETS[n].A.power}p/${PRESETS[n].A.hp}h) vs ${PRESETS[n].B.power + PRESETS[n].B.hp} (${PRESETS[n].B.power}p/${PRESETS[n].B.hp}h)</small></button>`).join('');
 $('chips').innerHTML = [1, 2, 5, 10, 25, 50].map(v => `<button data-v="${v}" class="${v === stake ? 'on' : ''}">${v}</button>`).join('');
 $('chips').onclick = e => { const b = e.target.closest('button'); if (!b) return; stake = +b.dataset.v; [...$('chips').children].forEach(x => x.classList.toggle('on', x === b)); };
-$('presets').onclick = e => { const b = e.target.closest('button'); if (!b || round) return; preset = b.dataset.p; [...$('presets').children].forEach(x => x.classList.toggle('on', x === b)); setup(); };
-function setup() { g = createGame({ preset }); s = g.open({ balance: Math.round(balance * 100) }); const F = g.engine;
-  $('nameA').textContent = `A · ELO ${F.elo.A} · ${F.hp.A} HP`; $('nameB').textContent = `B · ELO ${F.elo.B} · ${F.hp.B} HP`; $('mElo').textContent = `${F.elo.A} (${F.fighters.A.power}p + ${F.fighters.A.hp}h) / ${F.elo.B} (${F.fighters.B.power}p + ${F.fighters.B.hp}h)`; $('mP0').textContent = pct(F.pA0); $('mLand').textContent = `${pct(F.pLand.A)} / ${pct(F.pLand.B)}`; $('mDmg').textContent = `${F.damage.A.mean.toFixed(1)} / ${F.damage.B.mean.toFixed(1)}`; $('stOdds').textContent = `${F.odds.A.toFixed(2)}× / ${F.odds.B.toFixed(2)}×`; $('btnA').textContent = `BACK A @ ${F.odds.A.toFixed(2)}`; $('btnB').textContent = `BACK B @ ${F.odds.B.toFixed(2)}`;
+const rosterOpts = `<option value="">— preset —</option>` + Object.entries(ROSTER).map(([n, f]) => `<option value="${n}">${n} · ${f.power + f.hp} (${f.power}p/${f.hp}h)</option>`).join('');
+$('selA').innerHTML = $('selB').innerHTML = rosterOpts; let fa = '', fb = '';
+const pickRoster = () => { fa = $('selA').value; fb = $('selB').value; if (!fa || !fb) return; preset = null; [...$('presets').children].forEach(x => x.classList.remove('on')); setup(); };
+$('selA').onchange = $('selB').onchange = pickRoster;
+const gameOpts = () => preset ? { preset } : { A: fa, B: fb };
+const tagName = (F, k) => F.fighters[k].name ? `${k} · ${F.fighters[k].name.toUpperCase()}` : k;
+$('presets').onclick = e => { const b = e.target.closest('button'); if (!b || round) return; preset = b.dataset.p; fa = fb = ''; $('selA').value = $('selB').value = ''; [...$('presets').children].forEach(x => x.classList.toggle('on', x === b)); setup(); };
+function setup() { g = createGame(gameOpts()); s = g.open({ balance: Math.round(balance * 100) }); const F = g.engine;
+  $('nameA').textContent = `${tagName(F, 'A')} · ELO ${F.elo.A} · ${F.hp.A} HP`; $('nameB').textContent = `${tagName(F, 'B')} · ELO ${F.elo.B} · ${F.hp.B} HP`; $('mElo').textContent = `${F.elo.A} (${F.fighters.A.power}p + ${F.fighters.A.hp}h) / ${F.elo.B} (${F.fighters.B.power}p + ${F.fighters.B.hp}h)`; $('mP0').textContent = pct(F.pA0); $('mLand').textContent = `${pct(F.pLand.A)} / ${pct(F.pLand.B)}`; $('mDmg').textContent = `${F.damage.A.mean.toFixed(1)} / ${F.damage.B.mean.toFixed(1)}`; $('stOdds').textContent = `${F.odds.A.toFixed(2)}× / ${F.odds.B.toFixed(2)}×`; $('btnA').textContent = `BACK A @ ${F.odds.A.toFixed(2)}`; $('btnB').textContent = `BACK B @ ${F.odds.B.toFixed(2)}`;
   render({ tick: 0, hp: { A: F.hp.A, B: F.hp.B }, pA: F.pA0 }); }
 let balance = 1000; const syncBalance = () => { balance = s ? g.getSession(s.sessionId).balance / 100 : balance; $('balance').textContent = fmt(balance); };
 function render(v) { const F = g.engine; $('barA').style.width = (100 * v.hp.A / F.hp.A) + '%'; $('barB').style.width = (100 * v.hp.B / F.hp.B) + '%'; $('hpA').textContent = v.hp.A.toFixed(1); $('hpB').textContent = v.hp.B.toFixed(1); $('pA').textContent = pct(v.pA); $('stTick').textContent = `${v.tick} / ${F.ticks}`;
@@ -81,7 +88,7 @@ function render(v) { const F = g.engine; $('barA').style.width = (100 * v.hp.A /
 function callout(cls, big, text) { $('callout').className = 'callout ' + cls; $('coBig').textContent = big; $('coText').textContent = text; }
 function log(msg, cls = '') { const d = document.createElement('div'); d.className = cls; d.textContent = msg; $('log').prepend(d); }
 function bet(side) { if (round) return; if (balance < stake) return callout('lose', 'NO CREDIT', 'Demo balance is empty. Reload.'); const r = g.bet({ sessionId: s.sessionId, betAmount: stake * 100, betType: side }); round = { id: r.roundId, side, ended: false }; liveBets = []; syncBalance();
-  $('fA').className = 'fighter a'; $('fB').className = 'fighter b'; $('btnA').disabled = $('btnB').disabled = true; $('btnStep').disabled = $('btnAuto').disabled = false; [...$('presets').children].forEach(b => b.disabled = true);
+  $('fA').className = 'fighter a'; $('fB').className = 'fighter b'; $('btnA').disabled = $('btnB').disabled = true; $('btnStep').disabled = $('btnAuto').disabled = false; [...$('presets').children].forEach(b => b.disabled = true); $('selA').disabled = $('selB').disabled = true;
   $('stBet').textContent = `${side} · ${fmt(stake)} @ ${g.engine.odds[side].toFixed(2)}×`; callout('', 'DING DING', `You backed ${side}. Step through the fight or play it out. Live bets at fair odds are open until the final bell.`); render(r); }
 function tick() { if (!round || round.ended) return; const r = g.nextAction({ roundId: round.id, actionCode: 'CONTINUE' }); const h = r.last; const victim = h.hitter === 'A' ? 'B' : 'A';
   const fv = $('f' + victim), fh = $('f' + h.hitter); fh.style.setProperty('--fw', h.hitter === 'A' ? '40px' : '-40px'); fh.classList.remove('swing'); void fh.offsetWidth; fh.classList.add('swing'); fv.style.setProperty('--kb', victim === 'A' ? '-18px' : '18px'); fv.style.setProperty('--rot', victim === 'A' ? '-8deg' : '8deg'); fv.classList.remove('hit'); void fv.offsetWidth; fv.classList.add('hit');
@@ -90,7 +97,7 @@ function tick() { if (!round || round.ended) return; const r = g.nextAction({ ro
   if (r.roundEnded) { round.ended = true; clearInterval(auto); auto = null; const loser = r.winner === 'A' ? 'B' : 'A'; if (r.how === 'KO') $('f' + loser).classList.add('ko'); const c = g.collect({ roundId: round.id }); let liveWon = 0; for (const l of liveBets) { const ch = g.getRound(l.roundId); liveWon += ch.totalWinAmount; g.collect({ roundId: l.roundId }); } syncBalance();
     const win = r.totalWinAmount / 100; callout(win > 0 ? 'win' : 'lose', `${r.winner} WINS BY ${r.how}`, `${r.how === 'DECISION' ? `Both standing at the bell: coin at P(A) = ${pct(r.decision.pA)}. ` : ''}Opening bet ${win > 0 ? 'pays ' + fmt(win) : 'lost'}.${liveBets.length ? ` Live bets pay ${fmt(liveWon / 100)} on ${fmt(liveBets.reduce((t, l) => t + l.stake, 0))} staked.` : ''}`);
     const net = win - stake + liveWon / 100 - liveBets.reduce((t, l) => t + l.stake, 0); log(`${preset} · backed ${round.side} · ${r.winner} by ${r.how} in ${r.tick} · ${net >= 0 ? '+' : ''}${fmt(net)}`, net >= 0 ? 'w' : 'l');
-    $('btnStep').disabled = $('btnAuto').disabled = true; $('btnA').disabled = $('btnB').disabled = false; [...$('presets').children].forEach(b => b.disabled = false); round = null; render({ ...r, pA: r.winner === 'A' ? 1 : 0 }); } }
+    $('btnStep').disabled = $('btnAuto').disabled = true; $('btnA').disabled = $('btnB').disabled = false; [...$('presets').children].forEach(b => b.disabled = false); $('selA').disabled = $('selB').disabled = false; round = null; render({ ...r, pA: r.winner === 'A' ? 1 : 0 }); } }
 function live(side) { if (!round || round.ended) return; if (balance < stake) return; const q = g.quote({ roundId: round.id }); if (q.cap.remaining < stake * 100) return; const lb = g.linkedBet({ sessionId: s.sessionId, roundId: round.id, betAmount: stake * 100, betType: side }); liveBets.push({ roundId: lb.roundId, betType: side, odds: lb.odds, stake }); syncBalance(); log(`live · ${side} @ ${lb.odds.toFixed(2)} × ${fmt(stake)} at tick ${q.tick} (P(A) ${pct(q.pA)})`); render({ tick: q.tick, hp: q.hp, pA: q.pA }); }
 $('btnA').onclick = () => bet('A'); $('btnB').onclick = () => bet('B'); $('btnStep').onclick = tick; $('btnAuto').onclick = () => { if (auto) { clearInterval(auto); auto = null; $('btnAuto').textContent = 'PLAY OUT'; return; } $('btnAuto').textContent = 'PAUSE'; auto = setInterval(() => { tick(); if (!round) { clearInterval(auto); auto = null; $('btnAuto').textContent = 'PLAY OUT'; } }, 650); };
 $('lvA').onclick = () => live('A'); $('lvB').onclick = () => live('B');

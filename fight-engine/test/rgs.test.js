@@ -42,3 +42,26 @@ test('live bets at one tick are capped at 3× the opening stake; the cap resets 
   assert.ok(done);
   const u = mod.createGame({ preset: 'even', liveCap: null }); assert.equal(u.linkedMaxMultiple, null);
 });
+test('roster: any two named fighters pair into a calibrated fight priced by the Elo formula', () => {
+  const names = Object.keys(mod.ROSTER); assert.ok(names.length >= 6);
+  const M = mod.matchupMatrix(); assert.deepEqual(M.names, names);
+  for (let i = 0; i < names.length; i++) for (let j = 0; j < names.length; j++) {
+    const a = mod.ROSTER[names[i]], b = mod.ROSTER[names[j]];
+    assert.ok(Math.abs(M.pA[i][j] - 1 / (1 + 10 ** (((b.power + b.hp) - (a.power + a.hp)) / 400))) < 1e-12);
+    assert.ok(Math.abs(M.pA[i][j] + M.pA[j][i] - 1) < 1e-12, 'the matrix is antisymmetric');
+  }
+  for (let i = 0; i < names.length; i++) for (let j = i; j < names.length; j++) {
+    const g = mod.createGame({ A: names[i], B: names[j] }); const F = g.engine;
+    assert.equal(g.preset, `${names[i]}-v-${names[j]}`); assert.equal(F.fighters.A.name, names[i]); assert.equal(F.fighters.B.name, names[j]);
+    assert.ok(F.calibration.calibrated && F.calibration.solved, `${g.preset} calibrates`);
+    assert.ok(Math.abs(F.pA0 - M.pA[i][j]) < 1e-8, `${g.preset}: grid price ${F.pA0} is the matrix entry ${M.pA[i][j]}`);
+  }
+  const T = mod.rosterTable(); assert.equal(T.length, names.length); assert.deepEqual(T.find(r => r.name === 'brawler'), { name: 'brawler', power: 800, hp: 800, elo: 1600, split: 0.5, health: 100, damage: 16 });
+});
+test('roster pairing and the equivalent preset settle the same round from the same seed', () => {
+  const a = mod.createGame({ A: 'cannon', B: 'tank' }), b = mod.createGame({ preset: 'glass-cannon' });
+  for (const g of [a, b]) { const s = g.open(); let r = g.bet({ sessionId: s.sessionId, betAmount: 1000, betType: 'A', seed: 'same' }); while (!r.roundEnded) r = g.nextAction({ roundId: r.roundId, actionCode: 'CONTINUE' }); g._last = r; }
+  assert.equal(a._last.winner, b._last.winner); assert.equal(a._last.totalWinAmount, b._last.totalWinAmount); assert.equal(a._last.tick, b._last.tick);
+  assert.throws(() => mod.createGame({ A: 'nobody', B: 'tank' }), /unknown fighter "nobody"/);
+  const c = mod.createGame({ A: 'champion', B: { power: 700, hp: 700 } }); assert.equal(c.preset, 'champion-v-700/700'); assert.ok(Math.abs(c.engine.pA0 - 1 / (1 + 10 ** ((1400 - 1900) / 400))) < 1e-8);
+});

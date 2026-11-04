@@ -1,6 +1,6 @@
 {
   "open": {
-    "sessionId": "00650b6f-8933-4700-8cff-1f50408b7745",
+    "sessionId": "dc4ab6cf-28a6-47a9-8503-2ebfcb976a83",
     "requestCounter": 0,
     "balance": 100000,
     "currency": {
@@ -29,6 +29,16 @@
     "rounds": 0,
     "winLoss": 0,
     "preset": "glass-cannon",
+    "roster": [
+      "rookie",
+      "brawler",
+      "cannon",
+      "tank",
+      "contender",
+      "slugger",
+      "wall",
+      "champion"
+    ],
     "rtp": 0.95,
     "fighters": {
       "A": {
@@ -157,7 +167,7 @@
     {
       "call": "bet",
       "response": {
-        "roundId": "42ce004e-ceee-47fc-b8e0-c300fc4140af",
+        "roundId": "19186d1f-128a-4b2d-89fe-cd5885fd76b4",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "balance": 99000,
@@ -223,7 +233,7 @@
     {
       "call": "side-bet",
       "response": {
-        "roundId": "2e1c0597-5288-4a5f-af3c-dd4afd50665c",
+        "roundId": "82963567-5cd2-4883-a882-3209aed9ffbf",
         "seedHash": "eb7d68bba829ef8acfd345ea99bf873477b4050b1e37ae8456aa5d1647739841",
         "seed": "fixture-007",
         "balance": 98000,

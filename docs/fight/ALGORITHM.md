@@ -156,3 +156,30 @@ The browser sandbox on the site has none of this protection by construction: the
 | 850 / 850 = 1700 vs 775 / 775 = 1550 | 106 / 97 | 17 / 15.5 | 54.9% | 70.3% | 1.35 / 3.20 |
 | 1000 / 600 = 1600 vs 600 / 1000 = 1600 | 75 / 125 | 20 / 12 | 50.2% | 50.0% | 1.90 / 1.90 |
 | 1000 / 600 = 1600 vs 775 / 775 = 1550 | 75 / 97 | 20 / 15.5 | 53.6% | 57.1% | 1.66 / 2.22 |
+
+## 11. Roster: characterising many fighters
+
+A roster is a table of named fighters, each a pair of attribute points $(\text{power}, \text{hp})$.
+Everything above is pairwise, so a roster needs no new math: for any two names the Elo is the
+sum, the price is the Elo formula, and the fight is built and calibrated for that pairing on demand
+(`createGame({ A: 'cannon', B: 'tank' })` in both the Live Fight and the Cutscene modules).
+
+The matchup matrix $P_{ij} = \sigma(\text{elo}_i - \text{elo}_j)$ with $\sigma(x) = 1 / (1 + 10^{-x/400})$
+is exact and needs no grid; it is antisymmetric, $P_{ij} + P_{ji} = 1$, and the diagonal is $\tfrac12$.
+The test builds every pairing and checks that the calibrated grid reproduces the matrix entry.
+
+| fighter | power / hp | Elo | health | mean damage |
+|---|---|---|---|---|
+| rookie | 700 / 700 | 1400 | 87.5 | 14.0 |
+| brawler | 800 / 800 | 1600 | 100 | 16.0 |
+| cannon | 1000 / 600 | 1600 | 75 | 20.0 |
+| tank | 600 / 1000 | 1600 | 125 | 12.0 |
+| contender | 850 / 850 | 1700 | 106.3 | 17.0 |
+| slugger | 1100 / 600 | 1700 | 75 | 22.0 |
+| wall | 600 / 1100 | 1700 | 137.5 | 12.0 |
+| champion | 950 / 950 | 1900 | 118.8 | 19.0 |
+
+Names are placeholders for a shape, not skins. Two rules of thumb when adding fighters: keep hp at
+or above about 400 points, below that one landed hit ends the fight and most ticks go unused; and
+remember that the split is cosmetic, so two fighters with the same sum are the same price whatever
+their shape, and a fighter's rating is changed only by changing its sum.
